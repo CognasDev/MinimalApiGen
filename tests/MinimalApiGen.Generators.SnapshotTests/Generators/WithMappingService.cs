@@ -7,7 +7,7 @@ namespace MinimalApiGen.Generators.SnapshotTests.Generators;
 /// 
 /// </summary>
 [UsesVerify]
-public sealed class GeneratorWithMappingService
+public sealed class WithMappingService
 {
     #region Public Method Declarations
 
@@ -38,7 +38,7 @@ public sealed class TestGenerator
     }
 }";
         GeneratorDriver driver = DriverBuilder.Build(source);
-        return Verifier.Verify(driver).UseDirectory("../Snapshots");
+        return Verifier.Verify(driver).UseDirectory($"../Snapshots/{nameof(WithMappingService)}");
     }
 
     #endregion

@@ -33,7 +33,7 @@
 		</None>
 	</ItemGroup>
 	<PropertyGroup>
-		<Version>$(VersionPrefix)0.0.1-beta</Version>
+		<Version>$(VersionPrefix)0.0.2-beta</Version>
 		<Title>MinimalApiGen.Framework</Title>
 		<PackageIcon>framework.png</PackageIcon>
 		<RepositoryUrl>https://github.com/CognasDev/MinimalApiGen</RepositoryUrl>
