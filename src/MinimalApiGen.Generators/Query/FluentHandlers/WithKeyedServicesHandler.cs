@@ -25,7 +25,7 @@ internal static class WithKeyedServicesHandler
     public static Dictionary<string, string> ToKeyedServices(this InvocationInfo fluentInvocation, SemanticModel semanticModel)
     {
         ImmutableArray<ITypeSymbol> serviceTypeSymbols = fluentInvocation.MethodSymbol.TypeArguments;
-        ReadOnlySpan<ArgumentSyntax> serviceKeys = [.. fluentInvocation.Invocation.ArgumentList.Arguments];
+        ReadOnlySpan<ArgumentSyntax> serviceKeys = [.. fluentInvocation.InvocationExpressionSyntax.ArgumentList.Arguments];
         Dictionary<string, string> keyedServices = [];
         for (int index = 0; index < serviceTypeSymbols.Length; index++)
         {
