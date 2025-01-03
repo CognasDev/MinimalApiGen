@@ -66,7 +66,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
-public sealed class {ModelName}To{ResponseName}MappingService: MappingServiceBase<{ModelName}, {ResponseName}>
+public sealed class {ModelName}To{ResponseName}MappingService : MappingServiceBase<{ModelName}, {ResponseName}>
 {{
     #region Public Method Declarations
 

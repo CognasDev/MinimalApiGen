@@ -26,7 +26,7 @@ internal static class FluentProcessor
     public static ImmutableArray<QueryResult> GetQueryResults(GeneratorAttributeSyntaxContext context)
     {
         ConstructorDeclarationSyntax constructor = GetConstructor(context);
-        SemanticModel semanticModel = context.SemanticModel.Compilation.GetSemanticModel(constructor.SyntaxTree);
+        SemanticModel semanticModel = context.SemanticModel;
         ImmutableArray<InvocationInfo> invocations = GetInvocations(constructor, semanticModel);
         QueryInvocationDetails queryInvocationDetails = invocations.ToQueryInvocationDetails();
         List<QueryIntermediateResult> intermediateResults = [];
@@ -133,10 +133,16 @@ internal static class FluentProcessor
     {
         return constructor.Body!.Statements
                           .SelectMany(statement => statement.DescendantNodes().OfType<InvocationExpressionSyntax>())
-                          .Select(invocation => new InvocationInfo(invocation, (IMethodSymbol)semanticModel.GetSymbolInfo(invocation).Symbol!))
+                          .Select(invocationExpressionSyntax =>
+                          {
+                              IMethodSymbol methodSymbol = invocationExpressionSyntax.GetMethodSymbol(semanticModel);
+                              return new InvocationInfo(invocationExpressionSyntax, methodSymbol);
+                          })
                           .Reverse()
                           .ToImmutableArray();
     }
+
+
 
     /// <summary>
     /// 

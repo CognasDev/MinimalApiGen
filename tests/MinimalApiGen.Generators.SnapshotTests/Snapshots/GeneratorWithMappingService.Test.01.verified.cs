@@ -1,8 +1,9 @@
-﻿using MinimalApiGen.Framework.Mapping;
-using SampleModel = QuickStartApi.Model.SampleModel;
-using SampleModelResponse = QuickStartApi.Model.SampleModelResponse;
+﻿//HintName: SampleModelSampleModelResponse.MappingSericeV1.g.cs
+using MinimalApiGen.Framework.Mapping;
+using SampleModel = MinimalApiGen.Generators.SnapshotTests.Fixtures.SampleModel;
+using SampleModelResponse = MinimalApiGen.Generators.SnapshotTests.Fixtures.SampleModelResponse;
 
-namespace QuickStartApi.V1;
+namespace MinimalApiGen.Generators.SnapshotTests.Fixtures;
 
 /// <summary>
 /// 

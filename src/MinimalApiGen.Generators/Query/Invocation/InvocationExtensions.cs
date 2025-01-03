@@ -74,7 +74,7 @@ internal static class InvocationExtensions
     /// </summary>
     /// <param name="fluentInvocation"></param>
     public static ExpressionSyntax GetSingleArgumentExpression(this InvocationInfo fluentInvocation)
-        => fluentInvocation.Invocation.ArgumentList.Arguments.Single().Expression;
+        => fluentInvocation.InvocationExpressionSyntax.ArgumentList.Arguments.Single().Expression;
 
     /// <summary>
     /// 
@@ -102,6 +102,21 @@ internal static class InvocationExtensions
                                             .Select(property => property.Name)
                                             .ToList();
         return properties;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="invocationExpressionSyntax"></param>
+    /// <param name="semanticModel"></param>
+    /// <returns></returns>
+    public static IMethodSymbol GetMethodSymbol(this InvocationExpressionSyntax invocationExpressionSyntax, SemanticModel semanticModel)
+    {
+        SymbolInfo symbolInfo = semanticModel.GetSymbolInfo(invocationExpressionSyntax);
+        IMethodSymbol? methodSymbol = symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
+                                        ? symbolInfo.CandidateSymbols[0] as IMethodSymbol
+                                        : symbolInfo.Symbol as IMethodSymbol;
+        return methodSymbol!;
     }
 
     #endregion

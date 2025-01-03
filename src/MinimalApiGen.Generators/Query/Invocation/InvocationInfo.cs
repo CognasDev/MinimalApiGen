@@ -6,16 +6,16 @@ namespace MinimalApiGen.Generators.Query.Invocation;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="invocation"></param>
+/// <param name="invocationExpressionSyntax"></param>
 /// <param name="methodSymbol"></param>
-internal readonly struct InvocationInfo(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+internal readonly struct InvocationInfo(InvocationExpressionSyntax invocationExpressionSyntax, IMethodSymbol methodSymbol)
 {
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly InvocationExpressionSyntax Invocation = invocation;
+    public readonly InvocationExpressionSyntax InvocationExpressionSyntax = invocationExpressionSyntax;
 
     /// <summary>
     /// 
