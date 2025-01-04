@@ -47,8 +47,7 @@ internal static class InvocationExtensions
             })
             .Where(info => !string.IsNullOrEmpty(info.FullyQualifiedName))
             .Select(static info => new FluentMethodInfo(info.FullyQualifiedName!, info.Invocation, info.IsGeneric))
-            .ToArray()
-            .AsSpan();
+            .ToArray();
     }
 
     /// <summary>

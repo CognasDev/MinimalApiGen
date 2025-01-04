@@ -59,7 +59,7 @@ internal static class SourceOutputExecutor
                 }
              )
             .Distinct()
-            .ToArray().AsSpan();
+            .ToArray();
     }
 
     /// <summary>

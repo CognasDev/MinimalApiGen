@@ -10,10 +10,10 @@ public interface IServiceBusinessLogic
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="sampleService"></param>
+    /// <param name="SampleService1"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IEnumerable<SampleModel>> GetModelsAsync(ISampleService sampleService, CancellationToken cancellationToken);
+    Task<IEnumerable<SampleModel>> GetModelsAsync(ISampleService1 SampleService1, CancellationToken cancellationToken);
 
     #endregion
 }

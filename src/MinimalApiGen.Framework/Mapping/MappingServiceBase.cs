@@ -1,6 +1,4 @@
-﻿using MinimalApiGen.Framework.Collections;
-
-namespace MinimalApiGen.Framework.Mapping;
+﻿namespace MinimalApiGen.Framework.Mapping;
 
 /// <summary>
 /// 
@@ -37,11 +35,12 @@ public abstract class MappingServiceBase<TSource, TTarget> : IMappingService<TSo
     public IEnumerable<TTarget> Map(IEnumerable<TSource> sourceCollection)
     {
         List<TTarget> targets = [];
-        sourceCollection.FastForEach(source =>
+        ReadOnlySpan<TSource> sourceSpan = [.. sourceCollection];
+        foreach (TSource source in sourceSpan)
         {
             TTarget target = Map(source);
             targets.Add(target);
-        });
+        }
         return targets;
     }
 

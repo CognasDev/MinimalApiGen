@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using MinimalApiGen.Generators.SnapshotTests.Helpers;
+﻿using MinimalApiGen.Generators.SnapshotTests.Helpers;
 
 namespace MinimalApiGen.Generators.SnapshotTests.Generators;
 
@@ -32,7 +31,7 @@ public sealed class TestGenerator
         ApiGeneration.Query<SampleModel>().WithNamespaceOf<IServiceBusinessLogic>()
                                           .WithGet()
                                           .WithBusinessLogic<IServiceBusinessLogic>(logic => logic.GetModelsAsync)
-                                          .WithKeyedServices<ISampleService>(nameof(SampleService))
+                                          .WithKeyedServices<ISampleService1>(nameof(SampleService1))
                                           .WithResponse<SampleModelResponse>();
     }
 }";

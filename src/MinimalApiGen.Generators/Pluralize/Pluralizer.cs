@@ -78,7 +78,7 @@ public sealed class Pluralizer : IPluralizer
             return originalWord;
         }
 
-        ReadOnlySpan<ReplaceRule> span = _pluralRules.AsSpan();
+        ReadOnlySpan<ReplaceRule> span = _pluralRules;
 
         int length = span.Length - 1;
         for (int index = length; index >= 0; index--)

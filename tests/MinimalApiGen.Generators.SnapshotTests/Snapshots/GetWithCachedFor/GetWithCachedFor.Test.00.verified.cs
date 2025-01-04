@@ -24,16 +24,15 @@ public partial class SampleModelQueryRouteEndpointsMapper
             "/samplemodels",
             (
                 CancellationToken cancellationToken,
-                [FromServices] MinimalApiGen.Generators.SnapshotTests.Fixtures.IServiceBusinessLogic businessLogic,
-                [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService,
-				[FromKeyedServices("SampleService1")] MinimalApiGen.Generators.SnapshotTests.Fixtures.ISampleService1 sampleService1
+                [FromServices] MinimalApiGen.Generators.SnapshotTests.Fixtures.ISimpleBusinessLogic businessLogic,
+                [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<SampleModelResponse> SampleModelResponseStreamAsync()
                 {
-                    IEnumerable<SampleModel> models = await businessLogic.GetModelsAsync(sampleService1, cancellationToken).ConfigureAwait(false);
+                    IEnumerable<SampleModel> models = await businessLogic.GetModelsAsync(cancellationToken).ConfigureAwait(false);
                     IEnumerable<SampleModelResponse> responses = mappingService.Map(models);
 
                     foreach (SampleModelResponse response in responses)
@@ -51,6 +50,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
         .MapToApiVersion(1)
         .Produces<IEnumerable<SampleModelResponse>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)
+        .CacheOutput(builder => builder.Expire(TimeSpan.FromMinutes(3)));
      }
 }

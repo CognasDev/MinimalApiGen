@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
-using MinimalApiGen.Generators.SnapshotTests.Helpers;
+﻿using MinimalApiGen.Generators.SnapshotTests.Helpers;
 
 namespace MinimalApiGen.Generators.SnapshotTests.Generators;
 

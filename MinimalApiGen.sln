@@ -19,12 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{
 		.github\workflows\ci-test-nuget.yml = .github\workflows\ci-test-nuget.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{95C11ECA-38D2-429F-9BB8-55C6FF3C89FB}"
-	ProjectSection(SolutionItems) = preProject
-		resources\framework.png = resources\framework.png
-		resources\generator.png = resources\generator.png
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E5600EED-954B-4044-96B4-0C1EE0AE86A5}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MinimalApiGen.Generators.Abstractions", "src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.shproj", "{DCAC0184-439A-4C22-B2E8-B1D0F05A8E84}"
