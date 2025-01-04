@@ -27,24 +27,22 @@
 
 	<!--Nuget package configuration-->
 	<ItemGroup>
-		<None Include=".Pack\framework.png">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
+		<None Include=".Pack\framework.png" Pack="true" PackagePath="">
+			<Link>Properties\framework.png</Link>
 		</None>
-		<None Include=".Pack\README.md">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
+		<None Include=".Pack\README.md" Pack="true" PackagePath="">
+			<Link>Properties\README.md</Link>
 		</None>
 	</ItemGroup>
 	<PropertyGroup>
 		<Version>$(VersionPrefix)0.0.2-beta</Version>
 		<Title>MinimalApiGen.Framework</Title>
 		<Authors>CognasDev</Authors>
-		<PackageIcon>.Pack\framework.png</PackageIcon>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>
 		<IsPackable>true</IsPackable>
-		<PackageReadmeFile>.Pack\README.md</PackageReadmeFile>
 		<Copyright>(C)opyright CognasDev 2025</Copyright>
+		<PackageIcon>framework.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 </Project>
