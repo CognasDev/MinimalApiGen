@@ -5,6 +5,6 @@ namespace MinimalApiGen.Generators.Abstractions.Get;
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetWithBusinessLogic : IServices, IKeyedServices
+public interface IWithGetWithBusinessLogic : IServices, IKeyedServices, IResponse
 {
 }

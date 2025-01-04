@@ -7,7 +7,7 @@ namespace MinimalApiGen.Generators.SnapshotTests.Generators;
 /// 
 /// </summary>
 [UsesVerify]
-public sealed class WithMappingService
+public sealed class Get
 {
     #region Public Method Declarations
 
@@ -29,16 +29,14 @@ public sealed class TestGenerator
 {
     public TestGenerator()
     {
-        ApiGeneration.Query<SampleModel>().WithNamespaceOf<IBusinessLogicV1>()
+        ApiGeneration.Query<SampleModel>().WithNamespaceOf<ISimpleBusinessLogic>()
                                           .WithGet()
-                                                .WithBusinessLogic<IBusinessLogicV1>(logic => logic.GetModelsV1Async)
-                                                .WithServices<SampleService1>()
-                                                .WithResponse<SampleModelResponse>()
-                                                .WithMappingService();
+                                          .WithBusinessLogic<ISimpleBusinessLogic>(logic => logic.GetModelsAsync)
+                                          .WithResponse<SampleModelResponse>();
     }
 }";
         GeneratorDriver driver = DriverBuilder.Build(source);
-        return Verifier.Verify(driver).UseDirectory($"../Snapshots/{nameof(WithMappingService)}");
+        return Verifier.Verify(driver).UseDirectory($"../Snapshots/{nameof(Get)}");
     }
 
     #endregion
