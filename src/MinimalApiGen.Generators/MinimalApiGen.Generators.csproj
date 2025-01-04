@@ -59,10 +59,10 @@
 		<Version>$(VersionPrefix)0.0.2-beta</Version>
 		<Title>MinimalApiGen.Generators</Title>
 		<Authors>CognasDev</Authors>
-		<PackageIcon>generator.png</PackageIcon>
+		<PackageIcon>.Pack\generator.png</PackageIcon>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>
 		<IsPackable>true</IsPackable>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>.Pack\README.md</PackageReadmeFile>
 		<Copyright>(C)opyright CognasDev 2025</Copyright>		
 	</PropertyGroup>
 
