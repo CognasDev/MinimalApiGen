@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed class SampleService1
+public sealed class SampleService : ISampleService
 {
 }
