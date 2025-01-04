@@ -1,0 +1,35 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+        source-url: https://nuget.pkg.github.com/cognasdev/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_PACKAGE_TOKEN}}
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --configuration Release --no-build --verbosity normal
+    - name: Create the package
+      run: dotnet pack --configuration Release
+    - name: Publish Generators package to GPR
+      run: dotnet nuget push src/MinimalApiGen.Generators/bin/Release/*.nupkg --skip-duplicate
+    - name: Publish Framework package to GPR
+      run: dotnet nuget push src/MinimalApiGen.Framework/bin/Release/*.nupkg --skip-duplicate
