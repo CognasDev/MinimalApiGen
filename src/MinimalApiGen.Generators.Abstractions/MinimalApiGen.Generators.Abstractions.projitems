@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>dcac0184-439a-4c22-b2e8-b1d0f05a8e84</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ICache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\INamespaceOf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\INamespace.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IMapping.cs" />
+    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Common\IVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IBusinessLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IPagination.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GetById\IWithGetById.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGetWithBusinessLogic.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGetWithCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithResponse.cs" />
+    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Get\IWithGetWithMapping.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGetWithPagination.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithKeyedServices.cs" />
+    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\IQuery.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithServices.cs" />
+    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\IQueryWithVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IKeyedServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\IServices.cs" />
+  </ItemGroup>
+</Project>
