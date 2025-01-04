@@ -1,0 +1,3 @@
+# MinimalApiGen
+
+## ApiGeneration.Query

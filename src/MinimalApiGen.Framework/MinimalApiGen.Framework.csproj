@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>Latest</LangVersion>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+		<PackageReference Include="FluentValidation" Version="11.11.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="6.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="9.0.0" />
+	</ItemGroup>
+
+	<Import Project="..\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems" Label="Shared" />
+
+	<!--Nuget package configuration-->
+	<PropertyGroup>
+		<Version>$(VersionPrefix)0.0.1-beta</Version>
+		<Title>MinimalApiGen.Framework</Title>
+		<Authors>CognasDev</Authors>
+		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>
+		<IsPackable>true</IsPackable>
+		<Copyright>(C)opyright CognasDev 2025</Copyright>
+	</PropertyGroup>
+
+</Project>

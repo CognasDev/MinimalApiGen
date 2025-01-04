@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25EBC387-6C88-4B5F-A665-F48FB60FAA60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F50EC002-C509-4A9B-B729-24E27510A632}"
+	ProjectSection(SolutionItems) = preProject
+		docs\- Getting Started.md = docs\- Getting Started.md
+		docs\ApiGeneration.Query.md = docs\ApiGeneration.Query.md
+		docs\WithBusinessLogic.md = docs\WithBusinessLogic.md
+		docs\WithGet.md = docs\WithGet.md
+		docs\WithKeyedServices.md = docs\WithKeyedServices.md
+		docs\WithMappingService.md = docs\WithMappingService.md
+		docs\WithNamespace.md = docs\WithNamespace.md
+		docs\WithNamespaceOf.md = docs\WithNamespaceOf.md
+		docs\WithPagination.md = docs\WithPagination.md
+		docs\WithResponse.md = docs\WithResponse.md
+		docs\WithServices.md = docs\WithServices.md
+		docs\WithVersion.md = docs\WithVersion.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E5600EED-954B-4044-96B4-0C1EE0AE86A5}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MinimalApiGen.Generators.Abstractions", "src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.shproj", "{DCAC0184-439A-4C22-B2E8-B1D0F05A8E84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators", "src\MinimalApiGen.Generators\MinimalApiGen.Generators.csproj", "{9ECDD303-259F-42A2-9E3C-27AD571F0170}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Framework", "src\MinimalApiGen.Framework\MinimalApiGen.Framework.csproj", "{4D78FC8B-1B87-429A-9B53-0C8A974D0867}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1044EFAC-1347-4A8E-AF06-398EE0D7FF24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Framework.Tests", "tests\MinimalApiGen.Framework.Tests\MinimalApiGen.Framework.Tests.csproj", "{4307989D-B2C1-482C-AD4A-C4A2239CB678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.Tests", "tests\MinimalApiGen.Generators.Tests\MinimalApiGen.Generators.Tests.csproj", "{D96752C4-08E4-47B7-AADB-E2C286DC0143}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStartApi", "samples\QuickStartApi\QuickStartApi.csproj", "{7A81F539-8F95-441A-848E-33CB971CB08F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.SnapshotTests", "tests\MinimalApiGen.Generators.SnapshotTests\MinimalApiGen.Generators.SnapshotTests.csproj", "{50828896-2E38-4AB4-8C53-15DBADF1C476}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ECDD303-259F-42A2-9E3C-27AD571F0170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECDD303-259F-42A2-9E3C-27AD571F0170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECDD303-259F-42A2-9E3C-27AD571F0170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECDD303-259F-42A2-9E3C-27AD571F0170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D78FC8B-1B87-429A-9B53-0C8A974D0867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D78FC8B-1B87-429A-9B53-0C8A974D0867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D78FC8B-1B87-429A-9B53-0C8A974D0867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D78FC8B-1B87-429A-9B53-0C8A974D0867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4307989D-B2C1-482C-AD4A-C4A2239CB678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4307989D-B2C1-482C-AD4A-C4A2239CB678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4307989D-B2C1-482C-AD4A-C4A2239CB678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4307989D-B2C1-482C-AD4A-C4A2239CB678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D96752C4-08E4-47B7-AADB-E2C286DC0143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D96752C4-08E4-47B7-AADB-E2C286DC0143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D96752C4-08E4-47B7-AADB-E2C286DC0143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D96752C4-08E4-47B7-AADB-E2C286DC0143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A81F539-8F95-441A-848E-33CB971CB08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A81F539-8F95-441A-848E-33CB971CB08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A81F539-8F95-441A-848E-33CB971CB08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A81F539-8F95-441A-848E-33CB971CB08F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCAC0184-439A-4C22-B2E8-B1D0F05A8E84} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
+		{9ECDD303-259F-42A2-9E3C-27AD571F0170} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
+		{4D78FC8B-1B87-429A-9B53-0C8A974D0867} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
+		{4307989D-B2C1-482C-AD4A-C4A2239CB678} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
+		{D96752C4-08E4-47B7-AADB-E2C286DC0143} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
+		{7A81F539-8F95-441A-848E-33CB971CB08F} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
+		{50828896-2E38-4AB4-8C53-15DBADF1C476} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
+		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{9ecdd303-259f-42a2-9e3c-27ad571f0170}*SharedItemsImports = 5
+		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{dcac0184-439a-4c22-b2e8-b1d0f05a8e84}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal

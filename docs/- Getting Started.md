@@ -1,0 +1,3 @@
+# MinimalApiGen
+
+## Getting Started
