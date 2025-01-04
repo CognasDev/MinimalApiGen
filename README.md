@@ -3,6 +3,8 @@
 **MinimalApiGen** is a .NET 9 library that leverages Roslyn incremental generators to create minimal API routes and their associated services using a Fluent syntax.
 It simplifies the process of setting up API routes, business logic and mappings, aiming to make it quicker to develop and maintain minimal RESTful API's.
 
+The generation is split into two parts, Query (GET, GET by id) and Command (POST, PUT, DELETE).
+
 ## Features
 
 **Fluent Syntax**: Define API routes and services in a readable and maintainable manner.
@@ -63,8 +65,8 @@ public class Example
 
 Please note, this is a work in progress with the following to be added:
 
-- Support for POST, PUT, DELETE HTTP methods.
-- Additional updates to include all required features the Framework needs into one extension method.
+- Support for GET by id, POST, PUT, DELETE HTTP methods.
+- Additional updates to include all required features MinimalApiGen.Framework needs into one extension method.
 
 ## License
 
