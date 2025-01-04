@@ -2,7 +2,8 @@
 using MinimalApiGen.Framework.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
-
+using MinimalApiGen.Framework.Pagination;
+using System.ComponentModel;
 using SampleModel = MinimalApiGen.Generators.SnapshotTests.Fixtures.SampleModel;
 using SampleModelResponse = MinimalApiGen.Generators.SnapshotTests.Fixtures.SampleModelResponse;
 
@@ -24,17 +25,34 @@ public partial class SampleModelQueryRouteEndpointsMapper
             "/samplemodels",
             (
                 CancellationToken cancellationToken,
-                [FromServices] MinimalApiGen.Generators.SnapshotTests.Fixtures.IServiceBusinessLogic businessLogic,
+                [FromServices] MinimalApiGen.Generators.SnapshotTests.Fixtures.ISimpleBusinessLogic businessLogic,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService,
-				[FromKeyedServices("SampleService1")] MinimalApiGen.Generators.SnapshotTests.Fixtures.ISampleService1 sampleService1
+                [FromServices] IPaginationService paginationService,
+                [AsParameters] PaginationQuery paginationQuery
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<SampleModelResponse> SampleModelResponseStreamAsync()
                 {
-                    IEnumerable<SampleModel> models = await businessLogic.GetModelsAsync(sampleService1, cancellationToken).ConfigureAwait(false);
+                    IEnumerable<SampleModel> models = await businessLogic.GetModelsAsync(cancellationToken).ConfigureAwait(false);
                     IEnumerable<SampleModelResponse> responses = mappingService.Map(models);
+
+                    if (paginationService.IsPaginationQueryValidOrNotRequested<SampleModelResponse>(paginationQuery) == true)
+                    {
+                        PropertyDescriptor orderByProperty = paginationService.OrderByProperty<SampleModelResponse>(paginationQuery);
+                        int takeQuantity = paginationService.TakeQuantity(paginationQuery);
+                        int skipNumber = paginationService.SkipNumber(paginationQuery);
+
+                        if (paginationQuery.OrderByAscending ?? true)
+                        {
+                            responses = responses.OrderBy(response => orderByProperty.GetValue(response)).Skip(skipNumber).Take(takeQuantity);
+                        }
+                        else
+                        {
+                            responses = responses.OrderByDescending(response => orderByProperty.GetValue(response)).Skip(skipNumber).Take(takeQuantity);
+                        }
+                    }
 
                     foreach (SampleModelResponse response in responses)
                     {
@@ -47,7 +65,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
         )
         .WithName("GetSampleModelsV1")
         .WithTags("samplemodels")
-        .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of SampleModels mapped to SampleModelResponse responses." })
+        .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of SampleModels mapped to SampleModelResponse responses. Pagination is supported." })
         .MapToApiVersion(1)
         .Produces<IEnumerable<SampleModelResponse>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)

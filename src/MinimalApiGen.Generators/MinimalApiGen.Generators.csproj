@@ -43,18 +43,27 @@
 	<!--Nuget package configuration-->
 	<ItemGroup>
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-		<None Include="..\..\resources\generator.png">
+		<None Include="$(PKGSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include=".Pack\generator.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
-		<None Include="$(PKGSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+		<None Include=".Pack\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 	<PropertyGroup>
 		<Version>$(VersionPrefix)0.0.2-beta</Version>
 		<Title>MinimalApiGen.Generators</Title>
+		<Authors>CognasDev</Authors>
 		<PackageIcon>generator.png</PackageIcon>
-		<RepositoryUrl>https://github.com/CognasDev/MinimalApiGen</RepositoryUrl>
+		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>
 		<IsPackable>true</IsPackable>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Copyright>(C)opyright CognasDev 2025</Copyright>		
 	</PropertyGroup>
 
 </Project>

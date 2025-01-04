@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Query.FluentHandlers;
 using MinimalApiGen.Generators.Query.Invocation;

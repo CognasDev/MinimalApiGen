@@ -48,7 +48,7 @@ public static class SnapshotHelper
             MetadataReference.CreateFromFile(typeof(QueryGeneratorAttribute).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(JsonSerializer).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(SampleModel).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(object).Assembly.Location) 
+            MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
         ];
     }
 

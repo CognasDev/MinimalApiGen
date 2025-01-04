@@ -6,7 +6,7 @@ namespace MinimalApiGen.Generators.SnapshotTests.Generators;
 /// 
 /// </summary>
 [UsesVerify]
-public sealed class GetWithService
+public sealed class GetWithVersion
 {
     #region Public Method Declarations
 
@@ -28,15 +28,15 @@ public sealed class TestGenerator
 {
     public TestGenerator()
     {
-        ApiGeneration.Query<SampleModel>().WithNamespaceOf<IServiceBusinessLogic>()
+        ApiGeneration.Query<SampleModel>().WithNamespaceOf<ISimpleBusinessLogic>()
                                           .WithGet()
-                                          .WithBusinessLogic<IServiceBusinessLogic>(logic => logic.GetModelsAsync)
-                                          .WithServices<ISampleService1>()
-                                          .WithResponse<SampleModelResponse>();
+                                          .WithBusinessLogic<ISimpleBusinessLogic>(logic => logic.GetModelsAsync)
+                                          .WithResponse<SampleModelResponse>()
+                                          .WithVersion(2);        
     }
 }";
 
-        await SnapshotHelper.VerifyAsync(source, nameof(GetWithService));
+        await SnapshotHelper.VerifyAsync(source, nameof(GetWithVersion));
     }
 
     #endregion

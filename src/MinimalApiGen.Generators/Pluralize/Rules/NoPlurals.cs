@@ -17,7 +17,7 @@ internal static class NoPlurals
     public static ICollection<string> GetNoPlurals()
     {
         return new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        { 
+        {
             "adulthood",
             "advice",
             "agenda",
