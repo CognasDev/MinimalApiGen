@@ -36,6 +36,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Snapshots\" />
+	  <Folder Include="Snapshots\GetWithService\" />
 	  <Folder Include="Snapshots\Get\" />
 	</ItemGroup>
 

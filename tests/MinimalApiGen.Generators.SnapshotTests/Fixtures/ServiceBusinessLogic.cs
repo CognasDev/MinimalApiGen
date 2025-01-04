@@ -3,17 +3,17 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed class BusinessLogicV1 : IBusinessLogicV1
+public sealed class ServiceBusinessLogic : IServiceBusinessLogic
 {
     #region Public Method Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="sampleService1"></param>
+    /// <param name="sampleService"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<SampleModel>> GetModelsV1Async(SampleService1 sampleService1, CancellationToken cancellationToken)
+    public async Task<IEnumerable<SampleModel>> GetModelsAsync(ISampleService sampleService, CancellationToken cancellationToken)
     {
         return await Task.FromResult<IEnumerable<SampleModel>>([]).ConfigureAwait(false);
     }

@@ -3,17 +3,17 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IBusinessLogicV1
+public interface IServiceBusinessLogic
 {
     #region Method Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="sampleService1"></param>
+    /// <param name="sampleService"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<IEnumerable<SampleModel>> GetModelsV1Async(SampleService1 sampleService1, CancellationToken cancellationToken);
+    Task<IEnumerable<SampleModel>> GetModelsAsync(ISampleService sampleService, CancellationToken cancellationToken);
 
     #endregion
 }
