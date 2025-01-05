@@ -37,7 +37,7 @@ internal static class FluentProcessor
             {
                 QueryInvocationDetails queryInvocationDetails = queryInvocations.ToQueryInvocationDetails();
                 ReadOnlySpan<FluentMethodInfo> fluentMethods = queryInvocations.ToFluentMethodInfos();
-            
+
                 QueryIntermediateResult? intermediateResult = null;
                 string masterNamespace = string.Empty;
                 string classNamespace = string.Empty;
@@ -137,7 +137,7 @@ internal static class FluentProcessor
         IReadOnlyList<InvocationExpressionSyntax> expressions = statement.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
         bool hasQuery = expressions.Any(expression => expression.GetMethodSymbol(semanticModel)?.ConstructedFrom?.ToDisplayString() == FullyQualifiedMethodNames.Query);
 
-        return hasQuery ? 
+        return hasQuery ?
                expressions.Select(invocationExpressionSyntax => invocationExpressionSyntax.ToInvocationInfo(semanticModel))
                           .Reverse()
                           .ToImmutableArray()

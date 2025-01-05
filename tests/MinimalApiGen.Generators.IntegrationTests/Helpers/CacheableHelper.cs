@@ -53,7 +53,7 @@ internal static class CacheableHelper
         ISourceGenerator generator = new Generator().AsSourceGenerator();
 
         GeneratorDriverOptions driverOptions = new(disabledOutputs: IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true);
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new[] { generator }, driverOptions: driverOptions);
+        GeneratorDriver driver = CSharpGeneratorDriver.Create([generator], driverOptions: driverOptions);
         CSharpCompilation clone = compilation.Clone();
 
         driver = driver.RunGenerators(compilation);
@@ -65,8 +65,8 @@ internal static class CacheableHelper
 
         runResult2.Results[0]
                     .TrackedOutputSteps
-                    .SelectMany(keyValuePair => keyValuePair.Value) // step executions
-                    .SelectMany(runStep => runStep.Outputs) // execution results
+                    .SelectMany(keyValuePair => keyValuePair.Value)
+                    .SelectMany(runStep => runStep.Outputs)
                     .Should()
                     .OnlyContain(runStep => runStep.Reason == IncrementalStepRunReason.Cached);
 
@@ -86,10 +86,10 @@ internal static class CacheableHelper
 
         trackedSteps1.Should().NotBeEmpty().And.HaveSameCount(trackedSteps2).And.ContainKeys(trackedSteps2.Keys);
 
-        foreach (KeyValuePair<string, ImmutableArray<IncrementalGeneratorRunStep>> kvp in trackedSteps1)
+        foreach (KeyValuePair<string, ImmutableArray<IncrementalGeneratorRunStep>> keyValuePair in trackedSteps1)
         {
-            string trackingName = kvp.Key;
-            ImmutableArray<IncrementalGeneratorRunStep> runSteps1 = kvp.Value;
+            string trackingName = keyValuePair.Key;
+            ImmutableArray<IncrementalGeneratorRunStep> runSteps1 = keyValuePair.Value;
             ImmutableArray<IncrementalGeneratorRunStep> runSteps2 = trackedSteps2[trackingName];
             AssertEqual(runSteps1, runSteps2, trackingName);
         }

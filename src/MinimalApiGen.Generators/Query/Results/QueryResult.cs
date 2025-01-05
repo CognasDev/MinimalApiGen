@@ -7,109 +7,109 @@ namespace MinimalApiGen.Generators.Query.Results;
 /// </summary>
 internal readonly record struct QueryResult
 {
-    #region Field Declarations - Model Details
+    #region Property Declarations - Model Details
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ClassName;
+    public string ClassName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ClassNamespace;
+    public string ClassNamespace { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ModelName;
+    public string ModelName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ModelPluralName;
+    public string ModelPluralName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ModelFullyQualifiedName;
+    public string ModelFullyQualifiedName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> ModelProperties;
+    public EquatableArray<string> ModelProperties { get; }
 
     #endregion
 
-    #region Field Declarations - Response Details
+    #region Property Declarations - Response Details
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ResponseName;
+    public string ResponseName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ResponseFullyQualifiedName;
+    public string ResponseFullyQualifiedName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly bool WithPagination;
+    public bool WithPagination { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly bool WithMappingService;
+    public bool WithMappingService { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> ResponseProperties;
+    public EquatableArray<string> ResponseProperties { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string? CachedFor;
+    public string? CachedFor { get; }
 
     #endregion
 
-    #region Field Declarations - Service Details
+    #region Property Declarations - Service Details
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> Services;
+    public EquatableArray<string> Services { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly int Version;
+    public int Version { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableDictionary<string, string> KeyedServices;
+    public EquatableDictionary<string, string> KeyedServices { get; }
 
     #endregion
 
-    #region Field Declarations - Business Logic Details
+    #region Property Declarations - Business Logic Details
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string BusinessLogicFullyQualifiedName;
+    public string BusinessLogicFullyQualifiedName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string BusinessLogicDelegateName;
+    public string BusinessLogicDelegateName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> BusinessLogicParameters;
+    public EquatableArray<string> BusinessLogicParameters { get; }
 
     #endregion
 
@@ -126,22 +126,22 @@ internal readonly record struct QueryResult
         ModelName = queryIntermediateResult.ModelName;
         ModelPluralName = queryIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;
-        ModelProperties = new EquatableArray<string>(queryIntermediateResult.ModelProperties);
+        ModelProperties = new(queryIntermediateResult.ModelProperties);
 
         ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
         ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
         WithPagination = queryIntermediateResult.WithPagination;
         WithMappingService = queryIntermediateResult.WithMappingService;
-        ResponseProperties = new EquatableArray<string>(queryIntermediateResult.ResponseResult.PropertyNames);
+        ResponseProperties = new(queryIntermediateResult.ResponseResult.PropertyNames);
         CachedFor = queryIntermediateResult.CachedFor;
 
-        Services = new EquatableArray<string>(queryIntermediateResult.Services);
+        Services = new(queryIntermediateResult.Services);
         Version = queryIntermediateResult.Version;
-        KeyedServices = new EquatableDictionary<string, string>(queryIntermediateResult.KeyedServices);
+        KeyedServices = new(queryIntermediateResult.KeyedServices);
 
         BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
         BusinessLogicDelegateName = queryIntermediateResult.BusinessLogicResult!.DelegateName;
-        BusinessLogicParameters = new EquatableArray<string>(queryIntermediateResult.BusinessLogicResult!.Parameters);
+        BusinessLogicParameters = new(queryIntermediateResult.BusinessLogicResult!.Parameters);
     }
 
     #endregion

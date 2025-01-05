@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using MinimalApiGen.Generators.Query.Invocation;
+using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace MinimalApiGen.Generators.Query.FluentHandlers;
 
@@ -19,7 +19,7 @@ internal static class WithServicesHandler
     /// <returns></returns>
     public static IReadOnlyList<string> ToServices(this InvocationInfo fluentInvocation)
     {
-        ImmutableArray<ITypeSymbol> serviceTypeSymbols = fluentInvocation.MethodSymbol.TypeArguments;
+        ReadOnlySpan<ITypeSymbol> serviceTypeSymbols = fluentInvocation.MethodSymbol.TypeArguments.AsSpan();
         List<string> serviceFullyQualifiedNames = [];
         foreach (ITypeSymbol serviceTypeSymbol in serviceTypeSymbols)
         {

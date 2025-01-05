@@ -5,7 +5,7 @@ namespace MinimalApiGen.Generators.Query.Results;
 /// <summary>
 /// 
 /// </summary>
-internal sealed record QueryIntermediateResult()
+internal sealed record QueryIntermediateResult
 {
     #region Property Declarations
 
