@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Query.FluentHandlers;
 using MinimalApiGen.Generators.Query.Invocation;
 using MinimalApiGen.Generators.Query.Results;
@@ -22,7 +23,7 @@ internal static class FluentProcessor
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    public static ImmutableArray<QueryResult> GetQueryResults(GeneratorAttributeSyntaxContext context)
+    public static EquatableArray<QueryResult> GetQueryResults(GeneratorAttributeSyntaxContext context)
     {
         ConstructorDeclarationSyntax constructor = GetConstructor(context);
         SemanticModel semanticModel = context.SemanticModel;
@@ -148,16 +149,16 @@ internal static class FluentProcessor
     /// </summary>
     /// <param name="queryIntermediateResults"></param>
     /// <returns></returns>
-    private static ImmutableArray<QueryResult> BuildQueryResults(List<QueryIntermediateResult> queryIntermediateResults)
+    private static EquatableArray<QueryResult> BuildQueryResults(List<QueryIntermediateResult> queryIntermediateResults)
     {
-        ImmutableArray<QueryResult>.Builder queryResultsBuilder = ImmutableArray.CreateBuilder<QueryResult>();
+        List<QueryResult> queryResultsBuilder = [];
         ReadOnlySpan<QueryIntermediateResult> span = [.. queryIntermediateResults];
         foreach (QueryIntermediateResult intermediateResult in span)
         {
             QueryResult queryResult = new(intermediateResult);
             queryResultsBuilder.Add(queryResult);
         }
-        return queryResultsBuilder.ToImmutableArray();
+        return new(queryResultsBuilder);
     }
 
     #endregion
