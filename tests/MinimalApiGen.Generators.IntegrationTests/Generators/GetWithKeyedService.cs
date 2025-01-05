@@ -32,14 +32,4 @@ public sealed class TestGenerator
 }";
 
     #endregion
-
-    #region Public Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public override async Task VerifySnapshot() => await VerifySnapshotAsync(nameof(GetWithKeyedService));
-
-    #endregion
 }

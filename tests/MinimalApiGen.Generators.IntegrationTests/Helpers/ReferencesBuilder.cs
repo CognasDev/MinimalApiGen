@@ -9,7 +9,7 @@ namespace MinimalApiGen.Generators.IntegrationTests.Helpers;
 /// <summary>
 /// 
 /// </summary>
-internal static class ReferencesHelper
+internal static class ReferencesBuilder
 {
     #region Public Method Declarations
 
@@ -17,7 +17,7 @@ internal static class ReferencesHelper
     /// 
     /// </summary>
     /// <returns></returns>
-    public static IEnumerable<PortableExecutableReference> BuildReferences()
+    public static IEnumerable<PortableExecutableReference> Build()
     {
         return
         [

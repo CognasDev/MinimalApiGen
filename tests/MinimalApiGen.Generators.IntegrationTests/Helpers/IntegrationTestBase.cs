@@ -26,13 +26,11 @@ public abstract class IntegrationTestBase
     /// </summary>
     /// <returns></returns>
     [Fact]
-    public abstract Task VerifySnapshot();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    protected async Task VerifySnapshotAsync(string name) => await SnapshotHelper.VerifyAsync(Source, name);
+    public async Task VerifySnapshot()
+    {
+        string callingClassName = GetType().Name;
+        await SnapshotHelper.VerifyAsync(Source, callingClassName);
+    }
 
     /// <summary>
     /// 
