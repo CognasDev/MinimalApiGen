@@ -34,6 +34,18 @@ internal static class InvocationExtensions
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="invocationExpressionSyntax"></param>
+    /// <param name="semanticModel"></param>
+    /// <returns></returns>
+    public static InvocationInfo ToInvocationInfo(this InvocationExpressionSyntax invocationExpressionSyntax, SemanticModel semanticModel)
+    {
+        IMethodSymbol methodSymbol = invocationExpressionSyntax.GetMethodSymbol(semanticModel);
+        return new(invocationExpressionSyntax, methodSymbol);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="fluentInvocations"></param>
     /// <returns></returns>
     public static ReadOnlySpan<FluentMethodInfo> ToFluentMethodInfos(this ImmutableArray<InvocationInfo> fluentInvocations)
