@@ -5,40 +5,39 @@ namespace MinimalApiGen.Generators.Query.Results;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="queryIntermediateResult"></param>
-internal readonly struct QueryResult(QueryIntermediateResult queryIntermediateResult)
+internal readonly record struct QueryResult
 {
     #region Field Declarations - Model Details
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ClassName = $"{queryIntermediateResult.ModelName}QueryRouteEndpointsMapper";
+    public readonly string ClassName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ClassNamespace = queryIntermediateResult.ClassNamespace!;
+    public readonly string ClassNamespace;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ModelName = queryIntermediateResult.ModelName;
+    public readonly string ModelName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ModelPluralName = queryIntermediateResult.ModelPluralName;
+    public readonly string ModelPluralName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;
+    public readonly string ModelFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> ModelProperties = new(queryIntermediateResult.ModelProperties);
+    public readonly EquatableArray<string> ModelProperties;
 
     #endregion
 
@@ -47,32 +46,32 @@ internal readonly struct QueryResult(QueryIntermediateResult queryIntermediateRe
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
+    public readonly string ResponseName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
+    public readonly string ResponseFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly bool WithPagination = queryIntermediateResult.WithPagination;
+    public readonly bool WithPagination;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly bool WithMappingService = queryIntermediateResult.WithMappingService;
+    public readonly bool WithMappingService;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> ResponseProperties = new(queryIntermediateResult.ResponseResult.PropertyNames);
+    public readonly EquatableArray<string> ResponseProperties;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string? CachedFor = queryIntermediateResult.CachedFor;
+    public readonly string? CachedFor;
 
     #endregion
 
@@ -81,17 +80,17 @@ internal readonly struct QueryResult(QueryIntermediateResult queryIntermediateRe
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> Services = new(queryIntermediateResult.Services);
+    public readonly EquatableArray<string> Services;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly int Version = queryIntermediateResult.Version;
+    public readonly int Version;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableDictionary<string, string> KeyedServices = new(queryIntermediateResult.KeyedServices);
+    public readonly EquatableDictionary<string, string> KeyedServices;
 
     #endregion
 
@@ -100,17 +99,50 @@ internal readonly struct QueryResult(QueryIntermediateResult queryIntermediateRe
     /// <summary>
     /// 
     /// </summary>
-    public readonly string BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
+    public readonly string BusinessLogicFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly string BusinessLogicDelegateName = queryIntermediateResult.BusinessLogicResult!.DelegateName;
+    public readonly string BusinessLogicDelegateName;
 
     /// <summary>
     /// 
     /// </summary>
-    public readonly EquatableArray<string> BusinessLogicParameters = new(queryIntermediateResult.BusinessLogicResult!.Parameters);
+    public readonly EquatableArray<string> BusinessLogicParameters;
+
+    #endregion
+
+    #region Constructor Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="queryIntermediateResult"></param>
+    public QueryResult(QueryIntermediateResult queryIntermediateResult)
+    {
+        ClassName = $"{queryIntermediateResult.ModelName}QueryRouteEndpointsMapper";
+        ClassNamespace = queryIntermediateResult.ClassNamespace!;
+        ModelName = queryIntermediateResult.ModelName;
+        ModelPluralName = queryIntermediateResult.ModelPluralName;
+        ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;
+        ModelProperties = new EquatableArray<string>(queryIntermediateResult.ModelProperties);
+
+        ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
+        ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
+        WithPagination = queryIntermediateResult.WithPagination;
+        WithMappingService = queryIntermediateResult.WithMappingService;
+        ResponseProperties = new EquatableArray<string>(queryIntermediateResult.ResponseResult.PropertyNames);
+        CachedFor = queryIntermediateResult.CachedFor;
+
+        Services = new EquatableArray<string>(queryIntermediateResult.Services);
+        Version = queryIntermediateResult.Version;
+        KeyedServices = new EquatableDictionary<string, string>(queryIntermediateResult.KeyedServices);
+
+        BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
+        BusinessLogicDelegateName = queryIntermediateResult.BusinessLogicResult!.DelegateName;
+        BusinessLogicParameters = new EquatableArray<string>(queryIntermediateResult.BusinessLogicResult!.Parameters);
+    }
 
     #endregion
 }

@@ -44,9 +44,15 @@ public sealed class Generator : IIncrementalGenerator
         IncrementalValueProvider<ImmutableArray<QueryResult>> queryResultsValueProvider = context.SyntaxProvider.ForAttributeWithMetadataName
         (
             "MinimalApiGen.Framework.Generation.QueryGeneratorAttribute",
-            predicate: static (syntaxNode, _) => syntaxNode is ClassDeclarationSyntax,
-            transform: static (context, _) => FluentProcessor.GetQueryResults(context)
-        ).SelectMany(static (results, _) => results).Collect();
+            predicate: static (syntaxNode, cancellationToken) => syntaxNode is ClassDeclarationSyntax,
+            transform: static (context, cancellationToken) => FluentProcessor.GetQueryResults(context)
+        )
+        .WithTrackingName(TrackingNames.GetQueryResults)
+        .SelectMany(static (results, cancellationToken) => results)
+        .WithTrackingName(TrackingNames.SelectMany)
+        .Collect()
+        .WithTrackingName(TrackingNames.CollectToValueProvider);
+
         context.RegisterSourceOutput(queryResultsValueProvider, static (context, queryResults) => SourceOutputExecutor.Execute(context, queryResults));
     }
 

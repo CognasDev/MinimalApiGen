@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStartApi", "samples\QuickStartApi\QuickStartApi.csproj", "{7A81F539-8F95-441A-848E-33CB971CB08F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.SnapshotTests", "tests\MinimalApiGen.Generators.SnapshotTests\MinimalApiGen.Generators.SnapshotTests.csproj", "{50828896-2E38-4AB4-8C53-15DBADF1C476}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.IntegrationTests", "tests\MinimalApiGen.Generators.IntegrationTests\MinimalApiGen.Generators.IntegrationTests.csproj", "{51A1159B-331A-4655-8AB0-45CBA297B19C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,10 +65,10 @@ Global
 		{7A81F539-8F95-441A-848E-33CB971CB08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A81F539-8F95-441A-848E-33CB971CB08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A81F539-8F95-441A-848E-33CB971CB08F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50828896-2E38-4AB4-8C53-15DBADF1C476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,7 +80,7 @@ Global
 		{4307989D-B2C1-482C-AD4A-C4A2239CB678} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
 		{D96752C4-08E4-47B7-AADB-E2C286DC0143} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
 		{7A81F539-8F95-441A-848E-33CB971CB08F} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
-		{50828896-2E38-4AB4-8C53-15DBADF1C476} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
+		{51A1159B-331A-4655-8AB0-45CBA297B19C} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
