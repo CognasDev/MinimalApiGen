@@ -156,10 +156,8 @@ internal static class CacheableHelper
         {
             IncrementalGeneratorRunStep runStep1 = runSteps1[index];
             IncrementalGeneratorRunStep runStep2 = runSteps2[index];
-
-            // The outputs should be equal between different runs
-            IEnumerable<object> outputs1 = runStep1.Outputs.Select(x => x.Value);
-            IEnumerable<object> outputs2 = runStep2.Outputs.Select(x => x.Value);
+            IEnumerable<object> outputs1 = runStep1.Outputs.Select(runStep => runStep.Value);
+            IEnumerable<object> outputs2 = runStep2.Outputs.Select(runStep => runStep.Value);
 
             outputs1.Should().Equal(outputs2, $"because {stepName} should produce cacheable outputs");
 
