@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Query.Generation;
 
 namespace MinimalApiGen.Generators.Query.Results;
 
@@ -33,6 +34,11 @@ internal readonly record struct QueryResult
     /// 
     /// </summary>
     public string ModelFullyQualifiedName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public QueryType QueryType { get; }
 
     /// <summary>
     /// 
@@ -127,6 +133,7 @@ internal readonly record struct QueryResult
         ModelPluralName = queryIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;
         ModelProperties = new(queryIntermediateResult.ModelProperties);
+        QueryType = queryIntermediateResult.QueryType;
 
         ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
         ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;

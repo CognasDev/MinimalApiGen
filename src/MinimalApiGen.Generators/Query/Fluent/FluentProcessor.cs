@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Query.FluentHandlers;
+using MinimalApiGen.Generators.Query.Generation;
 using MinimalApiGen.Generators.Query.Invocation;
 using MinimalApiGen.Generators.Query.Results;
 using System;
@@ -49,7 +50,12 @@ internal static class FluentProcessor
                     {
                         case string name when name == FullyQualifiedMethodNames.WithGet:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, masterNamespace, classNamespace);
-                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult();
+                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.Get);
+                            classNamespace = string.Empty;
+                            break;
+                        case string name when name == FullyQualifiedMethodNames.WithGetById:
+                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, masterNamespace, classNamespace);
+                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.GetById);
                             classNamespace = string.Empty;
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithNamespace:

@@ -16,7 +16,9 @@ public static class EndpointRouteMappingExtension
     public static void UseMinimalApiGenEndpointRouteMaps(this WebApplication webApplication)
     {
 		MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelQueryRouteEndpointsMapper mapperV1 = new();
+
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
+
 		mapperV1.MapGetV1(apiVersionRouteV1);
 
     }

@@ -1,7 +1,9 @@
 ﻿using FluentAssertions;
 using MinimalApiGen.Generators.Query.Fluent;
+using MinimalApiGen.Generators.Query.Generation;
 using MinimalApiGen.Generators.Query.Invocation;
 using MinimalApiGen.Generators.Query.Results;
+using Moq;
 
 namespace MinimalApiGen.Generators.Tests.Query.Fluent;
 
@@ -27,7 +29,7 @@ public sealed class QueryIntermediateResultExtensionsTests
         };
 
         // Act
-        QueryIntermediateResult result = queryInvocationDetails.InitialiseQueryIntermediateResult();
+        QueryIntermediateResult result = queryInvocationDetails.InitialiseQueryIntermediateResult(It.IsAny<QueryType>());
 
         // Assert
         result.ModelName.Should().Be("Model");
@@ -47,7 +49,8 @@ public sealed class QueryIntermediateResultExtensionsTests
         {
             ModelName = "Model",
             ModelPluralName = "Models",
-            ModelFullyQualifiedName = "Namespace.Model"
+            ModelFullyQualifiedName = "Namespace.Model",
+            QueryType = QueryType.Get
         };
 
         // Act
@@ -70,7 +73,8 @@ public sealed class QueryIntermediateResultExtensionsTests
         {
             ModelName = "Model",
             ModelPluralName = "Models",
-            ModelFullyQualifiedName = "Namespace.Model"
+            ModelFullyQualifiedName = "Namespace.Model",
+            QueryType = QueryType.Get
         };
 
         // Act

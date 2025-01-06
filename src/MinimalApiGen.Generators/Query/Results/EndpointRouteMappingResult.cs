@@ -1,4 +1,6 @@
-﻿namespace MinimalApiGen.Generators.Query.Results;
+﻿using MinimalApiGen.Generators.Query.Generation;
+
+namespace MinimalApiGen.Generators.Query.Results;
 
 /// <summary>
 /// 
@@ -6,4 +8,5 @@
 /// <param name="ClassNamespace"></param>
 /// <param name="ClassName"></param>
 /// <param name="Version"></param>
-internal readonly record struct EndpointRouteMappingResult(string ClassNamespace, string ClassName, int Version);
+/// <param name="QueryType"></param>
+internal readonly record struct EndpointRouteMappingResult(string ClassNamespace, string ClassName, int Version, QueryType QueryType);

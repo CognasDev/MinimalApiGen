@@ -37,7 +37,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<SampleModelResponse> SampleModelResponseStreamAsync()
                 {
-                    IEnumerable<SampleModel> models = await businessLogic.GetModelsV2Async(sampleService1, sampleKeyedService, cancellationToken).ConfigureAwait(false);
+                    IEnumerable<SampleModel> models = await businessLogic.GetModelsAsync(sampleService1, sampleKeyedService, cancellationToken).ConfigureAwait(false);
                     IEnumerable<SampleModelResponse> responses = mappingService.Map(models);
 
                     if (paginationService.IsPaginationQueryValidOrNotRequested<SampleModelResponse>(paginationQuery) == true)

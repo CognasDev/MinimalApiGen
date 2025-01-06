@@ -1,29 +1,33 @@
-﻿namespace MinimalApiGen.Generators.Query.SourceBuilders;
+﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Query.Results;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading;
+
+namespace MinimalApiGen.Generators.Query.SourceBuilders;
 
 /// <summary>
 /// 
 /// </summary>
-/// <param name="classNamespace"></param>
+/// <param name="queryResult"></param>
 /// <param name="apiVersion"></param>
-/// <param name="modelName"></param>
-/// <param name="modelPluralName"></param>
-/// <param name="modelFullyQualifiedName"></param>
-/// <param name="responseName"></param>
-/// <param name="responseFullyQualifiedName"></param>
-public sealed class MapGetByIdBuilder(string classNamespace,
-                                      int apiVersion,
-                                      string modelName,
-                                      string modelPluralName,
-                                      string modelFullyQualifiedName,
-                                      string responseName,
-                                      string responseFullyQualifiedName)
+/// <param name="servicesBuilder"></param>
+/// <param name="cachedForBuilder"></param>
+internal sealed class MapGetByIdBuilder(QueryResult queryResult, int apiVersion, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder)
 {
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = classNamespace;
+    public string ClassName { get; } = queryResult.ClassName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ClassNamespace { get; } = queryResult.ClassNamespace;
 
     /// <summary>
     /// 
@@ -33,12 +37,12 @@ public sealed class MapGetByIdBuilder(string classNamespace,
     /// <summary>
     /// 
     /// </summary>
-    public string ModelName { get; } = modelName;
+    public string ModelName { get; } = queryResult.ModelName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ModelPluralName { get; } = modelPluralName;
+    public string ModelPluralName { get; } = queryResult.ModelPluralName;
 
     /// <summary>
     /// 
@@ -48,17 +52,54 @@ public sealed class MapGetByIdBuilder(string classNamespace,
     /// <summary>
     /// 
     /// </summary>
-    public string ModelFullyQualifiedName { get; } = modelFullyQualifiedName;
+    public string ModelFullyQualifiedName { get; } = queryResult.ModelFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseName { get; } = responseName;
+    public string ResponseName { get; } = queryResult.ResponseName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseFullyQualifiedName { get; } = responseFullyQualifiedName;
+    public string ResponseFullyQualifiedName { get; } = queryResult.ResponseFullyQualifiedName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FromServices { get; } = servicesBuilder.FromServices;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FromKeyedServices { get; } = servicesBuilder.FromKeyedServices;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ServiceNames { get; } = servicesBuilder.ServiceNames;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string BusinessLogic { get; } = queryResult.BusinessLogicFullyQualifiedName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string BusinessLogicDelegateName { get; } = queryResult.BusinessLogicDelegateName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(queryResult.BusinessLogicParameters,
+                                                                                     queryResult.Services,
+                                                                                     queryResult.KeyedServices);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string CachedFor { get; } = cachedForBuilder.Build(queryResult.CachedFor);
 
     #endregion
 
@@ -68,7 +109,7 @@ public sealed class MapGetByIdBuilder(string classNamespace,
     /// 
     /// </summary>
     public string Build() =>
-$@"using MinimalApiGen.Generators.Abstractions.Mapping;
+$@"using MinimalApiGen.Framework.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
@@ -80,7 +121,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
-public partial class {ModelName}QueryApi
+public partial class {ClassName}
 {{
     /// <summary>
     /// 
@@ -95,21 +136,84 @@ public partial class {ModelName}QueryApi
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService
+                [FromServices] {BusinessLogic} businessLogic,
+                [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService{FromServices}{FromKeyedServices}
             ) =>
             {{
-                cancellationToken.ThrowIfCancellationRequested();
+                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
+
+                {ModelName}? model = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+
+                if (model is null)
+                {{
+                    return Results.NotFound();
+                }}
+
+                {ResponseName} response = mappingService.Map(model);
+                return Results.Ok(response);
             }}
         )
-        .WithName(""Get{ModelPluralName}ByIdV{ApiVersion}"")
+        .WithName(""GetById{ModelPluralName}V{ApiVersion}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single {ModelName} mapped to a {ResponseName} response."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName} by the id, mapped to a {ResponseName} response."" }})
         .MapToApiVersion({ApiVersion})
-        .Produces<{ResponseName}>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status404NotFound, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
+        .Produces<IEnumerable<{ResponseName}>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
+        .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
+        .Produces(StatusCodes.Status404NotFound)
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor};
      }}
 }}";
+
+    #endregion
+
+    #region Private Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="businessLogicParameters"></param>
+    /// <param name="services"></param>
+    /// <param name="keyedServices"></param>
+    /// <returns></returns>
+    private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
+                                                  EquatableArray<string> services,
+                                                  EquatableDictionary<string, string> keyedServices)
+    {
+        ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
+        ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
+        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.AsSpan();
+        StringBuilder stringBuilder = new();
+
+        foreach (string parameter in businessLogicParametersSpan)
+        {
+            if (services.Contains(parameter))
+            {
+                string serviceName = parameter.Split('.').Last();
+                string serviceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(serviceName);
+                stringBuilder.Append(serviceNameCamelCase);
+                stringBuilder.Append(", ");
+            }
+            else if (values.IndexOf(parameter) is int index && index != -1)
+            {
+                string keyedServiceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(keys[index]);
+                stringBuilder.Append(keyedServiceNameCamelCase);
+                stringBuilder.Append(", ");
+            }
+            else if (parameter == "int")
+            {
+                stringBuilder.Append("id, ");
+            }
+            else if (parameter == typeof(CancellationToken).FullName)
+            {
+                stringBuilder.Append("cancellationToken, ");
+            }
+        }
+
+        stringBuilder.Length -= 2;
+        string delegateParameters = stringBuilder.ToString();
+        return delegateParameters;
+    }
 
     #endregion
 }

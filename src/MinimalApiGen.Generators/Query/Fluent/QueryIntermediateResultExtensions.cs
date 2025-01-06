@@ -1,4 +1,5 @@
-﻿using MinimalApiGen.Generators.Query.Invocation;
+﻿using MinimalApiGen.Generators.Query.Generation;
+using MinimalApiGen.Generators.Query.Invocation;
 using MinimalApiGen.Generators.Query.Results;
 using System.Collections.Generic;
 
@@ -15,14 +16,16 @@ internal static class QueryIntermediateResultExtensions
     /// 
     /// </summary>
     /// <param name="queryInvocationDetails"></param>
+    /// <param name="queryType"></param>
     /// <returns></returns>
-    public static QueryIntermediateResult InitialiseQueryIntermediateResult(this QueryInvocationDetails queryInvocationDetails)
+    public static QueryIntermediateResult InitialiseQueryIntermediateResult(this QueryInvocationDetails queryInvocationDetails, QueryType queryType)
     {
         QueryIntermediateResult result = new()
         {
             ModelFullyQualifiedName = queryInvocationDetails.ModelFullyQualifiedName,
             ModelPluralName = queryInvocationDetails.ModelPluralName,
-            ModelName = queryInvocationDetails.ModelName
+            ModelName = queryInvocationDetails.ModelName,
+            QueryType = queryType
         };
         result.ModelProperties.AddRange(queryInvocationDetails.PropertyNames);
         return result;

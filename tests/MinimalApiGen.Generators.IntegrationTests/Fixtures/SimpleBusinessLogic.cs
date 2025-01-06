@@ -17,5 +17,17 @@ public sealed class SimpleBusinessLogic : ISimpleBusinessLogic
         return await Task.FromResult<IEnumerable<SampleModel>>([]).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<SampleModel> GetModelByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        SampleModel sampleModel = new() { Id = 5, Name = "SampleModel" };
+        return await Task.FromResult(sampleModel).ConfigureAwait(false);
+    }
+
     #endregion
 }

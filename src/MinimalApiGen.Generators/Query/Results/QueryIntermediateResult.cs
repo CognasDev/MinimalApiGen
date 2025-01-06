@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MinimalApiGen.Generators.Query.Generation;
+using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Query.Results;
 
@@ -23,6 +24,11 @@ internal sealed record QueryIntermediateResult
     /// 
     /// </summary>
     public required string ModelFullyQualifiedName { get; init; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public required QueryType QueryType { get; init; }
 
     /// <summary>
     /// 
