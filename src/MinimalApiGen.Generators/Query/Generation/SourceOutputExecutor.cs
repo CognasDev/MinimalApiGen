@@ -26,7 +26,14 @@ internal static class SourceOutputExecutor
         {
             ServicesBuilder servicesBuilder = new(queryResult.Services, queryResult.KeyedServices);
             CachedForBuilder cachedForBuilder = new();
-            AddMapGetSource(context, queryResult, servicesBuilder, cachedForBuilder, queryResult.Version);
+            if (queryResult.QueryType == QueryType.Get)
+            {
+                AddMapGetSource(context, queryResult, servicesBuilder, cachedForBuilder, queryResult.Version);
+            }
+            else if (queryResult.QueryType == QueryType.GetById)
+            {
+                AddMapGetByIdSource(context, queryResult, servicesBuilder, cachedForBuilder, queryResult.Version);
+            }
             if (queryResult.WithMappingService)
             {
                 AddMappingService(context, queryResult, queryResult.Version);
@@ -55,7 +62,8 @@ internal static class SourceOutputExecutor
                 {
                     ClassName = queryResult.ClassName,
                     ClassNamespace = queryResult.ClassNamespace,
-                    Version = queryResult.Version
+                    Version = queryResult.Version,
+                    QueryType = queryResult.QueryType
                 }
              )
             .Distinct()
@@ -96,12 +104,13 @@ internal static class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="queryResult"></param>
     /// <param name="servicesBuilder"></param>
+    /// <param name="cachedForBuilder"></param>
     /// <param name="apiVersion"></param>
-    private static void AddMapGetByIdSource(SourceProductionContext context, QueryResult queryResult, ServicesBuilder servicesBuilder, int apiVersion)
+    private static void AddMapGetByIdSource(SourceProductionContext context, QueryResult queryResult, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder, int apiVersion)
     {
-        //MapGetBuilder builder = new(queryResult, apiVersion, servicesBuilder);
-        //string mapGet = builder.Build();
-        //context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetByIdV{apiVersion}.g.cs", mapGet);
+        MapGetByIdBuilder builder = new(queryResult, apiVersion, servicesBuilder, cachedForBuilder);
+        string mapGet = builder.Build();
+        context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetByIdV{apiVersion}.g.cs", mapGet);
     }
 
     #endregion

@@ -1,5 +1,7 @@
-﻿using MinimalApiGen.Generators.Query.Results;
+﻿using MinimalApiGen.Generators.Query.Generation;
+using MinimalApiGen.Generators.Query.Results;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace MinimalApiGen.Generators.Query.SourceBuilders;
@@ -35,8 +37,7 @@ public static class EndpointRouteMappingExtension
     {{
 {BuildInternal(endpointRouteMappings)}
     }}
-}}
-";
+}}";
 
     #endregion
 
@@ -50,26 +51,49 @@ public static class EndpointRouteMappingExtension
     private static string BuildInternal(ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings)
     {
         StringBuilder builder = new();
-        foreach (EndpointRouteMappingResult endpointRouteMapping in endpointRouteMappings)
+
+        (int Version, string FullName)[] versionWithNames = endpointRouteMappings.ToArray()
+                                                                                 .Select(mapping => (mapping.Version, $"{mapping.ClassNamespace}.{mapping.ClassName}"))
+                                                                                 .Distinct()
+                                                                                 .ToArray();
+
+        foreach ((int Version, string FullName) versionWithName in versionWithNames)
         {
-            int version = endpointRouteMapping.Version;
+            int version = versionWithName.Version;
             builder.Append("\t\t");
-            builder.Append(endpointRouteMapping.ClassNamespace);
-            builder.Append(".");
-            builder.Append(endpointRouteMapping.ClassName);
+            builder.Append(versionWithName.FullName);
             builder.Append(" mapperV");
             builder.Append(version);
             builder.AppendLine(" = new();");
+        }
+        builder.AppendLine();
+
+        foreach ((int Version, string FullName) versionWithName in versionWithNames)
+        {
+            int version = versionWithName.Version;
             builder.Append("\t\t");
             builder.Append("RouteGroupBuilder apiVersionRouteV");
             builder.Append(version);
             builder.Append(" = webApplication.GetApiVersionRoute(");
             builder.Append(version);
             builder.AppendLine(");");
+        }
+        builder.AppendLine();
+
+        foreach (EndpointRouteMappingResult endpointRouteMapping in endpointRouteMappings)
+        {
+            int version = endpointRouteMapping.Version;
             builder.Append("\t\t");
             builder.Append("mapperV");
             builder.Append(version);
-            builder.Append(".MapGetV");
+            if (endpointRouteMapping.QueryType == QueryType.Get)
+            {
+                builder.Append(".MapGetV");
+            }
+            else if (endpointRouteMapping.QueryType == QueryType.GetById)
+            {
+                builder.Append(".MapGetByIdV");
+            }
             builder.Append(version);
             builder.Append("(apiVersionRouteV");
             builder.Append(version);

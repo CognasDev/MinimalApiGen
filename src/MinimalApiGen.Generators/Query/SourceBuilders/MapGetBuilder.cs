@@ -221,8 +221,7 @@ public partial class {ClassName}
             }
             else if (parameter == typeof(CancellationToken).FullName)
             {
-                stringBuilder.Append("cancellationToken");
-                stringBuilder.Append(", ");
+                stringBuilder.Append("cancellationToken, ");
             }
         }
 

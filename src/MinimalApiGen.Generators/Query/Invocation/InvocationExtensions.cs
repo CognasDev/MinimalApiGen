@@ -34,6 +34,18 @@ internal static class InvocationExtensions
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="invocationExpressionSyntax"></param>
+    /// <param name="semanticModel"></param>
+    /// <returns></returns>
+    public static InvocationInfo ToInvocationInfo(this InvocationExpressionSyntax invocationExpressionSyntax, SemanticModel semanticModel)
+    {
+        IMethodSymbol methodSymbol = invocationExpressionSyntax.GetMethodSymbol(semanticModel);
+        return new(invocationExpressionSyntax, methodSymbol);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="fluentInvocations"></param>
     /// <returns></returns>
     public static ReadOnlySpan<FluentMethodInfo> ToFluentMethodInfos(this ImmutableArray<InvocationInfo> fluentInvocations)
@@ -45,7 +57,7 @@ internal static class InvocationExtensions
                 Invocation = invocationInfo,
                 IsGeneric = invocationInfo.MethodSymbol?.IsGenericMethod ?? false
             })
-            .Where(info => !string.IsNullOrEmpty(info.FullyQualifiedName))
+            .Where(static info => !string.IsNullOrEmpty(info.FullyQualifiedName))
             .Select(static info => new FluentMethodInfo(info.FullyQualifiedName!, info.Invocation, info.IsGeneric))
             .ToArray();
     }
@@ -112,10 +124,10 @@ internal static class InvocationExtensions
     public static IMethodSymbol GetMethodSymbol(this InvocationExpressionSyntax invocationExpressionSyntax, SemanticModel semanticModel)
     {
         SymbolInfo symbolInfo = semanticModel.GetSymbolInfo(invocationExpressionSyntax);
-        IMethodSymbol? methodSymbol = symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
-                                        ? symbolInfo.CandidateSymbols[0] as IMethodSymbol
-                                        : symbolInfo.Symbol as IMethodSymbol;
-        return methodSymbol!;
+        IMethodSymbol methodSymbol = symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
+                                        ? (IMethodSymbol)symbolInfo.CandidateSymbols[0]
+                                        : (IMethodSymbol)symbolInfo.Symbol!;
+        return methodSymbol;
     }
 
     #endregion

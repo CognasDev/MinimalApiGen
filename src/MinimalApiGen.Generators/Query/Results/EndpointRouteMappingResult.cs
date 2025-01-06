@@ -1,26 +1,12 @@
-﻿namespace MinimalApiGen.Generators.Query.Results;
+﻿using MinimalApiGen.Generators.Query.Generation;
+
+namespace MinimalApiGen.Generators.Query.Results;
 
 /// <summary>
 /// 
 /// </summary>
-internal sealed record EndpointRouteMappingResult
-{
-    #region Property Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public required string ClassNamespace { get; init; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public required string ClassName { get; init; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public required int Version { get; init; }
-
-    #endregion
-}
+/// <param name="ClassNamespace"></param>
+/// <param name="ClassName"></param>
+/// <param name="Version"></param>
+/// <param name="QueryType"></param>
+internal readonly record struct EndpointRouteMappingResult(string ClassNamespace, string ClassName, int Version, QueryType QueryType);

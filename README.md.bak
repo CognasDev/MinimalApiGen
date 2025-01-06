@@ -21,10 +21,6 @@ Add the following NuGet packages to your .NET project:
 Install-Package MinimalApiGen.Framework
 Install-Package MinimalApiGen.Generators
 ```
-## Usage
-
-Please see the various documents located in the doc folder for details on each Fluent command (WIP).
-Please see the QuickStartApi sample.
 
 ## Notes
 
