@@ -37,7 +37,7 @@ internal sealed record QueryIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public string? ClassNamespace { get; set; }
+    public string? QueryNamespace { get; set; }
 
     /// <summary>
     /// 

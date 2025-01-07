@@ -5,6 +5,6 @@ namespace MinimalApiGen.Generators.Abstractions.Query.Get;
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetWithKeyedServices : ICache, IResponse, IServices
+public interface IWithGetWithKeyedServices : ICache, IGetResponse, IGetServices
 {
 }

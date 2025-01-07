@@ -17,13 +17,13 @@ public sealed class QueryOperations : IQueryOperations
     /// 
     /// </summary>
     /// <returns></returns>
-    public IWithGet WithGet() => new WithGet();
+    public IWithGetOperation WithGet() => new WithGetOperation();
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public IWithGetById WithGetById() => new WithGetById();
+    public IWithGetByIdOperation WithGetById() => new WithGetByIdOperation();
 
     #endregion
 }

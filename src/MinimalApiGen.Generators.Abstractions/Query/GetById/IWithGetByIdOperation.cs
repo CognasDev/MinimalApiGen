@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace MinimalApiGen.Generators.Abstractions.Query.Get;
+namespace MinimalApiGen.Generators.Abstractions.Query.GetById;
 
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGet
+public interface IWithGetByIdOperation
 {
     #region Method Declarations
 
@@ -16,7 +16,7 @@ public interface IWithGet
     /// <typeparam name="TBusinessLogic"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    IWithGetOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression);
+    IWithGetByIdOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression);
 
     #endregion
 }

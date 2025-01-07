@@ -1,6 +1,7 @@
 ﻿using MinimalApiGen.Generators.Abstractions.Query;
 using MinimalApiGen.Generators.Abstractions.Query.Common;
 using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.GetById;
 
 namespace MinimalApiGen.Generators.Generation.Query.Fluent;
 
@@ -48,12 +49,22 @@ internal static class FullyQualifiedMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithServices { get; } = $"{typeof(IServices).FullName}.{nameof(IServices.WithServices)}";
+    public static string WithGetServices { get; } = $"{typeof(IGetServices).FullName}.{nameof(IGetServices.WithServices)}";
 
     /// <summary>
     /// 
     /// </summary>
-    public static string WithKeyedServices { get; } = $"{typeof(IKeyedServices).FullName}.{nameof(IKeyedServices.WithKeyedServices)}";
+    public static string WithGetByIdServices { get; } = $"{typeof(IGetByIdServices).FullName}.{nameof(IGetByIdServices.WithServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetKeyedServices { get; } = $"{typeof(IGetKeyedServices).FullName}.{nameof(IGetKeyedServices.WithKeyedServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdKeyedServices { get; } = $"{typeof(IGetByIdKeyedServices).FullName}.{nameof(IGetByIdKeyedServices.WithKeyedServices)}";
 
     /// <summary>
     /// 
@@ -63,7 +74,12 @@ internal static class FullyQualifiedMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithBusinessLogic { get; } = $"{typeof(IWithGet).FullName}.{nameof(IWithGet.WithBusinessLogic)}";
+    public static string WithGetBusinessLogic { get; } = $"{typeof(IWithGetOperation).FullName}.{nameof(IWithGetOperation.WithBusinessLogic)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdBusinessLogic { get; } = $"{typeof(IWithGetByIdOperation).FullName}.{nameof(IWithGetByIdOperation.WithBusinessLogic)}";
 
     /// <summary>
     /// 
@@ -73,7 +89,12 @@ internal static class FullyQualifiedMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithResponse { get; } = $"{typeof(IResponse).FullName}.{nameof(IResponse.WithResponse)}";
+    public static string WithGetResponse { get; } = $"{typeof(IGetResponse).FullName}.{nameof(IGetResponse.WithResponse)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdResponse { get; } = $"{typeof(IGetByIdResponse).FullName}.{nameof(IGetByIdResponse.WithResponse)}";
 
     /// <summary>
     /// 

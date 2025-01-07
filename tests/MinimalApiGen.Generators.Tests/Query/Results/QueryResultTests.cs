@@ -25,7 +25,7 @@ public sealed class QueryResultTests
             ModelPluralName = "TestModels",
             ModelFullyQualifiedName = "Namespace.TestModel",
             QueryType = QueryType.Get,
-            ClassNamespace = "Namespace",
+            QueryNamespace = "Namespace",
             ResponseResult = new WithResponseResult
             {
                 ResponseName = "TestResponse",

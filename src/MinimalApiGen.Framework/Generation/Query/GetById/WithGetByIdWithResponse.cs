@@ -1,14 +1,14 @@
 ﻿using MinimalApiGen.Framework.Generation.Query.Common;
 using MinimalApiGen.Generators.Abstractions.Query;
 using MinimalApiGen.Generators.Abstractions.Query.Common;
-using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.GetById;
 
-namespace MinimalApiGen.Framework.Generation.Query.Get;
+namespace MinimalApiGen.Framework.Generation.Query.GetById;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetPaginationService : IWithGetPaginationService
+public sealed class WithGetByIdWithResponse : IWithGetByIdWithResponse
 {
     #region Public Method Declarations
 

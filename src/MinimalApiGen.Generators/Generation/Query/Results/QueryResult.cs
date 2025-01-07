@@ -127,7 +127,7 @@ internal readonly record struct QueryResult
     public QueryResult(QueryIntermediateResult queryIntermediateResult)
     {
         ClassName = $"{queryIntermediateResult.ModelName}QueryRouteEndpointsMapper";
-        ClassNamespace = queryIntermediateResult.ClassNamespace!;
+        ClassNamespace = queryIntermediateResult.QueryNamespace!;
         ModelName = queryIntermediateResult.ModelName;
         ModelPluralName = queryIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;

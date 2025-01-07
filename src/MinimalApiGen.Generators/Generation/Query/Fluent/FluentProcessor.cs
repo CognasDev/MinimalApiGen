@@ -39,68 +39,53 @@ internal static class FluentProcessor
                 ReadOnlySpan<FluentMethodInfo> fluentMethods = queryInvocations.ToFluentMethodInfos();
 
                 QueryIntermediateResult? intermediateResult = null;
-                string masterNamespace = string.Empty;
-                string classNamespace = string.Empty;
+                string queryNamespace = string.Empty;
 
                 foreach (FluentMethodInfo fluentMethod in fluentMethods)
                 {
                     InvocationInfo invocationInfo = fluentMethod.Invocation;
                     switch (fluentMethod.FullyQualifiedName)
                     {
-                        case string name when name == FullyQualifiedMethodNames.WithGet:
-                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, masterNamespace, classNamespace);
-                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.Get);
-                            classNamespace = string.Empty;
-                            break;
-                        case string name when name == FullyQualifiedMethodNames.WithGetById:
-                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, masterNamespace, classNamespace);
-                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.GetById);
-                            classNamespace = string.Empty;
-                            break;
                         case string name when name == FullyQualifiedMethodNames.WithNamespace:
-                            string namespaceValue = invocationInfo.ToNamespace(semanticModel);
-                            if (intermediateResult is null)
-                            {
-                                masterNamespace = namespaceValue;
-                            }
-                            else
-                            {
-                                classNamespace = namespaceValue;
-                            }
+                            queryNamespace = invocationInfo.ToNamespace(semanticModel);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithNamespaceOf:
-                            string strongNamespace = invocationInfo.ToNamespace();
-                            if (intermediateResult is null)
-                            {
-                                masterNamespace = strongNamespace;
-                            }
-                            else
-                            {
-                                classNamespace = strongNamespace;
-                            }
+                            queryNamespace = invocationInfo.ToNamespace();
+                            break;
+                        case string name when name == FullyQualifiedMethodNames.WithGet:
+                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
+                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.Get);
+                            break;
+                        case string name when name == FullyQualifiedMethodNames.WithGetById:
+                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
+                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.GetById);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithVersion:
                             int version = invocationInfo.ToVersion(semanticModel);
                             intermediateResult!.Version = version;
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithServices && fluentMethod.IsGeneric:
+                        case string name when (name == FullyQualifiedMethodNames.WithGetServices || name == FullyQualifiedMethodNames.WithGetByIdServices)
+                                              && fluentMethod.IsGeneric:
                             IReadOnlyList<string> services = invocationInfo.ToServices();
                             intermediateResult!.Services.AddRange(services);
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithKeyedServices && fluentMethod.IsGeneric:
+                        case string name when (name == FullyQualifiedMethodNames.WithGetKeyedServices || name == FullyQualifiedMethodNames.WithGetByIdKeyedServices)
+                                              && fluentMethod.IsGeneric:
                             Dictionary<string, string> keyedServices = invocationInfo.ToKeyedServices(semanticModel);
                             intermediateResult!.KeyedServices.AddRange(keyedServices);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithPagination:
                             intermediateResult!.WithPagination = true;
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithBusinessLogic && fluentMethod.IsGeneric:
+                        case string name when (name == FullyQualifiedMethodNames.WithGetBusinessLogic || name == FullyQualifiedMethodNames.WithGetByIdBusinessLogic)
+                                              && fluentMethod.IsGeneric:
                             intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithMappingService:
                             intermediateResult!.WithMappingService = true;
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithResponse && fluentMethod.IsGeneric:
+                        case string name when (name == FullyQualifiedMethodNames.WithGetResponse || name == FullyQualifiedMethodNames.WithGetByIdResponse)
+                                              && fluentMethod.IsGeneric:
                             intermediateResult!.ResponseResult = invocationInfo.ToResponse();
                             break;
                         case string name when name == FullyQualifiedMethodNames.CachedFor:
@@ -109,7 +94,7 @@ internal static class FluentProcessor
                     }
                 }
 
-                intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, masterNamespace, classNamespace);
+                intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
             }
         }
 

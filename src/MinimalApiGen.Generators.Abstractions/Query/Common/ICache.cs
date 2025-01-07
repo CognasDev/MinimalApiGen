@@ -1,5 +1,4 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-using System;
+﻿using System;
 
 namespace MinimalApiGen.Generators.Abstractions.Query.Common;
 
@@ -15,7 +14,7 @@ public interface ICache
     /// </summary>
     /// <param name="timeSpan"></param>
     /// <returns></returns>
-    IWithGetWithCache CachedFor(TimeSpan timeSpan);
+    IQueryWithCache CachedFor(TimeSpan timeSpan);
 
     #endregion
 }

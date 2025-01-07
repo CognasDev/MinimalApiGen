@@ -54,35 +54,11 @@ public sealed class QueryIntermediateResultExtensionsTests
         };
 
         // Act
-        queryIntermediateResults.TryFinaliseAndCollectIntermediateResult(queryIntermediateResult, "MasterNamespace", "ClassNamespace");
+        queryIntermediateResults.TryFinaliseAndCollectIntermediateResult(queryIntermediateResult, "QueryNamespace");
 
         // Assert
         queryIntermediateResults.Should().ContainSingle();
-        queryIntermediateResults[0].ClassNamespace.Should().Be("ClassNamespace");
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    [Fact]
-    public void TryFinaliseAndCollectIntermediateResult_ShouldUseMasterNamespaceWhenClassNamespaceIsEmpty()
-    {
-        // Arrange
-        List<QueryIntermediateResult> queryIntermediateResults = [];
-        QueryIntermediateResult queryIntermediateResult = new()
-        {
-            ModelName = "Model",
-            ModelPluralName = "Models",
-            ModelFullyQualifiedName = "Namespace.Model",
-            QueryType = QueryType.Get
-        };
-
-        // Act
-        queryIntermediateResults.TryFinaliseAndCollectIntermediateResult(queryIntermediateResult, "MasterNamespace", string.Empty);
-
-        // Assert
-        queryIntermediateResults.Should().ContainSingle();
-        queryIntermediateResults[0].ClassNamespace.Should().Be("MasterNamespace");
+        queryIntermediateResults[0].QueryNamespace.Should().Be("QueryNamespace");
     }
 
     #endregion

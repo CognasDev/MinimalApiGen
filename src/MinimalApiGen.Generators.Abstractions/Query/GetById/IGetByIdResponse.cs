@@ -1,11 +1,9 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-
-namespace MinimalApiGen.Generators.Abstractions.Query.Common;
+﻿namespace MinimalApiGen.Generators.Abstractions.Query.GetById;
 
 /// <summary>
 /// 
 /// </summary>
-public interface IResponse
+public interface IGetByIdResponse
 {
     #region Method Declarations
 
@@ -14,7 +12,7 @@ public interface IResponse
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
-    IWithGetWithResponse WithResponse<TResponse>();
+    IWithGetByIdWithResponse WithResponse<TResponse>();
 
     #endregion
 }

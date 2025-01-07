@@ -1,6 +1,4 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-
-namespace MinimalApiGen.Generators.Abstractions.Query.Common;
+﻿namespace MinimalApiGen.Generators.Abstractions.Query.Common;
 
 /// <summary>
 /// 
@@ -14,7 +12,7 @@ public interface IVersion
     /// </summary>
     /// <param name="version"></param>
     /// <returns></returns>
-    IWithGetWithVersion WithVersion(int version);
+    IQueryOperations WithVersion(int version);
 
     #endregion
 }

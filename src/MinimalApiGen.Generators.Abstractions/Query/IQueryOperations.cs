@@ -14,13 +14,13 @@ public interface IQueryOperations
     /// 
     /// </summary>
     /// <returns></returns>
-    IWithGet WithGet();
+    IWithGetOperation WithGet();
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    IWithGetById WithGetById();
+    IWithGetByIdOperation WithGetById();
 
     #endregion
 }

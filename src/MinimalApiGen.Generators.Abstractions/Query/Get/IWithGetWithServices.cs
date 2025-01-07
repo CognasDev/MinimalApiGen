@@ -1,10 +1,8 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Common;
-
-namespace MinimalApiGen.Generators.Abstractions.Query.Get;
+﻿namespace MinimalApiGen.Generators.Abstractions.Query.Get;
 
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetWithServices : IKeyedServices, IResponse
+public interface IWithGetWithServices : IGetKeyedServices, IGetResponse
 {
 }

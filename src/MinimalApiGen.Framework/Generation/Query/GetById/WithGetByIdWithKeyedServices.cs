@@ -1,13 +1,13 @@
 ﻿using MinimalApiGen.Framework.Generation.Query.Common;
 using MinimalApiGen.Generators.Abstractions.Query.Common;
-using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.GetById;
 
-namespace MinimalApiGen.Framework.Generation.Query.Get;
+namespace MinimalApiGen.Framework.Generation.Query.GetById;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetWithKeyedServices : IWithGetWithKeyedServices
+public sealed class WithGetByIdWithKeyedServices : IWithGetByIdWithKeyedServices
 {
     #region Public Method Declarations
 
@@ -16,7 +16,7 @@ public sealed class WithGetWithKeyedServices : IWithGetWithKeyedServices
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
-    public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
+    public IWithGetByIdWithResponse WithResponse<TResponse>() => new WithGetByIdWithResponse();
 
     /// <summary>
     /// 
@@ -33,14 +33,14 @@ public sealed class WithGetWithKeyedServices : IWithGetWithKeyedServices
     /// 
     /// </summary>
     /// <typeparam name="TService1"></typeparam>
-    public IWithGetWithServices WithServices<TService1>() => new WithGetWithServices();
+    public IWithGetByIdWithServices WithServices<TService1>() => new WithGetByIdWithServices();
 
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="TService1"></typeparam>
     /// <typeparam name="TService2"></typeparam>
-    public IWithGetWithServices WithServices<TService1, TService2>() => new WithGetWithServices();
+    public IWithGetByIdWithServices WithServices<TService1, TService2>() => new WithGetByIdWithServices();
 
     /// <summary>
     /// 
@@ -48,7 +48,7 @@ public sealed class WithGetWithKeyedServices : IWithGetWithKeyedServices
     /// <typeparam name="TService1"></typeparam>
     /// <typeparam name="TService2"></typeparam>
     /// <typeparam name="TService3"></typeparam>
-    public IWithGetWithServices WithServices<TService1, TService2, TService3>() => new WithGetWithServices();
+    public IWithGetByIdWithServices WithServices<TService1, TService2, TService3>() => new WithGetByIdWithServices();
 
     /// <summary>
     /// 
@@ -57,7 +57,7 @@ public sealed class WithGetWithKeyedServices : IWithGetWithKeyedServices
     /// <typeparam name="TService2"></typeparam>
     /// <typeparam name="TService3"></typeparam>
     /// <typeparam name="TService4"></typeparam>
-    public IWithGetWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithGetWithServices();
+    public IWithGetByIdWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithGetByIdWithServices();
 
     #endregion
 }

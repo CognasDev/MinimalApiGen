@@ -1,14 +1,12 @@
-﻿using MinimalApiGen.Framework.Generation.Query.Common;
-using MinimalApiGen.Generators.Abstractions.Query;
+﻿using MinimalApiGen.Generators.Abstractions.Query;
 using MinimalApiGen.Generators.Abstractions.Query.Common;
-using MinimalApiGen.Generators.Abstractions.Query.Get;
 
-namespace MinimalApiGen.Framework.Generation.Query.Get;
+namespace MinimalApiGen.Framework.Generation.Query.Common;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetPaginationService : IWithGetPaginationService
+public sealed class QueryWithMappingService : IQueryWithMappingService
 {
     #region Public Method Declarations
 
@@ -18,12 +16,6 @@ public sealed class WithGetPaginationService : IWithGetPaginationService
     /// <param name="timeSpan"></param>
     /// <returns></returns>
     public IQueryWithCache CachedFor(TimeSpan timeSpan) => new QueryWithCache();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public IQueryWithMappingService WithMappingService() => new QueryWithMappingService();
 
     /// <summary>
     /// 

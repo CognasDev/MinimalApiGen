@@ -1,10 +1,8 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Common;
-
-namespace MinimalApiGen.Generators.Abstractions.Query.GetById;
+﻿namespace MinimalApiGen.Generators.Abstractions.Query.GetById;
 
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetByIdOptionals : IServices, IKeyedServices, IResponse
+public interface IWithGetByIdOptionals : IGetByIdServices, IGetByIdKeyedServices, IGetByIdResponse
 {
 }

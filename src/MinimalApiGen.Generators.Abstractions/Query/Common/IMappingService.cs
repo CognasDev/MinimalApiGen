@@ -1,6 +1,4 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-
-namespace MinimalApiGen.Generators.Abstractions.Query.Common;
+﻿namespace MinimalApiGen.Generators.Abstractions.Query.Common;
 
 /// <summary>
 /// 
@@ -13,7 +11,7 @@ public interface IMappingService
     /// 
     /// </summary>
     /// <returns></returns>
-    IWithGetWithMappingService WithMappingService();
+    IQueryWithMappingService WithMappingService();
 
     #endregion
 }

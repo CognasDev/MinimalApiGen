@@ -35,16 +35,14 @@ internal static class QueryIntermediateResultExtensions
     /// </summary>
     /// <param name="queryIntermediateResults"></param>
     /// <param name="queryIntermediateResult"></param>
-    /// <param name="masterNamespace"></param>
-    /// <param name="classNamespace"></param>
+    /// <param name="queryNamespace"></param>
     public static void TryFinaliseAndCollectIntermediateResult(this List<QueryIntermediateResult> queryIntermediateResults,
                                                                QueryIntermediateResult? queryIntermediateResult,
-                                                               string masterNamespace,
-                                                               string classNamespace)
+                                                               string queryNamespace)
     {
         if (queryIntermediateResult is not null)
         {
-            queryIntermediateResult.ClassNamespace = string.IsNullOrWhiteSpace(classNamespace) ? masterNamespace : classNamespace;
+            queryIntermediateResult.QueryNamespace = queryNamespace;
             queryIntermediateResults.Add(queryIntermediateResult);
         }
     }

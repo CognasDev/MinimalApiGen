@@ -14,11 +14,11 @@ public sealed class BusinessLogicV2 : IBusinessLogicV2
     /// 
     /// </summary>
     /// <param name="sampleService1"></param>
-    /// <param name="sampleService2"></param>
+    /// <param name="sampleKeyedService"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task<IEnumerable<SampleModel>> GetModelsAsync(SampleService1 sampleService1,
-                                                               SampleKeyedService sampleService2,
+                                                               SampleKeyedService sampleKeyedService,
                                                                CancellationToken cancellationToken)
     {
         SampleModel sampleModel1 = new() { Id = 1, Name = "SampleModel1 - BusinessLogicV2" };
@@ -31,11 +31,11 @@ public sealed class BusinessLogicV2 : IBusinessLogicV2
     /// 
     /// </summary>
     /// <param name="id"></param>
-    /// <param name="sampleService2"></param>
+    /// <param name="sampleService1"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     public async Task<SampleModel> GetModelByIdAsync(int id,
-                                                     SampleService1 sampleService2,
+                                                     SampleService1 sampleService1,
                                                      CancellationToken cancellationToken)
     {
         SampleModel sampleModel1 = new() { Id = id, Name = "SampleModel1 - BusinessLogicV2" };

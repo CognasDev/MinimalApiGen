@@ -6,7 +6,7 @@ namespace MinimalApiGen.Framework.Generation.Query.Get;
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGet : IWithGet
+public sealed class WithGetOperation : IWithGetOperation
 {
     #region Public Method Declarations
 
