@@ -1,4 +1,5 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query;
+﻿using MinimalApiGen.Framework.Generation.Query;
+using MinimalApiGen.Generators.Abstractions.Query;
 
 namespace MinimalApiGen.Framework.Generation;
 
@@ -14,7 +15,7 @@ public static partial class ApiGeneration
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     /// <returns></returns>
-    public static IQuery Query<TModel>() => new Query();
+    public static IQueryRoot Query<TModel>() => new QueryRoot();
 
     #endregion
 }

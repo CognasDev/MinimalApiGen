@@ -1,11 +1,15 @@
-﻿using MinimalApiGen.Framework.Generation.Get;
+﻿using MinimalApiGen.Framework.Generation.Query.Get;
+using MinimalApiGen.Framework.Generation.Query.GetById;
+using MinimalApiGen.Generators.Abstractions.Query;
+using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.GetById;
 
-namespace MinimalApiGen.Framework.Generation.Query1;
+namespace MinimalApiGen.Framework.Generation.Query;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class QueryOperations
+public sealed class QueryOperations : IQueryOperations
 {
     #region Public Method Declarations
 
@@ -13,13 +17,13 @@ public sealed class QueryOperations
     /// 
     /// </summary>
     /// <returns></returns>
-    public WithGet WithGet() => new();
+    public IWithGet WithGet() => new WithGet();
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    //public WithGetById WithGetById() => new();
+    public IWithGetById WithGetById() => new WithGetById();
 
     #endregion
 }

@@ -23,13 +23,7 @@ public sealed class QueryGeneratorV2
                                                 .WithServices<SampleService1, SampleService2>()
                                                 .WithKeyedServices<SampleKeyedService>(nameof(SampleKeyedService))
                                                 .WithResponse<SampleModelResponse>()
-                                                .CachedFor(TimeSpan.FromMinutes(3))
                                                 .WithPagination()
-                                                .WithVersion(2)
-                                          .WithGetById()
-                                                .WithBusinessLogic<IBusinessLogicV2>(logic => logic.GetModelByIdAsync)
-                                                .WithServices<SampleService1>()
-                                                .WithResponse<SampleModelResponse>()
                                                 .CachedFor(TimeSpan.FromMinutes(3))
                                                 .WithVersion(2);
     }

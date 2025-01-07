@@ -9,26 +9,23 @@
     <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Common\ICache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\INamespaceOf.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\INamespace.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\IMapping.cs" />
-    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Common\IVersion.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\IBusinessLogic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\IPagination.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GetById\IWithGetById.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGetWithBusinessLogic.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGetWithCache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithResponse.cs" />
-    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Get\IWithGetWithMapping.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Get\IWithGetWithPagination.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\IResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithKeyedServices.cs" />
-    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\IQuery.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithServices.cs" />
-    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\IQueryWithVersion.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\IKeyedServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\IServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\ICache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IKeyedServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetById.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetOptionals.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetPaginationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithKeyedServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryOperations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryRoot.cs" />
   </ItemGroup>
 </Project>

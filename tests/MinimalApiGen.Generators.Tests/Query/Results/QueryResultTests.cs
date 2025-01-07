@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Query.Generation;
-using MinimalApiGen.Generators.Query.Results;
+using MinimalApiGen.Generators.Generation.Query;
+using MinimalApiGen.Generators.Generation.Query.Results;
 
 namespace MinimalApiGen.Generators.Tests.Query.Results;
 

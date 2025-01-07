@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MinimalApiGen.Generators.Query.Fluent;
-using MinimalApiGen.Generators.Query.FluentHandlers;
-using MinimalApiGen.Generators.Query.Invocation;
+using MinimalApiGen.Generators.Generation.Query.Fluent;
+using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
+using MinimalApiGen.Generators.Generation.Query.Invocation;
 using Moq;
 using System.Collections.Immutable;
 
@@ -51,7 +51,7 @@ public sealed class QueryHandlerTests
     #region Private Method Declarations
 
     /// <summary>
-    /// Mocks the <see cref="MinimalApiGen.Generators.Query.Invocation.InvocationExtensions.GetPublicProperties(ITypeSymbol)"/> extension method.
+    /// Mocks the <see cref="InvocationExtensions.GetPublicProperties(ITypeSymbol)"/> extension method.
     /// </summary>
     /// <param name="typeSymbolMock"></param>
     private static void MockGetPublicProperties(Mock<ITypeSymbol> typeSymbolMock)

@@ -22,7 +22,6 @@ public static class EndpointRouteMappingExtension
 
 		mapperV1.MapGetV1(apiVersionRouteV1);
 		mapperV2.MapGetV2(apiVersionRouteV2);
-		mapperV2.MapGetByIdV2(apiVersionRouteV2);
 
     }
 }
