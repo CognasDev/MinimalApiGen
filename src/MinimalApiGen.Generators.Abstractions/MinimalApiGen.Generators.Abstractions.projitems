@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>dcac0184-439a-4c22-b2e8-b1d0f05a8e84</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandRoot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\ICache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IKeyedServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetById.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdOptionals.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithKeyedServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetOptionals.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetPaginationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithKeyedServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryOperations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryRoot.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Command\Delete\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Command\Put\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Command\Post\" />
+  </ItemGroup>
+</Project>
