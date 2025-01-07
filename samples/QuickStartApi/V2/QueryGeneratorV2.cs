@@ -25,7 +25,9 @@ public sealed class QueryGeneratorV2
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithPagination()
                                                 .CachedFor(TimeSpan.FromMinutes(3))
-                                                .WithVersion(2)
+                                                .WithVersion(2);
+
+        ApiGeneration.Query<SampleModel>().WithNamespaceOf<IBusinessLogicV2>()
                                           .WithGetById()
                                                 .WithBusinessLogic<IBusinessLogicV2>(logic => logic.GetModelByIdAsync)
                                                 .WithServices<SampleService1>()

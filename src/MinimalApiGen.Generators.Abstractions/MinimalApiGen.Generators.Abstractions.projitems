@@ -9,8 +9,11 @@
     <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandRoot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostOperation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Common\ICache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdResponse.cs" />
@@ -35,10 +38,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryRoot.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Command\Delete\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Command\Put\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Command\Post\" />
   </ItemGroup>
 </Project>

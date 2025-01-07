@@ -21,8 +21,8 @@ public sealed class BusinessLogicV2 : IBusinessLogicV2
                                                                SampleKeyedService sampleKeyedService,
                                                                CancellationToken cancellationToken)
     {
-        SampleModel sampleModel1 = new() { Id = 1, Name = "SampleModel1 - BusinessLogicV2" };
-        SampleModel sampleModel2 = new() { Id = 2, Name = "SampleModel2 - BusinessLogicV2" };
+        SampleModel sampleModel1 = new() { Id = 1, Name = "SampleModel1" };
+        SampleModel sampleModel2 = new() { Id = 2, Name = "SampleModel2" };
         List<SampleModel> sampleModels = [sampleModel1, sampleModel2];
         return await Task.FromResult<IEnumerable<SampleModel>>(sampleModels).ConfigureAwait(false);
     }
@@ -38,7 +38,7 @@ public sealed class BusinessLogicV2 : IBusinessLogicV2
                                                      SampleService1 sampleService1,
                                                      CancellationToken cancellationToken)
     {
-        SampleModel sampleModel1 = new() { Id = id, Name = "SampleModel1 - BusinessLogicV2" };
+        SampleModel sampleModel1 = new() { Id = id, Name = $"SampleModel {nameof(SampleModel.Id)}:{id}" };
         return await Task.FromResult(sampleModel1).ConfigureAwait(false);
     }
 

@@ -6,6 +6,7 @@ using QuickStartApi.Model;
 using QuickStartApi.Services;
 using QuickStartApi.V1;
 using QuickStartApi.V2;
+using QuickStartApi.V3;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddMinimalApiGenFramework();
 builder.Services.AddSingleton<IMappingService<SampleModel, SampleModelResponse>, SampleModelToSampleModelResponseMappingService>();
 builder.Services.AddScoped<IBusinessLogicV1, BusinessLogicV1>();
 builder.Services.AddScoped<IBusinessLogicV2, BusinessLogicV2>();
+builder.Services.AddScoped<IBusinessLogicV3, BusinessLogicV3>();
 builder.Services.AddScoped<SampleService1>();
 builder.Services.AddScoped<SampleService2>();
 
