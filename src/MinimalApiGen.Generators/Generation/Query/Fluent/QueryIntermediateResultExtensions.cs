@@ -1,5 +1,5 @@
-﻿using MinimalApiGen.Generators.Generation.Common;
-using MinimalApiGen.Generators.Generation.Query.Results;
+﻿using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Query.Fluent;

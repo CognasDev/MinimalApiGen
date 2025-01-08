@@ -1,5 +1,7 @@
-﻿using MinimalApiGen.Generators.Abstractions.Command;
-using MinimalApiGen.Generators.Abstractions.Command.Common;
+﻿using MinimalApiGen.Framework.Generation.Command.Post;
+using MinimalApiGen.Generators.Abstractions.Command;
+using MinimalApiGen.Generators.Abstractions.Command.Post;
+using MinimalApiGen.Generators.Abstractions.Command.Shared;
 
 namespace MinimalApiGen.Framework.Generation.Command.Common;
 
@@ -9,6 +11,13 @@ namespace MinimalApiGen.Framework.Generation.Command.Common;
 public sealed class CommandWithRequestMappingService : ICommandWithRequestMappingService
 {
     #region Public Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TResponse"></typeparam>
+    /// <returns></returns>
+    public IWithPostWithResponse WithResponse<TResponse>() => new WithPostWithResponse();
 
     /// <summary>
     /// 

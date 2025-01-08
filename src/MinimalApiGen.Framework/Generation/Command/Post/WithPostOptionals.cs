@@ -12,6 +12,13 @@ public sealed class WithPostOptionals : IWithPostOptionals
     /// <summary>
     /// 
     /// </summary>
+    /// <typeparam name="TRequest"></typeparam>
+    /// <returns></returns>
+    public IWithPostWithRequest WithRequest<TRequest>() => new WithPostWithRequest();
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
     public IWithPostWithResponse WithResponse<TResponse>() => new WithPostWithResponse();

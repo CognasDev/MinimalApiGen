@@ -1,9 +1,11 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Common;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Fluent;
+using MinimalApiGen.Generators.Generation.Shared.FluentHandlers;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -52,6 +54,10 @@ internal static class FluentProcessor
                         case string name when name == FullyQualifiedMethodNames.WithNamespaceOf:
                             queryNamespace = invocationInfo.ToNamespace();
                             break;
+                        case string name when (name == FullyQualifiedMethodNames.WithGetBusinessLogic || name == FullyQualifiedMethodNames.WithGetByIdBusinessLogic)
+                                              && fluentMethod.IsGeneric:
+                            intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
+                            break;
                         case string name when name == FullyQualifiedMethodNames.WithGet:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
                             intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.Get);
@@ -59,10 +65,6 @@ internal static class FluentProcessor
                         case string name when name == FullyQualifiedMethodNames.WithGetById:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
                             intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.GetById);
-                            break;
-                        case string name when name == FullyQualifiedMethodNames.WithVersion:
-                            int version = invocationInfo.ToVersion(semanticModel);
-                            intermediateResult!.Version = version;
                             break;
                         case string name when (name == FullyQualifiedMethodNames.WithGetServices || name == FullyQualifiedMethodNames.WithGetByIdServices)
                                               && fluentMethod.IsGeneric:
@@ -74,22 +76,22 @@ internal static class FluentProcessor
                             Dictionary<string, string> keyedServices = invocationInfo.ToKeyedServices(semanticModel);
                             intermediateResult!.KeyedServices.AddRange(keyedServices);
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithPagination:
-                            intermediateResult!.WithPagination = true;
-                            break;
-                        case string name when (name == FullyQualifiedMethodNames.WithGetBusinessLogic || name == FullyQualifiedMethodNames.WithGetByIdBusinessLogic)
-                                              && fluentMethod.IsGeneric:
-                            intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
-                            break;
-                        case string name when name == FullyQualifiedMethodNames.WithMappingService:
-                            intermediateResult!.WithMappingService = true;
-                            break;
                         case string name when (name == FullyQualifiedMethodNames.WithGetResponse || name == FullyQualifiedMethodNames.WithGetByIdResponse)
                                               && fluentMethod.IsGeneric:
                             intermediateResult!.ResponseResult = invocationInfo.ToResponse();
                             break;
+                        case string name when name == FullyQualifiedMethodNames.WithMappingService:
+                            intermediateResult!.WithMappingService = true;
+                            break;
+                        case string name when name == FullyQualifiedMethodNames.WithPagination:
+                            intermediateResult!.WithPagination = true;
+                            break;
                         case string name when name == FullyQualifiedMethodNames.CachedFor:
                             intermediateResult!.CachedFor = invocationInfo.GetCachedForTimeSpan();
+                            break;
+                        case string name when name == FullyQualifiedMethodNames.WithVersion:
+                            int version = invocationInfo.ToVersion(semanticModel);
+                            intermediateResult!.Version = version;
                             break;
                     }
                 }

@@ -46,6 +46,30 @@ internal readonly record struct CommandResult
 
     #endregion
 
+    #region Property Declarations - Request Details
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string RequestName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string RequestFullyQualifiedName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithRequestMappingService { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public EquatableArray<string> RequestProperties { get; }
+
+    #endregion
+
     #region Property Declarations - Response Details
 
     /// <summary>
@@ -61,17 +85,7 @@ internal readonly record struct CommandResult
     /// <summary>
     /// 
     /// </summary>
-    public bool WithRequestMappingService { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public bool WithResponseMappingService { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public EquatableArray<string> RequestProperties { get; }
 
     /// <summary>
     /// 
@@ -123,31 +137,33 @@ internal readonly record struct CommandResult
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="CommandIntermediateResult"></param>
-    public CommandResult(CommandIntermediateResult CommandIntermediateResult)
+    /// <param name="commandIntermediateResult"></param>
+    public CommandResult(CommandIntermediateResult commandIntermediateResult)
     {
-        ClassName = $"{CommandIntermediateResult.ModelName}CommandRouteEndpointsMapper";
-        ClassNamespace = CommandIntermediateResult.CommandNamespace!;
-        ModelName = CommandIntermediateResult.ModelName;
-        ModelPluralName = CommandIntermediateResult.ModelPluralName;
-        ModelFullyQualifiedName = CommandIntermediateResult.ModelFullyQualifiedName;
-        ModelProperties = new(CommandIntermediateResult.ModelProperties);
-        CommandType = CommandIntermediateResult.CommandType;
+        ClassName = $"{commandIntermediateResult.ModelName}CommandRouteEndpointsMapper";
+        ClassNamespace = commandIntermediateResult.CommandNamespace!;
+        ModelName = commandIntermediateResult.ModelName;
+        ModelPluralName = commandIntermediateResult.ModelPluralName;
+        ModelFullyQualifiedName = commandIntermediateResult.ModelFullyQualifiedName;
+        ModelProperties = new(commandIntermediateResult.ModelProperties);
+        CommandType = commandIntermediateResult.CommandType;
 
-        ResponseName = CommandIntermediateResult.ResponseResult!.ResponseName;
-        ResponseFullyQualifiedName = CommandIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
-        WithRequestMappingService = CommandIntermediateResult.WithRequestMappingService;
-        WithResponseMappingService = CommandIntermediateResult.WithResponseMappingService;
-        RequestProperties = new(CommandIntermediateResult.RequestResult.PropertyNames);
-        ResponseProperties = new(CommandIntermediateResult.ResponseResult.PropertyNames);
+        RequestName = commandIntermediateResult.RequestResult!.RequestName;
+        RequestFullyQualifiedName = commandIntermediateResult.RequestResult!.RequestFullyQualifiedName;
+        ResponseName = commandIntermediateResult.ResponseResult!.ResponseName;
+        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
+        WithRequestMappingService = commandIntermediateResult.WithRequestMappingService;
+        WithResponseMappingService = commandIntermediateResult.WithResponseMappingService;
+        RequestProperties = new(commandIntermediateResult.RequestResult.PropertyNames);
+        ResponseProperties = new(commandIntermediateResult.ResponseResult.PropertyNames);
 
-        Services = new(CommandIntermediateResult.Services);
-        Version = CommandIntermediateResult.Version;
-        KeyedServices = new(CommandIntermediateResult.KeyedServices);
+        Services = new(commandIntermediateResult.Services);
+        Version = commandIntermediateResult.Version;
+        KeyedServices = new(commandIntermediateResult.KeyedServices);
 
-        BusinessLogicFullyQualifiedName = CommandIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
-        BusinessLogicDelegateName = CommandIntermediateResult.BusinessLogicResult!.DelegateName;
-        BusinessLogicParameters = new(CommandIntermediateResult.BusinessLogicResult!.Parameters);
+        BusinessLogicFullyQualifiedName = commandIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
+        BusinessLogicDelegateName = commandIntermediateResult.BusinessLogicResult!.DelegateName;
+        BusinessLogicParameters = new(commandIntermediateResult.BusinessLogicResult!.Parameters);
     }
 
     #endregion

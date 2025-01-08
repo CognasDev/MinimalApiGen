@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
-using MinimalApiGen.Generators.Generation.Common;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Pluralize;
 using System.Collections.Generic;
 using System.Collections.Immutable;

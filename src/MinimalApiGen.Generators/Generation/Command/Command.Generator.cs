@@ -53,7 +53,7 @@ public sealed class Generator : IIncrementalGenerator
         .Collect()
         .WithTrackingName(TrackingNames.CollectToValueProvider);
 
-        // context.RegisterSourceOutput(CommandResultsValueProvider, static (context, CommandResults) => SourceOutputExecutor.Execute(context, CommandResults));
+        context.RegisterSourceOutput(CommandResultsValueProvider, static (context, CommandResults) => SourceOutputExecutor.Execute(context, CommandResults));
     }
 
     #endregion

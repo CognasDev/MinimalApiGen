@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
-using MinimalApiGen.Generators.Generation.Common;
 using MinimalApiGen.Generators.Generation.Query;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using Moq;
 
 namespace MinimalApiGen.Generators.Tests.Query.Fluent;

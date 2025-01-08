@@ -9,10 +9,12 @@
     <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Common\ICommandWithResponseMappingService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Common\ICommandWithRequestMappingService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Common\IResponseMappingService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Common\IRequestMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithResponseMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithRequestMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IResponseMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IRequestMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IPutServices.cs" />
@@ -39,8 +41,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOptionals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOperation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\ICache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\ICache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\IVersion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdServices.cs" />
@@ -50,16 +52,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithServices.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\Get\IGetKeyedServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\IMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IGetResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetOptionals.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\Get\IWithGetOperation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IQueryWithCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\IQueryWithCache.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\Get\IWithGetWithKeyedServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Common\IQueryWithMappingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\IQueryWithMappingService.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\Get\IWithGetWithServices.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Query\Get\IGetServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Common\IVersion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IVersion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetPaginationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryOperations.cs" />

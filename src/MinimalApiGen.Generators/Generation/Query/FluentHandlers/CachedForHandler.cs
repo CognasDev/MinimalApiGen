@@ -1,5 +1,5 @@
 ﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MinimalApiGen.Generators.Generation.Common;
+using MinimalApiGen.Generators.Generation.Shared;
 
 namespace MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 

@@ -1,5 +1,5 @@
 ﻿using MinimalApiGen.Generators.Abstractions.Command;
-using MinimalApiGen.Generators.Abstractions.Command.Common;
+using MinimalApiGen.Generators.Abstractions.Command.Shared;
 
 namespace MinimalApiGen.Framework.Generation.Command.Common;
 

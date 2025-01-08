@@ -1,6 +1,6 @@
 ﻿using MinimalApiGen.Framework.Generation.Query.Common;
-using MinimalApiGen.Generators.Abstractions.Query.Common;
 using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.Shared;
 
 namespace MinimalApiGen.Framework.Generation.Query.Get;
 

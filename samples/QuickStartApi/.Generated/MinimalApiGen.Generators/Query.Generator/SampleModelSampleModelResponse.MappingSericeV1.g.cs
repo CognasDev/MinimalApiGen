@@ -1,8 +1,8 @@
 ﻿using MinimalApiGen.Framework.Mapping;
-using SampleModel = QuickStartApi.Model.SampleModel;
-using SampleModelResponse = QuickStartApi.Model.SampleModelResponse;
+using SampleModel = QuickStartApi.V1.Model.SampleModel;
+using SampleModelResponse = QuickStartApi.V1.Model.SampleModelResponse;
 
-namespace QuickStartApi.V1;
+namespace QuickStartApi.V1.Query;
 
 /// <summary>
 /// 
