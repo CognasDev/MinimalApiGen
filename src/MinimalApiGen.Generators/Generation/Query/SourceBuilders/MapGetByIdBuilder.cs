@@ -110,8 +110,9 @@ internal sealed class MapGetByIdBuilder(QueryResult queryResult, int apiVersion,
     /// 
     /// </summary>
     public string Build() =>
-$@"using MinimalApiGen.Framework.Mapping;
+$@"using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using {ModelName} = {ModelFullyQualifiedName};
@@ -134,7 +135,7 @@ public partial class {ClassName}
         return endpointRouteBuilder.MapGet
         (
             ""/{ModelPluralNameLower}/{{id}}"",
-            async
+            async Task<Results<Ok<{ResponseName}>, NotFound>>
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
@@ -149,11 +150,11 @@ public partial class {ClassName}
 
                 if (model is null)
                 {{
-                    return Results.NotFound();
+                    return TypedResults.NotFound();
                 }}
 
                 {ResponseName} response = mappingService.Map(model);
-                return Results.Ok(response);
+                return TypedResults.Ok(response);
             }}
         )
         .WithName(""GetById{ModelPluralName}V{ApiVersion}"")

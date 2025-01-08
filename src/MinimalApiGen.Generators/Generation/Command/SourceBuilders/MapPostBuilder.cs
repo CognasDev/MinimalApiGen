@@ -141,6 +141,7 @@ public partial class {ClassName}
             ""/{ModelPluralNameLower}"",
             (
                 CancellationToken cancellationToken,
+                [FromBody] {RequestName} request,
                 [FromServices] {BusinessLogic} businessLogic,
                 [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> responseMappingService{FromServices}{FromKeyedServices}
@@ -157,6 +158,7 @@ public partial class {ClassName}
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""TODO"" }})
         .MapToApiVersion({ApiVersion})
+        .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces<{ResponseName}>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
