@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace MinimalApiGen.Generators.Generation.Query.Invocation;
+namespace MinimalApiGen.Generators.Generation.Common;
 
 /// <summary>
 /// 

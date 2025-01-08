@@ -1,5 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
-using MinimalApiGen.Generators.Generation.Query.Invocation;
+using MinimalApiGen.Generators.Generation.Common;
 using System;
 using System.Collections.Generic;
 

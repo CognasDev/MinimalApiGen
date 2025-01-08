@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace MinimalApiGen.Generators.Generation.Query.Invocation;
+namespace MinimalApiGen.Generators.Generation.Common;
 
 /// <summary>
 /// 

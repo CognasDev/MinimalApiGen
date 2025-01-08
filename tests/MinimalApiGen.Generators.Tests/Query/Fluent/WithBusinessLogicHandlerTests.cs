@@ -2,8 +2,8 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MinimalApiGen.Generators.Generation.Common;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
-using MinimalApiGen.Generators.Generation.Query.Invocation;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using Moq;
 

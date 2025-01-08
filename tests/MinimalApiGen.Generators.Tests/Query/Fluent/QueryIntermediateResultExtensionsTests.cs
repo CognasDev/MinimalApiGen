@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
+using MinimalApiGen.Generators.Generation.Common;
 using MinimalApiGen.Generators.Generation.Query;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
-using MinimalApiGen.Generators.Generation.Query.Invocation;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using Moq;
 
@@ -21,7 +21,7 @@ public sealed class QueryIntermediateResultExtensionsTests
     public void InitialiseQueryIntermediateResult_ShouldInitializeCorrectly()
     {
         // Arrange
-        QueryInvocationDetails queryInvocationDetails = new()
+        InvocationResult queryInvocationDetails = new()
         {
             ModelName = "Model",
             ModelPluralName = "Models",

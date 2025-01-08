@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace MinimalApiGen.Generators.Generation.Query.Invocation;
+namespace MinimalApiGen.Generators.Generation.Common;
 
 /// <summary>
 /// 
 /// </summary>
-internal sealed record QueryInvocationDetails()
+internal sealed record InvocationResult()
 {
     #region Property Declarations
 

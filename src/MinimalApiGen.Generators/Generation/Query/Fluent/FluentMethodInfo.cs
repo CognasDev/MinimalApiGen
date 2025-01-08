@@ -1,4 +1,4 @@
-﻿using MinimalApiGen.Generators.Generation.Query.Invocation;
+﻿using MinimalApiGen.Generators.Generation.Common;
 
 namespace MinimalApiGen.Generators.Generation.Query.Fluent;
 

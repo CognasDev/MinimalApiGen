@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Common;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
-using MinimalApiGen.Generators.Generation.Query.Invocation;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using System;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ internal static class FluentProcessor
             ImmutableArray<InvocationInfo> queryInvocations = GetQueryInvocations(statement, semanticModel);
             if (queryInvocations.Length > 0)
             {
-                QueryInvocationDetails queryInvocationDetails = queryInvocations.ToQueryInvocationDetails();
+                InvocationResult invocationResult = queryInvocations.ToInvocationResult();
                 ReadOnlySpan<FluentMethodInfo> fluentMethods = queryInvocations.ToFluentMethodInfos();
 
                 QueryIntermediateResult? intermediateResult = null;
@@ -54,11 +54,11 @@ internal static class FluentProcessor
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithGet:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
-                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.Get);
+                            intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.Get);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithGetById:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
-                            intermediateResult = queryInvocationDetails.InitialiseQueryIntermediateResult(QueryType.GetById);
+                            intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.GetById);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithVersion:
                             int version = invocationInfo.ToVersion(semanticModel);
