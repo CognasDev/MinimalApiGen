@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using MinimalApiGen.Generators.Query.Generation;
+using MinimalApiGen.Generators.Generation.Query;
 using System.Collections;
 using System.Collections.Immutable;
 using System.Reflection;

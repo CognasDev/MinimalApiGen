@@ -25,11 +25,11 @@ public interface IBusinessLogicV2
     /// 
     /// </summary>
     /// <param name="id"></param>
-    /// <param name="sampleService2"></param>
+    /// <param name="sampleService1"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task<SampleModel> GetModelByIdAsync(int id,
-                                        SampleService1 sampleService2,
+                                        SampleService1 sampleService1,
                                         CancellationToken cancellationToken);
     #endregion
 }

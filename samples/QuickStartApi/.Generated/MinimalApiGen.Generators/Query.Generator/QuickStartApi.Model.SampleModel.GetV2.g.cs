@@ -27,7 +27,6 @@ public partial class SampleModelQueryRouteEndpointsMapper
                 [FromServices] QuickStartApi.V2.IBusinessLogicV2 businessLogic,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService,
 				[FromServices] QuickStartApi.Services.SampleService1 sampleService1,
-				[FromServices] QuickStartApi.Services.SampleService2 sampleService2,
 				[FromKeyedServices("SampleKeyedService")] QuickStartApi.Services.SampleKeyedService sampleKeyedService,
                 [FromServices] IPaginationService paginationService,
                 [AsParameters] PaginationQuery paginationQuery
