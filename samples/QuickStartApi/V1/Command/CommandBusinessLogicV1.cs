@@ -15,10 +15,10 @@ public sealed class CommandBusinessLogicV1 : ICommandBusinessLogicV1
     /// <param name="model"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<SampleModel> PostModelAsync(SampleModel model, CancellationToken cancellationToken)
+    public async Task<SampleModel?> PostModelAsync(SampleModel model, CancellationToken cancellationToken)
     {
         SampleModel postedModel = model with { Name = $"{model.Name} - Posted" };
-        return await Task.FromResult<SampleModel>(postedModel).ConfigureAwait(false);
+        return await Task.FromResult<SampleModel?>(postedModel).ConfigureAwait(false);
     }
 
     #endregion

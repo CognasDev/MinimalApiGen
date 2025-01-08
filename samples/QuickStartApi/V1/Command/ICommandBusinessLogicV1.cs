@@ -12,9 +12,10 @@ public interface ICommandBusinessLogicV1
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="model"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<SampleModel> PostModelAsync(SampleModel model, CancellationToken cancellationToken);
+    Task<SampleModel?> PostModelAsync(SampleModel model, CancellationToken cancellationToken);
 
     #endregion
 }

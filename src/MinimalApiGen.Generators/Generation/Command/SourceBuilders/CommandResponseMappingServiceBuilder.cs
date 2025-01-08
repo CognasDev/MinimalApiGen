@@ -1,53 +1,53 @@
 ﻿using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using System;
 using System.Linq;
 using System.Text;
 
-namespace MinimalApiGen.Generators.Generation.Query.SourceBuilders;
+namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 
 /// <summary>
 /// 
 /// </summary>
-/// <param name="queryResult"></param>
-internal sealed class ResponseMappingServiceBuilder(QueryResult queryResult)
+/// <param name="commandResult"></param>
+internal sealed class CommandResponseMappingServiceBuilder(CommandResult commandResult)
 {
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = queryResult.ClassNamespace;
+    public string ClassNamespace { get; } = commandResult.ClassNamespace;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ModelName { get; } = queryResult.ModelName;
+    public string ModelName { get; } = commandResult.ModelName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ModelFullyQualifiedName { get; } = queryResult.ModelFullyQualifiedName;
+    public string ModelFullyQualifiedName { get; } = commandResult.ModelFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseName { get; } = queryResult.ResponseName;
+    public string ResponseName { get; } = commandResult.ResponseName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseFullyQualifiedName { get; } = queryResult.ResponseFullyQualifiedName;
+    public string ResponseFullyQualifiedName { get; } = commandResult.ResponseFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<string> ModelProperties { get; } = queryResult.ModelProperties;
+    public EquatableArray<string> ModelProperties { get; } = commandResult.ModelProperties;
 
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<string> ResponseProperties { get; } = queryResult.ResponseProperties;
+    public EquatableArray<string> ResponseProperties { get; } = commandResult.ResponseProperties;
 
     #endregion
 

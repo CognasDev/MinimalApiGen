@@ -104,7 +104,8 @@ internal sealed class MapPostBuilder(CommandResult commandResult, int apiVersion
     /// </summary>
     public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(commandResult.BusinessLogicParameters,
                                                                                      commandResult.Services,
-                                                                                     commandResult.KeyedServices);
+                                                                                     commandResult.KeyedServices,
+                                                                                     commandResult.ModelFullyQualifiedName);
 
     #endregion
 
@@ -153,6 +154,14 @@ public partial class {ClassName}
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
 
+                {ModelName} model = requestMappingService.Map(request);
+                {ModelName}? insertedModel = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+
+                if (insertedModel is not null)
+                {{
+                    {ResponseName} response = responseMappingService.Map(insertedModel);
+                }}
+
                 throw new NotImplementedException();
             }}
         )
@@ -177,10 +186,12 @@ public partial class {ClassName}
     /// <param name="businessLogicParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
+    /// <param name="modelName"></param>
     /// <returns></returns>
     private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
                                                   EquatableArray<string> services,
-                                                  EquatableDictionary<string, string> keyedServices)
+                                                  EquatableDictionary<string, string> keyedServices,
+                                                  string modelName)
     {
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
@@ -201,6 +212,10 @@ public partial class {ClassName}
                 string keyedServiceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(keys[index]);
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
+            }
+            else if (parameter == modelName)
+            {
+                stringBuilder.Append("model, ");
             }
             else if (parameter == typeof(CancellationToken).FullName)
             {

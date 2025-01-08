@@ -37,6 +37,14 @@ public partial class SampleModelCommandRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
 
+                SampleModel model = requestMappingService.Map(request);
+                SampleModel? insertedModel = await businessLogic.PostModelAsync(model, cancellationToken).ConfigureAwait(false);
+
+                if (insertedModel is not null)
+                {
+                    SampleModelResponse response = responseMappingService.Map(insertedModel);
+                }
+
                 throw new NotImplementedException();
             }
         )

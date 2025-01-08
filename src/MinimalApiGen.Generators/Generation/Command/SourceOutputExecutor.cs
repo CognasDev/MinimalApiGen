@@ -11,7 +11,7 @@ namespace MinimalApiGen.Generators.Generation.Command;
 /// <summary>
 /// 
 /// </summary>
-internal static class SourceOutputExecutor
+internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
 {
     #region Public Method Declarations
 
@@ -45,7 +45,7 @@ internal static class SourceOutputExecutor
             }
             if (commandResult.WithResponseMappingService)
             {
-                //AddResponseMappingService(context, commandResult, commandResult.Version);
+                AddResponseMappingService(context, commandResult, commandResult.Version);
             }
         }
 
@@ -140,9 +140,13 @@ internal static class SourceOutputExecutor
     /// <param name="apiVersion"></param>
     private static void AddResponseMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
-        ResponseMappingServiceBuilder builder = new(commandResult);
-        string mappingService = builder.Build();
-        context.AddSource($"{commandResult.ModelName}{commandResult.ResponseName}.MappingSericeV{apiVersion}.g.cs", mappingService);
+        string mappingServiceName = BuildResponseMappingServiceName(commandResult.ResponseName, commandResult.ModelName, apiVersion);
+        if (!IsMappingServiceGenerated(mappingServiceName))
+        {
+            CommandResponseMappingServiceBuilder builder = new(commandResult);
+            string mappingService = builder.Build();
+            context.AddSource(mappingServiceName, mappingService);
+        }
     }
 
     #endregion
