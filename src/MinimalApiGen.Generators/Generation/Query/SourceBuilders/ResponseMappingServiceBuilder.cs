@@ -9,7 +9,8 @@ namespace MinimalApiGen.Generators.Generation.Query.SourceBuilders;
 /// <summary>
 /// 
 /// </summary>
-internal sealed class MappingServiceBuilder(QueryResult queryResult)
+/// <param name="queryResult"></param>
+internal sealed class ResponseMappingServiceBuilder(QueryResult queryResult)
 {
     #region Property Declarations
 

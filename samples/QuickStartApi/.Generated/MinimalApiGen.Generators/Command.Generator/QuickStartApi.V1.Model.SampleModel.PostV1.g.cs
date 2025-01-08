@@ -1,5 +1,6 @@
-﻿using MinimalApiGen.Framework.Mapping;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using SampleModel = QuickStartApi.V1.Model.SampleModel;
@@ -23,6 +24,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
         return endpointRouteBuilder.MapPost
         (
             "/samplemodels",
+            async Task<Results<CreatedAtRoute<SampleModelResponse>, BadRequest>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] SampleModelRequest request,

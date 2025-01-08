@@ -114,8 +114,9 @@ internal sealed class MapPostBuilder(CommandResult commandResult, int apiVersion
     /// 
     /// </summary>
     public string Build() =>
-$@"using MinimalApiGen.Framework.Mapping;
+$@"using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using {ModelName} = {ModelFullyQualifiedName};
@@ -139,6 +140,7 @@ public partial class {ClassName}
         return endpointRouteBuilder.MapPost
         (
             ""/{ModelPluralNameLower}"",
+            async Task<Results<CreatedAtRoute<{ResponseName}>, BadRequest>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] {RequestName} request,

@@ -94,7 +94,7 @@ internal static class SourceOutputExecutor
     /// <param name="apiVersion"></param>
     private static void AddMappingService(SourceProductionContext context, QueryResult queryResult, int apiVersion)
     {
-        MappingServiceBuilder builder = new(queryResult);
+        ResponseMappingServiceBuilder builder = new(queryResult);
         string mappingService = builder.Build();
         context.AddSource($"{queryResult.ModelName}{queryResult.ResponseName}.MappingSericeV{apiVersion}.g.cs", mappingService);
     }

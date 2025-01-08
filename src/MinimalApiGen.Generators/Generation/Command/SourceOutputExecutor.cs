@@ -1,13 +1,10 @@
 ﻿using Microsoft.CodeAnalysis;
 using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Command.SourceBuilders;
-using MinimalApiGen.Generators.Generation.Query.Results;
-using MinimalApiGen.Generators.Generation.Query.SourceBuilders;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using EndpointRouteMappingResult = MinimalApiGen.Generators.Generation.Command.Results.EndpointRouteMappingResult;
 
 namespace MinimalApiGen.Generators.Generation.Command;
 
@@ -44,11 +41,11 @@ internal static class SourceOutputExecutor
 
             if (commandResult.WithRequestMappingService)
             {
-                //AddMappingService(context, commandResult, commandResult.Version);
+                AddRequestMappingService(context, commandResult, commandResult.Version);
             }
             if (commandResult.WithResponseMappingService)
             {
-                //AddMappingService(context, commandResult, commandResult.Version);
+                //AddResponseMappingService(context, commandResult, commandResult.Version);
             }
         }
 
@@ -128,9 +125,24 @@ internal static class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="commandResult"></param>
     /// <param name="apiVersion"></param>
-    private static void AddMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
+    private static void AddRequestMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
-        throw new NotImplementedException();
+        RequestMappingServiceBuilder builder = new(commandResult);
+        string mappingService = builder.Build();
+        context.AddSource($"{commandResult.RequestName}{commandResult.ModelName}.MappingSericeV{apiVersion}.g.cs", mappingService);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="commandResult"></param>
+    /// <param name="apiVersion"></param>
+    private static void AddResponseMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
+    {
+        ResponseMappingServiceBuilder builder = new(commandResult);
+        string mappingService = builder.Build();
+        context.AddSource($"{commandResult.ModelName}{commandResult.ResponseName}.MappingSericeV{apiVersion}.g.cs", mappingService);
     }
 
     #endregion
