@@ -11,6 +11,7 @@ namespace MinimalApiGen.Generators.IntegrationTests.Fixtures;
 /// <summary>
 /// 
 /// </summary>
+#nullable enable
 public partial class SampleModelQueryRouteEndpointsMapper
 {
     /// <summary>

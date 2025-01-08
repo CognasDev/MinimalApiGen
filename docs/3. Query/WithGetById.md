@@ -1,0 +1,5 @@
+# MinimalApiGen
+
+## Query
+
+### WithGetById

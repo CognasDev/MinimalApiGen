@@ -141,6 +141,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
+#nullable enable
 public partial class {ClassName}
 {{
     /// <summary>

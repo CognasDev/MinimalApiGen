@@ -10,6 +10,7 @@ namespace QuickStartApi.V2;
 /// <summary>
 /// 
 /// </summary>
+#nullable enable
 public partial class SampleModelQueryRouteEndpointsMapper
 {
     /// <summary>
