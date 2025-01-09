@@ -16,7 +16,7 @@ namespace MinimalApiGen.Generators.Generation.Query.Fluent;
 /// <summary>
 /// 
 /// </summary>
-internal static class FluentProcessor
+internal static class QueryProcessor
 {
     #region Public Method Declarations
 

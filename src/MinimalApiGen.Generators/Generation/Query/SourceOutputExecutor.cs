@@ -109,7 +109,7 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// <param name="apiVersion"></param>
     private static void AddMappingService(SourceProductionContext context, QueryResult queryResult, int apiVersion)
     {
-        string mappingServiceName = BuildResponseMappingServiceName(queryResult.ResponseName, queryResult.ModelName, apiVersion);
+        string mappingServiceName = BuildResponseMappingServiceName(queryResult.ModelName, queryResult.ResponseName, apiVersion);
         if (!IsMappingServiceGenerated(mappingServiceName))
         {
             QueryResponseMappingServiceBuilder builder = new(queryResult);

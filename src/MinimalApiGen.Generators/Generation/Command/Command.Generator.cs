@@ -23,12 +23,12 @@ public sealed class Generator : IIncrementalGenerator
     /// </summary>
     public Generator()
     {
-#if DEBUG
-        if (!System.Diagnostics.Debugger.IsAttached)
-        {
-            System.Diagnostics.Debugger.Launch();
-        }
-#endif
+        //#if DEBUG
+        //        if (!System.Diagnostics.Debugger.IsAttached)
+        //        {
+        //            System.Diagnostics.Debugger.Launch();
+        //        }
+        //#endif
     }
 
     #endregion
@@ -45,7 +45,7 @@ public sealed class Generator : IIncrementalGenerator
         (
             "MinimalApiGen.Framework.Generation.CommandGeneratorAttribute",
             predicate: static (syntaxNode, _) => syntaxNode is ClassDeclarationSyntax,
-            transform: static (context, _) => FluentProcessor.GetCommandResults(context)
+            transform: static (context, _) => CommandProcessor.GetCommandResults(context)
         )
         .WithTrackingName(TrackingNames.GetCommandResults)
         .SelectMany(static (results, _) => results)

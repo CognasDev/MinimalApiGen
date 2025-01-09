@@ -129,7 +129,7 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     {
         RequestMappingServiceBuilder builder = new(commandResult);
         string mappingService = builder.Build();
-        context.AddSource($"{commandResult.RequestName}{commandResult.ModelName}.MappingSericeV{apiVersion}.g.cs", mappingService);
+        context.AddSource($"{commandResult.RequestName}.{commandResult.ModelName}.MappingSericeV{apiVersion}.g.cs", mappingService);
     }
 
     /// <summary>
@@ -140,7 +140,7 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// <param name="apiVersion"></param>
     private static void AddResponseMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
-        string mappingServiceName = BuildResponseMappingServiceName(commandResult.ResponseName, commandResult.ModelName, apiVersion);
+        string mappingServiceName = BuildResponseMappingServiceName(commandResult.ModelName, commandResult.ResponseName, apiVersion);
         if (!IsMappingServiceGenerated(mappingServiceName))
         {
             CommandResponseMappingServiceBuilder builder = new(commandResult);

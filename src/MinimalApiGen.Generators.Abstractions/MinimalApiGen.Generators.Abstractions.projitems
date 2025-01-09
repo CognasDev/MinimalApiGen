@@ -11,13 +11,14 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithResponseMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithRequestMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IResponseMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IRequestMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteKeyedServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IPutServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteOptionals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithServices.cs" />
@@ -27,7 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPutServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithServices.cs" />
@@ -38,7 +39,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IPutResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOptionals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\ICache.cs" />

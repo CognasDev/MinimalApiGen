@@ -23,7 +23,7 @@ internal abstract class SourceOutputExecutorBase
     /// <param name="apiVersion"></param>
     /// <returns></returns>
     protected static string BuildResponseMappingServiceName(string modelName, string responseName, int apiVersion)
-        => $"{modelName}{responseName}.MappingSericeV{apiVersion}.g.cs";
+        => $"{modelName}.{responseName}.MappingSericeV{apiVersion}.g.cs";
 
     /// <summary>
     /// 

@@ -16,7 +16,7 @@ namespace MinimalApiGen.Generators.Generation.Command.Fluent;
 /// <summary>
 /// 
 /// </summary>
-internal static class FluentProcessor
+internal static class CommandProcessor
 {
     #region Public Method Declarations
 

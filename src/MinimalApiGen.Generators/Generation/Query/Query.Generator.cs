@@ -45,7 +45,7 @@ public sealed class Generator : IIncrementalGenerator
         (
             "MinimalApiGen.Framework.Generation.QueryGeneratorAttribute",
             predicate: static (syntaxNode, _) => syntaxNode is ClassDeclarationSyntax,
-            transform: static (context, _) => FluentProcessor.GetQueryResults(context)
+            transform: static (context, _) => QueryProcessor.GetQueryResults(context)
         )
         .WithTrackingName(TrackingNames.GetQueryResults)
         .SelectMany(static (results, _) => results)
