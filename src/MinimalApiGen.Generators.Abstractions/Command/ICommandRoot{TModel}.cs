@@ -3,7 +3,8 @@
 /// <summary>
 /// 
 /// </summary>
-public interface ICommandRoot
+/// <typeparam name="TModel"></typeparam>
+public interface ICommandRoot<TModel>
 {
     #region Method Declarations
 
@@ -12,14 +13,14 @@ public interface ICommandRoot
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    ICommandWithModelId WithNamespaceOf<T>();
+    ICommandWithModelId<TModel> WithNamespaceOf<T>();
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="commandNamespace"></param>
     /// <returns></returns>
-    ICommandWithModelId WithNamespace(string commandNamespace);
+    ICommandWithModelId<TModel> WithNamespace(string commandNamespace);
 
     #endregion
 }

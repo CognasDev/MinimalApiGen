@@ -5,15 +5,9 @@ namespace MinimalApiGen.Framework.Generation.Command;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="modelType"></param>
-public sealed class CommandRoot(Type modelType) : ICommandRoot
+/// <typeparam name="TModel"></typeparam>
+public sealed class CommandRoot<TModel> : ICommandRoot<TModel>
 {
-    #region Field Declarations
-
-    private readonly Type _modelType = modelType;
-
-    #endregion
-
     #region Public Method Declarations
 
     /// <summary>
@@ -21,14 +15,14 @@ public sealed class CommandRoot(Type modelType) : ICommandRoot
     /// </summary>
     /// <param name="commandNamespace"></param>
     /// <returns></returns>
-    public ICommandWithModelId WithNamespace(string commandNamespace) => new CommandWithModelId();
+    public ICommandWithModelId<TModel> WithNamespace(string commandNamespace) => new CommandWithModelId<TModel>();
 
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public ICommandWithModelId WithNamespaceOf<T>() => new CommandWithModelId();
+    public ICommandWithModelId<TModel> WithNamespaceOf<T>() => new CommandWithModelId<TModel>();
 
     #endregion
 }

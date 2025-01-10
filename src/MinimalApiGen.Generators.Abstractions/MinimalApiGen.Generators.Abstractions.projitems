@@ -25,8 +25,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandRoot.cs" />
-    <Compile Include="..\MinimalApiGen.Generators.Abstractions\Command\ICommandWithModelId.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandRoot{TModel}.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandWithModelId{TModel}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostServices.cs" />

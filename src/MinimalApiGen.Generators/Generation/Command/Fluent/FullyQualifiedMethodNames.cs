@@ -23,12 +23,12 @@ internal static class FullyQualifiedMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithNamespace { get; } = $"{typeof(ICommandRoot).FullName}.{nameof(ICommandRoot.WithNamespace)}";
+    public static string WithNamespace { get; } = $"{typeof(ICommandRoot<>).Namespace}.{typeof(ICommandRoot<>).Name.Split('`')[0]}.{nameof(ICommandRoot<object>.WithNamespace)}";
 
     /// <summary>
     /// 
     /// </summary>
-    public static string WithNamespaceOf { get; } = $"{typeof(ICommandRoot).FullName}.{nameof(ICommandRoot.WithNamespaceOf)}";
+    public static string WithNamespaceOf { get; } = $"{typeof(ICommandRoot<>).Namespace}.{typeof(ICommandRoot<>).Name.Split('`')[0]}.{nameof(ICommandRoot<object>.WithNamespaceOf)}";
 
     /// <summary>
     /// 
