@@ -46,7 +46,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
                 return TypedResults.Ok(response);
             }
         )
-        .WithName("GetByIdSampleModelsV1")
+        .WithName("SampleModels-GetById-V1")
         .WithTags("samplemodels")
         .WithOpenApi(operation => new(operation) { Summary = "Gets a single model of SampleModel by the id, mapped to a SampleModelResponse response." })
         .MapToApiVersion(1)
