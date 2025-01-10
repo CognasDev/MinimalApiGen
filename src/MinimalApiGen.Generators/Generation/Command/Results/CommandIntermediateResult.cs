@@ -43,6 +43,16 @@ internal sealed record CommandIntermediateResult
     /// <summary>
     /// 
     /// </summary>
+    public string? ModelIdPropertyType { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool ModelIdPropertyIsNullable { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string? CommandNamespace { get; set; }
 
     /// <summary>

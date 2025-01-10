@@ -41,6 +41,7 @@ internal static class CommandProcessor
                 ReadOnlySpan<FluentMethodInfo> fluentMethods = CommandInvocations.ToFluentMethodInfos();
 
                 CommandIntermediateResult? intermediateResult = null;
+                ModelIdPropertyResult? modelIdPropertyResult = null;
                 string commandNamespace = string.Empty;
                 string modelIdPropertyName = string.Empty;
 
@@ -55,14 +56,14 @@ internal static class CommandProcessor
                         case string name when name == FullyQualifiedMethodNames.WithNamespaceOf:
                             commandNamespace = invocationInfo.ToNamespace();
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithModelId:
-                            modelIdPropertyName = invocationInfo.ToModelIdPropertyName();
+                        case string name when name == FullyQualifiedMethodNames.WithModelId && modelIdPropertyResult is null:
+                            modelIdPropertyResult = invocationInfo.ToModelIdPropertyName(semanticModel);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithPostBusinessLogic && fluentMethod.IsGeneric:
                             intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithPost:
-                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyName);
+                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyResult!);
                             intermediateResult = invocationResult.InitialiseCommandIntermediateResult(CommandType.Post);
                             break;
                         case string name when name == FullyQualifiedMethodNames.WithPostServices && fluentMethod.IsGeneric:
@@ -92,7 +93,7 @@ internal static class CommandProcessor
                     }
                 }
 
-                intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyName);
+                intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyResult!);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Command.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -58,6 +59,16 @@ internal sealed class MapPostBuilder(CommandResult commandResult, int apiVersion
     /// 
     /// </summary>
     public string ModelIdPropertyName { get; } = commandResult.ModelIdPropertyName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyType { get; } = commandResult.ModelIdPropertyType;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyNullCheck { get; } = BuildModelIdPropertyNullCheck(commandResult.ModelIdPropertyIsNullable);
 
     /// <summary>
     /// 
@@ -168,11 +179,12 @@ public partial class {ClassName}
                 }}
 
                 {ResponseName} response = responseMappingService.Map(insertedModel);
-                string routeName = $""GetById{ModelPluralName}V{ApiVersion}"";
-                return TypedResults.CreatedAtRoute<{ResponseName}>(response, routeName, new {{id = insertedModel.{ModelIdPropertyName}}});
+                string routeName = ""{RouteNameFactory.GetById(ModelPluralName, ApiVersion)}"";
+                {ModelIdPropertyType} newId = insertedModel.{ModelIdPropertyName}{ModelIdPropertyNullCheck};
+                return TypedResults.CreatedAtRoute<{ResponseName}>(response, routeName, new {{id = newId}});
             }}
         )
-        .WithName(""Post{ModelPluralName}V{ApiVersion}"")
+        .WithName(""{RouteNameFactory.Post(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""TODO"" }})
         .MapToApiVersion({ApiVersion})
@@ -234,6 +246,13 @@ public partial class {ClassName}
         string delegateParameters = stringBuilder.ToString();
         return delegateParameters;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="isNullable"></param>
+    /// <returns></returns>
+    private static string BuildModelIdPropertyNullCheck(bool isNullable) => isNullable ? $" ?? throw new {nameof(NullReferenceException)}()" : string.Empty;
 
     #endregion
 }

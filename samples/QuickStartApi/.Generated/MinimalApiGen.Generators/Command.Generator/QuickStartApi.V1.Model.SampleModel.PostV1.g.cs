@@ -46,11 +46,12 @@ public partial class SampleModelCommandRouteEndpointsMapper
                 }
 
                 SampleModelResponse response = responseMappingService.Map(insertedModel);
-                string routeName = $"GetByIdSampleModelsV1";
-                return TypedResults.CreatedAtRoute<SampleModelResponse>(response, routeName, new {id = insertedModel.Id});
+                string routeName = "SampleModels-GetById-V1";
+                int? newId = insertedModel.Id ?? throw new NullReferenceException();
+                return TypedResults.CreatedAtRoute<SampleModelResponse>(response, routeName, new {id = newId});
             }
         )
-        .WithName("PostSampleModelsV1")
+        .WithName("SampleModels-Post-V1")
         .WithTags("samplemodels")
         .WithOpenApi(operation => new(operation) { Summary = "TODO" })
         .MapToApiVersion(1)

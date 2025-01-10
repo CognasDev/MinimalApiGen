@@ -1,5 +1,7 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using System;
 
@@ -16,11 +18,22 @@ internal static class WithModelIdHandler
     /// 
     /// </summary>
     /// <param name="fluentInvocation"></param>
-    public static string ToModelIdPropertyName(this InvocationInfo fluentInvocation)
+    /// <param name="semanticModel"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
+    public static ModelIdPropertyResult ToModelIdPropertyName(this InvocationInfo fluentInvocation, SemanticModel semanticModel)
     {
         SimpleLambdaExpressionSyntax lambdaExpression = (SimpleLambdaExpressionSyntax)fluentInvocation.GetSingleArgumentExpression();
-        string delegateName = lambdaExpression.ExpressionBody?.TryGetInferredMemberName() ?? throw new NullReferenceException();
-        return delegateName;
+        ExpressionSyntax expression = lambdaExpression.ExpressionBody ?? throw new NullReferenceException(nameof(SimpleLambdaExpressionSyntax.ExpressionBody));
+        string propertyName = expression.TryGetInferredMemberName() ?? throw new NullReferenceException(nameof(ModelIdPropertyResult.PropertyName));
+
+        ITypeSymbol typeSymbol = semanticModel.GetTypeInfo(expression).Type ?? throw new InvalidOperationException("Unable to determine the type of the expression body.");
+        string propertyType = typeSymbol.ToDisplayString();
+        bool isNullable = typeSymbol.NullableAnnotation == NullableAnnotation.Annotated;
+
+        ModelIdPropertyResult result = new() { PropertyName = propertyName, PropertyType = propertyType, IsNullable = isNullable };
+        return result;
     }
 
     #endregion

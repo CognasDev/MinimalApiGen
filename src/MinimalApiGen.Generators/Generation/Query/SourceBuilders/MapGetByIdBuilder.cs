@@ -1,5 +1,6 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -157,7 +158,7 @@ public partial class {ClassName}
                 return TypedResults.Ok(response);
             }}
         )
-        .WithName(""GetById{ModelPluralName}V{ApiVersion}"")
+        .WithName(""{RouteNameFactory.GetById(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName} by the id, mapped to a {ResponseName} response."" }})
         .MapToApiVersion({ApiVersion})

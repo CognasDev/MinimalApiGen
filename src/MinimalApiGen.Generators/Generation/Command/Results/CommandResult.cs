@@ -49,6 +49,16 @@ internal readonly record struct CommandResult
     /// </summary>
     public string ModelIdPropertyName { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyType { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool ModelIdPropertyIsNullable { get; }
+
     #endregion
 
     #region Property Declarations - Request Details
@@ -152,6 +162,8 @@ internal readonly record struct CommandResult
         ModelFullyQualifiedName = commandIntermediateResult.ModelFullyQualifiedName;
         ModelProperties = new(commandIntermediateResult.ModelProperties);
         ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyName!;
+        ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyType!;
+        ModelIdPropertyIsNullable = commandIntermediateResult.ModelIdPropertyIsNullable;
         CommandType = commandIntermediateResult.CommandType;
 
         RequestName = commandIntermediateResult.RequestResult!.RequestName;
