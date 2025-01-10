@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Query.SourceBuilders;
+using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace MinimalApiGen.Generators.Generation.Query;
 /// <summary>
 /// 
 /// </summary>
-internal static class SourceOutputExecutor
+internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
 {
     #region Public Method Declarations
 
@@ -90,19 +91,6 @@ internal static class SourceOutputExecutor
     /// </summary>
     /// <param name="context"></param>
     /// <param name="queryResult"></param>
-    /// <param name="apiVersion"></param>
-    private static void AddMappingService(SourceProductionContext context, QueryResult queryResult, int apiVersion)
-    {
-        MappingServiceBuilder builder = new(queryResult);
-        string mappingService = builder.Build();
-        context.AddSource($"{queryResult.ModelName}{queryResult.ResponseName}.MappingSericeV{apiVersion}.g.cs", mappingService);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="context"></param>
-    /// <param name="queryResult"></param>
     /// <param name="servicesBuilder"></param>
     /// <param name="cachedForBuilder"></param>
     /// <param name="apiVersion"></param>
@@ -111,6 +99,23 @@ internal static class SourceOutputExecutor
         MapGetByIdBuilder builder = new(queryResult, apiVersion, servicesBuilder, cachedForBuilder);
         string mapGet = builder.Build();
         context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetByIdV{apiVersion}.g.cs", mapGet);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="queryResult"></param>
+    /// <param name="apiVersion"></param>
+    private static void AddMappingService(SourceProductionContext context, QueryResult queryResult, int apiVersion)
+    {
+        string mappingServiceName = BuildResponseMappingServiceName(queryResult.ModelName, queryResult.ResponseName, apiVersion);
+        if (!IsMappingServiceGenerated(mappingServiceName))
+        {
+            QueryResponseMappingServiceBuilder builder = new(queryResult);
+            string mappingService = builder.Build();
+            context.AddSource(mappingServiceName, mappingService);
+        }
     }
 
     #endregion

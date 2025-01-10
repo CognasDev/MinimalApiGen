@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
-using MinimalApiGen.Generators.Generation.Query.Invocation;
+using MinimalApiGen.Generators.Generation.Shared;
 using Moq;
 using System.Collections.Immutable;
 
@@ -37,7 +37,7 @@ public sealed class QueryHandlerTests
         ImmutableArray<InvocationInfo> invocations = [invocationInfo];
 
         // Act
-        QueryInvocationDetails result = invocations.ToQueryInvocationDetails();
+        InvocationResult result = invocations.ToInvocationResult();
 
         // Assert
         result.ModelName.Should().Be("TestModel");

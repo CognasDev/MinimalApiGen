@@ -1,6 +1,7 @@
 ﻿//HintName: MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel.GetByIdV1.g.cs
-using MinimalApiGen.Framework.Mapping;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
@@ -11,6 +12,7 @@ namespace MinimalApiGen.Generators.IntegrationTests.Fixtures;
 /// <summary>
 /// 
 /// </summary>
+#nullable enable
 public partial class SampleModelQueryRouteEndpointsMapper
 {
     /// <summary>
@@ -22,7 +24,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
         return endpointRouteBuilder.MapGet
         (
             "/samplemodels/{id}",
-            async
+            async Task<Results<Ok<SampleModelResponse>, NotFound>>
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
@@ -37,11 +39,11 @@ public partial class SampleModelQueryRouteEndpointsMapper
 
                 if (model is null)
                 {
-                    return Results.NotFound();
+                    return TypedResults.NotFound();
                 }
 
                 SampleModelResponse response = mappingService.Map(model);
-                return Results.Ok(response);
+                return TypedResults.Ok(response);
             }
         )
         .WithName("GetByIdSampleModelsV1")

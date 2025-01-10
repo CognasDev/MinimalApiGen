@@ -1,5 +1,5 @@
-﻿using MinimalApiGen.Generators.Generation.Query.Invocation;
-using MinimalApiGen.Generators.Generation.Query.Results;
+﻿using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Query.Fluent;
@@ -17,7 +17,7 @@ internal static class QueryIntermediateResultExtensions
     /// <param name="queryInvocationDetails"></param>
     /// <param name="queryType"></param>
     /// <returns></returns>
-    public static QueryIntermediateResult InitialiseQueryIntermediateResult(this QueryInvocationDetails queryInvocationDetails, QueryType queryType)
+    public static QueryIntermediateResult InitialiseQueryIntermediateResult(this InvocationResult queryInvocationDetails, QueryType queryType)
     {
         QueryIntermediateResult result = new()
         {

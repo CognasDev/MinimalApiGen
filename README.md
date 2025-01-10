@@ -23,8 +23,8 @@ Install-Package MinimalApiGen.Generators
 ```
 ## Usage
 
-Please see the various documents located in the doc folder for details on each Fluent command (WIP).
-Please see the QuickStartApi sample.
+- Please see the various documents located in the doc folder for details on each Fluent command (WIP).
+- Please see the QuickStartApi sample.
 
 ## Notes
 

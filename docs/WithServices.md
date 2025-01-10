@@ -1,3 +1,0 @@
-# MinimalApiGen
-
-## WithServices

@@ -7,13 +7,13 @@ namespace MinimalApiGen.Framework.Generation;
 /// <summary>
 /// 
 /// </summary>
-public static class EndpointRouteMappingExtension
+public static partial class EndpointRouteMappingExtension
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="webApplication"></param>
-    public static void UseMinimalApiGenEndpointRouteMaps(this WebApplication webApplication)
+    public static void UseQueryRouteMaps(this WebApplication webApplication)
     {
 		MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelQueryRouteEndpointsMapper mapperV1 = new();
 

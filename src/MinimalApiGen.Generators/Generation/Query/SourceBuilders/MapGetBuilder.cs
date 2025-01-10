@@ -1,5 +1,6 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
 using System.Text;
@@ -141,6 +142,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
+#nullable enable
 public partial class {ClassName}
 {{
     /// <summary>

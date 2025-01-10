@@ -1,4 +1,4 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Common;
+﻿using MinimalApiGen.Generators.Abstractions.Query.Shared;
 
 namespace MinimalApiGen.Generators.Abstractions.Query.GetById;
 

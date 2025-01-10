@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
-using MinimalApiGen.Generators.Generation.Query.Invocation;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Pluralize;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -26,13 +26,13 @@ internal static class QueryHandler
     /// </summary>
     /// <param name="invocations"></param>
     /// <returns></returns>
-    public static QueryInvocationDetails ToQueryInvocationDetails(this ImmutableArray<InvocationInfo> invocations)
+    public static InvocationResult ToInvocationResult(this ImmutableArray<InvocationInfo> invocations)
     {
         InvocationInfo queryInvocation = invocations.Single(invocation => invocation.MethodSymbol?.ConstructedFrom?.ToDisplayString() == FullyQualifiedMethodNames.Query);
         ITypeSymbol modelSymbol = queryInvocation.MethodSymbol.TypeArguments.Single();
         IReadOnlyList<string> modelProperties = modelSymbol.GetPublicProperties();
 
-        QueryInvocationDetails details = new()
+        InvocationResult details = new()
         {
             ModelName = modelSymbol.Name,
             ModelPluralName = _pluralizer.Pluralize(modelSymbol.Name),

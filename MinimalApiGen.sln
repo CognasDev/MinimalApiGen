@@ -6,21 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25EBC387-6C88-4B5F-A665-F48FB60FAA60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F50EC002-C509-4A9B-B729-24E27510A632}"
-	ProjectSection(SolutionItems) = preProject
-		docs\- Getting Started.md = docs\- Getting Started.md
-		docs\ApiGeneration.Query.md = docs\ApiGeneration.Query.md
-		docs\WithBusinessLogic.md = docs\WithBusinessLogic.md
-		docs\WithGet.md = docs\WithGet.md
-		docs\WithGetById.md = docs\WithGetById.md
-		docs\WithKeyedServices.md = docs\WithKeyedServices.md
-		docs\WithMappingService.md = docs\WithMappingService.md
-		docs\WithNamespace.md = docs\WithNamespace.md
-		docs\WithNamespaceOf.md = docs\WithNamespaceOf.md
-		docs\WithPagination.md = docs\WithPagination.md
-		docs\WithResponse.md = docs\WithResponse.md
-		docs\WithServices.md = docs\WithServices.md
-		docs\WithVersion.md = docs\WithVersion.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E5600EED-954B-4044-96B4-0C1EE0AE86A5}"
 EndProject
@@ -39,6 +24,42 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickStartApi", "samples\QuickStartApi\QuickStartApi.csproj", "{7A81F539-8F95-441A-848E-33CB971CB08F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.IntegrationTests", "tests\MinimalApiGen.Generators.IntegrationTests\MinimalApiGen.Generators.IntegrationTests.csproj", "{51A1159B-331A-4655-8AB0-45CBA297B19C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Query", "3. Query", "{A4894BF9-1973-43D7-AF2D-DD2F2F8C061C}"
+	ProjectSection(SolutionItems) = preProject
+		docs\3. Query\WithBusinessLogic.md = docs\3. Query\WithBusinessLogic.md
+		docs\3. Query\WithGet.md = docs\3. Query\WithGet.md
+		docs\3. Query\WithGetById.md = docs\3. Query\WithGetById.md
+		docs\3. Query\WithKeyedServices.md = docs\3. Query\WithKeyedServices.md
+		docs\3. Query\WithMappingService.md = docs\3. Query\WithMappingService.md
+		docs\3. Query\WithNamespace.md = docs\3. Query\WithNamespace.md
+		docs\3. Query\WithNamespaceOf.md = docs\3. Query\WithNamespaceOf.md
+		docs\3. Query\WithPagination.md = docs\3. Query\WithPagination.md
+		docs\3. Query\WithResponse.md = docs\3. Query\WithResponse.md
+		docs\3. Query\WithServices.md = docs\3. Query\WithServices.md
+		docs\3. Query\WithVersion.md = docs\3. Query\WithVersion.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Getting Started", "1. Getting Started", "{EBE5F3B1-8B8E-4B7A-B658-8BD7BAAC41FF}"
+	ProjectSection(SolutionItems) = preProject
+		docs\1. Getting Started\- Getting Started.md = docs\1. Getting Started\- Getting Started.md
+		docs\1. Getting Started\ApiGeneration.Query.md = docs\1. Getting Started\ApiGeneration.Query.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Command", "2. Command", "{FFADCDC9-DE02-40FB-AA85-59060DE51126}"
+	ProjectSection(SolutionItems) = preProject
+		docs\2. Command\WithBusinessLogic.md = docs\2. Command\WithBusinessLogic.md
+		docs\2. Command\WithDelete.md = docs\2. Command\WithDelete.md
+		docs\2. Command\WithKeyedServices.md = docs\2. Command\WithKeyedServices.md
+		docs\2. Command\WithMappingService.md = docs\2. Command\WithMappingService.md
+		docs\2. Command\WithNamespace.md = docs\2. Command\WithNamespace.md
+		docs\2. Command\WithNamespaceOf.md = docs\2. Command\WithNamespaceOf.md
+		docs\2. Command\WithPost.md = docs\2. Command\WithPost.md
+		docs\2. Command\WithPut.md = docs\2. Command\WithPut.md
+		docs\2. Command\WithResponse.md = docs\2. Command\WithResponse.md
+		docs\2. Command\WithServices.md = docs\2. Command\WithServices.md
+		docs\2. Command\WithVersion.md = docs\2. Command\WithVersion.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +103,9 @@ Global
 		{D96752C4-08E4-47B7-AADB-E2C286DC0143} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
 		{7A81F539-8F95-441A-848E-33CB971CB08F} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{51A1159B-331A-4655-8AB0-45CBA297B19C} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
+		{A4894BF9-1973-43D7-AF2D-DD2F2F8C061C} = {F50EC002-C509-4A9B-B729-24E27510A632}
+		{EBE5F3B1-8B8E-4B7A-B658-8BD7BAAC41FF} = {F50EC002-C509-4A9B-B729-24E27510A632}
+		{FFADCDC9-DE02-40FB-AA85-59060DE51126} = {F50EC002-C509-4A9B-B729-24E27510A632}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5

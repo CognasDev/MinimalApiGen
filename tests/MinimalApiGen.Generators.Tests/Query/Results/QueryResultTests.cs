@@ -2,6 +2,7 @@
 using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Query;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 
 namespace MinimalApiGen.Generators.Tests.Query.Results;
 

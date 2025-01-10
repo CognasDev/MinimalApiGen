@@ -1,4 +1,6 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
+﻿using MinimalApiGen.Framework.Generation.Query.Shared;
+using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.Shared;
 
 namespace MinimalApiGen.Framework.Generation.Query.Get;
 
@@ -15,6 +17,13 @@ public sealed class WithGetWithServices : IWithGetWithServices
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
     public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="timeSpan"></param>
+    /// <returns></returns>
+    public IQueryWithCache CachedFor(TimeSpan timeSpan) => new QueryWithCache();
 
     #endregion
 
