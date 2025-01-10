@@ -38,6 +38,11 @@ internal sealed record CommandIntermediateResult
     /// <summary>
     /// 
     /// </summary>
+    public string? ModelIdPropertyName { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string? CommandNamespace { get; set; }
 
     /// <summary>

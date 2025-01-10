@@ -44,6 +44,11 @@ internal readonly record struct CommandResult
     /// </summary>
     public EquatableArray<string> ModelProperties { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyName { get; }
+
     #endregion
 
     #region Property Declarations - Request Details
@@ -146,6 +151,7 @@ internal readonly record struct CommandResult
         ModelPluralName = commandIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = commandIntermediateResult.ModelFullyQualifiedName;
         ModelProperties = new(commandIntermediateResult.ModelProperties);
+        ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyName!;
         CommandType = commandIntermediateResult.CommandType;
 
         RequestName = commandIntermediateResult.RequestResult!.RequestName;

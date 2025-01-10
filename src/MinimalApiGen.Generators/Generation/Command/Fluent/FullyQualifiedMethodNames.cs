@@ -35,6 +35,11 @@ internal static class FullyQualifiedMethodNames
     /// </summary>
     public static string WithVersion { get; } = $"{typeof(IVersion).FullName}.{nameof(IVersion.WithVersion)}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithModelId { get; } = $"{typeof(ICommandWithModelId<>).Namespace}.{typeof(ICommandWithModelId<>).Name.Split('`')[0]}.{nameof(ICommandWithModelId<object>.WithModelId)}";
+
     #endregion
 
     #region Property Declarations - Post

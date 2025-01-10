@@ -40,12 +40,14 @@ public partial class SampleModelCommandRouteEndpointsMapper
                 SampleModel model = requestMappingService.Map(request);
                 SampleModel? insertedModel = await businessLogic.PostModelAsync(model, cancellationToken).ConfigureAwait(false);
 
-                if (insertedModel is not null)
+                if (insertedModel is null)
                 {
-                    SampleModelResponse response = responseMappingService.Map(insertedModel);
+                    return TypedResults.BadRequest();
                 }
 
-                throw new NotImplementedException();
+                SampleModelResponse response = responseMappingService.Map(insertedModel);
+                string routeName = $"GetByIdSampleModelsV1";
+                return TypedResults.CreatedAtRoute<SampleModelResponse>(response, routeName, new {id = insertedModel.Id});
             }
         )
         .WithName("PostSampleModelsV1")

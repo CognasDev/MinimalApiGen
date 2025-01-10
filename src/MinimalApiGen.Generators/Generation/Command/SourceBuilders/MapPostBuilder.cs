@@ -57,6 +57,11 @@ internal sealed class MapPostBuilder(CommandResult commandResult, int apiVersion
     /// <summary>
     /// 
     /// </summary>
+    public string ModelIdPropertyName { get; } = commandResult.ModelIdPropertyName;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string ResponseName { get; } = commandResult.ResponseName;
 
     /// <summary>
@@ -157,12 +162,14 @@ public partial class {ClassName}
                 {ModelName} model = requestMappingService.Map(request);
                 {ModelName}? insertedModel = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
 
-                if (insertedModel is not null)
+                if (insertedModel is null)
                 {{
-                    {ResponseName} response = responseMappingService.Map(insertedModel);
+                    return TypedResults.BadRequest();
                 }}
 
-                throw new NotImplementedException();
+                {ResponseName} response = responseMappingService.Map(insertedModel);
+                string routeName = $""GetById{ModelPluralName}V{ApiVersion}"";
+                return TypedResults.CreatedAtRoute<{ResponseName}>(response, routeName, new {{id = insertedModel.{ModelIdPropertyName}}});
             }}
         )
         .WithName(""Post{ModelPluralName}V{ApiVersion}"")

@@ -10,6 +10,7 @@ using QuickStartApi.V1.Services;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMinimalApiGenFramework();
+builder.Services.AddSingleton<IMappingService<SampleModelRequest, SampleModel>, SampleModelRequestToSampleModelMappingService>();
 builder.Services.AddSingleton<IMappingService<SampleModel, SampleModelResponse>, SampleModelToSampleModelResponseMappingService>();
 
 builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
