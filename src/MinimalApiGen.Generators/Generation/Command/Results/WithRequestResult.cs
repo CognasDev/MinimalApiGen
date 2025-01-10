@@ -5,9 +5,9 @@ namespace MinimalApiGen.Generators.Generation.Command.Results;
 /// <summary>
 /// 
 /// </summary>
-internal sealed record WithRequestResult()
+internal readonly record struct WithRequestResult()
 {
-    #region Field Declarations
+    #region Property Declarations
 
     /// <summary>
     /// 

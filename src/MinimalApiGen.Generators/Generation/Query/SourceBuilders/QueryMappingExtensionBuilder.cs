@@ -17,7 +17,7 @@ internal static class QueryMappingExtensionBuilder
     /// </summary>
     /// <param name="endpointRouteMappings"></param>
     /// <returns></returns>
-    public static string Build(ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings) =>
+    public static string Build(ReadOnlySpan<QueryRouteMappingResult> endpointRouteMappings) =>
 @$"using Microsoft.AspNetCore.Builder;
 using MinimalApiGen.Framework.Versioning;
 
@@ -47,7 +47,7 @@ public static partial class EndpointRouteMappingExtension
     /// </summary>
     /// <param name="endpointRouteMappings"></param>
     /// <returns></returns>
-    private static string BuildInternal(ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings)
+    private static string BuildInternal(ReadOnlySpan<QueryRouteMappingResult> endpointRouteMappings)
     {
         StringBuilder builder = new();
 
@@ -79,7 +79,7 @@ public static partial class EndpointRouteMappingExtension
         }
         builder.AppendLine();
 
-        foreach (EndpointRouteMappingResult endpointRouteMapping in endpointRouteMappings)
+        foreach (QueryRouteMappingResult endpointRouteMapping in endpointRouteMappings)
         {
             int version = endpointRouteMapping.Version;
             builder.Append("\t\t");

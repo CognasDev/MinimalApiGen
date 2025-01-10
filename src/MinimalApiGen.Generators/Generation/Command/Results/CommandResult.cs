@@ -161,15 +161,15 @@ internal readonly record struct CommandResult
         ModelPluralName = commandIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = commandIntermediateResult.ModelFullyQualifiedName;
         ModelProperties = new(commandIntermediateResult.ModelProperties);
-        ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyName!;
-        ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyType!;
-        ModelIdPropertyIsNullable = commandIntermediateResult.ModelIdPropertyIsNullable;
+        ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyResult.PropertyName;
+        ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyResult.PropertyType;
+        ModelIdPropertyIsNullable = commandIntermediateResult.ModelIdPropertyResult.IsNullable;
         CommandType = commandIntermediateResult.CommandType;
 
-        RequestName = commandIntermediateResult.RequestResult!.RequestName;
-        RequestFullyQualifiedName = commandIntermediateResult.RequestResult!.RequestFullyQualifiedName;
+        RequestName = commandIntermediateResult.RequestResult.RequestName;
+        RequestFullyQualifiedName = commandIntermediateResult.RequestResult.RequestFullyQualifiedName;
         ResponseName = commandIntermediateResult.ResponseResult!.ResponseName;
-        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
+        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult.ResponseFullyQualifiedName;
         WithRequestMappingService = commandIntermediateResult.WithRequestMappingService;
         WithResponseMappingService = commandIntermediateResult.WithResponseMappingService;
         RequestProperties = new(commandIntermediateResult.RequestResult.PropertyNames);

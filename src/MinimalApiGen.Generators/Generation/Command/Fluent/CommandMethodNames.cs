@@ -7,7 +7,7 @@ namespace MinimalApiGen.Generators.Generation.Command.Fluent;
 /// <summary>
 /// 
 /// </summary>
-internal static class FullyQualifiedMethodNames
+internal static class CommandMethodNames
 {
     #region Field Declarations
 

@@ -8,7 +8,7 @@ namespace MinimalApiGen.Generators.Generation.Query.Fluent;
 /// <summary>
 /// 
 /// </summary>
-internal static class FullyQualifiedMethodNames
+internal static class QueryMethodNames
 {
     #region Field Declarations
 

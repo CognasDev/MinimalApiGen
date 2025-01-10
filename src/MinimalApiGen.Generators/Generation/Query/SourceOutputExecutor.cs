@@ -40,7 +40,7 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
                 AddMappingService(context, queryResult, queryResult.Version);
             }
         }
-        ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(queryResults);
+        ReadOnlySpan<QueryRouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(queryResults);
         string mappingExtension = QueryMappingExtensionBuilder.Build(endpointRouteMappings);
         context.AddSource($"EndpointRouteMappingExtension.Query.g.cs", mappingExtension);
     }
@@ -54,12 +54,12 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// </summary>
     /// <param name="queryResults"></param>
     /// <returns></returns>
-    private static ReadOnlySpan<EndpointRouteMappingResult> GetEndpointRouteMappings(ImmutableArray<QueryResult> queryResults)
+    private static ReadOnlySpan<QueryRouteMappingResult> GetEndpointRouteMappings(ImmutableArray<QueryResult> queryResults)
     {
         return queryResults
             .Select
              (
-                queryResult => new EndpointRouteMappingResult
+                queryResult => new QueryRouteMappingResult
                 {
                     ClassName = queryResult.ClassName,
                     ClassNamespace = queryResult.ClassNamespace,

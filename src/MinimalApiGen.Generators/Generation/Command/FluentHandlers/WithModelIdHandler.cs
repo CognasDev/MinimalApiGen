@@ -28,7 +28,7 @@ internal static class WithModelIdHandler
         ExpressionSyntax expression = lambdaExpression.ExpressionBody ?? throw new NullReferenceException(nameof(SimpleLambdaExpressionSyntax.ExpressionBody));
         string propertyName = expression.TryGetInferredMemberName() ?? throw new NullReferenceException(nameof(ModelIdPropertyResult.PropertyName));
 
-        ITypeSymbol typeSymbol = semanticModel.GetTypeInfo(expression).Type ?? throw new InvalidOperationException("Unable to determine the type of the expression body.");
+        ITypeSymbol typeSymbol = semanticModel.GetTypeInfo(expression).Type ?? throw new InvalidOperationException("Unable to determine the type of the model id.");
         string propertyType = typeSymbol.ToDisplayString();
         bool isNullable = typeSymbol.NullableAnnotation == NullableAnnotation.Annotated;
 

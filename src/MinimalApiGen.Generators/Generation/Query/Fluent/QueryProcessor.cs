@@ -16,7 +16,7 @@ namespace MinimalApiGen.Generators.Generation.Query.Fluent;
 /// <summary>
 /// 
 /// </summary>
-internal static class QueryProcessor
+internal sealed class QueryProcessor : ProcessorBase
 {
     #region Public Method Declarations
 
@@ -34,7 +34,7 @@ internal static class QueryProcessor
 
         foreach (StatementSyntax statement in statements)
         {
-            ImmutableArray<InvocationInfo> queryInvocations = GetQueryInvocations(statement, semanticModel);
+            ImmutableArray<InvocationInfo> queryInvocations = GetInvocations(statement, semanticModel, QueryMethodNames.Query);
             if (queryInvocations.Length > 0)
             {
                 InvocationResult invocationResult = queryInvocations.ToInvocationResult();
@@ -48,48 +48,48 @@ internal static class QueryProcessor
                     InvocationInfo invocationInfo = fluentMethod.Invocation;
                     switch (fluentMethod.FullyQualifiedName)
                     {
-                        case string name when name == FullyQualifiedMethodNames.WithNamespace:
+                        case string name when name == QueryMethodNames.WithNamespace:
                             queryNamespace = invocationInfo.ToNamespace(semanticModel);
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithNamespaceOf:
+                        case string name when name == QueryMethodNames.WithNamespaceOf:
                             queryNamespace = invocationInfo.ToNamespace();
                             break;
-                        case string name when (name == FullyQualifiedMethodNames.WithGetBusinessLogic || name == FullyQualifiedMethodNames.WithGetByIdBusinessLogic)
+                        case string name when (name == QueryMethodNames.WithGetBusinessLogic || name == QueryMethodNames.WithGetByIdBusinessLogic)
                                               && fluentMethod.IsGeneric:
                             intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithGet:
+                        case string name when name == QueryMethodNames.WithGet:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
                             intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.Get);
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithGetById:
+                        case string name when name == QueryMethodNames.WithGetById:
                             intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
                             intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.GetById);
                             break;
-                        case string name when (name == FullyQualifiedMethodNames.WithGetServices || name == FullyQualifiedMethodNames.WithGetByIdServices)
+                        case string name when (name == QueryMethodNames.WithGetServices || name == QueryMethodNames.WithGetByIdServices)
                                               && fluentMethod.IsGeneric:
                             IReadOnlyList<string> services = invocationInfo.ToServices();
                             intermediateResult!.Services.AddRange(services);
                             break;
-                        case string name when (name == FullyQualifiedMethodNames.WithGetKeyedServices || name == FullyQualifiedMethodNames.WithGetByIdKeyedServices)
+                        case string name when (name == QueryMethodNames.WithGetKeyedServices || name == QueryMethodNames.WithGetByIdKeyedServices)
                                               && fluentMethod.IsGeneric:
                             Dictionary<string, string> keyedServices = invocationInfo.ToKeyedServices(semanticModel);
                             intermediateResult!.KeyedServices.AddRange(keyedServices);
                             break;
-                        case string name when (name == FullyQualifiedMethodNames.WithGetResponse || name == FullyQualifiedMethodNames.WithGetByIdResponse)
+                        case string name when (name == QueryMethodNames.WithGetResponse || name == QueryMethodNames.WithGetByIdResponse)
                                               && fluentMethod.IsGeneric:
                             intermediateResult!.ResponseResult = invocationInfo.ToResponse();
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithMappingService:
+                        case string name when name == QueryMethodNames.WithMappingService:
                             intermediateResult!.WithMappingService = true;
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithPagination:
+                        case string name when name == QueryMethodNames.WithPagination:
                             intermediateResult!.WithPagination = true;
                             break;
-                        case string name when name == FullyQualifiedMethodNames.CachedFor:
+                        case string name when name == QueryMethodNames.CachedFor:
                             intermediateResult!.CachedFor = invocationInfo.GetCachedForTimeSpan();
                             break;
-                        case string name when name == FullyQualifiedMethodNames.WithVersion:
+                        case string name when name == QueryMethodNames.WithVersion:
                             int version = invocationInfo.ToVersion(semanticModel);
                             intermediateResult!.Version = version;
                             break;
@@ -106,35 +106,6 @@ internal static class QueryProcessor
     #endregion
 
     #region Private Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="context"></param>
-    /// <returns></returns>
-    private static ConstructorDeclarationSyntax GetConstructor(GeneratorAttributeSyntaxContext context)
-    {
-        ClassDeclarationSyntax classDeclarationSyntax = (ClassDeclarationSyntax)context.TargetNode;
-        return classDeclarationSyntax.Members.OfType<ConstructorDeclarationSyntax>().Single();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="statement"></param>
-    /// <param name="semanticModel"></param>
-    /// <returns></returns>
-    private static ImmutableArray<InvocationInfo> GetQueryInvocations(StatementSyntax statement, SemanticModel semanticModel)
-    {
-        IReadOnlyList<InvocationExpressionSyntax> expressions = statement.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
-        bool hasQuery = expressions.Any(expression => expression.GetMethodSymbol(semanticModel)?.ConstructedFrom?.ToDisplayString() == FullyQualifiedMethodNames.Query);
-
-        return hasQuery ?
-               expressions.Select(invocationExpressionSyntax => invocationExpressionSyntax.ToInvocationInfo(semanticModel))
-                          .Reverse()
-                          .ToImmutableArray()
-              : [];
-    }
 
     /// <summary>
     /// 

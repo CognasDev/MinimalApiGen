@@ -28,7 +28,7 @@ internal static class QueryHandler
     /// <returns></returns>
     public static InvocationResult ToInvocationResult(this ImmutableArray<InvocationInfo> invocations)
     {
-        InvocationInfo queryInvocation = invocations.Single(invocation => invocation.MethodSymbol?.ConstructedFrom?.ToDisplayString() == FullyQualifiedMethodNames.Query);
+        InvocationInfo queryInvocation = invocations.Single(invocation => invocation.MethodSymbol?.ConstructedFrom?.ToDisplayString() == QueryMethodNames.Query);
         ITypeSymbol modelSymbol = queryInvocation.MethodSymbol.TypeArguments.Single();
         IReadOnlyList<string> modelProperties = modelSymbol.GetPublicProperties();
 

@@ -45,9 +45,7 @@ internal static class CommandIntermediateResultExtensions
         if (commandIntermediateResult is not null)
         {
             commandIntermediateResult.CommandNamespace = commandNamespace;
-            commandIntermediateResult.ModelIdPropertyName = modelIdPropertyResult.PropertyName;
-            commandIntermediateResult.ModelIdPropertyType = modelIdPropertyResult.PropertyType;
-            commandIntermediateResult.ModelIdPropertyIsNullable = modelIdPropertyResult.IsNullable;
+            commandIntermediateResult.ModelIdPropertyResult = modelIdPropertyResult;
             commandIntermediateResults.Add(commandIntermediateResult);
         }
     }

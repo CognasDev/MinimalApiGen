@@ -28,7 +28,7 @@ internal static class CommandHandler
     /// <returns></returns>
     public static InvocationResult ToInvocationResult(this ImmutableArray<InvocationInfo> invocations)
     {
-        InvocationInfo queryInvocation = invocations.Single(invocation => invocation.MethodSymbol?.ConstructedFrom?.ToDisplayString() == FullyQualifiedMethodNames.Command);
+        InvocationInfo queryInvocation = invocations.Single(invocation => invocation.MethodSymbol?.ConstructedFrom?.ToDisplayString() == CommandMethodNames.Command);
         ITypeSymbol modelSymbol = queryInvocation.MethodSymbol.TypeArguments.Single();
         IReadOnlyList<string> modelProperties = modelSymbol.GetPublicProperties();
 
