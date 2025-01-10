@@ -1,4 +1,4 @@
-﻿using MinimalApiGen.Framework.Generation.Command.Common;
+﻿using MinimalApiGen.Framework.Generation.Command.Shared;
 using MinimalApiGen.Generators.Abstractions.Command;
 using MinimalApiGen.Generators.Abstractions.Command.Post;
 using MinimalApiGen.Generators.Abstractions.Command.Shared;

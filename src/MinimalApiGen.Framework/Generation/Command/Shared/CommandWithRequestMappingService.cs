@@ -3,7 +3,7 @@ using MinimalApiGen.Generators.Abstractions.Command;
 using MinimalApiGen.Generators.Abstractions.Command.Post;
 using MinimalApiGen.Generators.Abstractions.Command.Shared;
 
-namespace MinimalApiGen.Framework.Generation.Command.Common;
+namespace MinimalApiGen.Framework.Generation.Command.Shared;
 
 /// <summary>
 /// 

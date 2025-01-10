@@ -17,7 +17,7 @@ public static class ApiGeneration
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     /// <returns></returns>
-    public static ICommandRoot Command<TModel>() => new CommandRoot();
+    public static ICommandRoot Command<TModel>() => new CommandRoot(typeof(TModel));
 
     /// <summary>
     /// 

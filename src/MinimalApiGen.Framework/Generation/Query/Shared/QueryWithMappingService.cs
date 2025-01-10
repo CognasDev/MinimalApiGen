@@ -1,7 +1,7 @@
 ﻿using MinimalApiGen.Generators.Abstractions.Query;
 using MinimalApiGen.Generators.Abstractions.Query.Shared;
 
-namespace MinimalApiGen.Framework.Generation.Query.Common;
+namespace MinimalApiGen.Framework.Generation.Query.Shared;
 
 /// <summary>
 /// 

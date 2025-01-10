@@ -29,7 +29,6 @@ public sealed class CommandOperations : ICommandOperations
         throw new NotImplementedException();
     }
 
-
     /// <summary>
     /// 
     /// </summary>

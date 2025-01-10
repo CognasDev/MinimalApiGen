@@ -12,14 +12,14 @@ public interface ICommandRoot
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    ICommandOperations WithNamespaceOf<T>();
+    ICommandWithModelId WithNamespaceOf<T>();
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="commandNamespace"></param>
     /// <returns></returns>
-    ICommandOperations WithNamespace(string commandNamespace);
+    ICommandWithModelId WithNamespace(string commandNamespace);
 
     #endregion
 }

@@ -17,6 +17,7 @@ public sealed class CommandGeneratorV1
     public CommandGeneratorV1()
     {
         ApiGeneration.Command<SampleModel>().WithNamespaceOf<CommandGeneratorV1>()
+                                            .WithModelId()
                                             .WithPost()
                                                 .WithBusinessLogic<ICommandBusinessLogicV1>(command => command.PostModelAsync)
                                                 .WithRequest<SampleModelRequest>()
