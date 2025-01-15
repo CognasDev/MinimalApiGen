@@ -155,7 +155,7 @@ public partial class {ClassName}
             async Task<Results<Ok<{ResponseName}>, NotFound>>
             (
                 CancellationToken cancellationToken,
-                [FromRoute] {ModelIdUnderlyingPropertyType} id,
+                [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
                 [FromServices] {BusinessLogic} businessLogic,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService{FromServices}{FromKeyedServices}
             ) =>

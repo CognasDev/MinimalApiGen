@@ -24,6 +24,7 @@ public sealed class TestGenerator
     public TestGenerator()
     {
         ApiGeneration.Query<SampleModel>().WithNamespaceOf<IServiceBusinessLogic>()
+                                          .WithModelId(model => model.Id)
                                           .WithGet()
                                           .WithBusinessLogic<IServiceBusinessLogic>(logic => logic.GetModelsAsync)
                                           .WithServices<ISampleService1>()
