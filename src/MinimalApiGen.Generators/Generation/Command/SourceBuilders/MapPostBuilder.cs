@@ -68,7 +68,7 @@ internal sealed class MapPostBuilder(CommandResult commandResult, int apiVersion
     /// <summary>
     /// 
     /// </summary>
-    public string ModelIdPropertyNullCheck { get; } = BuildModelIdPropertyNullCheck(commandResult.ModelIdPropertyIsNullable);
+    public string? ModelIdPropertyNullCheck { get; } = BuildModelIdPropertyNullCheck(commandResult.ModelIdUnderlyingPropertyType);
 
     /// <summary>
     /// 
@@ -250,9 +250,9 @@ public partial class {ClassName}
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="isNullable"></param>
+    /// <param name="underlyingType"></param>
     /// <returns></returns>
-    private static string BuildModelIdPropertyNullCheck(bool isNullable) => isNullable ? $" ?? throw new {nameof(NullReferenceException)}()" : string.Empty;
+    private static string BuildModelIdPropertyNullCheck(string? underlyingType) => string.IsNullOrEmpty(underlyingType) ? string.Empty : $" ?? throw new {nameof(NullReferenceException)}()";
 
     #endregion
 }

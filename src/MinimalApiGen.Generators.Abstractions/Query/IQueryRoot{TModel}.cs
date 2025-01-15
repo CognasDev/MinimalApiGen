@@ -3,7 +3,8 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IQueryRoot
+/// <typeparam name="TModel"></typeparam>
+public interface IQueryRoot<TModel>
 {
     #region Method Declarations
 
@@ -12,14 +13,14 @@ public interface IQueryRoot
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    IQueryOperations WithNamespaceOf<T>();
+    IQueryWithModelId<TModel> WithNamespaceOf<T>();
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="queryNamespace"></param>
+    /// <param name="commandNamespace"></param>
     /// <returns></returns>
-    IQueryOperations WithNamespace(string queryNamespace);
+    IQueryWithModelId<TModel> WithNamespace(string commandNamespace);
 
     #endregion
 }

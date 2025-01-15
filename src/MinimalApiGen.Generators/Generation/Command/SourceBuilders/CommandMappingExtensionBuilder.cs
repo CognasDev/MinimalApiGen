@@ -51,7 +51,7 @@ public static partial class EndpointRouteMappingExtension
     {
         StringBuilder builder = new();
 
-        (int Version, string FullName)[] versionWithNames = endpointRouteMappings.ToArray()
+        ReadOnlySpan<(int Version, string FullName)> versionWithNames = endpointRouteMappings.ToArray()
                                                                                  .Select(mapping => (mapping.Version, $"{mapping.ClassNamespace}.{mapping.ClassName}"))
                                                                                  .Distinct()
                                                                                  .ToArray();

@@ -57,7 +57,7 @@ internal readonly record struct CommandResult
     /// <summary>
     /// 
     /// </summary>
-    public bool ModelIdPropertyIsNullable { get; }
+    public string? ModelIdUnderlyingPropertyType { get; }
 
     #endregion
 
@@ -163,7 +163,7 @@ internal readonly record struct CommandResult
         ModelProperties = new(commandIntermediateResult.ModelProperties);
         ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyResult.PropertyName;
         ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyResult.PropertyType;
-        ModelIdPropertyIsNullable = commandIntermediateResult.ModelIdPropertyResult.IsNullable;
+        ModelIdUnderlyingPropertyType = commandIntermediateResult.ModelIdPropertyResult.UnderlyingType;
         CommandType = commandIntermediateResult.CommandType;
 
         RequestName = commandIntermediateResult.RequestResult.RequestName;

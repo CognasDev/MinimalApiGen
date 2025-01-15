@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOptionals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutOperation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryWithModelId{TModel}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\ICache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Shared\IVersion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdKeyedServices.cs" />
@@ -66,6 +67,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetPaginationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryOperations.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryRoot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\IQueryRoot{TModel}.cs" />
   </ItemGroup>
 </Project>

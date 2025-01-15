@@ -1,6 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Command.Fluent;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
@@ -41,6 +43,7 @@ internal sealed class QueryProcessor : ProcessorBase
                 ReadOnlySpan<FluentMethodInfo> fluentMethods = queryInvocations.ToFluentMethodInfos();
 
                 QueryIntermediateResult? intermediateResult = null;
+                ModelIdPropertyResult modelIdPropertyResult = default; 
                 string queryNamespace = string.Empty;
 
                 foreach (FluentMethodInfo fluentMethod in fluentMethods)
@@ -54,16 +57,19 @@ internal sealed class QueryProcessor : ProcessorBase
                         case string name when name == QueryMethodNames.WithNamespaceOf:
                             queryNamespace = invocationInfo.ToNamespace();
                             break;
+                        case string name when name == QueryMethodNames.WithModelId:
+                            modelIdPropertyResult = invocationInfo.ToModelIdPropertyName(semanticModel);
+                            break;
                         case string name when (name == QueryMethodNames.WithGetBusinessLogic || name == QueryMethodNames.WithGetByIdBusinessLogic)
                                               && fluentMethod.IsGeneric:
                             intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
                             break;
                         case string name when name == QueryMethodNames.WithGet:
-                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
+                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace, modelIdPropertyResult);
                             intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.Get);
                             break;
                         case string name when name == QueryMethodNames.WithGetById:
-                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
+                            intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace, modelIdPropertyResult);
                             intermediateResult = invocationResult.InitialiseQueryIntermediateResult(QueryType.GetById);
                             break;
                         case string name when (name == QueryMethodNames.WithGetServices || name == QueryMethodNames.WithGetByIdServices)
@@ -96,7 +102,7 @@ internal sealed class QueryProcessor : ProcessorBase
                     }
                 }
 
-                intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace);
+                intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace, modelIdPropertyResult);
             }
         }
 

@@ -5,7 +5,7 @@ using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using System;
 
-namespace MinimalApiGen.Generators.Generation.Command.FluentHandlers;
+namespace MinimalApiGen.Generators.Generation.Shared.FluentHandlers;
 
 /// <summary>
 /// 
@@ -28,11 +28,14 @@ internal static class WithModelIdHandler
         ExpressionSyntax expression = lambdaExpression.ExpressionBody ?? throw new NullReferenceException(nameof(SimpleLambdaExpressionSyntax.ExpressionBody));
         string propertyName = expression.TryGetInferredMemberName() ?? throw new NullReferenceException(nameof(ModelIdPropertyResult.PropertyName));
 
-        ITypeSymbol typeSymbol = semanticModel.GetTypeInfo(expression).Type ?? throw new InvalidOperationException("Unable to determine the type of the model id.");
-        string propertyType = typeSymbol.ToDisplayString();
-        bool isNullable = typeSymbol.NullableAnnotation == NullableAnnotation.Annotated;
+        INamedTypeSymbol typeSymbol = (INamedTypeSymbol)semanticModel.GetTypeInfo(expression).Type! ?? throw new InvalidCastException();
 
-        ModelIdPropertyResult result = new() { PropertyName = propertyName, PropertyType = propertyType, IsNullable = isNullable };
+        string propertyType = typeSymbol.ToDisplayString();
+        string underlyingType = typeSymbol.NullableAnnotation == NullableAnnotation.Annotated
+                                ? typeSymbol.TypeArguments[0].ToDisplayString()
+                                : propertyType;
+
+        ModelIdPropertyResult result = new() { PropertyName = propertyName, PropertyType = propertyType, UnderlyingType = underlyingType };
         return result;
     }
 

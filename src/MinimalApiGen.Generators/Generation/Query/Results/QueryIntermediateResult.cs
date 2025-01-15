@@ -1,4 +1,5 @@
-﻿using MinimalApiGen.Generators.Generation.Shared.Results;
+﻿using MinimalApiGen.Generators.Generation.Command.Results;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Query.Results;
@@ -39,6 +40,11 @@ internal sealed record QueryIntermediateResult
     /// 
     /// </summary>
     public string? QueryNamespace { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public ModelIdPropertyResult ModelIdPropertyResult { get; set; }
 
     /// <summary>
     /// 
