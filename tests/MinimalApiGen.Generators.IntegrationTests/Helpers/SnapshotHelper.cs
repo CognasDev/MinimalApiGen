@@ -14,13 +14,20 @@ public static class SnapshotHelper
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="generatorType"></param>
     /// <param name="source"></param>
+    /// <param name="outputFolder"></param>
     /// <returns></returns>
-    public static async Task VerifyAsync(string source, string outputFolder)
+    public static async Task VerifyAsync(GeneratorType generatorType, string source, string outputFolder)
     {
         IEnumerable<PortableExecutableReference> references = ReferencesBuilder.Build();
         CSharpCompilation compilation = CompilationBuilder.Build(source, references);
-        Generator generator = new();
+        IIncrementalGenerator generator = generatorType switch
+        {
+            GeneratorType.Command => new Command.Generator(),
+            GeneratorType.Query => new Query.Generator(),
+            _ => throw new NotSupportedException()
+        };
         CSharpGeneratorDriver csharpDriver = CSharpGeneratorDriver.Create(generator);
         GeneratorDriver driver = csharpDriver.RunGenerators(compilation);
 

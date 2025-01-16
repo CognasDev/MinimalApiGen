@@ -38,6 +38,7 @@
 	  <Folder Include="Snapshots\" />
 	  <Folder Include="Snapshots\GetWithService\" />
 	  <Folder Include="Snapshots\Get\" />
+	  <Folder Include="Snapshots\Post\" />
 	</ItemGroup>
 
 </Project>

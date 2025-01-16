@@ -1,6 +1,6 @@
 ﻿using MinimalApiGen.Generators.IntegrationTests.Helpers;
 
-namespace MinimalApiGen.Generators.IntegrationTests.Generators;
+namespace MinimalApiGen.Generators.IntegrationTests.Generators.Query;
 
 /// <summary>
 /// 
@@ -8,6 +8,11 @@ namespace MinimalApiGen.Generators.IntegrationTests.Generators;
 public sealed class GetWithServiceAndKeyedService : IntegrationTestBase
 {
     #region Property Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    protected override GeneratorType GeneratorType => GeneratorType.Query;
 
     /// <summary>
     /// 
