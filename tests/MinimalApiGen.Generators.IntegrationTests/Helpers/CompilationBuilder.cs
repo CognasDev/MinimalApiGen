@@ -27,7 +27,8 @@ internal static class CompilationBuilder
     public static CSharpCompilation Build(string[] sources, IEnumerable<PortableExecutableReference> references)
     {
         IEnumerable<SyntaxTree> syntaxTrees = sources.Select(static source => CSharpSyntaxTree.ParseText(source));
-        CSharpCompilationOptions options = new(OutputKind.DynamicallyLinkedLibrary);
+        CSharpCompilationOptions options = new(OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Enable);
+
         return CSharpCompilation.Create
         (
             "Test",

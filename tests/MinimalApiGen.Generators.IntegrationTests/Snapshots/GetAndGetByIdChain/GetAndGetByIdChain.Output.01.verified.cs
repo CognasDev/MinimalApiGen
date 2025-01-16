@@ -27,7 +27,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
             async Task<Results<Ok<SampleModelResponse>, NotFound>>
             (
                 CancellationToken cancellationToken,
-                [FromRoute] ? id,
+                [FromRoute] int id,
                 [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISimpleBusinessLogic businessLogic,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService
             ) =>
@@ -35,7 +35,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                SampleModel? model = await businessLogic.GetModelByIdAsync(cancellationToken).ConfigureAwait(false);
+                SampleModel? model = await businessLogic.GetModelByIdAsync(id, cancellationToken).ConfigureAwait(false);
 
                 if (model is null)
                 {

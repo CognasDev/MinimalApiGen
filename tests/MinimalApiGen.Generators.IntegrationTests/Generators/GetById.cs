@@ -15,7 +15,7 @@ public sealed class GetById : IntegrationTestBase
     protected override string Source => @"
 using MinimalApiGen.Framework.Generation;
 using MinimalApiGen.Generators.IntegrationTests.Fixtures;
-using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
+
 namespace TestNamespace;
 
 [QueryGenerator]
@@ -23,7 +23,6 @@ public sealed class TestGenerator
 {
     public TestGenerator()
     {
-var d = new SampleModel();
         ApiGeneration.Query<SampleModel>().WithNamespaceOf<ISimpleBusinessLogic>()
                                           .WithModelId(model => model.Id)
                                           .WithGetById()
