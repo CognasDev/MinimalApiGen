@@ -14,6 +14,8 @@ public sealed class CommandWithModelId<TModel> : ICommandWithModelId<TModel>
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="property"></param>
+    /// <returns></returns>
     public ICommandOperations WithModelId(Expression<Func<TModel, object?>> property) => new CommandOperations();
 
     #endregion

@@ -49,7 +49,7 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
             }
         }
 
-        ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(commandResults);
+        ReadOnlySpan<CommandRouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(commandResults);
         string mappingExtension = CommandMappingExtensionBuilder.Build(endpointRouteMappings);
         context.AddSource($"EndpointRouteMappingExtension.Command.g.cs", mappingExtension);
     }
@@ -63,12 +63,12 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// </summary>
     /// <param name="commandResults"></param>
     /// <returns></returns>
-    private static ReadOnlySpan<EndpointRouteMappingResult> GetEndpointRouteMappings(ImmutableArray<CommandResult> commandResults)
+    private static ReadOnlySpan<CommandRouteMappingResult> GetEndpointRouteMappings(ImmutableArray<CommandResult> commandResults)
     {
         return commandResults
             .Select
              (
-                commandResult => new EndpointRouteMappingResult
+                commandResult => new CommandRouteMappingResult
                 {
                     ClassName = commandResult.ClassName,
                     ClassNamespace = commandResult.ClassNamespace,
@@ -90,8 +90,8 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     private static void AddPostGetSource(SourceProductionContext context, CommandResult commandResult, ServicesBuilder servicesBuilder, int apiVersion)
     {
         MapPostBuilder builder = new(commandResult, apiVersion, servicesBuilder);
-        string mapGet = builder.Build();
-        context.AddSource($"{commandResult.ModelFullyQualifiedName}.PostV{apiVersion}.g.cs", mapGet);
+        string mapPost = builder.Build();
+        context.AddSource($"{commandResult.ModelFullyQualifiedName}.PostV{apiVersion}.g.cs", mapPost);
     }
 
     /// <summary>

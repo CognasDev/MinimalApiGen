@@ -1,5 +1,7 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -176,7 +178,7 @@ public partial class {ClassName}
                 return {ResponseName}StreamAsync();   
             }}
         )
-        .WithName(""Get{ModelPluralName}V{ApiVersion}"")
+        .WithName(""{RouteNameFactory.Get(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a collection of {ModelPluralName} mapped to {ResponseName} responses.{PaginationComment}"" }})
         .MapToApiVersion({ApiVersion})

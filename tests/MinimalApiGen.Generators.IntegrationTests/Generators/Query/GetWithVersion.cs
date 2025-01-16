@@ -1,13 +1,18 @@
 ﻿using MinimalApiGen.Generators.IntegrationTests.Helpers;
 
-namespace MinimalApiGen.Generators.IntegrationTests.Generators;
+namespace MinimalApiGen.Generators.IntegrationTests.Generators.Query;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class Get : IntegrationTestBase
+public sealed class GetWithVersion : IntegrationTestBase
 {
     #region Property Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    protected override GeneratorType GeneratorType => GeneratorType.Query;
 
     /// <summary>
     /// 
@@ -24,9 +29,11 @@ public sealed class TestGenerator
     public TestGenerator()
     {
         ApiGeneration.Query<SampleModel>().WithNamespaceOf<ISimpleBusinessLogic>()
+                                          .WithModelId(model => model.Id)
                                           .WithGet()
                                           .WithBusinessLogic<ISimpleBusinessLogic>(logic => logic.GetModelsAsync)
-                                          .WithResponse<SampleModelResponse>();
+                                          .WithResponse<SampleModelResponse>()
+                                          .WithVersion(2);        
     }
 }";
 

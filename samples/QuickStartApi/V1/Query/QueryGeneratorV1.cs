@@ -17,6 +17,7 @@ public sealed class QueryGeneratorV1
     public QueryGeneratorV1()
     {
         ApiGeneration.Query<SampleModel>().WithNamespaceOf<IQueryBusinessLogicV1>()
+                                          .WithModelId(model => model.Id)
                                           .WithGet()
                                                 .WithBusinessLogic<IQueryBusinessLogicV1>(query => query.GetModelsAsync)
                                                 .WithResponse<SampleModelResponse>()

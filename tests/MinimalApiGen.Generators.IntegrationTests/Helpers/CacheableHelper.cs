@@ -5,7 +5,6 @@ using MinimalApiGen.Generators.Generation.Query;
 using System.Collections;
 using System.Collections.Immutable;
 using System.Reflection;
-using Generator = global::Query.Generator;
 
 namespace MinimalApiGen.Generators.IntegrationTests.Helpers;
 
@@ -19,10 +18,10 @@ internal static class CacheableHelper
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <param name="generatorType"></param>
     /// <param name="sources"></param>
     /// <returns></returns>
-    public static (ImmutableArray<Diagnostic> Diagnostics, string[] Output) GetGeneratedTrees(params string[] sources)
+    public static (ImmutableArray<Diagnostic> Diagnostics, string[] Output) GetGeneratedTrees(GeneratorType generatorType, params string[] sources)
     {
         string[] stages = typeof(TrackingNames)
                                     .GetFields()
@@ -34,7 +33,7 @@ internal static class CacheableHelper
 
         IEnumerable<PortableExecutableReference> references = ReferencesBuilder.Build();
         CSharpCompilation compilation = CompilationBuilder.Build(sources, references);
-        GeneratorDriverRunResult runResult = RunGeneratorAndAssertOutput(compilation, stages);
+        GeneratorDriverRunResult runResult = RunGeneratorAndAssertOutput(generatorType, compilation, stages);
         return (runResult.Diagnostics, runResult.GeneratedTrees.Select(syntaxTree => syntaxTree.ToString()).ToArray());
     }
 
@@ -45,12 +44,18 @@ internal static class CacheableHelper
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="generatorType"></param>
     /// <param name="compilation"></param>
     /// <param name="trackingNames"></param>
     /// <returns></returns>
-    private static GeneratorDriverRunResult RunGeneratorAndAssertOutput(CSharpCompilation compilation, string[] trackingNames)
+    private static GeneratorDriverRunResult RunGeneratorAndAssertOutput(GeneratorType generatorType, CSharpCompilation compilation, string[] trackingNames)
     {
-        ISourceGenerator generator = new Generator().AsSourceGenerator();
+        ISourceGenerator generator = generatorType switch
+        {
+            GeneratorType.Command => new Command.Generator().AsSourceGenerator(),
+            GeneratorType.Query => new Query.Generator().AsSourceGenerator(),
+            _ => throw new NotSupportedException()
+        };
 
         GeneratorDriverOptions driverOptions = new(disabledOutputs: IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true);
         GeneratorDriver driver = CSharpGeneratorDriver.Create([generator], driverOptions: driverOptions);

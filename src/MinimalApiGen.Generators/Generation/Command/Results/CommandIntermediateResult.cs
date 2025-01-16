@@ -38,7 +38,7 @@ internal sealed record CommandIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public string? ModelIdPropertyName { get; set; }
+    public ModelIdPropertyResult ModelIdPropertyResult { get; set; }
 
     /// <summary>
     /// 
@@ -48,7 +48,7 @@ internal sealed record CommandIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public WithRequestResult? RequestResult { get; set; }
+    public WithRequestResult RequestResult { get; set; }
 
     /// <summary>
     /// 

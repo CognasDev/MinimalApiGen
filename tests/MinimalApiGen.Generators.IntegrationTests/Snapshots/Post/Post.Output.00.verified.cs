@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿//HintName: MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel.PostV1.g.cs
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
-using SampleModel = QuickStartApi.V1.Model.SampleModel;
-using SampleModelRequest = QuickStartApi.V1.Model.SampleModelRequest;
-using SampleModelResponse = QuickStartApi.V1.Model.SampleModelResponse;
+using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
+using SampleModelRequest = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelRequest;
+using SampleModelResponse = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelResponse;
 
-namespace QuickStartApi.V1.Command;
+namespace TestNamespace;
 
 /// <summary>
 /// 
@@ -28,7 +29,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromBody] SampleModelRequest request,
-                [FromServices] QuickStartApi.V1.Command.ICommandBusinessLogicV1 businessLogic,
+                [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISimpleBusinessLogic businessLogic,
                 [FromServices] IMappingService<SampleModelRequest, SampleModel> requestMappingService,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> responseMappingService
             ) =>

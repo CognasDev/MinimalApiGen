@@ -7,4 +7,4 @@
 /// <param name="ClassName"></param>
 /// <param name="Version"></param>
 /// <param name="CommandType"></param>
-internal readonly record struct EndpointRouteMappingResult(string ClassNamespace, string ClassName, int Version, CommandType CommandType);
+internal readonly record struct CommandRouteMappingResult(string ClassNamespace, string ClassName, int Version, CommandType CommandType);

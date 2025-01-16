@@ -24,7 +24,7 @@ public sealed class QueryHandlerTests
     {
         // Arrange
         Mock<IMethodSymbol> methodSymbolMock = new();
-        methodSymbolMock.Setup(methodSymbol => methodSymbol.ConstructedFrom.ToDisplayString(It.IsAny<SymbolDisplayFormat>())).Returns(FullyQualifiedMethodNames.Query);
+        methodSymbolMock.Setup(methodSymbol => methodSymbol.ConstructedFrom.ToDisplayString(It.IsAny<SymbolDisplayFormat>())).Returns(QueryMethodNames.Query);
         Mock<ITypeSymbol> typeSymbolMock = new();
         typeSymbolMock.Setup(typeSymbol => typeSymbol.Name).Returns("TestModel");
         typeSymbolMock.Setup(typeSymbol => typeSymbol.ToDisplayString(It.IsAny<SymbolDisplayFormat>())).Returns("Namespace.TestModel");

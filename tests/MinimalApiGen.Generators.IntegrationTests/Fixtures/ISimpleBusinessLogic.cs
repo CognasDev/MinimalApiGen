@@ -22,5 +22,13 @@ public interface ISimpleBusinessLogic
     /// <returns></returns>
     Task<SampleModel> GetModelByIdAsync(int id, CancellationToken cancellationToken);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<SampleModel?> PostModelAsync(SampleModel model, CancellationToken cancellationToken);
+
     #endregion
 }

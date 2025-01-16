@@ -44,7 +44,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
                 return SampleModelResponseStreamAsync();   
             }
         )
-        .WithName("GetSampleModelsV1")
+        .WithName("SampleModels-Get-V1")
         .WithTags("samplemodels")
         .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of SampleModels mapped to SampleModelResponse responses." })
         .MapToApiVersion(1)

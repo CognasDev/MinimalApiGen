@@ -49,6 +49,16 @@ internal readonly record struct CommandResult
     /// </summary>
     public string ModelIdPropertyName { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyType { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ModelIdUnderlyingPropertyType { get; }
+
     #endregion
 
     #region Property Declarations - Request Details
@@ -151,13 +161,15 @@ internal readonly record struct CommandResult
         ModelPluralName = commandIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = commandIntermediateResult.ModelFullyQualifiedName;
         ModelProperties = new(commandIntermediateResult.ModelProperties);
-        ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyName!;
+        ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyResult.PropertyName;
+        ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyResult.PropertyType;
+        ModelIdUnderlyingPropertyType = commandIntermediateResult.ModelIdPropertyResult.UnderlyingType;
         CommandType = commandIntermediateResult.CommandType;
 
-        RequestName = commandIntermediateResult.RequestResult!.RequestName;
-        RequestFullyQualifiedName = commandIntermediateResult.RequestResult!.RequestFullyQualifiedName;
+        RequestName = commandIntermediateResult.RequestResult.RequestName;
+        RequestFullyQualifiedName = commandIntermediateResult.RequestResult.RequestFullyQualifiedName;
         ResponseName = commandIntermediateResult.ResponseResult!.ResponseName;
-        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
+        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult.ResponseFullyQualifiedName;
         WithRequestMappingService = commandIntermediateResult.WithRequestMappingService;
         WithResponseMappingService = commandIntermediateResult.WithResponseMappingService;
         RequestProperties = new(commandIntermediateResult.RequestResult.PropertyNames);

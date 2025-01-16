@@ -16,6 +16,8 @@
 
 	<ItemGroup>
 		<Folder Include=".Generated\MinimalApiGen.Generators\" />
+		<Folder Include=".Generated\MinimalApiGen.Generators\Command.Generator\" />
+		<Folder Include=".Generated\MinimalApiGen.Generators\Query.Generator\" />
 	</ItemGroup>
 
 	<PropertyGroup>

@@ -48,7 +48,7 @@
 		<None Include="$(PKGSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
 	<PropertyGroup>
-		<Version>$(VersionPrefix)0.0.3-alpha</Version>
+		<Version>$(VersionPrefix)0.0.4-alpha</Version>
 		<Title>MinimalApiGen.Generators</Title>
 		<Authors>CognasDev</Authors>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>

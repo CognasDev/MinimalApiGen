@@ -29,5 +29,17 @@ public sealed class SimpleBusinessLogic : ISimpleBusinessLogic
         return await Task.FromResult(sampleModel).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<SampleModel?> PostModelAsync(SampleModel model, CancellationToken cancellationToken)
+    {
+        SampleModel postedModel = model with { Name = $"{model.Name} - Posted" };
+        return await Task.FromResult<SampleModel?>(postedModel).ConfigureAwait(false);
+    }
+
     #endregion
 }

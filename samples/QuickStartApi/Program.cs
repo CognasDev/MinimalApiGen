@@ -11,7 +11,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMinimalApiGenFramework();
 builder.Services.AddSingleton<IMappingService<SampleModelRequest, SampleModel>, SampleModelRequestToSampleModelMappingService>();
-builder.Services.AddSingleton<IMappingService<SampleModel, SampleModelResponse>, SampleModelToSampleModelResponseMappingService>();
+//builder.Services.AddSingleton<IMappingService<SampleModel, SampleModelResponse>, QuickStartApi.V1.Command.SampleModelToSampleModelResponseMappingService>();
 
 builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
 builder.Services.AddScoped<IQueryBusinessLogicV1, QueryBusinessLogicV1>();

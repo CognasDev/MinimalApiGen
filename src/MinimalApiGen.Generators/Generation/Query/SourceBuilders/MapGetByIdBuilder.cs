@@ -1,5 +1,6 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -58,6 +59,21 @@ internal sealed class MapGetByIdBuilder(QueryResult queryResult, int apiVersion,
     /// <summary>
     /// 
     /// </summary>
+    public string ModelIdPropertyName { get; } = queryResult.ModelIdPropertyName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyType { get; } = queryResult.ModelIdPropertyType;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ModelIdUnderlyingPropertyType { get; } = queryResult.ModelIdUnderlyingPropertyType;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string ResponseName { get; } = queryResult.ResponseName;
 
     /// <summary>
@@ -95,7 +111,8 @@ internal sealed class MapGetByIdBuilder(QueryResult queryResult, int apiVersion,
     /// </summary>
     public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(queryResult.BusinessLogicParameters,
                                                                                      queryResult.Services,
-                                                                                     queryResult.KeyedServices);
+                                                                                     queryResult.KeyedServices,
+                                                                                     queryResult.ModelIdUnderlyingPropertyType ?? queryResult.ModelIdPropertyType);
 
     /// <summary>
     /// 
@@ -138,7 +155,7 @@ public partial class {ClassName}
             async Task<Results<Ok<{ResponseName}>, NotFound>>
             (
                 CancellationToken cancellationToken,
-                [FromRoute] int id,
+                [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
                 [FromServices] {BusinessLogic} businessLogic,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService{FromServices}{FromKeyedServices}
             ) =>
@@ -157,7 +174,7 @@ public partial class {ClassName}
                 return TypedResults.Ok(response);
             }}
         )
-        .WithName(""GetById{ModelPluralName}V{ApiVersion}"")
+        .WithName(""{RouteNameFactory.GetById(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName} by the id, mapped to a {ResponseName} response."" }})
         .MapToApiVersion({ApiVersion})
@@ -178,10 +195,12 @@ public partial class {ClassName}
     /// <param name="businessLogicParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
+    /// <param name="modelIdPropertyType"></param>
     /// <returns></returns>
     private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
                                                   EquatableArray<string> services,
-                                                  EquatableDictionary<string, string> keyedServices)
+                                                  EquatableDictionary<string, string> keyedServices,
+                                                  string modelIdPropertyType)
     {
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
@@ -203,7 +222,7 @@ public partial class {ClassName}
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (parameter == "int")
+            else if (parameter == modelIdPropertyType) 
             {
                 stringBuilder.Append("id, ");
             }

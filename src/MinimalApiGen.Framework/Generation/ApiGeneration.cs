@@ -24,7 +24,7 @@ public static class ApiGeneration
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
     /// <returns></returns>
-    public static IQueryRoot Query<TModel>() => new QueryRoot();
+    public static IQueryRoot<TModel> Query<TModel>() => new QueryRoot<TModel>();
 
     #endregion
 }

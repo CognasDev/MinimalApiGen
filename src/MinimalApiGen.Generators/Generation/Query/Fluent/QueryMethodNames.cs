@@ -8,7 +8,7 @@ namespace MinimalApiGen.Generators.Generation.Query.Fluent;
 /// <summary>
 /// 
 /// </summary>
-internal static class FullyQualifiedMethodNames
+internal static class QueryMethodNames
 {
     #region Field Declarations
 
@@ -34,12 +34,17 @@ internal static class FullyQualifiedMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithNamespace { get; } = $"{typeof(IQueryRoot).FullName}.{nameof(IQueryRoot.WithNamespace)}";
+    public static string WithNamespace { get; } = $"{typeof(IQueryRoot<>).Namespace}.{typeof(IQueryRoot<>).Name.Split('`')[0]}.{nameof(IQueryRoot<object>.WithNamespace)}";
 
     /// <summary>
     /// 
     /// </summary>
-    public static string WithNamespaceOf { get; } = $"{typeof(IQueryRoot).FullName}.{nameof(IQueryRoot.WithNamespaceOf)}";
+    public static string WithNamespaceOf { get; } = $"{typeof(IQueryRoot<>).Namespace}.{typeof(IQueryRoot<>).Name.Split('`')[0]}.{nameof(IQueryRoot<object>.WithNamespaceOf)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithModelId { get; } = $"{typeof(IQueryWithModelId<>).Namespace}.{typeof(IQueryWithModelId<>).Name.Split('`')[0]}.{nameof(IQueryWithModelId<object>.WithModelId)}";
 
     /// <summary>
     /// 

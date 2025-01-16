@@ -36,16 +36,16 @@ internal static class CommandIntermediateResultExtensions
     /// <param name="commandIntermediateResults"></param>
     /// <param name="commandIntermediateResult"></param>
     /// <param name="commandNamespace"></param>
-    /// <param name="modelIdPropertyName"></param>
+    /// <param name="modelIdPropertyResult"></param>
     public static void TryFinaliseAndCollectIntermediateResult(this List<CommandIntermediateResult> commandIntermediateResults,
                                                                CommandIntermediateResult? commandIntermediateResult,
                                                                string commandNamespace,
-                                                               string modelIdPropertyName)
+                                                               ModelIdPropertyResult modelIdPropertyResult)
     {
         if (commandIntermediateResult is not null)
         {
             commandIntermediateResult.CommandNamespace = commandNamespace;
-            commandIntermediateResult.ModelIdPropertyName = modelIdPropertyName;
+            commandIntermediateResult.ModelIdPropertyResult = modelIdPropertyResult;
             commandIntermediateResults.Add(commandIntermediateResult);
         }
     }

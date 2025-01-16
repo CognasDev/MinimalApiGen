@@ -17,7 +17,7 @@ internal static class CommandMappingExtensionBuilder
     /// </summary>
     /// <param name="endpointRouteMappings"></param>
     /// <returns></returns>
-    public static string Build(ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings) =>
+    public static string Build(ReadOnlySpan<CommandRouteMappingResult> endpointRouteMappings) =>
 @$"using Microsoft.AspNetCore.Builder;
 using MinimalApiGen.Framework.Versioning;
 
@@ -47,11 +47,11 @@ public static partial class EndpointRouteMappingExtension
     /// </summary>
     /// <param name="endpointRouteMappings"></param>
     /// <returns></returns>
-    private static string BuildInternal(ReadOnlySpan<EndpointRouteMappingResult> endpointRouteMappings)
+    private static string BuildInternal(ReadOnlySpan<CommandRouteMappingResult> endpointRouteMappings)
     {
         StringBuilder builder = new();
 
-        (int Version, string FullName)[] versionWithNames = endpointRouteMappings.ToArray()
+        ReadOnlySpan<(int Version, string FullName)> versionWithNames = endpointRouteMappings.ToArray()
                                                                                  .Select(mapping => (mapping.Version, $"{mapping.ClassNamespace}.{mapping.ClassName}"))
                                                                                  .Distinct()
                                                                                  .ToArray();
@@ -79,7 +79,7 @@ public static partial class EndpointRouteMappingExtension
         }
         builder.AppendLine();
 
-        foreach (EndpointRouteMappingResult endpointRouteMapping in endpointRouteMappings)
+        foreach (CommandRouteMappingResult endpointRouteMapping in endpointRouteMappings)
         {
             int version = endpointRouteMapping.Version;
             builder.Append("\t\t");

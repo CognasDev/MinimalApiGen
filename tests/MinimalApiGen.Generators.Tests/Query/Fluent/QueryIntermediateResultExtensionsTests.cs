@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
 using MinimalApiGen.Generators.Generation.Query.Results;
@@ -54,7 +55,7 @@ public sealed class QueryIntermediateResultExtensionsTests
         };
 
         // Act
-        queryIntermediateResults.TryFinaliseAndCollectIntermediateResult(queryIntermediateResult, "QueryNamespace");
+        queryIntermediateResults.TryFinaliseAndCollectIntermediateResult(queryIntermediateResult, "QueryNamespace", It.IsAny<ModelIdPropertyResult>());
 
         // Assert
         queryIntermediateResults.Should().ContainSingle();
