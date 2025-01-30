@@ -27,7 +27,7 @@ public sealed class QueryGeneratorV1
                                                 .WithBusinessLogic<IQueryBusinessLogicV1>(query => query.GetModelByIdAsync)
                                                 .WithResponse<SampleModelResponse>()
                                                 .CachedFor(TimeSpan.FromMinutes(5))
-                                                .WithVersion(1);
+                                                .WithVersion(2);
     }
 
     #endregion
