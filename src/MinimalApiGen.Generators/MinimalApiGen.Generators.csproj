@@ -47,6 +47,9 @@
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 		<None Include="$(PKGSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Generation\Mapping\" />
+	</ItemGroup>
 	<PropertyGroup>
 		<Version>$(VersionPrefix)0.0.4-alpha</Version>
 		<Title>MinimalApiGen.Generators</Title>

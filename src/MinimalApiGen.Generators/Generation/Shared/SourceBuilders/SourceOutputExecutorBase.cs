@@ -9,6 +9,7 @@ internal abstract class SourceOutputExecutorBase
 {
     #region Field Declarations
 
+    private static readonly object _lock = new();
     private readonly static HashSet<string> _responseMappingServices = [];
 
     #endregion
@@ -18,12 +19,12 @@ internal abstract class SourceOutputExecutorBase
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="modelName"></param>
-    /// <param name="responseName"></param>
+    /// <param name="source"></param>
+    /// <param name="target"></param>
     /// <param name="apiVersion"></param>
     /// <returns></returns>
-    protected static string BuildResponseMappingServiceName(string modelName, string responseName, int apiVersion)
-        => $"{modelName}.{responseName}.MappingSericeV{apiVersion}.g.cs";
+    protected static string BuildMappingServiceName(string source, string target, int apiVersion)
+        => $"{source}.{target}.MappingSericeV{apiVersion}.g.cs";
 
     /// <summary>
     /// 
@@ -32,12 +33,15 @@ internal abstract class SourceOutputExecutorBase
     /// <returns></returns>
     protected static bool IsMappingServiceGenerated(string name)
     {
-        if (!_responseMappingServices.Contains(name))
+        lock (_lock)
         {
-            _responseMappingServices.Add(name);
-            return false;
+            if (!_responseMappingServices.Contains(name))
+            {
+                _responseMappingServices.Add(name);
+                return false;
+            }
+            return true;
         }
-        return true;
     }
 
     #endregion
