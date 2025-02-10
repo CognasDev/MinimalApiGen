@@ -186,7 +186,7 @@ public partial class {ClassName}
         )
         .WithName(""{RouteNameFactory.Post(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""TODO"" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Posts a {ModelName} via a {RequestName}, mapped to a {ResponseName} response."" }})
         .MapToApiVersion({ApiVersion})
         .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces<{ResponseName}>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)

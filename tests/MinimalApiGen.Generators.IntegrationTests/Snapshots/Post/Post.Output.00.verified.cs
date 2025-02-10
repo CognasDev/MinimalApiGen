@@ -54,7 +54,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
         )
         .WithName("SampleModels-Post-V1")
         .WithTags("samplemodels")
-        .WithOpenApi(operation => new(operation) { Summary = "TODO" })
+        .WithOpenApi(operation => new(operation) { Summary = "Posts a SampleModel via a SampleModelRequest, mapped to a SampleModelResponse response." })
         .MapToApiVersion(1)
         .Accepts<SampleModelRequest>(MediaTypeNames.Application.Json)
         .Produces<SampleModelResponse>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)

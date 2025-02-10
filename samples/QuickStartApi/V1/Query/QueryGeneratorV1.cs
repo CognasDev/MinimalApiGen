@@ -22,6 +22,11 @@ public sealed class QueryGeneratorV1
                                                 .WithBusinessLogic<IQueryBusinessLogicV1>(query => query.GetModelsAsync)
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithMappingService()
+                                                .WithVersion(1)
+                                          .WithGetById()
+                                                .WithBusinessLogic<IQueryBusinessLogicV1>(query => query.GetModelByIdAsync)
+                                                .WithResponse<SampleModelResponse>()
+                                                .WithMappingService()
                                                 .WithVersion(1);
 
     }
