@@ -19,7 +19,6 @@ public static partial class EndpointRouteMappingExtension
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
 
 		mapperV1.MapGetV1(apiVersionRouteV1);
-		mapperV1.MapGetByIdV1(apiVersionRouteV1);
 
     }
 }

@@ -10,7 +10,7 @@ namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 /// 
 /// </summary>
 /// <param name="commandResult"></param>
-internal sealed class RequestMappingServiceBuilder(CommandResult commandResult)
+internal sealed class CommandRequestMappingServiceBuilder(CommandResult commandResult)
 {
     #region Property Declarations
 
@@ -28,6 +28,16 @@ internal sealed class RequestMappingServiceBuilder(CommandResult commandResult)
     /// 
     /// </summary>
     public string ModelFullyQualifiedName { get; } = commandResult.ModelFullyQualifiedName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string OperationName { get; } = commandResult.CommandType.ToString();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int Version { get; } = commandResult.Version;
 
     /// <summary>
     /// 
@@ -67,7 +77,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
-public sealed class {RequestName}To{ModelName}MappingService : MappingServiceBase<{RequestName}, {ModelName}>
+public sealed class {OperationName}{RequestName}To{ModelName}MappingServiceV{Version} : MappingServiceBase<{RequestName}, {ModelName}>
 {{
     #region Public Method Declarations
 

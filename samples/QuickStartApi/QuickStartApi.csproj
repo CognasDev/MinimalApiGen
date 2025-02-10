@@ -7,17 +7,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Text.Encodings.Web" Version="9.0.0" />
+		<PackageReference Include="System.Text.Encodings.Web" Version="9.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\MinimalApiGen.Framework\MinimalApiGen.Framework.csproj" />
 		<ProjectReference Include="..\..\src\MinimalApiGen.Generators\MinimalApiGen.Generators.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include=".Generated\MinimalApiGen.Generators\" />
-		<Folder Include=".Generated\MinimalApiGen.Generators\Command.Generator\" />
-		<Folder Include=".Generated\MinimalApiGen.Generators\Query.Generator\" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -29,6 +23,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include=".Generated\" />
 	</ItemGroup>
 
 </Project>
