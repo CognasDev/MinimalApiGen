@@ -7,7 +7,7 @@ namespace QuickStartApi.V1.Command;
 /// <summary>
 /// 
 /// </summary>
-public sealed class SampleModelRequestToSampleModelMappingService : MappingServiceBase<SampleModelRequest, SampleModel>
+public sealed class PostSampleModelRequestToSampleModelMappingServiceV1 : MappingServiceBase<SampleModelRequest, SampleModel>
 {
     #region Public Method Declarations
 

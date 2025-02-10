@@ -1,4 +1,4 @@
-﻿//HintName: SampleModelRequest.SampleModel.MappingSericeV1.g.cs
+﻿//HintName: SampleModelRequest.SampleModel.PostMappingServiceV1.g.cs
 using MinimalApiGen.Framework.Mapping;
 using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
 using SampleModelRequest = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelRequest;
@@ -8,7 +8,7 @@ namespace TestNamespace;
 /// <summary>
 /// 
 /// </summary>
-public sealed class SampleModelRequestToSampleModelMappingService : MappingServiceBase<SampleModelRequest, SampleModel>
+public sealed class PostSampleModelRequestToSampleModelMappingServiceV1 : MappingServiceBase<SampleModelRequest, SampleModel>
 {
     #region Public Method Declarations
 

@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using System;
 using System.Linq;
@@ -28,6 +29,16 @@ internal sealed class QueryResponseMappingServiceBuilder(QueryResult queryResult
     /// 
     /// </summary>
     public string ModelFullyQualifiedName { get; } = queryResult.ModelFullyQualifiedName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string OperationName { get; } = queryResult.QueryType.ToString();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int Version { get; } = queryResult.Version;
 
     /// <summary>
     /// 
@@ -67,7 +78,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
-public sealed class {ModelName}To{ResponseName}MappingService : MappingServiceBase<{ModelName}, {ResponseName}>
+public sealed class {OperationName}{ModelName}To{ResponseName}MappingServiceV{Version} : MappingServiceBase<{ModelName}, {ResponseName}>
 {{
     #region Public Method Declarations
 

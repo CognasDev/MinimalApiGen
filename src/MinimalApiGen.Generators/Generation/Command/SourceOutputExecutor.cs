@@ -127,13 +127,11 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// <param name="apiVersion"></param>
     private static void AddRequestMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
-        string mappingServiceName = BuildMappingServiceName(commandResult.RequestName, commandResult.ModelName, apiVersion);
-        if (!IsMappingServiceGenerated(mappingServiceName))
-        {
-            RequestMappingServiceBuilder builder = new(commandResult);
-            string mappingService = builder.Build();
-            context.AddSource(mappingServiceName, mappingService);
-        }
+        string operationName = commandResult.CommandType.ToString();
+        string mappingServiceName = BuildMappingServiceName(commandResult.RequestName, commandResult.ModelName, operationName, apiVersion);
+        CommandRequestMappingServiceBuilder builder = new(commandResult);
+        string mappingService = builder.Build();
+        context.AddSource(mappingServiceName, mappingService);
     }
 
     /// <summary>
@@ -144,13 +142,11 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// <param name="apiVersion"></param>
     private static void AddResponseMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
-        string mappingServiceName = BuildMappingServiceName(commandResult.ModelName, commandResult.ResponseName, apiVersion);
-        if (!IsMappingServiceGenerated(mappingServiceName))
-        {
-            CommandResponseMappingServiceBuilder builder = new(commandResult);
-            string mappingService = builder.Build();
-            context.AddSource(mappingServiceName, mappingService);
-        }
+        string operationName = commandResult.CommandType.ToString();
+        string mappingServiceName = BuildMappingServiceName(commandResult.ModelName, commandResult.ResponseName, operationName, apiVersion);
+        CommandResponseMappingServiceBuilder builder = new(commandResult);
+        string mappingService = builder.Build();
+        context.AddSource(mappingServiceName, mappingService);
     }
 
     #endregion
