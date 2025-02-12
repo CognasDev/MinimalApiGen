@@ -59,6 +59,11 @@ internal sealed class CommandRequestMappingServiceBuilder(CommandResult commandR
     /// </summary>
     public EquatableArray<string> RequestProperties { get; } = commandResult.RequestProperties;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string MappingServiceName => $"{OperationName}{RequestName}To{ModelName}MappingServiceV{Version}";
+
     #endregion
 
     #region Public Method Declarations
@@ -77,7 +82,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
-public sealed class {OperationName}{RequestName}To{ModelName}MappingServiceV{Version} : MappingServiceBase<{RequestName}, {ModelName}>
+public sealed class {MappingServiceName} : MappingServiceBase<{RequestName}, {ModelName}>
 {{
     #region Public Method Declarations
 

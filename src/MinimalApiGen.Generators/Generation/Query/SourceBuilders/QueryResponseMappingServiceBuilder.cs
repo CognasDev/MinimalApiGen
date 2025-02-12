@@ -60,6 +60,11 @@ internal sealed class QueryResponseMappingServiceBuilder(QueryResult queryResult
     /// </summary>
     public EquatableArray<string> ResponseProperties { get; } = queryResult.ResponseProperties;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string MappingServiceName => $"{OperationName}{ModelName}To{ResponseName}MappingServiceV{Version}";
+
     #endregion
 
     #region Public Method Declarations
@@ -78,7 +83,7 @@ namespace {ClassNamespace};
 /// <summary>
 /// 
 /// </summary>
-public sealed class {OperationName}{ModelName}To{ResponseName}MappingServiceV{Version} : MappingServiceBase<{ModelName}, {ResponseName}>
+public sealed class {MappingServiceName} : MappingServiceBase<{ModelName}, {ResponseName}>
 {{
     #region Public Method Declarations
 

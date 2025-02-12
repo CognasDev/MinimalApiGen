@@ -5,6 +5,7 @@ using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 
 namespace MinimalApiGen.Generators.Generation.Command;
 
@@ -23,6 +24,7 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     public static void Execute(SourceProductionContext context, ImmutableArray<CommandResult> commandResults)
     {
         ReadOnlySpan<CommandResult> span = commandResults.AsSpan();
+        StringBuilder commandRegistrationsBuilder = new();
         foreach (CommandResult commandResult in span)
         {
             ServicesBuilder servicesBuilder = new(commandResult.Services, commandResult.KeyedServices);
@@ -41,17 +43,27 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
 
             if (commandResult.WithRequestMappingService)
             {
-                AddRequestMappingService(context, commandResult, commandResult.Version);
+                CommandRequestMappingServiceBuilder builder = new(commandResult);
+                AddRequestMappingService(builder, context, commandResult, commandResult.Version);
+                string registration = BuildMappingServiceRegistration(commandResult.RequestFullyQualifiedName, commandResult.ModelFullyQualifiedName, commandResult.ClassNamespace, builder.MappingServiceName);
+                commandRegistrationsBuilder.AppendLine(registration);
             }
             if (commandResult.WithResponseMappingService)
             {
-                AddResponseMappingService(context, commandResult, commandResult.Version);
+                CommandResponseMappingServiceBuilder builder = new(commandResult);
+                AddResponseMappingService(builder, context, commandResult, commandResult.Version);
+                string registration = BuildMappingServiceRegistration(commandResult.ModelFullyQualifiedName, commandResult.ResponseFullyQualifiedName, commandResult.ClassNamespace, builder.MappingServiceName);
+                commandRegistrationsBuilder.AppendLine(registration);
             }
         }
 
         ReadOnlySpan<CommandRouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(commandResults);
         string mappingExtension = CommandMappingExtensionBuilder.Build(endpointRouteMappings);
         context.AddSource($"EndpointRouteMappingExtension.Command.g.cs", mappingExtension);
+
+        string commandRegistrations = commandRegistrationsBuilder.ToString();
+        string commandRegistrationsSource = CommandMappingRegistrationsBuilder.Build(commandRegistrations);
+        context.AddSource($"MappingRegistrations.Command.g.cs", commandRegistrationsSource);
     }
 
     #endregion
@@ -106,7 +118,6 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
         throw new NotImplementedException();
     }
 
-
     /// <summary>
     /// 
     /// </summary>
@@ -122,14 +133,14 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="builder"></param>
     /// <param name="context"></param>
     /// <param name="commandResult"></param>
     /// <param name="apiVersion"></param>
-    private static void AddRequestMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
+    private static void AddRequestMappingService(CommandRequestMappingServiceBuilder builder, SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
         string operationName = commandResult.CommandType.ToString();
         string mappingServiceName = BuildMappingServiceName(commandResult.RequestName, commandResult.ModelName, operationName, apiVersion);
-        CommandRequestMappingServiceBuilder builder = new(commandResult);
         string mappingService = builder.Build();
         context.AddSource(mappingServiceName, mappingService);
     }
@@ -137,16 +148,31 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="builder"></param>
     /// <param name="context"></param>
     /// <param name="commandResult"></param>
     /// <param name="apiVersion"></param>
-    private static void AddResponseMappingService(SourceProductionContext context, CommandResult commandResult, int apiVersion)
+    private static void AddResponseMappingService(CommandResponseMappingServiceBuilder builder, SourceProductionContext context, CommandResult commandResult, int apiVersion)
     {
         string operationName = commandResult.CommandType.ToString();
         string mappingServiceName = BuildMappingServiceName(commandResult.ModelName, commandResult.ResponseName, operationName, apiVersion);
-        CommandResponseMappingServiceBuilder builder = new(commandResult);
         string mappingService = builder.Build();
         context.AddSource(mappingServiceName, mappingService);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="target"></param>
+    /// <param name="classNamespace"></param>
+    /// <param name="mappingServiceName"></param>
+    /// <returns></returns>
+    private static string BuildMappingServiceRegistration(string source, string target, string classNamespace, string mappingServiceName)
+    {
+        string mappingServiceFullyQualifiedName = $"{classNamespace}.{mappingServiceName}";
+        string registration = MappingRegistrationsBuilder.Build(source, target, mappingServiceFullyQualifiedName);
+        return registration;
     }
 
     #endregion
