@@ -26,7 +26,7 @@ public static class CommandMappingRegistrations
     /// 
     /// </summary>
     /// <param name=""builder""></param>
-    public static void UseCommandMappingServices(this WebApplicationBuilder builder)
+    public static void AddCommandMappingServices(this WebApplicationBuilder builder)
     {{
 {registrations}
     }}

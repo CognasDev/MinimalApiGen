@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using MinimalApiGen.Framework.Pagination;
 using MinimalApiGen.Framework.Swagger;
 using MinimalApiGen.Framework.Versioning;
@@ -15,14 +16,15 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="services"></param>
-    public static void AddMinimalApiGenFramework(this IServiceCollection services)
+    /// <param name="builder"></param>
+    public static void AddMinimalApiGenFramework(this WebApplicationBuilder builder)
     {
-        services.AddVersioning();
-        services.ConfigureOptions<ConfigureSwaggerGenOptions>();
-        services.ConfigureSwaggerGen();
-        services.AddSingleton<IPaginationService, PaginationService>();
-        services.AddOutputCache();
+        IServiceCollection serviceCollection = builder.Services;
+        serviceCollection.AddVersioning();
+        serviceCollection.ConfigureOptions<ConfigureSwaggerGenOptions>();
+        serviceCollection.ConfigureSwaggerGen();
+        serviceCollection.AddSingleton<IPaginationService, PaginationService>();
+        serviceCollection.AddOutputCache();
     }
 
     #endregion

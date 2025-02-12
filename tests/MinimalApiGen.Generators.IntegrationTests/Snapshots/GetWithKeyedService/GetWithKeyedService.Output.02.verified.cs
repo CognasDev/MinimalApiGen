@@ -12,7 +12,7 @@ public static class QueryMappingRegistrations
     /// 
     /// </summary>
     /// <param name="builder"></param>
-    public static void UseQueryMappingServices(this WebApplicationBuilder builder)
+    public static void AddQueryMappingServices(this WebApplicationBuilder builder)
     {
 
     }

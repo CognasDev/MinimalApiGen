@@ -7,9 +7,9 @@ using QuickStartApi.V1.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMinimalApiGenFramework();
-builder.UseCommandMappingServices();
-builder.UseQueryMappingServices();
+builder.AddMinimalApiGenFramework();
+builder.AddCommandMappingServices();
+builder.AddQueryMappingServices();
 
 builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
 builder.Services.AddScoped<IQueryBusinessLogicV1, QueryBusinessLogicV1>();
