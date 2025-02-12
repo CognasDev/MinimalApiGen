@@ -132,6 +132,9 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
         CommandRequestMappingServiceBuilder builder = new(commandResult);
         string mappingService = builder.Build();
         context.AddSource(mappingServiceName, mappingService);
+
+        string mappingServiceDependency = MappingServicesBuilder.Build(commandResult.RequestFullyQualifiedName, commandResult.ModelFullyQualifiedName, commandResult.ClassNamespace, builder.MappingServiceName);
+        context.AddSource(mappingServiceName.Replace("g.cs","Dep.g.cs"), mappingServiceDependency);
     }
 
     /// <summary>
@@ -147,6 +150,9 @@ internal sealed class SourceOutputExecutor : SourceOutputExecutorBase
         CommandResponseMappingServiceBuilder builder = new(commandResult);
         string mappingService = builder.Build();
         context.AddSource(mappingServiceName, mappingService);
+
+        string mappingServiceDependency = MappingServicesBuilder.Build(commandResult.ModelFullyQualifiedName, commandResult.ResponseFullyQualifiedName, commandResult.ClassNamespace, builder.MappingServiceName);
+        context.AddSource(mappingServiceName.Replace("g.cs", "Dep.g.cs"), mappingServiceDependency);
     }
 
     #endregion
