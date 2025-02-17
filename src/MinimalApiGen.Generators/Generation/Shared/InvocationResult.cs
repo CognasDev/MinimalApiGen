@@ -5,7 +5,7 @@ namespace MinimalApiGen.Generators.Generation.Shared;
 /// <summary>
 /// 
 /// </summary>
-internal sealed record InvocationResult()
+internal sealed record InvocationResult
 {
     #region Property Declarations
 
