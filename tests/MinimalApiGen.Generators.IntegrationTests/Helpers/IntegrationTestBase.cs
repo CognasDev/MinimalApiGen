@@ -7,10 +7,6 @@ namespace MinimalApiGen.Generators.IntegrationTests.Helpers;
 /// <summary>
 /// 
 /// </summary>
-/// <remarks>
-/// 
-/// </remarks>
-[UsesVerify]
 public abstract class IntegrationTestBase
 {
     #region Property Declarations
