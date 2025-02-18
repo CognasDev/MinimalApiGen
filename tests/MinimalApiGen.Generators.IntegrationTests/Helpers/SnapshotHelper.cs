@@ -1,6 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Generator = global::Query.Generator;
 
 namespace MinimalApiGen.Generators.IntegrationTests.Helpers;
 

@@ -1,5 +1,4 @@
 ﻿using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Command.Results;
 
 namespace MinimalApiGen.Generators.Generation.Query.Results;
 

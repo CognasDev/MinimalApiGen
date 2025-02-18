@@ -10,6 +10,7 @@ public sealed class CachedForBuilder
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="timeSpan"></param>
     /// <returns></returns>
     public string Build(string? timeSpan)
     {

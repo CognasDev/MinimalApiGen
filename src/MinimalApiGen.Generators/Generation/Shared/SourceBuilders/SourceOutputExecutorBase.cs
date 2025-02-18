@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
+﻿namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 
 /// <summary>
 /// 

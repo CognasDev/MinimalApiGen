@@ -1,6 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using MinimalApiGen.Generators.Generation.Command.Results;
-using MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Query.SourceBuilders;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;

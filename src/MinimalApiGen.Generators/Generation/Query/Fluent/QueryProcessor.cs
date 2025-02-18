@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Command.Fluent;
 using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 using MinimalApiGen.Generators.Generation.Query.Results;
@@ -43,7 +42,7 @@ internal sealed class QueryProcessor : ProcessorBase
                 ReadOnlySpan<FluentMethodInfo> fluentMethods = queryInvocations.ToFluentMethodInfos();
 
                 QueryIntermediateResult? intermediateResult = null;
-                ModelIdPropertyResult modelIdPropertyResult = default; 
+                ModelIdPropertyResult modelIdPropertyResult = default;
                 string queryNamespace = string.Empty;
 
                 foreach (FluentMethodInfo fluentMethod in fluentMethods)

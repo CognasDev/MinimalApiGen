@@ -222,7 +222,7 @@ public partial class {ClassName}
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (parameter == modelIdPropertyType) 
+            else if (parameter == modelIdPropertyType)
             {
                 stringBuilder.Append("id, ");
             }
