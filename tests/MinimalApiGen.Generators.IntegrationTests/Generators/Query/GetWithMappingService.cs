@@ -5,7 +5,7 @@ namespace MinimalApiGen.Generators.IntegrationTests.Generators.Query;
 /// <summary>
 /// 
 /// </summary>
-public sealed class GetWithCachedFor : IntegrationTestBase
+public sealed class GetWithMappingService : IntegrationTestBase
 {
     #region Property Declarations
 
@@ -33,7 +33,7 @@ public sealed class TestGenerator
                                           .WithGet()
                                           .WithBusinessLogic<ISimpleBusinessLogic>(logic => logic.GetModelsAsync)
                                           .WithResponse<SampleModelResponse>()
-                                          .CachedFor(TimeSpan.FromMinutes(3));        
+                                          .WithMappingService();
     }
 }";
 

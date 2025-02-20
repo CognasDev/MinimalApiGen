@@ -14,6 +14,7 @@ public static class MappingRegistrations
     /// <param name="builder"></param>
     public static void AddMappingServices(this WebApplicationBuilder builder)
     {
+		builder.Services.AddSingleton<IMappingService<MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel, MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelResponse>, MinimalApiGen.Generators.IntegrationTests.Fixtures.GetSampleModelToSampleModelResponseMappingServiceV1>();
 
     }
 }

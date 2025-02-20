@@ -7,7 +7,7 @@ namespace MinimalApiGen.Generators.Generation.Query.Results;
 /// </summary>
 internal interface IQueryResult : IResult
 {
-    #region Property Declarations - Response Details
+    #region Property Declarations
 
     /// <summary>
     /// 

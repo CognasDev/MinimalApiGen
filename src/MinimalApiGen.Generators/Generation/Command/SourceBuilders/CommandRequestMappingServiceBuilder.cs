@@ -37,7 +37,7 @@ internal sealed class CommandRequestMappingServiceBuilder(ICommandResult command
     /// <summary>
     /// 
     /// </summary>
-    public int Version { get; } = commandResult.Version;
+    public int Version { get; } = commandResult.ApiVersion;
 
     /// <summary>
     /// 

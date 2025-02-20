@@ -166,8 +166,7 @@ public sealed class ServicesBuilder
         for (int i = 0; i < servicesSpan.Length; i++)
         {
             builder.AppendLine(",");
-            builder.Append("\t\t\t\t");
-            builder.Append("[FromServices] ");
+            builder.Append("\t\t\t\t[FromServices] ");
             builder.Append(servicesSpan[i]);
             builder.Append(" ");
             builder.Append(serviceCamelCaseNames[i]);
@@ -189,8 +188,7 @@ public sealed class ServicesBuilder
         foreach (KeyValuePair<string, string> keyValuePair in keyedServices)
         {
             builder.AppendLine(",");
-            builder.Append("\t\t\t\t");
-            builder.Append("[FromKeyedServices(\"");
+            builder.Append("\t\t\t\t[FromKeyedServices(\"");
             builder.Append(keyValuePair.Key);
             builder.Append("\")] ");
             builder.Append(keyValuePair.Value);

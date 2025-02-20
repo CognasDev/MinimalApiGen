@@ -107,7 +107,7 @@ internal readonly record struct QueryResult : IQueryResult
     /// <summary>
     /// 
     /// </summary>
-    public int Version { get; }
+    public int ApiVersion { get; }
 
     /// <summary>
     /// 
@@ -162,7 +162,7 @@ internal readonly record struct QueryResult : IQueryResult
         CachedFor = queryIntermediateResult.CachedFor;
 
         Services = new(queryIntermediateResult.Services);
-        Version = queryIntermediateResult.Version;
+        ApiVersion = queryIntermediateResult.Version;
         KeyedServices = new(queryIntermediateResult.KeyedServices);
 
         BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
@@ -199,7 +199,7 @@ internal readonly record struct QueryResult : IQueryResult
                ResponseProperties.Equals(result.ResponseProperties) &&
                CachedFor == result.CachedFor &&
                Services.Equals(result.Services) &&
-               Version == result.Version &&
+               ApiVersion == result.ApiVersion &&
                KeyedServices.Equals(result.KeyedServices) &&
                BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
                BusinessLogicDelegateName == result.BusinessLogicDelegateName &&

@@ -14,10 +14,8 @@ namespace MinimalApiGen.Generators.Generation.Query.SourceBuilders;
 /// 
 /// </summary>
 /// <param name="queryResult"></param>
-/// <param name="apiVersion"></param>
 /// <param name="servicesBuilder"></param>
-/// <param name="cachedForBuilder"></param>
-internal sealed class MapGetBuilder(IQueryResult queryResult, int apiVersion, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder)
+internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder servicesBuilder)
 {
     #region Property Declarations
 
@@ -34,7 +32,7 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, int apiVersion, Se
     /// <summary>
     /// 
     /// </summary>
-    public int ApiVersion { get; } = apiVersion;
+    public int ApiVersion { get; } = queryResult.ApiVersion;
 
     /// <summary>
     /// 
@@ -121,7 +119,7 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, int apiVersion, Se
     /// <summary>
     /// 
     /// </summary>
-    public string CachedFor { get; } = cachedForBuilder.Build(queryResult.CachedFor);
+    public string CachedFor { get; } = CachedForBuilder.Build(queryResult.CachedFor);
 
     #endregion
 

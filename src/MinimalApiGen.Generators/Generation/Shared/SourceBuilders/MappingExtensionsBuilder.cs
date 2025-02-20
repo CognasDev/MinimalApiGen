@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 
-namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
+namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 
 /// <summary>
 /// 
 /// </summary>
-internal static class CommandMappingExtensionBuilder
+internal static class MappingExtensionsBuilder
 {
     #region Public Method Declarations
 
@@ -51,18 +51,17 @@ public static partial class EndpointRouteMappingExtension
     private static string BuildInternal(ReadOnlySpan<RouteMappingResult> endpointRouteMappings)
     {
         StringBuilder builder = new();
-
-        ReadOnlySpan<(int Version, string ClassName, string FullName)> versionWithClassNames = endpointRouteMappings.ToArray()
+        RouteMappingResult[] mappingsArray = endpointRouteMappings.ToArray();
+        ReadOnlySpan<(int Version, string ClassName, string FullName)> versionWithClassNames = mappingsArray
                                                                          .Select(mapping => (mapping.Version, JsonNamingPolicy.CamelCase.ConvertName(mapping.ClassName), $"{mapping.ClassNamespace}.{mapping.ClassName}"))
                                                                          .Distinct()
                                                                          .ToArray();
 
-        ReadOnlySpan<int> distinctVersions = endpointRouteMappings.ToArray().Select(mapping => mapping.Version).Distinct().ToArray();
+        ReadOnlySpan<int> distinctVersions = mappingsArray.Select(mapping => mapping.Version).Distinct().ToArray();
 
         foreach (int version in distinctVersions)
         {
-            builder.Append("\t\t");
-            builder.Append("RouteGroupBuilder apiVersionRouteV");
+            builder.Append("\t\tRouteGroupBuilder apiVersionRouteV");
             builder.Append(version);
             builder.Append(" = webApplication.GetApiVersionRoute(");
             builder.Append(version);

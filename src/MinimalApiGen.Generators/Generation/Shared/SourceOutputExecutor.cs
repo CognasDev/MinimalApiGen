@@ -34,45 +34,46 @@ internal sealed class SourceOutputExecutor
         foreach (IResult result in span)
         {
             ServicesBuilder servicesBuilder = new(result.Services, result.KeyedServices);
-            CachedForBuilder cachedForBuilder = new();
             IQueryResult? queryResult = result.OperationType == OperationType.Get || result.OperationType == OperationType.GetById ? (IQueryResult)result : null;
             ICommandResult? commandResult = queryResult is null ? (ICommandResult)result : null;
 
             switch (result.OperationType)
             {
                 case OperationType.Get:
-                    AddMapGetSource(context, queryResult!, servicesBuilder, cachedForBuilder, result.Version);
+                    AddMapGetSource(context, queryResult!, servicesBuilder);
                     break;
                 case OperationType.GetById:
-                    AddMapGetByIdSource(context, queryResult!, servicesBuilder, cachedForBuilder, result.Version);
+                    AddMapGetByIdSource(context, queryResult!, servicesBuilder);
                     break;
                 case OperationType.Post:
-                    AddPostGetSource(context, commandResult!, servicesBuilder, result.Version);
+                    AddPostGetSource(context, commandResult!, servicesBuilder);
                     break;
                 case OperationType.Put:
-                    AddPutGetSource(context, commandResult!, servicesBuilder, result.Version);
+                    AddPutGetSource(context, commandResult!, servicesBuilder);
                     break;
                 case OperationType.Delete:
-                    AddDeleteGetSource(context, commandResult!, servicesBuilder, result.Version);
+                    AddDeleteGetSource(context, commandResult!, servicesBuilder);
                     break;
+                default:
+                    throw new NotSupportedException(result.OperationType.ToString());
             }
 
-            if (queryResult?.WithResponseMappingService == true)
+            if (queryResult?.WithResponseMappingService == true || commandResult?.WithResponseMappingService == true)
             {
-                string mappingServiceName = BuildMappingServiceName(queryResult.ModelName, queryResult.ResponseName, queryResult.Version);
+                string mappingServiceName = BuildMappingServiceName(result.ModelName, result.ResponseName, result.ApiVersion);
                 if (!mappingServiceNames.Contains(mappingServiceName))
                 {
                     mappingServiceNames.Add(mappingServiceName);
-                    ResponseMappingServiceBuilder builder = new(queryResult);
+                    ResponseMappingServiceBuilder builder = new(result);
                     string mappingService = builder.Build();
                     context.AddSource(mappingServiceName, mappingService);
-                    string registration = BuildMappingServiceRegistration(queryResult.ModelFullyQualifiedName, queryResult.ResponseFullyQualifiedName, queryResult.ClassNamespace, builder.MappingServiceName);
+                    string registration = BuildMappingServiceRegistration(result.ModelFullyQualifiedName, result.ResponseFullyQualifiedName, result.ClassNamespace, builder.MappingServiceName);
                     registrationsBuilder.AppendLine(registration);
                 }
             }
             if (commandResult?.WithRequestMappingService == true)
             {
-                string mappingServiceName = BuildMappingServiceName(commandResult.RequestName, commandResult.ModelName, commandResult.Version);
+                string mappingServiceName = BuildMappingServiceName(commandResult.RequestName, commandResult.ModelName, commandResult.ApiVersion);
                 if (!mappingServiceNames.Contains(mappingServiceName))
                 {
                     mappingServiceNames.Add(mappingServiceName);
@@ -83,28 +84,18 @@ internal sealed class SourceOutputExecutor
                     registrationsBuilder.AppendLine(registration);
                 }
             }
-            if (commandResult?.WithResponseMappingService == true)
-            {
-                string mappingServiceName = BuildMappingServiceName(commandResult.ModelName, commandResult.ResponseName, commandResult.Version);
-                if (!mappingServiceNames.Contains(mappingServiceName))
-                {
-                    mappingServiceNames.Add(mappingServiceName);
-                    ResponseMappingServiceBuilder builder = new(commandResult);
-                    string mappingService = builder.Build();
-                    context.AddSource(mappingServiceName, mappingService);
-                    string registration = BuildMappingServiceRegistration(commandResult.ModelFullyQualifiedName, commandResult.ResponseFullyQualifiedName, commandResult.ClassNamespace, builder.MappingServiceName);
-                    registrationsBuilder.AppendLine(registration);
-                }
-            }
         }
 
         ReadOnlySpan<RouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(results);
-        string mappingExtension = CommandMappingExtensionBuilder.Build(endpointRouteMappings);
+        string mappingExtension = MappingExtensionsBuilder.Build(endpointRouteMappings);
         context.AddSource($"EndpointRouteMappingExtension.g.cs", mappingExtension);
 
         string registrations = registrationsBuilder.ToString();
-        string registrationsSource = MappingRegistrationsBuilder.Build(registrations);
-        context.AddSource($"MappingRegistrations.g.cs", registrationsSource);
+        if (!string.IsNullOrEmpty(registrations))
+        {
+            string registrationsSource = MappingRegistrationsBuilder.Build(registrations);
+            context.AddSource($"MappingRegistrations.g.cs", registrationsSource);
+        }
     }
 
     #endregion
@@ -134,7 +125,7 @@ internal sealed class SourceOutputExecutor
                 {
                     ClassName = commandResult.ClassName,
                     ClassNamespace = commandResult.ClassNamespace,
-                    Version = commandResult.Version,
+                    Version = commandResult.ApiVersion,
                     OperationType = commandResult.OperationType
                 }
              )
@@ -148,13 +139,11 @@ internal sealed class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="queryResult"></param>
     /// <param name="servicesBuilder"></param>
-    /// <param name="cachedForBuilder"></param>
-    /// <param name="apiVersion"></param>
-    private static void AddMapGetSource(SourceProductionContext context, IQueryResult queryResult, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder, int apiVersion)
+    private static void AddMapGetSource(SourceProductionContext context, IQueryResult queryResult, ServicesBuilder servicesBuilder)
     {
-        MapGetBuilder builder = new(queryResult, apiVersion, servicesBuilder, cachedForBuilder);
+        MapGetBuilder builder = new(queryResult, servicesBuilder);
         string mapGet = builder.Build();
-        context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetV{apiVersion}.g.cs", mapGet);
+        context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetV{queryResult.ApiVersion}.g.cs", mapGet);
     }
 
     /// <summary>
@@ -163,13 +152,11 @@ internal sealed class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="queryResult"></param>
     /// <param name="servicesBuilder"></param>
-    /// <param name="cachedForBuilder"></param>
-    /// <param name="apiVersion"></param>
-    private static void AddMapGetByIdSource(SourceProductionContext context, IQueryResult queryResult, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder, int apiVersion)
+    private static void AddMapGetByIdSource(SourceProductionContext context, IQueryResult queryResult, ServicesBuilder servicesBuilder)
     {
-        MapGetByIdBuilder builder = new(queryResult, apiVersion, servicesBuilder, cachedForBuilder);
+        MapGetByIdBuilder builder = new(queryResult, servicesBuilder);
         string mapGet = builder.Build();
-        context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetByIdV{apiVersion}.g.cs", mapGet);
+        context.AddSource($"{queryResult.ModelFullyQualifiedName}.GetByIdV{queryResult.ApiVersion}.g.cs", mapGet);
     }
 
     /// <summary>
@@ -178,12 +165,11 @@ internal sealed class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="commandResult"></param>
     /// <param name="servicesBuilder"></param>
-    /// <param name="apiVersion"></param>
-    private static void AddPostGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder, int apiVersion)
+    private static void AddPostGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder)
     {
-        MapPostBuilder builder = new(commandResult, apiVersion, servicesBuilder);
+        MapPostBuilder builder = new(commandResult, servicesBuilder);
         string mapPost = builder.Build();
-        context.AddSource($"{commandResult.ModelFullyQualifiedName}.PostV{apiVersion}.g.cs", mapPost);
+        context.AddSource($"{commandResult.ModelFullyQualifiedName}.PostV{commandResult.ApiVersion}.g.cs", mapPost);
     }
 
     /// <summary>
@@ -192,8 +178,7 @@ internal sealed class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="commandResult"></param>
     /// <param name="servicesBuilder"></param>
-    /// <param name="apiVersion"></param>
-    private static void AddPutGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder, int apiVersion)
+    private static void AddPutGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder)
     {
         throw new NotImplementedException();
     }
@@ -204,8 +189,7 @@ internal sealed class SourceOutputExecutor
     /// <param name="context"></param>
     /// <param name="commandResult"></param>
     /// <param name="servicesBuilder"></param>
-    /// <param name="apiVersion"></param>
-    private static void AddDeleteGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder, int apiVersion)
+    private static void AddDeleteGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder)
     {
         throw new NotImplementedException();
     }

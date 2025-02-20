@@ -23,7 +23,7 @@ using MinimalApiGen.Generators.IntegrationTests.Fixtures;
 
 namespace TestNamespace;
 
-[QueryGenerator]
+[ApiGenerator]
 public sealed class TestGenerator
 {
     public TestGenerator()

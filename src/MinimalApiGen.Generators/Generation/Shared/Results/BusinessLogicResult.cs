@@ -5,7 +5,7 @@ namespace MinimalApiGen.Generators.Generation.Shared.Results;
 /// <summary>
 /// 
 /// </summary>
-internal sealed record BusinessLogicResult()
+internal sealed record BusinessLogicResult
 {
     #region Property Declarations
 
