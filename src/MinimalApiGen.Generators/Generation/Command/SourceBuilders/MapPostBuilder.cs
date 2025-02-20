@@ -16,7 +16,7 @@ namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 /// <param name="commandResult"></param>
 /// <param name="apiVersion"></param>
 /// <param name="servicesBuilder"></param>
-internal sealed class MapPostBuilder(CommandResult commandResult, int apiVersion, ServicesBuilder servicesBuilder)
+internal sealed class MapPostBuilder(ICommandResult commandResult, int apiVersion, ServicesBuilder servicesBuilder)
 {
     #region Property Declarations
 

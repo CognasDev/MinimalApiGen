@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using System;
 using System.Linq;
 using System.Text;
@@ -85,11 +86,11 @@ public static partial class EndpointRouteMappingExtension
             builder.Append("\t\t");
             builder.Append("mapperV");
             builder.Append(version);
-            if (endpointRouteMapping.QueryType == QueryType.Get)
+            if (endpointRouteMapping.OperationType == OperationType.Get)
             {
                 builder.Append(".MapGetV");
             }
-            else if (endpointRouteMapping.QueryType == QueryType.GetById)
+            else if (endpointRouteMapping.OperationType == OperationType.GetById)
             {
                 builder.Append(".MapGetByIdV");
             }

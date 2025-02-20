@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using MinimalApiGen.Framework.Mapping;
 
 namespace MinimalApiGen.Framework.Generation;
 

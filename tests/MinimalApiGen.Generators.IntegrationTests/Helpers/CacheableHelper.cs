@@ -50,13 +50,7 @@ internal static class CacheableHelper
     /// <returns></returns>
     private static GeneratorDriverRunResult RunGeneratorAndAssertOutput(GeneratorType generatorType, CSharpCompilation compilation, string[] trackingNames)
     {
-        ISourceGenerator generator = generatorType switch
-        {
-            GeneratorType.Command => new Command.Generator().AsSourceGenerator(),
-            GeneratorType.Query => new Query.Generator().AsSourceGenerator(),
-            _ => throw new NotSupportedException()
-        };
-
+        ISourceGenerator generator = new ApiGenerator.Generator().AsSourceGenerator();
         GeneratorDriverOptions driverOptions = new(disabledOutputs: IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true);
         GeneratorDriver driver = CSharpGeneratorDriver.Create([generator], driverOptions: driverOptions);
         CSharpCompilation clone = compilation.Clone();

@@ -1,7 +1,8 @@
-﻿using MinimalApiGen.Generators.Generation.Command.Results;
+﻿using MinimalApiGen.Generators.Generation.Shared.Results;
 using System;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 
@@ -17,7 +18,7 @@ internal static class CommandMappingExtensionBuilder
     /// </summary>
     /// <param name="endpointRouteMappings"></param>
     /// <returns></returns>
-    public static string Build(ReadOnlySpan<CommandRouteMappingResult> endpointRouteMappings) =>
+    public static string Build(ReadOnlySpan<RouteMappingResult> endpointRouteMappings) =>
 @$"using Microsoft.AspNetCore.Builder;
 using MinimalApiGen.Framework.Versioning;
 
@@ -32,7 +33,7 @@ public static partial class EndpointRouteMappingExtension
     /// 
     /// </summary>
     /// <param name=""webApplication""></param>
-    public static void UseCommandRouteMaps(this WebApplication webApplication)
+    public static void UseRouteMaps(this WebApplication webApplication)
     {{
 {BuildInternal(endpointRouteMappings)}
     }}
@@ -47,29 +48,19 @@ public static partial class EndpointRouteMappingExtension
     /// </summary>
     /// <param name="endpointRouteMappings"></param>
     /// <returns></returns>
-    private static string BuildInternal(ReadOnlySpan<CommandRouteMappingResult> endpointRouteMappings)
+    private static string BuildInternal(ReadOnlySpan<RouteMappingResult> endpointRouteMappings)
     {
         StringBuilder builder = new();
 
-        ReadOnlySpan<(int Version, string FullName)> versionWithNames = endpointRouteMappings.ToArray()
-                                                                                 .Select(mapping => (mapping.Version, $"{mapping.ClassNamespace}.{mapping.ClassName}"))
-                                                                                 .Distinct()
-                                                                                 .ToArray();
+        ReadOnlySpan<(int Version, string ClassName, string FullName)> versionWithClassNames = endpointRouteMappings.ToArray()
+                                                                         .Select(mapping => (mapping.Version, JsonNamingPolicy.CamelCase.ConvertName(mapping.ClassName), $"{mapping.ClassNamespace}.{mapping.ClassName}"))
+                                                                         .Distinct()
+                                                                         .ToArray();
 
-        foreach ((int Version, string FullName) versionWithName in versionWithNames)
-        {
-            int version = versionWithName.Version;
-            builder.Append("\t\t");
-            builder.Append(versionWithName.FullName);
-            builder.Append(" mapperV");
-            builder.Append(version);
-            builder.AppendLine(" = new();");
-        }
-        builder.AppendLine();
+        ReadOnlySpan<int> distinctVersions = endpointRouteMappings.ToArray().Select(mapping => mapping.Version).Distinct().ToArray();
 
-        foreach ((int Version, string FullName) versionWithName in versionWithNames)
+        foreach (int version in distinctVersions)
         {
-            int version = versionWithName.Version;
             builder.Append("\t\t");
             builder.Append("RouteGroupBuilder apiVersionRouteV");
             builder.Append(version);
@@ -79,20 +70,31 @@ public static partial class EndpointRouteMappingExtension
         }
         builder.AppendLine();
 
-        foreach (CommandRouteMappingResult endpointRouteMapping in endpointRouteMappings)
+        foreach ((int Version, string ClassName, string FullName) versionWithName in versionWithClassNames)
+        {
+            builder.Append("\t\t");
+            builder.Append(versionWithName.FullName);
+            builder.Append(" ");
+            builder.Append(versionWithName.ClassName);
+            builder.AppendLine(" = new();");
+        }
+
+        builder.AppendLine();
+
+        foreach (RouteMappingResult endpointRouteMapping in endpointRouteMappings)
         {
             int version = endpointRouteMapping.Version;
             builder.Append("\t\t");
-            builder.Append("mapperV");
-            builder.Append(version);
+            builder.Append(JsonNamingPolicy.CamelCase.ConvertName(endpointRouteMapping.ClassName));
             builder.Append(".Map");
-            builder.Append(endpointRouteMapping.CommandType);
+            builder.Append(endpointRouteMapping.OperationType);
             builder.Append("V");
             builder.Append(version);
             builder.Append("(apiVersionRouteV");
             builder.Append(version);
             builder.AppendLine(");");
         }
+
         string result = builder.ToString();
         return result;
     }

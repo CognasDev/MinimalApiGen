@@ -23,7 +23,7 @@ public sealed class CollectionExtensionsTests
         IAsyncEnumerable<int> collection = list.ToAsyncEnumerable();
 
         // Act
-        FrozenSet<int> result = await collection.ToFrozenSetAsync();
+        FrozenSet<int> result = await collection.ToFrozenSetAsync(TestContext.Current.CancellationToken);
 
         // Assert
         result.Should().BeAssignableTo<FrozenSet<int>>();

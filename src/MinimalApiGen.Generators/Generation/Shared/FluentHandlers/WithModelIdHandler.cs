@@ -2,7 +2,6 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Generation.Command.Results;
-using MinimalApiGen.Generators.Generation.Shared;
 using System;
 
 namespace MinimalApiGen.Generators.Generation.Shared.FluentHandlers;

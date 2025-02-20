@@ -17,7 +17,7 @@ namespace MinimalApiGen.Generators.Generation.Query.SourceBuilders;
 /// <param name="apiVersion"></param>
 /// <param name="servicesBuilder"></param>
 /// <param name="cachedForBuilder"></param>
-internal sealed class MapGetByIdBuilder(QueryResult queryResult, int apiVersion, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder)
+internal sealed class MapGetByIdBuilder(IQueryResult queryResult, int apiVersion, ServicesBuilder servicesBuilder, CachedForBuilder cachedForBuilder)
 {
     #region Property Declarations
 
@@ -222,7 +222,7 @@ public partial class {ClassName}
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (parameter == modelIdPropertyType) 
+            else if (parameter == modelIdPropertyType)
             {
                 stringBuilder.Append("id, ");
             }

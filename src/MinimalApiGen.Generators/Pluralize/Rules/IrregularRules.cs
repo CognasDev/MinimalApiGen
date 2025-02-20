@@ -79,7 +79,7 @@ internal static class IrregularRules
     public static IDictionary<string, string> GetIrregularPlurals()
     {
         return _irregulars.GroupBy(keyValuePair => keyValuePair.Value, StringComparer.OrdinalIgnoreCase)
-                                .ToDictionary(grouping => grouping.Key, grouping => grouping.First().Key, StringComparer.OrdinalIgnoreCase);
+                          .ToDictionary(grouping => grouping.Key, grouping => grouping.First().Key, StringComparer.OrdinalIgnoreCase);
     }
 
     /// <summary>

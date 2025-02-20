@@ -25,7 +25,8 @@
 		<Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include=".Generated\" />
+	  <Folder Include=".Generated\MinimalApiGen.Generators\" />
+	  <Folder Include=".Generated\MinimalApiGen.Generators\ApiGenerator.Generator\" />
 	</ItemGroup>
 
 </Project>

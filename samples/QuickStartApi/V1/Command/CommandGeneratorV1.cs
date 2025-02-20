@@ -6,7 +6,7 @@ namespace QuickStartApi.V1.Command;
 /// <summary>
 /// 
 /// </summary>
-[CommandGenerator]
+[ApiGenerator]
 public sealed class CommandGeneratorV1
 {
     #region Constructor Declarations

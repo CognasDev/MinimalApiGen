@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Query;
 using MinimalApiGen.Generators.Generation.Query.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 
 namespace MinimalApiGen.Generators.Tests.Query.Results;
@@ -25,7 +25,7 @@ public sealed class QueryResultTests
             ModelName = "TestModel",
             ModelPluralName = "TestModels",
             ModelFullyQualifiedName = "Namespace.TestModel",
-            QueryType = QueryType.Get,
+            OperationType = OperationType.Get,
             QueryNamespace = "Namespace",
             ResponseResult = new WithResponseResult
             {
@@ -48,7 +48,7 @@ public sealed class QueryResultTests
         QueryResult queryResult = new(queryIntermediateResult);
 
         // Assert
-        queryResult.QueryType.Should().Be(QueryType.Get);
+        queryResult.OperationType.Should().Be(OperationType.Get);
         queryResult.ClassNamespace.Should().Be("Namespace");
         queryResult.ModelName.Should().Be("TestModel");
         queryResult.ModelPluralName.Should().Be("TestModels");
