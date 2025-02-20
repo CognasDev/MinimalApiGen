@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Generation.Command.Results;
+using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using System.Collections.Generic;
 
@@ -29,7 +30,7 @@ internal sealed record QueryIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public required QueryType QueryType { get; init; }
+    public required OperationType OperationType { get; init; }
 
     /// <summary>
     /// 
@@ -84,7 +85,7 @@ internal sealed record QueryIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public bool WithMappingService { get; set; }
+    public bool WithResponseMappingService { get; set; }
 
     #endregion
 }

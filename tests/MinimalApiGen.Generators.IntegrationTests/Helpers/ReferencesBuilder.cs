@@ -25,7 +25,7 @@ internal static class ReferencesBuilder
         [
             MetadataReference.CreateFromFile(runtimeAssembly.Location),
             MetadataReference.CreateFromFile(typeof(Expression<>).Assembly.Location),
-            MetadataReference.CreateFromFile(typeof(QueryGeneratorAttribute).Assembly.Location),
+            MetadataReference.CreateFromFile(typeof(ApiGeneratorAttribute).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(JsonSerializer).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(SampleModel).Assembly.Location),
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location)

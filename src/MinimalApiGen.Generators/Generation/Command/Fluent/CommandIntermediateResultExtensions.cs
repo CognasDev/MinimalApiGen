@@ -1,5 +1,6 @@
 ﻿using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Command.Fluent;
@@ -17,7 +18,7 @@ internal static class CommandIntermediateResultExtensions
     /// <param name="commandInvocationDetails"></param>
     /// <param name="commandType"></param>
     /// <returns></returns>
-    public static CommandIntermediateResult InitialiseCommandIntermediateResult(this InvocationResult commandInvocationDetails, CommandType commandType)
+    public static CommandIntermediateResult InitialiseCommandIntermediateResult(this InvocationResult commandInvocationDetails, OperationType commandType)
     {
         CommandIntermediateResult result = new()
         {

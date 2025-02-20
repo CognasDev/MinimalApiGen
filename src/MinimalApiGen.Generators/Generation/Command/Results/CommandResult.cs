@@ -1,11 +1,13 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 
 namespace MinimalApiGen.Generators.Generation.Command.Results;
 
 /// <summary>
 /// 
 /// </summary>
-internal readonly record struct CommandResult
+internal readonly record struct CommandResult : ICommandResult
 {
     #region Property Declarations - Model Details
 
@@ -37,7 +39,7 @@ internal readonly record struct CommandResult
     /// <summary>
     /// 
     /// </summary>
-    public CommandType CommandType { get; }
+    public OperationType OperationType { get; }
 
     /// <summary>
     /// 
@@ -164,7 +166,7 @@ internal readonly record struct CommandResult
         ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyResult.PropertyName;
         ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyResult.PropertyType;
         ModelIdUnderlyingPropertyType = commandIntermediateResult.ModelIdPropertyResult.UnderlyingType;
-        CommandType = commandIntermediateResult.CommandType;
+        OperationType = commandIntermediateResult.CommandType;
 
         RequestName = commandIntermediateResult.RequestResult.RequestName;
         RequestFullyQualifiedName = commandIntermediateResult.RequestResult.RequestFullyQualifiedName;
@@ -182,6 +184,44 @@ internal readonly record struct CommandResult
         BusinessLogicFullyQualifiedName = commandIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
         BusinessLogicDelegateName = commandIntermediateResult.BusinessLogicResult!.DelegateName;
         BusinessLogicParameters = new(commandIntermediateResult.BusinessLogicResult!.Parameters);
+    }
+
+    #endregion
+
+    #region Public Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public bool Equals(IResult other)
+    {
+        return other is CommandResult result &&
+               ClassName == result.ClassName &&
+               ClassNamespace == result.ClassNamespace &&
+               ModelName == result.ModelName &&
+               ModelPluralName == result.ModelPluralName &&
+               ModelFullyQualifiedName == result.ModelFullyQualifiedName &&
+               OperationType == result.OperationType &&
+               ModelProperties == result.ModelProperties &&
+               ModelIdPropertyName == result.ModelIdPropertyName &&
+               ModelIdPropertyType == result.ModelIdPropertyType &&
+               ModelIdUnderlyingPropertyType == result.ModelIdUnderlyingPropertyType &&
+               RequestName == result.RequestName &&
+               RequestFullyQualifiedName == result.RequestFullyQualifiedName &&
+               WithRequestMappingService == result.WithRequestMappingService &&
+               RequestProperties == result.RequestProperties &&
+               ResponseName == result.ResponseName &&
+               ResponseFullyQualifiedName == result.ResponseFullyQualifiedName &&
+               WithResponseMappingService == result.WithResponseMappingService &&
+               ResponseProperties == result.ResponseProperties &&
+               Services == result.Services &&
+               Version == result.Version &&
+               KeyedServices == result.KeyedServices &&
+               BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
+               BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
+               BusinessLogicParameters == result.BusinessLogicParameters;
     }
 
     #endregion

@@ -8,8 +8,7 @@ using QuickStartApi.V1.Services;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.AddMinimalApiGenFramework();
-builder.AddCommandMappingServices();
-builder.AddQueryMappingServices();
+builder.AddMappingServices();
 
 builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
 builder.Services.AddScoped<IQueryBusinessLogicV1, QueryBusinessLogicV1>();
@@ -17,8 +16,7 @@ builder.Services.AddScoped<SampleService1>();
 builder.Services.AddScoped<SampleService2>();
 
 WebApplication webApplication = builder.Build();
-webApplication.UseCommandRouteMaps();
-webApplication.UseQueryRouteMaps();
+webApplication.UseRouteMaps();
 
 if (webApplication.Environment.IsDevelopment())
 {

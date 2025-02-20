@@ -10,7 +10,7 @@ namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 /// 
 /// </summary>
 /// <param name="commandResult"></param>
-internal sealed class CommandRequestMappingServiceBuilder(CommandResult commandResult)
+internal sealed class CommandRequestMappingServiceBuilder(ICommandResult commandResult)
 {
     #region Property Declarations
 
@@ -32,7 +32,7 @@ internal sealed class CommandRequestMappingServiceBuilder(CommandResult commandR
     /// <summary>
     /// 
     /// </summary>
-    public string OperationName { get; } = commandResult.CommandType.ToString();
+    public string OperationName { get; } = commandResult.OperationType.ToString();
 
     /// <summary>
     /// 

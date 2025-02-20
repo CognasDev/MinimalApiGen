@@ -4,6 +4,7 @@ using MinimalApiGen.Generators.Generation.Query;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 using Moq;
 
 namespace MinimalApiGen.Generators.Tests.Query.Fluent;
@@ -30,7 +31,7 @@ public sealed class QueryIntermediateResultExtensionsTests
         };
 
         // Act
-        QueryIntermediateResult result = queryInvocationDetails.InitialiseQueryIntermediateResult(It.IsAny<QueryType>());
+        QueryIntermediateResult result = queryInvocationDetails.InitialiseQueryIntermediateResult(It.IsAny<OperationType>());
 
         // Assert
         result.ModelName.Should().Be("Model");
@@ -51,7 +52,7 @@ public sealed class QueryIntermediateResultExtensionsTests
             ModelName = "Model",
             ModelPluralName = "Models",
             ModelFullyQualifiedName = "Namespace.Model",
-            QueryType = QueryType.Get
+            OperationType = OperationType.Get
         };
 
         // Act

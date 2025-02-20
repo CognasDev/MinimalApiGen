@@ -6,7 +6,7 @@ namespace QuickStartApi.V1.Query;
 /// <summary>
 /// 
 /// </summary>
-[QueryGenerator]
+[ApiGenerator]
 public sealed class QueryGeneratorV1
 {
     #region Constructor Declarations

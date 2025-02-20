@@ -1,4 +1,5 @@
-﻿using MinimalApiGen.Generators.Generation.Shared.Results;
+﻿using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Command.Results;
@@ -28,7 +29,7 @@ internal sealed record CommandIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public required CommandType CommandType { get; init; }
+    public required OperationType CommandType { get; init; }
 
     /// <summary>
     /// 

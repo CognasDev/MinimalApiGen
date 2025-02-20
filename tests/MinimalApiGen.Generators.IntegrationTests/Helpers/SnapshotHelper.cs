@@ -21,12 +21,7 @@ public static class SnapshotHelper
     {
         IEnumerable<PortableExecutableReference> references = ReferencesBuilder.Build();
         CSharpCompilation compilation = CompilationBuilder.Build(source, references);
-        IIncrementalGenerator generator = generatorType switch
-        {
-            GeneratorType.Command => new Command.Generator(),
-            GeneratorType.Query => new Query.Generator(),
-            _ => throw new NotSupportedException()
-        };
+        IIncrementalGenerator generator = new ApiGenerator.Generator();
         CSharpGeneratorDriver csharpDriver = CSharpGeneratorDriver.Create(generator);
         GeneratorDriver driver = csharpDriver.RunGenerators(compilation);
 

@@ -1,11 +1,13 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 
 namespace MinimalApiGen.Generators.Generation.Query.Results;
 
 /// <summary>
 /// 
 /// </summary>
-internal readonly record struct QueryResult
+internal readonly record struct QueryResult : IQueryResult
 {
     #region Property Declarations - Model Details
 
@@ -37,7 +39,7 @@ internal readonly record struct QueryResult
     /// <summary>
     /// 
     /// </summary>
-    public QueryType QueryType { get; }
+    public OperationType OperationType { get; }
 
     /// <summary>
     /// 
@@ -81,7 +83,7 @@ internal readonly record struct QueryResult
     /// <summary>
     /// 
     /// </summary>
-    public bool WithMappingService { get; }
+    public bool WithResponseMappingService { get; }
 
     /// <summary>
     /// 
@@ -150,12 +152,12 @@ internal readonly record struct QueryResult
         ModelIdPropertyName = queryIntermediateResult.ModelIdPropertyResult.PropertyName;
         ModelIdPropertyType = queryIntermediateResult.ModelIdPropertyResult.PropertyType;
         ModelIdUnderlyingPropertyType = queryIntermediateResult.ModelIdPropertyResult.UnderlyingType;
-        QueryType = queryIntermediateResult.QueryType;
+        OperationType = queryIntermediateResult.OperationType;
 
         ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
         ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
         WithPagination = queryIntermediateResult.WithPagination;
-        WithMappingService = queryIntermediateResult.WithMappingService;
+        WithResponseMappingService = queryIntermediateResult.WithResponseMappingService;
         ResponseProperties = new(queryIntermediateResult.ResponseResult.PropertyNames);
         CachedFor = queryIntermediateResult.CachedFor;
 
@@ -166,6 +168,42 @@ internal readonly record struct QueryResult
         BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
         BusinessLogicDelegateName = queryIntermediateResult.BusinessLogicResult!.DelegateName;
         BusinessLogicParameters = new(queryIntermediateResult.BusinessLogicResult!.Parameters);
+    }
+
+    #endregion
+
+    #region Public Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public bool Equals(IResult other)
+    {
+        return other is QueryResult result &&
+               ClassName == result.ClassName &&
+               ClassNamespace == result.ClassNamespace &&
+               ModelName == result.ModelName &&
+               ModelPluralName == result.ModelPluralName &&
+               ModelFullyQualifiedName == result.ModelFullyQualifiedName &&
+               OperationType == result.OperationType &&
+               ModelProperties.Equals(result.ModelProperties) &&
+               ModelIdPropertyName == result.ModelIdPropertyName &&
+               ModelIdPropertyType == result.ModelIdPropertyType &&
+               ModelIdUnderlyingPropertyType == result.ModelIdUnderlyingPropertyType &&
+               ResponseName == result.ResponseName &&
+               ResponseFullyQualifiedName == result.ResponseFullyQualifiedName &&
+               WithPagination == result.WithPagination &&
+               WithResponseMappingService == result.WithResponseMappingService &&
+               ResponseProperties.Equals(result.ResponseProperties) &&
+               CachedFor == result.CachedFor &&
+               Services.Equals(result.Services) &&
+               Version == result.Version &&
+               KeyedServices.Equals(result.KeyedServices) &&
+               BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
+               BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
+               BusinessLogicParameters.Equals(result.BusinessLogicParameters);
     }
 
     #endregion
