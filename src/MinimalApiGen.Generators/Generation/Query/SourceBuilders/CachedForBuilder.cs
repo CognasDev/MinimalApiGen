@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed class CachedForBuilder
+public static class CachedForBuilder
 {
     #region Public Method Declarations
 
@@ -12,7 +12,7 @@ public sealed class CachedForBuilder
     /// </summary>
     /// <param name="timeSpan"></param>
     /// <returns></returns>
-    public string Build(string? timeSpan)
+    public static string Build(string? timeSpan)
     {
         if (string.IsNullOrWhiteSpace(timeSpan))
         {

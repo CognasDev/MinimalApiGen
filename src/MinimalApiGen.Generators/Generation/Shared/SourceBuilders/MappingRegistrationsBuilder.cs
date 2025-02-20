@@ -1,9 +1,9 @@
-﻿namespace MinimalApiGen.Generators.Generation.Query.SourceBuilders;
+﻿namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 
 /// <summary>
 /// 
 /// </summary>
-internal static class QueryMappingRegistrationsBuilder
+internal static class MappingRegistrationsBuilder
 {
     #region Public Method Declarations
 
@@ -20,13 +20,13 @@ namespace MinimalApiGen.Framework.Generation;
 /// <summary>
 /// 
 /// </summary>
-public static class QueryMappingRegistrations
+public static class MappingRegistrations
 {{
     /// <summary>
     /// 
     /// </summary>
     /// <param name=""builder""></param>
-    public static void AddQueryMappingServices(this WebApplicationBuilder builder)
+    public static void AddMappingServices(this WebApplicationBuilder builder)
     {{
 {registrations}
     }}

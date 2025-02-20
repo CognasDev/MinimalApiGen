@@ -14,9 +14,8 @@ namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 /// 
 /// </summary>
 /// <param name="commandResult"></param>
-/// <param name="apiVersion"></param>
 /// <param name="servicesBuilder"></param>
-internal sealed class MapPostBuilder(ICommandResult commandResult, int apiVersion, ServicesBuilder servicesBuilder)
+internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuilder servicesBuilder)
 {
     #region Property Declarations
 
@@ -33,7 +32,7 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, int apiVersio
     /// <summary>
     /// 
     /// </summary>
-    public int ApiVersion { get; } = apiVersion;
+    public int ApiVersion { get; } = commandResult.ApiVersion;
 
     /// <summary>
     /// 

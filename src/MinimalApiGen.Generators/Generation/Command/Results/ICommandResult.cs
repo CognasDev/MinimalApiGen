@@ -8,7 +8,7 @@ namespace MinimalApiGen.Generators.Generation.Command.Results;
 /// </summary>
 internal interface ICommandResult : IResult
 {
-    #region Property Declarations - Request Details
+    #region Property Declarations
 
     /// <summary>
     /// 

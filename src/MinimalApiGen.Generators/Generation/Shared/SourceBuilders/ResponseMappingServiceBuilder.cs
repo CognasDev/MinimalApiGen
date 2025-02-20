@@ -37,7 +37,7 @@ internal sealed class ResponseMappingServiceBuilder(IResult result)
     /// <summary>
     /// 
     /// </summary>
-    public int Version { get; } = result.Version;
+    public int Version { get; } = result.ApiVersion;
 
     /// <summary>
     /// 

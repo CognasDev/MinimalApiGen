@@ -121,7 +121,7 @@ internal readonly record struct CommandResult : ICommandResult
     /// <summary>
     /// 
     /// </summary>
-    public int Version { get; }
+    public int ApiVersion { get; }
 
     /// <summary>
     /// 
@@ -178,7 +178,7 @@ internal readonly record struct CommandResult : ICommandResult
         ResponseProperties = new(commandIntermediateResult.ResponseResult.PropertyNames);
 
         Services = new(commandIntermediateResult.Services);
-        Version = commandIntermediateResult.Version;
+        ApiVersion = commandIntermediateResult.Version;
         KeyedServices = new(commandIntermediateResult.KeyedServices);
 
         BusinessLogicFullyQualifiedName = commandIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
@@ -217,7 +217,7 @@ internal readonly record struct CommandResult : ICommandResult
                WithResponseMappingService == result.WithResponseMappingService &&
                ResponseProperties == result.ResponseProperties &&
                Services == result.Services &&
-               Version == result.Version &&
+               ApiVersion == result.ApiVersion &&
                KeyedServices == result.KeyedServices &&
                BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
                BusinessLogicDelegateName == result.BusinessLogicDelegateName &&

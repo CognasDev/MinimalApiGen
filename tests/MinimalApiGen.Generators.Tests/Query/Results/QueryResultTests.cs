@@ -57,7 +57,7 @@ public sealed class QueryResultTests
         queryResult.ResponseFullyQualifiedName.Should().Be("Namespace.TestResponse");
         queryResult.WithPagination.Should().BeTrue();
         queryResult.Services.Should().BeEquivalentTo(new EquatableArray<string>(["Service1", "Service2"]));
-        queryResult.Version.Should().Be(2);
+        queryResult.ApiVersion.Should().Be(2);
         queryResult.KeyedServices.Should().BeEquivalentTo(new EquatableDictionary<string, string>(new Dictionary<string, string> { ["Key1"] = "Value1", ["Key2"] = "Value2" }));
         queryResult.BusinessLogicFullyQualifiedName.Should().Be("Namespace.BusinessLogic");
         queryResult.BusinessLogicDelegateName.Should().Be("BusinessLogicDelegate");

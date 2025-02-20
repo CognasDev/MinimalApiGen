@@ -91,7 +91,7 @@ internal interface IResult : IEquatable<IResult>
     /// <summary>
     /// 
     /// </summary>
-    int Version { get; }
+    int ApiVersion { get; }
 
     /// <summary>
     /// 
