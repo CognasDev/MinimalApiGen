@@ -87,7 +87,7 @@ internal sealed class SourceOutputExecutor
         }
 
         ReadOnlySpan<RouteMappingResult> endpointRouteMappings = GetEndpointRouteMappings(results);
-        string mappingExtension = CommandMappingExtensionBuilder.Build(endpointRouteMappings);
+        string mappingExtension = MappingExtensionsBuilder.Build(endpointRouteMappings);
         context.AddSource($"EndpointRouteMappingExtension.g.cs", mappingExtension);
 
         string registrations = registrationsBuilder.ToString();
