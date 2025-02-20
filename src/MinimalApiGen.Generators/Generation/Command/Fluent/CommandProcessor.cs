@@ -1,5 +1,4 @@
 ﻿using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Command.FluentHandlers;
 using MinimalApiGen.Generators.Generation.Command.Results;
@@ -10,7 +9,6 @@ using MinimalApiGen.Generators.Generation.Shared.Results;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 
 namespace MinimalApiGen.Generators.Generation.Command.Fluent;
 

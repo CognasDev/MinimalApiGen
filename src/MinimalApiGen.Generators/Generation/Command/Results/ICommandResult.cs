@@ -1,6 +1,5 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Shared.Results;
-using System;
 
 namespace MinimalApiGen.Generators.Generation.Command.Results;
 
