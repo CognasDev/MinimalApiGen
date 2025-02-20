@@ -91,8 +91,11 @@ internal sealed class SourceOutputExecutor
         context.AddSource($"EndpointRouteMappingExtension.g.cs", mappingExtension);
 
         string registrations = registrationsBuilder.ToString();
-        string registrationsSource = MappingRegistrationsBuilder.Build(registrations);
-        context.AddSource($"MappingRegistrations.g.cs", registrationsSource);
+        if (!string.IsNullOrEmpty(registrations))
+        {
+            string registrationsSource = MappingRegistrationsBuilder.Build(registrations);
+            context.AddSource($"MappingRegistrations.g.cs", registrationsSource);
+        }
     }
 
     #endregion
