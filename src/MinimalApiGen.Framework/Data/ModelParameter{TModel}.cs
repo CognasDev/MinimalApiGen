@@ -39,7 +39,7 @@ public sealed class ModelParameter<TModel> : IModelParameter<TModel> where TMode
 
     #endregion
 
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="ModelParameter{TModel}"/>

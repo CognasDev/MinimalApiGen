@@ -8,17 +8,6 @@ namespace MinimalApiGen.Framework.Data;
 /// </summary>
 public sealed class DatabaseTransactionService : IDatabaseTransactionService
 {
-    #region Constructor / Finaliser Declarations
-
-    /// <summary>
-    /// Default constructor for <see cref="DatabaseTransactionService"/>
-    /// </summary>
-    public DatabaseTransactionService()
-    {
-    }
-
-    #endregion
-
     #region Public Method Declarations
 
     /// <summary>

@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Albums;
 /// </summary>
 public sealed class AlbumRequestValidator : AbstractValidator<AlbumRequest>
 {
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="AlbumRequestValidator"/>

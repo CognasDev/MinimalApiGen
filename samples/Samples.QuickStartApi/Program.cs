@@ -7,7 +7,7 @@ using Samples.QuickStartApi.V1.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.AddMinimalApiGenFramework();
+builder.AddMinimalApiFramework();
 builder.AddMappingServices();
 
 builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
@@ -23,6 +23,6 @@ if (webApplication.Environment.IsDevelopment())
     webApplication.AddSwagger();
 }
 
-webApplication.UseMinimalApiGenFramework();
+webApplication.UseMinimalApiFramework();
 webApplication.UseHttpsRedirection();
 webApplication.Run();

@@ -15,7 +15,7 @@ public sealed class DatabaseConnectionFactory : IDatabaseConnectionFactory
 
     #endregion
 
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="DatabaseConnectionFactory"/>

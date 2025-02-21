@@ -38,11 +38,12 @@
 	<Import Project="..\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems" Label="Shared" />
 	<Import Project="..\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems" Label="Shared" />
 
-	<!--Nuget package configuration-->
 	<ItemGroup>
 		<None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 		<None Include="$(PKGSystem_Text_Json)\lib\netstandard2.0\System.Text.Json.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
 	</ItemGroup>
+
+	<!--Nuget package configuration-->
 	<PropertyGroup>
 		<Version>$(VersionPrefix)0.0.9-alpha</Version>
 		<Title>MinimalApiGen.Generators</Title>

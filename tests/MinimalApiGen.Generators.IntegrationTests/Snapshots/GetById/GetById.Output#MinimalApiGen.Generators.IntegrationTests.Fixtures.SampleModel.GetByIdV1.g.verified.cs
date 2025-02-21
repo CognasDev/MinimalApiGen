@@ -48,7 +48,7 @@ public partial class SampleModelQueryRouteEndpointsMapper
         )
         .WithName("SampleModels-GetById-V1")
         .WithTags("samplemodels")
-        .WithOpenApi(operation => new(operation) { Summary = "Gets a single model of SampleModel by the id, mapped to a SampleModelResponse response." })
+        .WithOpenApi(operation => new(operation) { Summary = "Gets a single model of a SampleModel by the id, mapped to a SampleModelResponse response." })
         .MapToApiVersion(1)
         .Produces<SampleModelResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)

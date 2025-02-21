@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Genres;
 /// </summary>
 public sealed class GenreRequestValidator : AbstractValidator<GenreRequest>
 {
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="GenreRequestValidator"/>

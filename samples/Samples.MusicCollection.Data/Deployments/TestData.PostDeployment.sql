@@ -1,0 +1,13 @@
+﻿:r "..\Resets\Tracks.Reset.sql"
+:r "..\Resets\Keys.Reset.sql"
+:r "..\Resets\Albums.Reset.sql"
+:r "..\Resets\Labels.Reset.sql"
+:r "..\Resets\Genres.Reset.sql"
+:r "..\Resets\Artists.Reset.sql"
+
+:r "..\Test Data\Genres.sql"
+:r "..\Test Data\Artists.sql"
+:r "..\Test Data\Labels.sql"
+:r "..\Test Data\Albums.sql"
+:r "..\Test Data\Keys.sql"
+:r "..\Test Data\Tracks.sql"

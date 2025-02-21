@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Labels;
 /// </summary>
 public sealed class LabelRequestValidator : AbstractValidator<LabelRequest>
 {
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="LabelRequestValidator"/>

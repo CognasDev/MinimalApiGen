@@ -33,7 +33,7 @@ public sealed class Pluralizer : IPluralizer
         {
             return word;
         }
-        if (_irregularSingles.TryGetValue(word, out string token))
+        if (_irregularSingles.TryGetValue(word, out string? token))
         {
             return RestoreCase(word, token);
         }

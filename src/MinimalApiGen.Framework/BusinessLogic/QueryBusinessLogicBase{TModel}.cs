@@ -29,7 +29,7 @@ public abstract class QueryBusinessLogicBase<TModel>  where TModel : class
 
     #endregion
 
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="QueryBusinessLogicBase{TModel}"/>

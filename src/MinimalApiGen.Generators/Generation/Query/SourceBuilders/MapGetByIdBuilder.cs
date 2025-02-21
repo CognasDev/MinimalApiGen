@@ -176,7 +176,7 @@ public partial class {ClassName}
         )
         .WithName(""{RouteNameFactory.GetById(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName} by the id, mapped to a {ResponseName} response."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName.GetIndefiniteArticle()} {ModelName} by the id, mapped to {ResponseName.GetIndefiniteArticle()} {ResponseName} response."" }})
         .MapToApiVersion({ApiVersion})
         .Produces<{ResponseName}>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
@@ -202,6 +202,11 @@ public partial class {ClassName}
                                                   EquatableDictionary<string, string> keyedServices,
                                                   string modelIdPropertyType)
     {
+        if (businessLogicParameters.Count == 0)
+        {
+            return string.Empty;
+        }
+
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
         ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.AsSpan();

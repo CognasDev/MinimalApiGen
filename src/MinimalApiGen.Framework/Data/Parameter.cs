@@ -19,7 +19,7 @@ public sealed record Parameter : IParameter
 
     #endregion
 
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="Parameter"/>

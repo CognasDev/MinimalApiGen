@@ -1,0 +1,1 @@
+﻿CREATE TYPE [dbo].[IdsParameterTable] AS TABLE ([Id] INT PRIMARY KEY NOT NULL);

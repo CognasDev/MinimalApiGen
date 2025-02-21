@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Keys]
+(
+	[KeyId] INT NOT NULL IDENTITY,
+    [CamelotCode] VARCHAR(3) NOT NULL,
+    [Name] VARCHAR(250) NOT NULL, 
+    CONSTRAINT [PK_Keys] PRIMARY KEY ([KeyId])
+)
