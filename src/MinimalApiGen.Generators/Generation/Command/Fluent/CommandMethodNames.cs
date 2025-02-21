@@ -1,5 +1,6 @@
 ﻿using MinimalApiGen.Generators.Abstractions.Command;
 using MinimalApiGen.Generators.Abstractions.Command.Post;
+using MinimalApiGen.Generators.Abstractions.Command.Put;
 using MinimalApiGen.Generators.Abstractions.Command.Shared;
 
 namespace MinimalApiGen.Generators.Generation.Command.Fluent;
@@ -40,6 +41,16 @@ internal static class CommandMethodNames
     /// </summary>
     public static string WithModelId { get; } = $"{typeof(ICommandWithModelId<>).Namespace}.{typeof(ICommandWithModelId<>).Name.Split('`')[0]}.{nameof(ICommandWithModelId<object>.WithModelId)}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithRequestMappingService { get; } = $"{typeof(IRequestMappingService).FullName}.{nameof(IRequestMappingService.WithRequestMappingService)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithResponseMappingService { get; } = $"{typeof(IResponseMappingService).FullName}.{nameof(IResponseMappingService.WithResponseMappingService)}";
+
     #endregion
 
     #region Property Declarations - Post
@@ -72,21 +83,42 @@ internal static class CommandMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithRequestMappingService { get; } = $"{typeof(IRequestMappingService).FullName}.{nameof(IRequestMappingService.WithRequestMappingService)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static string WithPostResponse { get; } = $"{typeof(IPostResponse).FullName}.{nameof(IPostResponse.WithResponse)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string WithResponseMappingService { get; } = $"{typeof(IResponseMappingService).FullName}.{nameof(IResponseMappingService.WithResponseMappingService)}";
 
     #endregion
 
     #region Property Declarations - Put
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPut { get; } = $"{typeof(ICommandOperations).FullName}.{nameof(ICommandOperations.WithPut)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutBusinessLogic { get; } = $"{typeof(IWithPutOperation).FullName}.{nameof(IWithPutOperation.WithBusinessLogic)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutServices { get; } = $"{typeof(IPutServices).FullName}.{nameof(IPutServices.WithServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutKeyedServices { get; } = $"{typeof(IPutKeyedServices).FullName}.{nameof(IPutKeyedServices.WithKeyedServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutRequest { get; } = $"{typeof(IPutRequest).FullName}.{nameof(IPutRequest.WithRequest)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutResponse { get; } = $"{typeof(IPutResponse).FullName}.{nameof(IPutResponse.WithResponse)}";
+
     #endregion
 
     #region Property Declarations - Delete

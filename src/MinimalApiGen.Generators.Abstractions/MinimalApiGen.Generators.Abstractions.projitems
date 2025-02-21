@@ -12,6 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IPutRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithResponseMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithRequestMappingService.cs" />

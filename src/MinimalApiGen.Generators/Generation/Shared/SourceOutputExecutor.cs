@@ -180,7 +180,9 @@ internal sealed class SourceOutputExecutor
     /// <param name="servicesBuilder"></param>
     private static void AddPutGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder)
     {
-        throw new NotImplementedException();
+        MapPutBuilder builder = new(commandResult, servicesBuilder);
+        string mapPut = builder.Build();
+        context.AddSource($"{commandResult.ModelFullyQualifiedName}.PutV{commandResult.ApiVersion}.g.cs", mapPut);
     }
 
     /// <summary>
