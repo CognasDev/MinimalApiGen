@@ -1,0 +1,44 @@
+@Samples.MusicCollection.Api_HostAddress = https://localhost:7104
+
+### GET all artists - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists
+Accept: application/json
+
+### GET artists with pagination - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists?pageSize=2&pageNumber=1&orderBy=name&orderByAscending=true
+Accept: application/json
+
+### GET artists with malformed pagination - 400
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists?pageSize=2&pageNumber=1
+Accept: application/json
+
+### GET a artist by Id that exists - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/1
+Accept: application/json
+
+### GET a artist by Id that does not exist - 404
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/0
+Accept: application/json
+
+### POST a new artist - 201
+POST {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/
+Content-Type: application/json
+
+{
+    "name" : "test"
+}
+
+### PUT an existing artist - 200
+PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/5
+Content-Type: application/json
+
+{
+    "artistId" : 5,
+    "name" : "updated"
+}
+
+### DELETE a artist that exists
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/5
+
+### DELETE a artist that does not exist
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/0

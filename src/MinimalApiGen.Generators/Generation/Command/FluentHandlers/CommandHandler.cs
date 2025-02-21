@@ -1,8 +1,8 @@
 ﻿using Microsoft.CodeAnalysis;
+using MinimalApiGen.Framework.Pluralize;
 using MinimalApiGen.Generators.Generation.Command.Fluent;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
-using MinimalApiGen.Generators.Pluralize;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;

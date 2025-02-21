@@ -1,0 +1,44 @@
+@Samples.MusicCollection.Api_HostAddress = https://localhost:7104
+
+### GET all labels - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels
+Accept: application/json
+
+### GET labels with pagination - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels?pageSize=2&pageNumber=1&orderBy=name&orderByAscending=true
+Accept: application/json
+
+### GET labels with malformed pagination - 400
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels?pageSize=2&pageNumber=1
+Accept: application/json
+
+### GET a label by Id that exists - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels/1
+Accept: application/json
+
+### GET a label by Id that does not exist - 404
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels/0
+Accept: application/json
+
+### POST a new label - 201
+POST {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels/
+Content-Type: application/json
+
+{
+    "name" : "test"
+}
+
+### PUT an existing label - 200
+PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels/5
+Content-Type: application/json
+
+{
+    "labelId" : 5,
+    "name" : "updated"
+}
+
+### DELETE a label that exists
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels/5
+
+### DELETE a label that does not exist
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/labels/0

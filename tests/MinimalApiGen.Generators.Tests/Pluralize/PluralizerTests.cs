@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using MinimalApiGen.Generators.Pluralize;
+using MinimalApiGen.Framework.Pluralize;
 
 namespace MinimalApiGen.Generators.Tests.Pluralize;
 
