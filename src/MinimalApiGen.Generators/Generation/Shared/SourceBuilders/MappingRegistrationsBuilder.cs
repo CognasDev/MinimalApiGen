@@ -26,7 +26,7 @@ public static class MappingRegistrations
     /// 
     /// </summary>
     /// <param name=""builder""></param>
-    public static void AddMappingServices(this WebApplicationBuilder builder)
+    public static void AddMinimalApiFramewokMappingServices(this WebApplicationBuilder builder)
     {{
 {registrations}
     }}

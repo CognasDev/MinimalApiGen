@@ -24,7 +24,7 @@ internal static class WithBusinessLogicHandler
         ITypeSymbol businessLogicTypeSymbol = fluentInvocation.GetSingleGenericArgument();
         SimpleLambdaExpressionSyntax lambdaExpression = (SimpleLambdaExpressionSyntax)fluentInvocation.GetSingleArgumentExpression();
         string delegateName = lambdaExpression.ExpressionBody?.TryGetInferredMemberName() ?? throw new NullReferenceException();
-        IMethodSymbol methodSymbol = businessLogicTypeSymbol.GetMembers().OfType<IMethodSymbol>().Single(method => method.Name == delegateName);
+        IMethodSymbol methodSymbol = businessLogicTypeSymbol.GetAllMembers().OfType<IMethodSymbol>().Single(method => method.Name == delegateName);
         IEnumerable<string> parameters = methodSymbol.Parameters.Select(parameter => parameter.Type.ToDisplayString());
         BusinessLogicResult result = new()
         {

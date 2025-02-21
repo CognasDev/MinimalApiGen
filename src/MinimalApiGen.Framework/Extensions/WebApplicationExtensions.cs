@@ -13,7 +13,7 @@ public static class WebApplicationExtensions
     /// 
     /// </summary>
     /// <param name="webApplication"></param>
-    public static void UseMinimalApiGenFramework(this WebApplication webApplication)
+    public static void UseMinimalApiFramework(this WebApplication webApplication)
     {
         webApplication.UseOutputCache();
     }

@@ -202,6 +202,11 @@ public partial class {ClassName}
                                                   EquatableArray<string> services,
                                                   EquatableDictionary<string, string> keyedServices)
     {
+        if (businessLogicParameters.Count == 0)
+        {
+            return string.Empty;
+        }
+
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
         ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.AsSpan();

@@ -1,0 +1,44 @@
+@Samples.MusicCollection.Api_HostAddress = https://localhost:7104
+
+### GET all tracks - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks
+Accept: application/json
+
+### GET tracks with pagination - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks?pageSize=2&pageNumber=1&orderBy=name&orderByAscending=true
+Accept: application/json
+
+### GET tracks with malformed pagination - 400
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks?pageSize=2&pageNumber=1
+Accept: application/json
+
+### GET a track by Id that exists - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks/1
+Accept: application/json
+
+### GET a track by Id that does not exist - 404
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks/0
+Accept: application/json
+
+### POST a new track - 201
+POST {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks/
+Content-Type: application/json
+
+{
+    "name" : "test"
+}
+
+### PUT an existing track - 200
+PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks/5
+Content-Type: application/json
+
+{
+    "trackId" : 5,
+    "name" : "updated"
+}
+
+### DELETE a track that exists
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks/5
+
+### DELETE a track that does not exist
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/tracks/0

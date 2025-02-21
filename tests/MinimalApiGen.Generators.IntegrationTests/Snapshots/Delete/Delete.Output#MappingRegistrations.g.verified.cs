@@ -12,7 +12,7 @@ public static class MappingRegistrations
     /// 
     /// </summary>
     /// <param name="builder"></param>
-    public static void AddMappingServices(this WebApplicationBuilder builder)
+    public static void AddMinimalApiFramewokMappingServices(this WebApplicationBuilder builder)
     {
 		builder.Services.AddSingleton<IMappingService<MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelRequest, MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel>, TestNamespace.DeleteSampleModelRequestToSampleModelMappingServiceV1>();
 

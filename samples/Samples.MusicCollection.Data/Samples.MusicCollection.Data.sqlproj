@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Samples.MusicCollection.Data</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{74fcf198-332c-4d19-9d44-14fbcc75b430}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>SampleDatabase.Scripts</RootNamespace>
+    <AssemblyName>SampleDatabase.Scripts</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Stored Procedures" />
+    <Folder Include="Types" />
+    <Folder Include="Test Data" />
+    <Folder Include="Deployments" />
+    <Folder Include="Stored Procedures\Albums" />
+    <Folder Include="Stored Procedures\Genres" />
+    <Folder Include="Resets" />
+    <Folder Include="Stored Procedures\Artists" />
+    <Folder Include="Stored Procedures\Tracks" />
+    <Folder Include="Stored Procedures\Labels" />
+    <Folder Include="Stored Procedures\Keys" />
+    <Folder Include="Stored Procedures\- ETL and Reporting" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Albums.sql" />
+    <Build Include="Tables\Artists.sql" />
+    <Build Include="Tables\Genres.sql" />
+    <None Include="Test Data\Artists.sql" />
+    <None Include="Test Data\Genres.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_Delete.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_Insert.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_Select.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_SelectById.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_Update.sql" />
+    <Build Include="Stored Procedures\Genres\Genres_Delete.sql" />
+    <Build Include="Stored Procedures\Genres\Genres_Insert.sql" />
+    <Build Include="Stored Procedures\Genres\Genres_Select.sql" />
+    <Build Include="Stored Procedures\Genres\Genres_SelectById.sql" />
+    <Build Include="Stored Procedures\Genres\Genres_Update.sql" />
+    <Build Include="Types\IdsParameterTable.sql" />
+    <None Include="Resets\Genres.Reset.sql" />
+    <None Include="Resets\Artists.Reset.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_SelectByGenreIds.sql" />
+    <Build Include="Stored Procedures\Artists\Artists_Delete.sql" />
+    <Build Include="Stored Procedures\Artists\Artists_Insert.sql" />
+    <Build Include="Stored Procedures\Artists\Artists_Select.sql" />
+    <Build Include="Stored Procedures\Artists\Artists_SelectById.sql" />
+    <Build Include="Stored Procedures\Artists\Artists_Update.sql" />
+    <Build Include="Tables\Tracks.sql" />
+    <Build Include="Stored Procedures\Tracks\Tracks_Delete.sql" />
+    <Build Include="Stored Procedures\Tracks\Tracks_Insert.sql" />
+    <Build Include="Stored Procedures\Tracks\Tracks_Select.sql" />
+    <Build Include="Stored Procedures\Tracks\Tracks_SelectById.sql" />
+    <Build Include="Stored Procedures\Tracks\Tracks_Update.sql" />
+    <None Include="Resets\Tracks.Reset.sql" />
+    <None Include="Test Data\Tracks.sql" />
+    <Build Include="Tables\Labels.sql" />
+    <Build Include="Stored Procedures\Labels\Labels_Delete.sql" />
+    <Build Include="Stored Procedures\Labels\Labels_Insert.sql" />
+    <Build Include="Stored Procedures\Labels\Labels_Select.sql" />
+    <Build Include="Stored Procedures\Labels\Labels_SelectById.sql" />
+    <Build Include="Stored Procedures\Labels\Labels_Update.sql" />
+    <None Include="Resets\Labels.Reset.sql" />
+    <None Include="Test Data\Labels.sql" />
+    <Build Include="Tables\Keys.sql" />
+    <None Include="Resets\Keys.Reset.sql" />
+    <Build Include="Stored Procedures\Keys\Keys_Select.sql" />
+    <Build Include="Stored Procedures\Keys\Keys_SelectById.sql" />
+    <None Include="Test Data\Keys.sql" />
+    <Build Include="Stored Procedures\- ETL and Reporting\AllMusic_ArtistAlbums_DetailsAndJSON.sql" />
+    <Build Include="Stored Procedures\- ETL and Reporting\AllMusic_LabelsStats_Pivot.sql" />
+    <Build Include="Stored Procedures\- ETL and Reporting\AllMusic_GenreStatistics.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Samples.MusicCollection.Data.publish.xml" />
+    <None Include="Test Data\Albums.sql" />
+    <None Include="Resets\Albums.Reset.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Deployments\TestData.PostDeployment.sql" />
+  </ItemGroup>
+</Project>

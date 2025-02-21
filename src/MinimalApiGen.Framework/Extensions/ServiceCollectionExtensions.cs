@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
     /// 
     /// </summary>
     /// <param name="builder"></param>
-    public static void AddMinimalApiGenFramework(this WebApplicationBuilder builder)
+    public static void AddMinimalApiFramework(this WebApplicationBuilder builder)
     {
         IServiceCollection serviceCollection = builder.Services;
         serviceCollection.AddVersioning();
