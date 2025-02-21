@@ -49,25 +49,29 @@ internal sealed class CommandProcessor
                 case string name when name == CommandMethodNames.WithModelId:
                     modelIdPropertyResult = invocationInfo.ToModelIdPropertyName(semanticModel);
                     break;
-                case string name when name == CommandMethodNames.WithPostBusinessLogic && fluentMethod.IsGeneric:
+                case string name when (name == CommandMethodNames.WithPostBusinessLogic || name == CommandMethodNames.WithPutBusinessLogic) && fluentMethod.IsGeneric:
                     intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
                     break;
                 case string name when name == CommandMethodNames.WithPost:
                     intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyResult);
                     intermediateResult = invocationResult.InitialiseCommandIntermediateResult(OperationType.Post);
                     break;
-                case string name when name == CommandMethodNames.WithPostServices && fluentMethod.IsGeneric:
+                case string name when name == CommandMethodNames.WithPut:
+                    intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyResult);
+                    intermediateResult = invocationResult.InitialiseCommandIntermediateResult(OperationType.Put);
+                    break;
+                case string name when (name == CommandMethodNames.WithPostServices || name == CommandMethodNames.WithPutServices) && fluentMethod.IsGeneric:
                     IReadOnlyList<string> services = invocationInfo.ToServices();
                     intermediateResult!.Services.AddRange(services);
                     break;
-                case string name when name == CommandMethodNames.WithPostKeyedServices && fluentMethod.IsGeneric:
+                case string name when (name == CommandMethodNames.WithPostKeyedServices || name == CommandMethodNames.WithPutKeyedServices) && fluentMethod.IsGeneric:
                     Dictionary<string, string> keyedServices = invocationInfo.ToKeyedServices(semanticModel);
                     intermediateResult!.KeyedServices.AddRange(keyedServices);
                     break;
-                case string name when name == CommandMethodNames.WithPostRequest && fluentMethod.IsGeneric:
+                case string name when (name == CommandMethodNames.WithPostRequest || name == CommandMethodNames.WithPutRequest) && fluentMethod.IsGeneric:
                     intermediateResult!.RequestResult = invocationInfo.ToRequest();
                     break;
-                case string name when name == CommandMethodNames.WithPostResponse && fluentMethod.IsGeneric:
+                case string name when (name == CommandMethodNames.WithPostResponse || name == CommandMethodNames.WithPutResponse) && fluentMethod.IsGeneric:
                     intermediateResult!.ResponseResult = invocationInfo.ToResponse();
                     break;
                 case string name when name == CommandMethodNames.WithRequestMappingService:

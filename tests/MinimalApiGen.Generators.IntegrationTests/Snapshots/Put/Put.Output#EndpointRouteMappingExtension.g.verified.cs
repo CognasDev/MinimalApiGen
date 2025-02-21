@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿//HintName: EndpointRouteMappingExtension.g.cs
+using Microsoft.AspNetCore.Builder;
 using MinimalApiGen.Framework.Versioning;
 
 namespace MinimalApiGen.Framework.Generation;
@@ -16,13 +17,9 @@ public static partial class EndpointRouteMappingExtension
     {
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
 
-		QuickStartApi.V1.Command.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapper = new();
-		QuickStartApi.V1.Query.SampleModelQueryRouteEndpointsMapper sampleModelQueryRouteEndpointsMapper = new();
+		TestNamespace.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapper = new();
 
-		sampleModelCommandRouteEndpointsMapper.MapPostV1(apiVersionRouteV1);
 		sampleModelCommandRouteEndpointsMapper.MapPutV1(apiVersionRouteV1);
-		sampleModelQueryRouteEndpointsMapper.MapGetV1(apiVersionRouteV1);
-		sampleModelQueryRouteEndpointsMapper.MapGetByIdV1(apiVersionRouteV1);
 
     }
 }

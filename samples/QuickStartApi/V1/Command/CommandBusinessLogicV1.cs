@@ -21,5 +21,17 @@ public sealed class CommandBusinessLogicV1 : ICommandBusinessLogicV1
         return await Task.FromResult<SampleModel?>(postedModel).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<SampleModel?> PutModelAsync(SampleModel model, CancellationToken cancellationToken)
+    {
+        SampleModel postedModel = model with { Name = $"{model.Name} - Put" };
+        return await Task.FromResult<SampleModel?>(postedModel).ConfigureAwait(false);
+    }
+
     #endregion
 }

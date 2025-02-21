@@ -25,6 +25,16 @@ public sealed class CommandGeneratorV1
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithResponseMappingService();
 
+        ApiGeneration.Command<SampleModel>().WithNamespaceOf<CommandGeneratorV1>()
+                                            .WithModelId(model => model.Id)
+                                            .WithPut()
+                                                .WithBusinessLogic<ICommandBusinessLogicV1>(command => command.PutModelAsync)
+                                                .WithRequest<SampleModelRequest>()
+                                                .WithRequestMappingService()
+                                                .WithResponse<SampleModelResponse>()
+                                                .WithResponseMappingService();
+
+
     }
 
     #endregion

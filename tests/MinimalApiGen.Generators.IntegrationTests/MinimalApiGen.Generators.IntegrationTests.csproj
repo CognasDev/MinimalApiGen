@@ -39,7 +39,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Snapshots\" />
 	  <Folder Include="Snapshots\GetAndGetByIdChain\" />
 	  <Folder Include="Snapshots\GetById\" />
 	  <Folder Include="Snapshots\GetMultipleLines\" />
