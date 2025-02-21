@@ -34,6 +34,13 @@ public sealed class CommandGeneratorV1
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithResponseMappingService();
 
+        ApiGeneration.Command<SampleModel>().WithNamespaceOf<CommandGeneratorV1>()
+                                            .WithModelId(model => model.Id)
+                                            .WithDelete()
+                                                .WithBusinessLogic<ICommandBusinessLogicV1>(command => command.DeleteModelAsync)
+                                                .WithRequest<SampleModelRequest>()
+                                                .WithRequestMappingService();
+
 
     }
 

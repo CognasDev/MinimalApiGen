@@ -1,6 +1,7 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -57,12 +58,12 @@ internal sealed class MapPutBuilder(ICommandResult commandResult, ServicesBuilde
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseName { get; } = commandResult.ResponseName;
+    public string ResponseName { get; } = !string.IsNullOrWhiteSpace(commandResult.ResponseName) ? commandResult.ResponseName! : throw new ArgumentNullException(nameof(IResult.ResponseName));
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseFullyQualifiedName { get; } = commandResult.ResponseFullyQualifiedName;
+    public string ResponseFullyQualifiedName { get; } = !string.IsNullOrWhiteSpace(commandResult.ResponseFullyQualifiedName) ? commandResult.ResponseFullyQualifiedName! : throw new ArgumentNullException(nameof(IResult.ResponseFullyQualifiedName));
 
     /// <summary>
     /// 

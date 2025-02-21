@@ -5,6 +5,6 @@ namespace MinimalApiGen.Generators.Abstractions.Command.Delete;
 /// <summary>
 /// 
 /// </summary>
-public interface IWithDeleteWithResponse : IRequestMappingService, IResponseMappingService, IVersion
+public interface IWithDeleteWithRequest : IRequestMappingService, IResponseMappingService, IVersion
 {
 }

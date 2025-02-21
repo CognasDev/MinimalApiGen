@@ -21,6 +21,7 @@ public static partial class EndpointRouteMappingExtension
 
 		sampleModelCommandRouteEndpointsMapper.MapPostV1(apiVersionRouteV1);
 		sampleModelCommandRouteEndpointsMapper.MapPutV1(apiVersionRouteV1);
+		sampleModelCommandRouteEndpointsMapper.MapDeleteV1(apiVersionRouteV1);
 		sampleModelQueryRouteEndpointsMapper.MapGetV1(apiVersionRouteV1);
 		sampleModelQueryRouteEndpointsMapper.MapGetByIdV1(apiVersionRouteV1);
 

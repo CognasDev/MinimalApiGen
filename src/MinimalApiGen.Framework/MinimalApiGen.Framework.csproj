@@ -27,7 +27,7 @@
 
 	<!--Nuget package configuration-->
 	<PropertyGroup>
-		<Version>$(VersionPrefix)0.0.8-alpha</Version>
+		<Version>$(VersionPrefix)0.0.9-alpha</Version>
 		<Title>MinimalApiGen.Framework</Title>
 		<Authors>CognasDev</Authors>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>

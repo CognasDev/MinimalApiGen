@@ -1,7 +1,6 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
-using MinimalApiGen.Generators.Generation.Shared.Results;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 /// </summary>
 /// <param name="commandResult"></param>
 /// <param name="servicesBuilder"></param>
-internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuilder servicesBuilder)
+internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBuilder servicesBuilder)
 {
     #region Property Declarations
 
@@ -54,31 +53,6 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// 
     /// </summary>
     public string ModelFullyQualifiedName { get; } = commandResult.ModelFullyQualifiedName;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ModelIdPropertyName { get; } = commandResult.ModelIdPropertyName;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ModelIdPropertyType { get; } = commandResult.ModelIdPropertyType;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string? ModelIdPropertyNullCheck { get; } = BuildModelIdPropertyNullCheck(commandResult.ModelIdUnderlyingPropertyType);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ResponseName { get; } = !string.IsNullOrWhiteSpace(commandResult.ResponseName) ? commandResult.ResponseName! : throw new ArgumentNullException(nameof(IResult.ResponseName));
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ResponseFullyQualifiedName { get; } = !string.IsNullOrWhiteSpace(commandResult.ResponseFullyQualifiedName) ? commandResult.ResponseFullyQualifiedName! : throw new ArgumentNullException(nameof(IResult.ResponseFullyQualifiedName));
 
     /// <summary>
     /// 
@@ -138,7 +112,6 @@ using System.Net.Mime;
 
 using {ModelName} = {ModelFullyQualifiedName};
 using {RequestName} = {RequestFullyQualifiedName};
-using {ResponseName} = {ResponseFullyQualifiedName};
 
 namespace {ClassNamespace};
 
@@ -152,44 +125,34 @@ public partial class {ClassName}
     /// 
     /// </summary>
     /// <param name=""endpointRouteBuilder""></param>
-    public virtual RouteHandlerBuilder MapPostV{ApiVersion}(IEndpointRouteBuilder endpointRouteBuilder)
+    public virtual RouteHandlerBuilder MapDeleteV{ApiVersion}(IEndpointRouteBuilder endpointRouteBuilder)
     {{
-        return endpointRouteBuilder.MapPost
+        return endpointRouteBuilder.MapDelete
         (
             ""/{ModelPluralNameLower}"",
-            async Task<Results<CreatedAtRoute<{ResponseName}>, BadRequest>>
+            async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] {RequestName} request,
                 [FromServices] {BusinessLogic} businessLogic,
-                [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService,
-                [FromServices] IMappingService<{ModelName}, {ResponseName}> responseMappingService{FromServices}{FromKeyedServices}
+                [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService{FromServices}{FromKeyedServices}
             ) =>
             {{
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
-                ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
 
                 {ModelName} model = requestMappingService.Map(request);
-                {ModelName}? insertedModel = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+                await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
 
-                if (insertedModel is null)
-                {{
-                    return TypedResults.BadRequest();
-                }}
-
-                {ResponseName} response = responseMappingService.Map(insertedModel);
-                string routeName = ""{RouteNameFactory.GetById(ModelPluralName, ApiVersion)}"";
-                {ModelIdPropertyType} newId = insertedModel.{ModelIdPropertyName}{ModelIdPropertyNullCheck};
-                return TypedResults.CreatedAtRoute<{ResponseName}>(response, routeName, new {{id = newId}});
+                return TypedResults.NoContent();
             }}
         )
-        .WithName(""{RouteNameFactory.Post(ModelPluralName, ApiVersion)}"")
+        .WithName(""{RouteNameFactory.Delete(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Posts a {ModelName} via a {RequestName}, mapped to a {ResponseName} response."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Deletes a {ModelName} via a {RequestName}."" }})
         .MapToApiVersion({ApiVersion})
         .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
-        .Produces<{ResponseName}>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)
+        .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
      }}
@@ -246,13 +209,6 @@ public partial class {ClassName}
         string delegateParameters = stringBuilder.ToString();
         return delegateParameters;
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="underlyingType"></param>
-    /// <returns></returns>
-    private static string BuildModelIdPropertyNullCheck(string? underlyingType) => string.IsNullOrEmpty(underlyingType) ? string.Empty : $" ?? throw new {nameof(NullReferenceException)}()";
 
     #endregion
 }

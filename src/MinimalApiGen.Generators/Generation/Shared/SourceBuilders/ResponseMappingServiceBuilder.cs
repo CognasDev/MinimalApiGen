@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using System;
 using System.Linq;
@@ -42,12 +43,12 @@ internal sealed class ResponseMappingServiceBuilder(IResult result)
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseName { get; } = result.ResponseName;
+    public string ResponseName { get; } = !string.IsNullOrWhiteSpace(result.ResponseName) ? result.ResponseName! : throw new ArgumentNullException(nameof(IResult.ResponseName));
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseFullyQualifiedName { get; } = result.ResponseFullyQualifiedName;
+    public string ResponseFullyQualifiedName { get; } = !string.IsNullOrWhiteSpace(result.ResponseFullyQualifiedName) ? result.ResponseFullyQualifiedName! : throw new ArgumentNullException(nameof(IResult.ResponseFullyQualifiedName));
 
     /// <summary>
     /// 

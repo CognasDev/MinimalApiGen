@@ -60,14 +60,14 @@ internal sealed class SourceOutputExecutor
 
             if (queryResult?.WithResponseMappingService == true || commandResult?.WithResponseMappingService == true)
             {
-                string mappingServiceName = BuildMappingServiceName(result.ModelName, result.ResponseName, result.ApiVersion);
+                string mappingServiceName = BuildMappingServiceName(result.ModelName, result.ResponseName!, result.ApiVersion);
                 if (!mappingServiceNames.Contains(mappingServiceName))
                 {
                     mappingServiceNames.Add(mappingServiceName);
                     ResponseMappingServiceBuilder builder = new(result);
                     string mappingService = builder.Build();
                     context.AddSource(mappingServiceName, mappingService);
-                    string registration = BuildMappingServiceRegistration(result.ModelFullyQualifiedName, result.ResponseFullyQualifiedName, result.ClassNamespace, builder.MappingServiceName);
+                    string registration = BuildMappingServiceRegistration(result.ModelFullyQualifiedName, result.ResponseFullyQualifiedName!, result.ClassNamespace, builder.MappingServiceName);
                     registrationsBuilder.AppendLine(registration);
                 }
             }
@@ -193,7 +193,9 @@ internal sealed class SourceOutputExecutor
     /// <param name="servicesBuilder"></param>
     private static void AddDeleteGetSource(SourceProductionContext context, ICommandResult commandResult, ServicesBuilder servicesBuilder)
     {
-        throw new NotImplementedException();
+        MapDeleteBuilder builder = new(commandResult, servicesBuilder);
+        string mapDelete = builder.Build();
+        context.AddSource($"{commandResult.ModelFullyQualifiedName}.DeleteV{commandResult.ApiVersion}.g.cs", mapDelete);
     }
 
     /// <summary>

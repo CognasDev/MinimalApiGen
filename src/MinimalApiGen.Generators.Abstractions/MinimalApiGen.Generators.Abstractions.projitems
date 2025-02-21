@@ -9,6 +9,8 @@
     <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithRequest.cs" />
@@ -19,14 +21,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\ICommandWithRequestMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IResponseMappingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Shared\IRequestMappingService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteKeyedServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteOperation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteOptionals.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithServices.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithKeyedServices.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandRoot{TModel}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandWithModelId{TModel}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostKeyedServices.cs" />

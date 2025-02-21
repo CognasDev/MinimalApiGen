@@ -3,16 +3,16 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IDeleteResponse
+public interface IDeleteRequest
 {
     #region Method Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
+    /// <typeparam name="TRequest"></typeparam>
     /// <returns></returns>
-    IWithDeleteWithResponse WithResponse<TResponse>();
+    IWithDeleteWithRequest WithRequest<TRequest>();
 
     #endregion
 }

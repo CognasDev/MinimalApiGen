@@ -92,12 +92,12 @@ internal readonly record struct CommandResult : ICommandResult
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseName { get; }
+    public string? ResponseName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseFullyQualifiedName { get; }
+    public string? ResponseFullyQualifiedName { get; }
 
     /// <summary>
     /// 
@@ -170,12 +170,12 @@ internal readonly record struct CommandResult : ICommandResult
 
         RequestName = commandIntermediateResult.RequestResult.RequestName;
         RequestFullyQualifiedName = commandIntermediateResult.RequestResult.RequestFullyQualifiedName;
-        ResponseName = commandIntermediateResult.ResponseResult!.ResponseName;
-        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult.ResponseFullyQualifiedName;
+        ResponseName = commandIntermediateResult.ResponseResult?.ResponseName;
+        ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult?.ResponseFullyQualifiedName;
         WithRequestMappingService = commandIntermediateResult.WithRequestMappingService;
         WithResponseMappingService = commandIntermediateResult.WithResponseMappingService;
         RequestProperties = new(commandIntermediateResult.RequestResult.PropertyNames);
-        ResponseProperties = new(commandIntermediateResult.ResponseResult.PropertyNames);
+        ResponseProperties = commandIntermediateResult.ResponseResult is not null ? new(commandIntermediateResult.ResponseResult.PropertyNames) : [];
 
         Services = new(commandIntermediateResult.Services);
         ApiVersion = commandIntermediateResult.Version;
