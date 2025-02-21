@@ -178,7 +178,7 @@ public partial class {ClassName}
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName} by the id, mapped to a {ResponseName} response."" }})
         .MapToApiVersion({ApiVersion})
-        .Produces<IEnumerable<{ResponseName}>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
+        .Produces<{ResponseName}>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status404NotFound)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor};
