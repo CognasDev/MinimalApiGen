@@ -2,16 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
-using Album = Samples.MusicCollection.Api.Albums.Album;
-using AlbumResponse = Samples.MusicCollection.Api.Albums.AlbumResponse;
+using Label = Samples.MusicCollection.Api.Labels.Label;
+using LabelResponse = Samples.MusicCollection.Api.Labels.LabelResponse;
 
-namespace Samples.MusicCollection.Api.Albums;
+namespace Samples.MusicCollection.Api.Labels;
 
 /// <summary>
 /// 
 /// </summary>
 #nullable enable
-public partial class AlbumQueryRouteEndpointsMapper
+public partial class LabelQueryRouteEndpointsMapper
 {
     /// <summary>
     /// 
@@ -21,34 +21,34 @@ public partial class AlbumQueryRouteEndpointsMapper
     {
         return endpointRouteBuilder.MapGet
         (
-            "/albums",
+            "/labels",
             (
                 CancellationToken cancellationToken,
-                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryBusinessLogic businessLogic,
-                [FromServices] IMappingService<Album, AlbumResponse> mappingService
+                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsQueryBusinessLogic businessLogic,
+                [FromServices] IMappingService<Label, LabelResponse> mappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
-                async IAsyncEnumerable<AlbumResponse> AlbumResponseStreamAsync()
+                async IAsyncEnumerable<LabelResponse> LabelResponseStreamAsync()
                 {
-                    IEnumerable<Album> models = await businessLogic.SelectAlbumsAsync().ConfigureAwait(false);
-                    IEnumerable<AlbumResponse> responses = mappingService.Map(models);
+                    IEnumerable<Label> models = await businessLogic.SelectLabelsAsync().ConfigureAwait(false);
+                    IEnumerable<LabelResponse> responses = mappingService.Map(models);
 
-                    foreach (AlbumResponse response in responses)
+                    foreach (LabelResponse response in responses)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         yield return response;
                     }
                 }
-                return AlbumResponseStreamAsync();   
+                return LabelResponseStreamAsync();   
             }
         )
-        .WithName("Albums-Get-V1")
-        .WithTags("albums")
-        .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of Albums mapped to AlbumResponse responses." })
+        .WithName("Labels-Get-V1")
+        .WithTags("labels")
+        .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of Labels mapped to LabelResponse responses." })
         .MapToApiVersion(1)
-        .Produces<IEnumerable<AlbumResponse>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
+        .Produces<IEnumerable<LabelResponse>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
      }

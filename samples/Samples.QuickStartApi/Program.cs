@@ -8,7 +8,7 @@ using Samples.QuickStartApi.V1.Services;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.AddMinimalApiFramework();
-builder.AddMappingServices();
+builder.AddMinimalApiFramewokMappingServices();
 
 builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
 builder.Services.AddScoped<IQueryBusinessLogicV1, QueryBusinessLogicV1>();

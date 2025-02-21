@@ -1,11 +1,11 @@
 ﻿using MinimalApiGen.Framework.Data;
 
-namespace Samples.MusicCollection.Api.Albums;
+namespace Samples.MusicCollection.Api.Labels;
 
 /// <summary>
 /// 
 /// </summary>
-public interface IAlbumQueryBusinessLogic
+public interface ILabelsQueryBusinessLogic
 {
     #region Public Method Declarations
 
@@ -13,14 +13,14 @@ public interface IAlbumQueryBusinessLogic
     /// 
     /// </summary>
     /// <returns></returns>
-    Task<IEnumerable<Album>> SelectAlbumsAsync();
+    Task<IEnumerable<Label>> SelectLabelsAsync();
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<Album?> SelectAlbumAsync(int id);
+    Task<Label?> SelectLabelAsync(int id);
 
     #endregion
 }

@@ -5,11 +5,11 @@ namespace Samples.MusicCollection.Api.Albums;
 /// <summary>
 /// 
 /// </summary>
-public sealed class AlbumQueryBusinessLogic : IAlbumQueryBusinessLogic
+public sealed class AlbumsQueryBusinessLogic : IAlbumsQueryBusinessLogic
 {
     #region Field Declarations
 
-    private readonly ILogger<AlbumQueryBusinessLogic> _logger;
+    private readonly ILogger<AlbumsQueryBusinessLogic> _logger;
     private readonly IQueryDatabaseService _databaseService;
     private readonly string _selectStoredProcedure;
     private readonly string _selectByIdStoredProcedure;
@@ -19,11 +19,11 @@ public sealed class AlbumQueryBusinessLogic : IAlbumQueryBusinessLogic
     #region Constructor Declarations
 
     /// <summary>
-    /// Default constructor for <see cref="AlbumQueryBusinessLogic"/>
+    /// Default constructor for <see cref="AlbumsQueryBusinessLogic"/>
     /// </summary>
     /// <param name="logger"></param>
     /// <param name="databaseService"></param>
-    public AlbumQueryBusinessLogic(ILogger<AlbumQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
+    public AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
     {
         ArgumentNullException.ThrowIfNull(logger, nameof(logger));
         ArgumentNullException.ThrowIfNull(databaseService, nameof(databaseService));

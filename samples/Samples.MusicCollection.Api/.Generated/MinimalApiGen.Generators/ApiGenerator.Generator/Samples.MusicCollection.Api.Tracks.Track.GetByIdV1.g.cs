@@ -3,16 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
-using Album = Samples.MusicCollection.Api.Albums.Album;
-using AlbumResponse = Samples.MusicCollection.Api.Albums.AlbumResponse;
+using Track = Samples.MusicCollection.Api.Tracks.Track;
+using TrackResponse = Samples.MusicCollection.Api.Tracks.TrackResponse;
 
-namespace Samples.MusicCollection.Api.Albums;
+namespace Samples.MusicCollection.Api.Tracks;
 
 /// <summary>
 /// 
 /// </summary>
 #nullable enable
-public partial class AlbumQueryRouteEndpointsMapper
+public partial class TrackQueryRouteEndpointsMapper
 {
     /// <summary>
     /// 
@@ -22,34 +22,34 @@ public partial class AlbumQueryRouteEndpointsMapper
     {
         return endpointRouteBuilder.MapGet
         (
-            "/albums/{id}",
-            async Task<Results<Ok<AlbumResponse>, NotFound>>
+            "/tracks/{id}",
+            async Task<Results<Ok<TrackResponse>, NotFound>>
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryBusinessLogic businessLogic,
-                [FromServices] IMappingService<Album, AlbumResponse> mappingService
+                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksQueryBusinessLogic businessLogic,
+                [FromServices] IMappingService<Track, TrackResponse> mappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Album? model = await businessLogic.SelectAlbumAsync(id).ConfigureAwait(false);
+                Track? model = await businessLogic.SelectTrackAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {
                     return TypedResults.NotFound();
                 }
 
-                AlbumResponse response = mappingService.Map(model);
+                TrackResponse response = mappingService.Map(model);
                 return TypedResults.Ok(response);
             }
         )
-        .WithName("Albums-GetById-V1")
-        .WithTags("albums")
-        .WithOpenApi(operation => new(operation) { Summary = "Gets a single model of an Album by the id, mapped to an AlbumResponse response." })
+        .WithName("Tracks-GetById-V1")
+        .WithTags("tracks")
+        .WithOpenApi(operation => new(operation) { Summary = "Gets a single model of a Track by the id, mapped to a TrackResponse response." })
         .MapToApiVersion(1)
-        .Produces<AlbumResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
+        .Produces<TrackResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status404NotFound)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);

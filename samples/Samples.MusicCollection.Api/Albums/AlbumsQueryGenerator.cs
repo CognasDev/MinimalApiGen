@@ -1,28 +1,29 @@
 ﻿using MinimalApiGen.Framework.Generation;
 
 namespace Samples.MusicCollection.Api.Albums;
+
 /// <summary>
 /// 
 /// </summary>
 [ApiGenerator]
-public sealed class AlbumQueryGenerator
+public sealed class AlbumsQueryGenerator
 {
     #region Constructor Declarations
 
     /// <summary>
     ///
     /// </summary>
-    public AlbumQueryGenerator()
+    public AlbumsQueryGenerator()
     {
-        ApiGeneration.Query<Album>().WithNamespaceOf<IAlbumQueryBusinessLogic>()
+        ApiGeneration.Query<Album>().WithNamespaceOf<IAlbumsQueryBusinessLogic>()
                                     .WithModelId(model => model.AlbumId)
                                     .WithGet()
-                                        .WithBusinessLogic<IAlbumQueryBusinessLogic>(query => query.SelectAlbumsAsync)
+                                        .WithBusinessLogic<IAlbumsQueryBusinessLogic>(query => query.SelectAlbumsAsync)
                                         .WithResponse<AlbumResponse>()
                                         .WithMappingService()
                                         .WithVersion(1)
                                     .WithGetById()
-                                         .WithBusinessLogic<IAlbumQueryBusinessLogic>(query => query.SelectAlbumAsync)
+                                         .WithBusinessLogic<IAlbumsQueryBusinessLogic>(query => query.SelectAlbumAsync)
                                          .WithResponse<AlbumResponse>()
                                          .WithMappingService()
                                          .WithVersion(1);

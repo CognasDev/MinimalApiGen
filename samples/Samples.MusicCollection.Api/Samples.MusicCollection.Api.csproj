@@ -37,5 +37,9 @@
 		<Folder Include=".Generated\MinimalApiGen.Generators\" />
 		<Folder Include=".Generated\MinimalApiGen.Generators\ApiGenerator.Generator\" />
 	</ItemGroup>
-	
+	<ItemGroup>
+		<None Include="appsettings.Development.json">
+			<DependentUpon>appsettings.json</DependentUpon>
+		</None>
+	</ItemGroup>
 </Project>
