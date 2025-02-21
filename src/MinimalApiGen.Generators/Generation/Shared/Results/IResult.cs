@@ -67,12 +67,12 @@ internal interface IResult : IEquatable<IResult>
     /// <summary>
     /// 
     /// </summary>
-    string ResponseName { get; }
+    string? ResponseName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    string ResponseFullyQualifiedName { get; }
+    string? ResponseFullyQualifiedName { get; }
 
     /// <summary>
     /// 

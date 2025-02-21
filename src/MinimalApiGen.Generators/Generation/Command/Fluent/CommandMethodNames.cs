@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Abstractions.Command;
+using MinimalApiGen.Generators.Abstractions.Command.Delete;
 using MinimalApiGen.Generators.Abstractions.Command.Post;
 using MinimalApiGen.Generators.Abstractions.Command.Put;
 using MinimalApiGen.Generators.Abstractions.Command.Shared;
@@ -122,5 +123,31 @@ internal static class CommandMethodNames
     #endregion
 
     #region Property Declarations - Delete
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithDelete { get; } = $"{typeof(ICommandOperations).FullName}.{nameof(ICommandOperations.WithDelete)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithDeleteBusinessLogic { get; } = $"{typeof(IWithDeleteOperation).FullName}.{nameof(IWithDeleteOperation.WithBusinessLogic)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithDeleteServices { get; } = $"{typeof(IDeleteServices).FullName}.{nameof(IDeleteServices.WithServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithDeleteKeyedServices { get; } = $"{typeof(IDeleteKeyedServices).FullName}.{nameof(IDeleteKeyedServices.WithKeyedServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithDeleteRequest { get; } = $"{typeof(IDeleteRequest).FullName}.{nameof(IDeleteRequest.WithRequest)}";
+
     #endregion
 }

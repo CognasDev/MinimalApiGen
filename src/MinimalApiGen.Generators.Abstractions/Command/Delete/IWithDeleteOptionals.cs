@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithDeleteOptionals : IDeleteServices, IDeleteKeyedServices, IDeleteResponse
+public interface IWithDeleteOptionals : IDeleteServices, IDeleteKeyedServices, IDeleteRequest
 {
 }

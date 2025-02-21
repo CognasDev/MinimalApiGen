@@ -1,6 +1,8 @@
 ﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
 using System.Linq;
@@ -57,12 +59,12 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseName { get; } = queryResult.ResponseName;
+    public string ResponseName { get; } = !string.IsNullOrWhiteSpace(queryResult.ResponseName) ? queryResult.ResponseName! : throw new ArgumentNullException(nameof(IResult.ResponseName));
 
     /// <summary>
     /// 
     /// </summary>
-    public string ResponseFullyQualifiedName { get; } = queryResult.ResponseFullyQualifiedName;
+    public string ResponseFullyQualifiedName { get; } = !string.IsNullOrWhiteSpace(queryResult.ResponseFullyQualifiedName) ? queryResult.ResponseFullyQualifiedName! : throw new ArgumentNullException(nameof(IResult.ResponseFullyQualifiedName));
 
     /// <summary>
     /// 
@@ -82,7 +84,7 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string PaginationCode { get; } = queryResult.WithPagination ? PaginationBuilder.Build(queryResult.ResponseName) : string.Empty;
+    public string PaginationCode { get; } = queryResult.WithPagination ? PaginationBuilder.Build(queryResult.ResponseName!) : string.Empty;
 
     /// <summary>
     /// 
