@@ -8,7 +8,7 @@ namespace MinimalApiGen.Generators.Tests.Equality;
 /// </summary>
 public sealed class EquatableArrayTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

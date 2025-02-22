@@ -33,7 +33,7 @@ public static partial class EndpointRouteMappingExtension
     /// 
     /// </summary>
     /// <param name=""webApplication""></param>
-    public static void UseRouteMaps(this WebApplication webApplication)
+    public static void UseMinimalApiFrameworkRoutes(this WebApplication webApplication)
     {{
 {BuildInternal(endpointRouteMappings)}
     }}

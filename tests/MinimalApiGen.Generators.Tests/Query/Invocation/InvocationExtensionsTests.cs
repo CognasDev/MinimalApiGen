@@ -12,7 +12,7 @@ namespace MinimalApiGen.Generators.Tests.Query.Invocation;
 /// </summary>
 public sealed class InvocationExtensionsTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

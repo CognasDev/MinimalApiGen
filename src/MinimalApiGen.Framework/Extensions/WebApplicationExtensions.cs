@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Builder;
 
 namespace MinimalApiGen.Framework.Extensions;
 
@@ -16,6 +17,10 @@ public static class WebApplicationExtensions
     public static void UseMinimalApiFramework(this WebApplication webApplication)
     {
         webApplication.UseOutputCache();
+        webApplication.MapHealthChecks("/api/health", new()
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
     }
 
     #endregion

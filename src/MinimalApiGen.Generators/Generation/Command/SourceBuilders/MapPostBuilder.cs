@@ -186,7 +186,7 @@ public partial class {ClassName}
         )
         .WithName(""{RouteNameFactory.Post(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Posts {ModelName.GetIndefiniteArticle()} {ModelName} via {RequestName.GetIndefiniteArticle()} {RequestName}, mapped to {ResponseName.GetIndefiniteArticle()} {ResponseName} response."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Posts {ModelName.WithIndefiniteArticle()} via {RequestName.WithIndefiniteArticle()}, mapped to {ResponseName.WithIndefiniteArticle()} response."" }})
         .MapToApiVersion({ApiVersion})
         .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces<{ResponseName}>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)

@@ -11,7 +11,7 @@ namespace MinimalApiGen.Generators.Tests.Query.Results;
 /// </summary>
 public sealed class QueryResultTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

@@ -8,7 +8,7 @@ namespace MinimalApiGen.Generators.Tests.Pluralize;
 /// </summary>
 public sealed class PluralizerTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

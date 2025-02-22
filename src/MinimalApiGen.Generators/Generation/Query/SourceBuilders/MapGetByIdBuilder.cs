@@ -176,7 +176,7 @@ public partial class {ClassName}
         )
         .WithName(""{RouteNameFactory.GetById(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName.GetIndefiniteArticle()} {ModelName} by the id, mapped to {ResponseName.GetIndefiniteArticle()} {ResponseName} response."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Gets a single model of {ModelName.WithIndefiniteArticle()} by the id, mapped to {ResponseName.WithIndefiniteArticle()} response."" }})
         .MapToApiVersion({ApiVersion})
         .Produces<{ResponseName}>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)

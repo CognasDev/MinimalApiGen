@@ -13,7 +13,7 @@ namespace MinimalApiGen.Generators.Tests.Query.Fluent;
 /// </summary>
 public sealed class QueryIntermediateResultExtensionsTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

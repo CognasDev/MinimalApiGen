@@ -13,7 +13,7 @@ public static partial class EndpointRouteMappingExtension
     /// 
     /// </summary>
     /// <param name="webApplication"></param>
-    public static void UseRouteMaps(this WebApplication webApplication)
+    public static void UseMinimalApiFrameworkRoutes(this WebApplication webApplication)
     {
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
 		RouteGroupBuilder apiVersionRouteV2 = webApplication.GetApiVersionRoute(2);

@@ -20,6 +20,7 @@ public sealed class GenresQueryGenerator
                                      .WithGet()
                                          .WithBusinessLogic<IGenresQueryBusinessLogic>(query => query.SelectGenresAsync)
                                          .WithResponse<GenreResponse>()
+                                         .WithPagination()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()

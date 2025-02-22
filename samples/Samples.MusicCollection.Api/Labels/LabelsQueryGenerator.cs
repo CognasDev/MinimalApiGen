@@ -20,6 +20,7 @@ public sealed class LabelsQueryGenerator
                                      .WithGet()
                                          .WithBusinessLogic<ILabelsQueryBusinessLogic>(query => query.SelectLabelsAsync)
                                          .WithResponse<LabelResponse>()
+                                         .WithPagination()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()

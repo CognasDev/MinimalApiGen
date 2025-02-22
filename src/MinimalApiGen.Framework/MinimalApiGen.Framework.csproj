@@ -15,6 +15,7 @@
 	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
 		<PackageReference Include="FluentValidation" Version="11.11.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
 		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="6.1.0" />
@@ -23,6 +24,11 @@
 		<PackageReference Include="System.Text.Encodings.Web" Version="9.0.2" />
 		<PackageReference Include="Dapper" Version="2.1.66" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.23.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="9.0.2" />
+		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
+		<PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.1.1" />
 	</ItemGroup>
 
 	<Import Project="..\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems" Label="Shared" />
@@ -30,7 +36,7 @@
 
 	<!--Nuget package configuration-->
 	<PropertyGroup>
-		<Version>$(VersionPrefix)1.0.0-alpha</Version>
+		<Version>$(VersionPrefix)1.0.1-alpha</Version>
 		<Title>MinimalApiGen.Framework</Title>
 		<Authors>CognasDev</Authors>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>

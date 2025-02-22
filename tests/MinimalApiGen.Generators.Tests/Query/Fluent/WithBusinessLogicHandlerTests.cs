@@ -14,7 +14,7 @@ namespace MinimalApiGen.Generators.Tests.Query.Fluent;
 /// </summary>
 public sealed class WithBusinessLogicHandlerTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

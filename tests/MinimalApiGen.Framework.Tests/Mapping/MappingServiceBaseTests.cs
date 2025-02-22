@@ -7,7 +7,7 @@ namespace MinimalApiGen.Framework.Tests.Mapping;
 /// </summary>
 public sealed class MappingServiceBaseTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 
