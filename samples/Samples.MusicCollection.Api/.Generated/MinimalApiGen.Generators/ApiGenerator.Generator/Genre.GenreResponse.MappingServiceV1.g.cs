@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Genres;
 /// <summary>
 /// 
 /// </summary>
-public sealed class GetGenreToGenreResponseMappingServiceV1 : MappingServiceBase<Genre, GenreResponse>
+public sealed class PostGenreToGenreResponseMappingServiceV1 : MappingServiceBase<Genre, GenreResponse>
 {
     #region Public Method Declarations
 

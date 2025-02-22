@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Artists;
 /// <summary>
 /// 
 /// </summary>
-public sealed class GetArtistToArtistResponseMappingServiceV1 : MappingServiceBase<Artist, ArtistResponse>
+public sealed class PostArtistToArtistResponseMappingServiceV1 : MappingServiceBase<Artist, ArtistResponse>
 {
     #region Public Method Declarations
 

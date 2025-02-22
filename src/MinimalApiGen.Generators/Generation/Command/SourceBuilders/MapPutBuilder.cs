@@ -58,6 +58,21 @@ internal sealed class MapPutBuilder(ICommandResult commandResult, ServicesBuilde
     /// <summary>
     /// 
     /// </summary>
+    public string ModelIdPropertyName { get; } = commandResult.ModelIdPropertyName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string ModelIdPropertyType { get; } = commandResult.ModelIdPropertyType;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ModelIdUnderlyingPropertyType { get; } = commandResult.ModelIdUnderlyingPropertyType;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string ResponseName { get; } = !string.IsNullOrWhiteSpace(commandResult.ResponseName) ? commandResult.ResponseName! : throw new ArgumentNullException(nameof(IResult.ResponseName));
 
     /// <summary>
@@ -141,10 +156,11 @@ public partial class {ClassName}
     {{
         return endpointRouteBuilder.MapPut
         (
-            ""/{ModelPluralNameLower}"",
+            ""/{ModelPluralNameLower}/{{id}}"",
             async Task<Results<Ok<{ResponseName}>, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
                 [FromBody] {RequestName} request,
                 [FromServices] {BusinessLogic} businessLogic,
                 [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService,
@@ -156,6 +172,12 @@ public partial class {ClassName}
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
 
                 {ModelName} model = requestMappingService.Map(request);
+
+                if (model.{ModelIdPropertyName} != id)
+                {{
+                    return TypedResults.BadRequest();
+                }}
+
                 {ModelName}? updatedModel = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
 
                 if (updatedModel is null)

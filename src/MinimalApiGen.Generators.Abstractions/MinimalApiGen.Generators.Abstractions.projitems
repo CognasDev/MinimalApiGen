@@ -9,8 +9,6 @@
     <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteRequest.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithRequest.cs" />

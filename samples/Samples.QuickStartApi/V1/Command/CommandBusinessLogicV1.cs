@@ -36,10 +36,10 @@ public sealed class CommandBusinessLogicV1 : ICommandBusinessLogicV1
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="model"></param>
+    /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task DeleteModelAsync(SampleModel model, CancellationToken cancellationToken)
+    public async Task DeleteModelAsync(int id, CancellationToken cancellationToken)
     {
         await Task.CompletedTask.ConfigureAwait(false);
     }

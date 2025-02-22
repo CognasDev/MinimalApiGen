@@ -13,7 +13,7 @@ public sealed record AlbumResponse
     /// 
     /// </summary>
     [JsonPropertyName("albumId")]
-    public required int AlbumId { get; init; }
+    public required int? AlbumId { get; init; }
 
     /// <summary>
     /// 

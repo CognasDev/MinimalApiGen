@@ -144,10 +144,5 @@ internal static class CommandMethodNames
     /// </summary>
     public static string WithDeleteKeyedServices { get; } = $"{typeof(IDeleteKeyedServices).FullName}.{nameof(IDeleteKeyedServices.WithKeyedServices)}";
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string WithDeleteRequest { get; } = $"{typeof(IDeleteRequest).FullName}.{nameof(IDeleteRequest.WithRequest)}";
-
     #endregion
 }

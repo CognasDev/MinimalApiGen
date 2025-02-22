@@ -13,7 +13,7 @@ public sealed record ArtistResponse
     /// 
     /// </summary>
     [JsonPropertyName("artistId")]
-    public required int ArtistId { get; init; }
+    public required int? ArtistId { get; init; }
 
     /// <summary>
     /// 

@@ -7,7 +7,7 @@ namespace Samples.QuickStartApi.V1.Command;
 /// </summary>
 public interface ICommandBusinessLogicV1
 {
-    #region Public Method Declarations
+    #region Method Declarations
 
     /// <summary>
     /// 
@@ -28,10 +28,10 @@ public interface ICommandBusinessLogicV1
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="model"></param>
+    /// <param name="id"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task DeleteModelAsync(SampleModel model, CancellationToken cancellationToken);
+    Task DeleteModelAsync(int id, CancellationToken cancellationToken);
 
     #endregion
 }

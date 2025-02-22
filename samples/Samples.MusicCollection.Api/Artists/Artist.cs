@@ -10,7 +10,7 @@ public sealed record Artist
     /// <summary>
     /// 
     /// </summary>
-    public required int ArtistId { get; set; }
+    public required int? ArtistId { get; set; }
 
     /// <summary>
     /// 

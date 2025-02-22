@@ -10,7 +10,7 @@ public sealed record Album
     /// <summary>
     /// 
     /// </summary>
-    public required int AlbumId { get; set; }
+    public required int? AlbumId { get; set; }
 
     /// <summary>
     /// 

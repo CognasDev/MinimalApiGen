@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Tracks;
 /// <summary>
 /// 
 /// </summary>
-public sealed class GetTrackToTrackResponseMappingServiceV1 : MappingServiceBase<Track, TrackResponse>
+public sealed class PostTrackToTrackResponseMappingServiceV1 : MappingServiceBase<Track, TrackResponse>
 {
     #region Public Method Declarations
 
