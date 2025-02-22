@@ -17,8 +17,13 @@ builder.AddMinimalApiFramework();
 builder.AddMinimalApiFrameworkData();
 builder.AddMinimalApiFramewokMappingServices();
 
-builder.Services.AddSingleton<IArtistsQueryBusinessLogic, ArtistsQueryBusinessLogic>();
+builder.Services.AddSingleton<IArtistsCommandBusinessLogic, ArtistsCommandBusinessLogic>();
 builder.Services.AddSingleton<IAlbumsCommandBusinessLogic, AlbumsCommandBusinessLogic>();
+builder.Services.AddSingleton<IGenresCommandBusinessLogic, GenresCommandBusinessLogic>();
+builder.Services.AddSingleton<ILabelsCommandBusinessLogic, LabelsCommandBusinessLogic>();
+builder.Services.AddSingleton<ITracksCommandBusinessLogic, TracksCommandBusinessLogic>();
+
+builder.Services.AddSingleton<IArtistsQueryBusinessLogic, ArtistsQueryBusinessLogic>();
 builder.Services.AddSingleton<IAlbumsQueryBusinessLogic, AlbumsQueryBusinessLogic>();
 builder.Services.AddSingleton<IGenresQueryBusinessLogic, GenresQueryBusinessLogic>();
 builder.Services.AddSingleton<IKeysQueryBusinessLogic, KeysQueryBusinessLogic>();

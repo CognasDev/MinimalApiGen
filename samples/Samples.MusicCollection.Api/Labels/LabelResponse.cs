@@ -13,7 +13,7 @@ public sealed record LabelResponse
     /// 
     /// </summary>
     [JsonPropertyName("labelId")]
-    public required int LabelId { get; init; }
+    public required int? LabelId { get; init; }
 
     /// <summary>
     /// 

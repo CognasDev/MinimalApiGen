@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Labels;
 /// <summary>
 /// 
 /// </summary>
-public sealed class GetLabelToLabelResponseMappingServiceV1 : MappingServiceBase<Label, LabelResponse>
+public sealed class PostLabelToLabelResponseMappingServiceV1 : MappingServiceBase<Label, LabelResponse>
 {
     #region Public Method Declarations
 

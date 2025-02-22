@@ -23,10 +23,11 @@ public partial class AlbumCommandRouteEndpointsMapper
     {
         return endpointRouteBuilder.MapPut
         (
-            "/albums",
+            "/albums/{id}",
             async Task<Results<Ok<AlbumResponse>, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromRoute] int id,
                 [FromBody] AlbumRequest request,
                 [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandBusinessLogic businessLogic,
                 [FromServices] IMappingService<AlbumRequest, Album> requestMappingService,
@@ -38,6 +39,12 @@ public partial class AlbumCommandRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
 
                 Album model = requestMappingService.Map(request);
+
+                if (model.AlbumId != id)
+                {
+                    return TypedResults.BadRequest();
+                }
+
                 Album? updatedModel = await businessLogic.UpdateAlbumAsync(model).ConfigureAwait(false);
 
                 if (updatedModel is null)

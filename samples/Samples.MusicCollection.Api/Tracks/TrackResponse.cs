@@ -13,7 +13,7 @@ public sealed record TrackResponse
     /// 
     /// </summary>
     [JsonPropertyName("trackId")]
-    public required int TrackId { get; init; }
+    public required int? TrackId { get; init; }
 
     /// <summary>
     /// 

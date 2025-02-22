@@ -13,7 +13,7 @@ public sealed record GenreResponse
     /// 
     /// </summary>
     [JsonPropertyName("genreId")]
-    public required int GenreId { get; init; }
+    public required int? GenreId { get; init; }
 
     /// <summary>
     /// 

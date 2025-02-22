@@ -29,11 +29,11 @@ Content-Type: application/json
     "genreId" : 1,
     "labelId" : 1,
     "name" : "test",
-    "releaseDate": "2025-02-22T13:45:21.378Z"
+    "releaseDate": "2024-06-22T15:10:21.378Z"
 }
 
 ### PUT an existing album - 200
-PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/albums/2002
+PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/albums/1001
 Content-Type: application/json
 
 {
@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 
 ### DELETE an album that exists
-DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/albums/2001
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/albums/1001
 
 ### DELETE an album that does not exist
 DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/albums/0

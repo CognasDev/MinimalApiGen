@@ -102,5 +102,6 @@ public abstract class CommandBusinessLogicBase<TModel> where TModel : class
         bool result = deleteCount == 1;
         return result;
     }
+
     #endregion
 }

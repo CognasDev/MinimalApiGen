@@ -23,10 +23,11 @@ public partial class SampleModelCommandRouteEndpointsMapper
     {
         return endpointRouteBuilder.MapPut
         (
-            "/samplemodels",
+            "/samplemodels/{id}",
             async Task<Results<Ok<SampleModelResponse>, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromRoute] int id,
                 [FromBody] SampleModelRequest request,
                 [FromServices] Samples.QuickStartApi.V1.Command.ICommandBusinessLogicV1 businessLogic,
                 [FromServices] IMappingService<SampleModelRequest, SampleModel> requestMappingService,
@@ -38,6 +39,12 @@ public partial class SampleModelCommandRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
 
                 SampleModel model = requestMappingService.Map(request);
+
+                if (model.Id != id)
+                {
+                    return TypedResults.BadRequest();
+                }
+
                 SampleModel? updatedModel = await businessLogic.PutModelAsync(model, cancellationToken).ConfigureAwait(false);
 
                 if (updatedModel is null)

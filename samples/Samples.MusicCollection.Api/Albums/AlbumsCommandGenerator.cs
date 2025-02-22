@@ -36,9 +36,7 @@ public sealed class AlbumsCommandGenerator
         ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandBusinessLogic>()
                                       .WithModelId(model => model.AlbumId)
                                       .WithDelete()
-                                            .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.DeleteAlbumAsync)
-                                            .WithRequest<AlbumRequest>()
-                                            .WithRequestMappingService();
+                                            .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.DeleteAlbumAsync);
 
     }
 

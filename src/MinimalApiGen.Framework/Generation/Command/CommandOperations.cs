@@ -1,4 +1,6 @@
-﻿using MinimalApiGen.Framework.Generation.Command.Post;
+﻿using MinimalApiGen.Framework.Generation.Command.Delete;
+using MinimalApiGen.Framework.Generation.Command.Post;
+using MinimalApiGen.Framework.Generation.Command.Put;
 using MinimalApiGen.Generators.Abstractions.Command;
 using MinimalApiGen.Generators.Abstractions.Command.Delete;
 using MinimalApiGen.Generators.Abstractions.Command.Post;
@@ -23,21 +25,13 @@ public sealed class CommandOperations : ICommandOperations
     /// 
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public IWithPutOperation WithPut()
-    {
-        throw new NotImplementedException();
-    }
+    public IWithPutOperation WithPut() => new WithPutOperation();
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public IWithDeleteOperation WithDelete()
-    {
-        throw new NotImplementedException();
-    }
+    public IWithDeleteOperation WithDelete() => new WithDeleteOperation();
 
     #endregion
 }

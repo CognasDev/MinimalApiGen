@@ -10,7 +10,7 @@ public sealed record Track
     /// <summary>
     /// 
     /// </summary>
-    public required int TrackId { get; set; }
+    public required int? TrackId { get; set; }
 
     /// <summary>
     /// 

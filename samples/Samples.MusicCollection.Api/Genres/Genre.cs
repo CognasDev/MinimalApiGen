@@ -10,7 +10,7 @@ public sealed record Genre
     /// <summary>
     /// 
     /// </summary>
-    public required int GenreId { get; set; }
+    public required int? GenreId { get; set; }
 
     /// <summary>
     /// 

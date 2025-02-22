@@ -10,7 +10,7 @@ public sealed record Label
     /// <summary>
     /// 
     /// </summary>
-    public required int LabelId { get; set; }
+    public required int? LabelId { get; set; }
 
     /// <summary>
     /// 

@@ -72,7 +72,7 @@ internal sealed class CommandProcessor
                     Dictionary<string, string> keyedServices = invocationInfo.ToKeyedServices(semanticModel);
                     intermediateResult!.KeyedServices.AddRange(keyedServices);
                     break;
-                case string name when (name == CommandMethodNames.WithPostRequest || name == CommandMethodNames.WithPutRequest || name == CommandMethodNames.WithDeleteRequest) && fluentMethod.IsGeneric:
+                case string name when (name == CommandMethodNames.WithPostRequest || name == CommandMethodNames.WithPutRequest) && fluentMethod.IsGeneric:
                     intermediateResult!.RequestResult = invocationInfo.ToRequest();
                     break;
                 case string name when (name == CommandMethodNames.WithPostResponse || name == CommandMethodNames.WithPutResponse) && fluentMethod.IsGeneric:

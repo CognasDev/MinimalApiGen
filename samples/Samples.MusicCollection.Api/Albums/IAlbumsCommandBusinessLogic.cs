@@ -22,9 +22,9 @@ public interface IAlbumsCommandBusinessLogic
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="album"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    Task DeleteAlbumAsync(Album album);
+    Task DeleteAlbumAsync(int id);
 
     #endregion
 }

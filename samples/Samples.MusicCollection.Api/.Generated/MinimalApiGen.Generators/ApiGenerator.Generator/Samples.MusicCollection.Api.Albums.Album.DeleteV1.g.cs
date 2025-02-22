@@ -4,7 +4,6 @@ using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using Album = Samples.MusicCollection.Api.Albums.Album;
-using AlbumRequest = Samples.MusicCollection.Api.Albums.AlbumRequest;
 
 namespace Samples.MusicCollection.Api.Albums;
 
@@ -22,29 +21,23 @@ public partial class AlbumCommandRouteEndpointsMapper
     {
         return endpointRouteBuilder.MapDelete
         (
-            "/albums",
+            "/albums/{id}",
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
-                [FromBody] AlbumRequest request,
-                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandBusinessLogic businessLogic,
-                [FromServices] IMappingService<AlbumRequest, Album> requestMappingService
+                [FromRoute] int id,
+                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandBusinessLogic businessLogic
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
-
-                Album model = requestMappingService.Map(request);
-                await businessLogic.DeleteAlbumAsync(model).ConfigureAwait(false);
-
+                await businessLogic.DeleteAlbumAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )
         .WithName("Albums-Delete-V1")
         .WithTags("albums")
-        .WithOpenApi(operation => new(operation) { Summary = "Deletes an Album via an AlbumRequest." })
+        .WithOpenApi(operation => new(operation) { Summary = "Deletes an Album via the id." })
         .MapToApiVersion(1)
-        .Accepts<AlbumRequest>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);

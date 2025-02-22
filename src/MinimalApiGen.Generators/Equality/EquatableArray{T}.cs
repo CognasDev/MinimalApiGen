@@ -22,7 +22,7 @@ public readonly struct EquatableArray<T>(IEnumerable<T> collection) : IEquatable
     /// <summary>
     /// 
     /// </summary>
-    private readonly T[]? _array = [.. collection];
+    private readonly T[]? _array = collection is not null ? [.. collection] : [];
 
     #endregion
 

@@ -57,12 +57,17 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// <summary>
     /// 
     /// </summary>
-    public string RequestName { get; } = commandResult.RequestName;
+    public string ModelIdPropertyName { get; } = commandResult.ModelIdPropertyName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string RequestFullyQualifiedName { get; } = commandResult.RequestFullyQualifiedName;
+    public string ModelIdPropertyType { get; } = commandResult.ModelIdPropertyType;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? ModelIdUnderlyingPropertyType { get; } = commandResult.ModelIdUnderlyingPropertyType;
 
     /// <summary>
     /// 
@@ -95,7 +100,7 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(commandResult.BusinessLogicParameters,
                                                                                      commandResult.Services,
                                                                                      commandResult.KeyedServices,
-                                                                                     commandResult.ModelFullyQualifiedName);
+                                                                                     commandResult.ModelIdUnderlyingPropertyType ?? commandResult.ModelIdPropertyType);
 
     #endregion
 
@@ -111,7 +116,6 @@ using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using {ModelName} = {ModelFullyQualifiedName};
-using {RequestName} = {RequestFullyQualifiedName};
 
 namespace {ClassNamespace};
 
@@ -129,29 +133,23 @@ public partial class {ClassName}
     {{
         return endpointRouteBuilder.MapDelete
         (
-            ""/{ModelPluralNameLower}"",
+            ""/{ModelPluralNameLower}/{{id}}"",
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
-                [FromBody] {RequestName} request,
-                [FromServices] {BusinessLogic} businessLogic,
-                [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService{FromServices}{FromKeyedServices}
+                [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
+                [FromServices] {BusinessLogic} businessLogic
             ) =>
             {{
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
-
-                {ModelName} model = requestMappingService.Map(request);
                 await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
-
                 return TypedResults.NoContent();
             }}
         )
         .WithName(""{RouteNameFactory.Delete(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Deletes {ModelName.WithIndefiniteArticle()} via {RequestName.WithIndefiniteArticle()}."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Deletes {ModelName.WithIndefiniteArticle()} via the id."" }})
         .MapToApiVersion({ApiVersion})
-        .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
@@ -168,12 +166,12 @@ public partial class {ClassName}
     /// <param name="businessLogicParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
-    /// <param name="modelName"></param>
+    /// <param name="modelIdPropertyType"></param>
     /// <returns></returns>
     private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
                                                   EquatableArray<string> services,
                                                   EquatableDictionary<string, string> keyedServices,
-                                                  string modelName)
+                                                  string modelIdPropertyType)
     {
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
@@ -195,9 +193,9 @@ public partial class {ClassName}
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (parameter == modelName)
+            else if (parameter == modelIdPropertyType)
             {
-                stringBuilder.Append("model, ");
+                stringBuilder.Append("id, ");
             }
             else if (parameter == typeof(CancellationToken).FullName)
             {

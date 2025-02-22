@@ -59,13 +59,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Command", "2. Command", 
 		docs\2. Command\WithVersion.md = docs\2. Command\WithVersion.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Api", "samples\Samples.MusicCollection.Api\Samples.MusicCollection.Api.csproj", "{F3215C05-ACC5-447A-AE2A-E1ABC3C1A156}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.QuickStartApi", "samples\Samples.QuickStartApi\Samples.QuickStartApi.csproj", "{D177D68D-DAA2-4C52-9CBA-DF4F40F2FDE9}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MinimalApiGen.Framework.Pluralize", "src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.shproj", "{5B201EAA-8A7C-4863-988F-98F1B2D7F7A2}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Samples.MusicCollection.Data", "samples\Samples.MusicCollection.Data\Samples.MusicCollection.Data.sqlproj", "{74FCF198-332C-4D19-9D44-14FBCC75B430}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Api", "samples\Samples.MusicCollection.Api\Samples.MusicCollection.Api.csproj", "{D544945F-DF56-4A16-8356-81CD8C476393}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,10 +93,6 @@ Global
 		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51A1159B-331A-4655-8AB0-45CBA297B19C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F3215C05-ACC5-447A-AE2A-E1ABC3C1A156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F3215C05-ACC5-447A-AE2A-E1ABC3C1A156}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F3215C05-ACC5-447A-AE2A-E1ABC3C1A156}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F3215C05-ACC5-447A-AE2A-E1ABC3C1A156}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D177D68D-DAA2-4C52-9CBA-DF4F40F2FDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D177D68D-DAA2-4C52-9CBA-DF4F40F2FDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D177D68D-DAA2-4C52-9CBA-DF4F40F2FDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -105,6 +101,10 @@ Global
 		{74FCF198-332C-4D19-9D44-14FBCC75B430}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{74FCF198-332C-4D19-9D44-14FBCC75B430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74FCF198-332C-4D19-9D44-14FBCC75B430}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D544945F-DF56-4A16-8356-81CD8C476393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D544945F-DF56-4A16-8356-81CD8C476393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D544945F-DF56-4A16-8356-81CD8C476393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D544945F-DF56-4A16-8356-81CD8C476393}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,10 +119,10 @@ Global
 		{A4894BF9-1973-43D7-AF2D-DD2F2F8C061C} = {F50EC002-C509-4A9B-B729-24E27510A632}
 		{EBE5F3B1-8B8E-4B7A-B658-8BD7BAAC41FF} = {F50EC002-C509-4A9B-B729-24E27510A632}
 		{FFADCDC9-DE02-40FB-AA85-59060DE51126} = {F50EC002-C509-4A9B-B729-24E27510A632}
-		{F3215C05-ACC5-447A-AE2A-E1ABC3C1A156} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{D177D68D-DAA2-4C52-9CBA-DF4F40F2FDE9} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{5B201EAA-8A7C-4863-988F-98F1B2D7F7A2} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
 		{74FCF198-332C-4D19-9D44-14FBCC75B430} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
+		{D544945F-DF56-4A16-8356-81CD8C476393} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
