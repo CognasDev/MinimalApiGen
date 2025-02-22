@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MinimalApiGen.Framework.Pagination;
+using MinimalApiGen.Framework.Data;
 
 namespace MinimalApiGen.Framework.ExceptionHandling;
 
@@ -16,7 +16,7 @@ public static class ExceptionExtensions
     /// <param name="serviceCollection"></param>
     public static void AddExceptionHandlers(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddExceptionHandler<PaginationQueryParametersExceptionHandler>();
+        serviceCollection.AddExceptionHandler<SqlExceptionHandler>();
         serviceCollection.AddExceptionHandler<OperationCanceledExceptionHandler>();
         serviceCollection.AddExceptionHandler<GlobalExceptionHandler>();
     }

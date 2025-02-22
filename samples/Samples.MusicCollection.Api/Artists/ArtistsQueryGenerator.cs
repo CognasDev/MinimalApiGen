@@ -20,6 +20,7 @@ public sealed class ArtistsQueryGenerator
                                      .WithGet()
                                          .WithBusinessLogic<IArtistsQueryBusinessLogic>(query => query.SelectArtistsAsync)
                                          .WithResponse<ArtistResponse>()
+                                         .WithPagination()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()

@@ -149,7 +149,7 @@ public partial class {ClassName}
         )
         .WithName(""{RouteNameFactory.Delete(ModelPluralName, ApiVersion)}"")
         .WithTags(""{ModelPluralNameLower}"")
-        .WithOpenApi(operation => new(operation) {{ Summary = ""Deletes {ModelName.GetIndefiniteArticle()} {ModelName} via {RequestName.GetIndefiniteArticle()} {RequestName}."" }})
+        .WithOpenApi(operation => new(operation) {{ Summary = ""Deletes {ModelName.WithIndefiniteArticle()} via {RequestName.WithIndefiniteArticle()}."" }})
         .MapToApiVersion({ApiVersion})
         .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)

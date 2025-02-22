@@ -11,7 +11,7 @@ namespace MinimalApiGen.Framework.Tests.Pagination;
 /// </summary>
 public sealed class PaginationServiceTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

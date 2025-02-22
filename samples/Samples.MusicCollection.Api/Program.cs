@@ -1,6 +1,7 @@
 using MinimalApiGen.Framework.Data;
 using MinimalApiGen.Framework.Extensions;
 using MinimalApiGen.Framework.Generation;
+using MinimalApiGen.Framework.Logging;
 using MinimalApiGen.Framework.Swagger;
 using Samples.MusicCollection.Api.Albums;
 using Samples.MusicCollection.Api.Artists;
@@ -10,6 +11,7 @@ using Samples.MusicCollection.Api.Labels;
 using Samples.MusicCollection.Api.Tracks;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+builder.ConfigureLogging(LoggingType.File);
 
 builder.AddMinimalApiFramework();
 builder.AddMinimalApiFrameworkData();
@@ -23,7 +25,7 @@ builder.Services.AddSingleton<ILabelsQueryBusinessLogic, LabelsQueryBusinessLogi
 builder.Services.AddSingleton<ITracksQueryBusinessLogic, TracksQueryBusinessLogic>();
 
 WebApplication webApplication = builder.Build();
-webApplication.UseRouteMaps();
+webApplication.UseMinimalApiFrameworkRoutes();
 
 if (webApplication.Environment.IsDevelopment())
 {

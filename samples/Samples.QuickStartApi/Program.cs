@@ -16,7 +16,7 @@ builder.Services.AddScoped<SampleService1>();
 builder.Services.AddScoped<SampleService2>();
 
 WebApplication webApplication = builder.Build();
-webApplication.UseRouteMaps();
+webApplication.UseMinimalApiFrameworkRoutes();
 
 if (webApplication.Environment.IsDevelopment())
 {

@@ -1,6 +1,4 @@
-﻿using MinimalApiGen.Framework.Data;
-
-namespace Samples.MusicCollection.Api.Genres;
+﻿namespace Samples.MusicCollection.Api.Genres;
 
 /// <summary>
 /// 

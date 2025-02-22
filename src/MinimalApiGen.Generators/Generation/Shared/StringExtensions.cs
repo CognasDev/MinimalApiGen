@@ -1,4 +1,6 @@
-﻿namespace MinimalApiGen.Generators.Generation.Shared;
+﻿using System;
+
+namespace MinimalApiGen.Generators.Generation.Shared;
 
 /// <summary>
 /// 
@@ -12,11 +14,13 @@ internal static class StringExtensions
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    public static string GetIndefiniteArticle(this string input)
+    public static string WithIndefiniteArticle(this string input)
     {
-        char firstChar = input.ToLowerInvariant()[0];
+        char firstChar = input.ToLowerInvariant().AsSpan()[0];
         bool vowelStart = "aeiou".IndexOf(firstChar) >= 0;
-        return vowelStart ? "an" : "a";
+        string indefiniteArticle = vowelStart ? "an" : "a";
+        string result = $"{indefiniteArticle} {input}";
+        return result;
     }
 
     #endregion

@@ -9,7 +9,7 @@ namespace MinimalApiGen.Framework.Tests.Extensions;
 /// </summary>
 public sealed class HeaderDictionaryExtensionsTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 

@@ -5,7 +5,7 @@ GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists
 Accept: application/json
 
 ### GET artists with pagination - 200
-GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists?pageSize=2&pageNumber=1&orderBy=name&orderByAscending=true
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists?pageSize=3&pageNumber=1&orderBy=name&orderByAscending=true
 Accept: application/json
 
 ### GET artists with malformed pagination - 400

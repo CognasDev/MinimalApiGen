@@ -20,6 +20,7 @@ public sealed class AlbumsQueryGenerator
                                     .WithGet()
                                         .WithBusinessLogic<IAlbumsQueryBusinessLogic>(query => query.SelectAlbumsAsync)
                                         .WithResponse<AlbumResponse>()
+                                        .WithPagination()
                                         .WithMappingService()
                                         .WithVersion(1)
                                     .WithGetById()

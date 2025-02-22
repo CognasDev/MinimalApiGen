@@ -1,7 +1,8 @@
 ﻿using MinimalApiGen.Framework.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
-
+using MinimalApiGen.Framework.Pagination;
+using System.ComponentModel;
 using Album = Samples.MusicCollection.Api.Albums.Album;
 using AlbumResponse = Samples.MusicCollection.Api.Albums.AlbumResponse;
 
@@ -25,7 +26,9 @@ public partial class AlbumQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryBusinessLogic businessLogic,
-                [FromServices] IMappingService<Album, AlbumResponse> mappingService
+                [FromServices] IMappingService<Album, AlbumResponse> mappingService,
+                [FromServices] IPaginationService paginationService,
+                [AsParameters] PaginationQuery paginationQuery
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
@@ -34,6 +37,22 @@ public partial class AlbumQueryRouteEndpointsMapper
                 {
                     IEnumerable<Album> models = await businessLogic.SelectAlbumsAsync().ConfigureAwait(false);
                     IEnumerable<AlbumResponse> responses = mappingService.Map(models);
+
+                    if (paginationService.IsPaginationQueryValidOrNotRequested<AlbumResponse>(paginationQuery) == true)
+                    {
+                        PropertyDescriptor orderByProperty = paginationService.OrderByProperty<AlbumResponse>(paginationQuery);
+                        int takeQuantity = paginationService.TakeQuantity(paginationQuery);
+                        int skipNumber = paginationService.SkipNumber(paginationQuery);
+
+                        if (paginationQuery.OrderByAscending ?? true)
+                        {
+                            responses = responses.OrderBy(response => orderByProperty.GetValue(response)).Skip(skipNumber).Take(takeQuantity);
+                        }
+                        else
+                        {
+                            responses = responses.OrderByDescending(response => orderByProperty.GetValue(response)).Skip(skipNumber).Take(takeQuantity);
+                        }
+                    }
 
                     foreach (AlbumResponse response in responses)
                     {
@@ -46,7 +65,7 @@ public partial class AlbumQueryRouteEndpointsMapper
         )
         .WithName("Albums-Get-V1")
         .WithTags("albums")
-        .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of Albums mapped to AlbumResponse responses." })
+        .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of Albums mapped to AlbumResponse responses. Pagination is supported." })
         .MapToApiVersion(1)
         .Produces<IEnumerable<AlbumResponse>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)

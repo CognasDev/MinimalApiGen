@@ -4,14 +4,6 @@
 GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/keys
 Accept: application/json
 
-### GET keys with pagination - 200
-GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/keys?pageSize=2&pageNumber=1&orderBy=name&orderByAscending=true
-Accept: application/json
-
-### GET keys with malformed pagination - 400
-GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/keys?pageSize=2&pageNumber=1
-Accept: application/json
-
 ### GET a key by Id that exists - 200
 GET {{Samples.MusicCollection.Api_HostAddress}}/api/v1/keys/1
 Accept: application/json

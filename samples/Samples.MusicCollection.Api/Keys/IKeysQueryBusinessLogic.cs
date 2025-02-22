@@ -1,6 +1,4 @@
-﻿using MinimalApiGen.Framework.Data;
-
-namespace Samples.MusicCollection.Api.Keys;
+﻿namespace Samples.MusicCollection.Api.Keys;
 
 /// <summary>
 /// 

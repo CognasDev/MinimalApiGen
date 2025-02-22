@@ -8,7 +8,7 @@ namespace MinimalApiGen.Framework.BusinessLogic;
 /// 
 /// </summary>
 /// <typeparam name="TModel"></typeparam>
-public abstract class QueryBusinessLogicBase<TModel>  where TModel : class
+public abstract class QueryBusinessLogicBase<TModel> where TModel : class
 {
     #region Property Declarations
 

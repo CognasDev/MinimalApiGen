@@ -1,0 +1,4 @@
+@Samples.MusicCollection.Api_HostAddress = https://localhost:7104
+
+### GET all albums - 200
+GET {{Samples.MusicCollection.Api_HostAddress}}/api/health

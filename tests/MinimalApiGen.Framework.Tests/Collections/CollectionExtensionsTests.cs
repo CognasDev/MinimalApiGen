@@ -9,7 +9,7 @@ namespace MinimalApiGen.Framework.Tests.Collections;
 /// </summary>
 public sealed class CollectionExtensionsTests
 {
-    #region Unit Test Method Declarations
+    #region Unit Test Declarations
 
     /// <summary>
     /// 
