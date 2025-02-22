@@ -7,7 +7,7 @@ namespace Samples.MusicCollection.Api.Albums;
 /// <summary>
 /// 
 /// </summary>
-public sealed class GetAlbumToAlbumResponseMappingServiceV1 : MappingServiceBase<Album, AlbumResponse>
+public sealed class PostAlbumToAlbumResponseMappingServiceV1 : MappingServiceBase<Album, AlbumResponse>
 {
     #region Public Method Declarations
 

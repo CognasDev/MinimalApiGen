@@ -1,54 +1,25 @@
-﻿using MinimalApiGen.Framework.Data;
+﻿using MinimalApiGen.Framework.BusinessLogic;
+using MinimalApiGen.Framework.Data;
+using MinimalApiGen.Framework.Pluralize;
 
 namespace Samples.MusicCollection.Api.Artists;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class ArtistsQueryBusinessLogic : IArtistsQueryBusinessLogic
+/// <param name="logger"></param>
+/// <param name="pluralizer"></param>
+/// <param name="databaseService"></param>
+public sealed class ArtistsQueryBusinessLogic(ILogger<ArtistsQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
+    : QueryBusinessLogicBase<Artist>(logger, pluralizer, databaseService), IArtistsQueryBusinessLogic
 {
-    #region Field Declarations
-
-    private readonly ILogger<ArtistsQueryBusinessLogic> _logger;
-    private readonly IQueryDatabaseService _databaseService;
-    private readonly string _selectStoredProcedure;
-    private readonly string _selectByIdStoredProcedure;
-
-    #endregion
-
-    #region Constructor Declarations
-
-    /// <summary>
-    /// Default constructor for <see cref="ArtistsQueryBusinessLogic"/>
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="databaseService"></param>
-    public ArtistsQueryBusinessLogic(ILogger<ArtistsQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
-    {
-        ArgumentNullException.ThrowIfNull(logger, nameof(logger));
-        ArgumentNullException.ThrowIfNull(databaseService, nameof(databaseService));
-
-        _logger = logger;
-        _databaseService = databaseService;
-
-        _selectStoredProcedure = $"[dbo].[{nameof(Artist)}s_Select]";
-        _selectByIdStoredProcedure = $"[dbo].[{nameof(Artist)}s_SelectById]";
-    }
-
-    #endregion
-
     #region Public Method Declarations
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    /// <exception cref="NullReferenceException"></exception>
-    public async Task<IEnumerable<Artist>> SelectArtistsAsync()
-    {
-        IEnumerable<Artist>? selectedModels = await _databaseService.SelectModelsAsync<Artist>(_selectStoredProcedure).ConfigureAwait(false);
-        return selectedModels ?? throw new NullReferenceException($"Model: {nameof(Artist)}, {nameof(_selectStoredProcedure)}: {_selectStoredProcedure}");
-    }
+    public async Task<IEnumerable<Artist>> SelectArtistsAsync() => await SelectModelsAsync().ConfigureAwait(false);
 
     /// <summary>
     /// 
@@ -58,7 +29,7 @@ public sealed class ArtistsQueryBusinessLogic : IArtistsQueryBusinessLogic
     public async Task<Artist?> SelectArtistAsync(int id)
     {
         Parameter parameter = new(nameof(Artist.ArtistId), id);
-        Artist? selectedModel = await _databaseService.SelectModelAsync<Artist>(_selectByIdStoredProcedure, parameter).ConfigureAwait(false);
+        Artist? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
         return selectedModel;
     }
 

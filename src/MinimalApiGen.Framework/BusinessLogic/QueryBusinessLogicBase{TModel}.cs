@@ -10,22 +10,28 @@ namespace MinimalApiGen.Framework.BusinessLogic;
 /// <typeparam name="TModel"></typeparam>
 public abstract class QueryBusinessLogicBase<TModel> where TModel : class
 {
+    #region Field Declarations
+
+    private readonly IQueryDatabaseService _databaseService;
+
+    #endregion
+
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public IQueryDatabaseService DatabaseService { get; }
+    protected ILogger Logger { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public virtual string SelectStoredProcedure { get; }
+    protected virtual string SelectStoredProcedure { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public virtual string SelectByIdStoredProcedure { get; }
+    protected virtual string SelectByIdStoredProcedure { get; }
 
     #endregion
 
@@ -39,10 +45,12 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
     /// <param name="databaseService"></param>
     protected QueryBusinessLogicBase(ILogger logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
     {
+        ArgumentNullException.ThrowIfNull(logger, nameof(logger));
         ArgumentNullException.ThrowIfNull(pluralizer, nameof(pluralizer));
         ArgumentNullException.ThrowIfNull(databaseService, nameof(databaseService));
 
-        DatabaseService = databaseService;
+        Logger = logger;
+        _databaseService = databaseService;
 
         string pluralModelName = pluralizer.Pluralize(typeof(TModel).Name);
         SelectStoredProcedure = $"[dbo].[{pluralModelName}_Select]";
@@ -58,9 +66,9 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NullReferenceException"></exception>
-    public async Task<IEnumerable<TModel>> SelectModelsAsync()
+    protected async Task<IEnumerable<TModel>> SelectModelsAsync(params IParameter[] parameters)
     {
-        IEnumerable<TModel>? selectedModels = await DatabaseService.SelectModelsAsync<TModel>(SelectStoredProcedure).ConfigureAwait(false);
+        IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(SelectStoredProcedure, parameters).ConfigureAwait(false);
         return selectedModels ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(SelectStoredProcedure)}: {SelectStoredProcedure}");
     }
 
@@ -69,10 +77,9 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
     /// </summary>
     /// <param name="idParameter"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    public async Task<TModel?> SelectModelAsync(IParameter idParameter)
+    protected async Task<TModel?> SelectModelAsync(IParameter idParameter)
     {
-        TModel? selectedModel = await DatabaseService.SelectModelAsync<TModel>(SelectByIdStoredProcedure, idParameter).ConfigureAwait(false);
+        TModel? selectedModel = await _databaseService.SelectModelAsync<TModel>(SelectByIdStoredProcedure, idParameter).ConfigureAwait(false);
         return selectedModel;
     }
 

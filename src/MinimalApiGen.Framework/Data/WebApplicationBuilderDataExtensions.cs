@@ -21,6 +21,7 @@ public static class WebApplicationBuilderDataExtensions
         builder.Services.AddSingleton<IDatabaseTransactionService, DatabaseTransactionService>();
         builder.Services.AddSingleton<IDynamicParameterFactory, DynamicParameterFactory>();
         builder.Services.AddSingleton<IIdsParameterFactory, IdsParameterFactory>();
+        builder.Services.AddSingleton<ICommandDatabaseService, CommandDatabaseService>();
         builder.Services.AddSingleton<IQueryDatabaseService, QueryDatabaseService>();
         builder.Services.AddSingleton<IPluralizer, Pluralizer>();
     }

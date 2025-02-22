@@ -16,6 +16,7 @@ public static partial class EndpointRouteMappingExtension
     {
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
 
+		Samples.MusicCollection.Api.Albums.AlbumCommandRouteEndpointsMapper albumCommandRouteEndpointsMapper = new();
 		Samples.MusicCollection.Api.Albums.AlbumQueryRouteEndpointsMapper albumQueryRouteEndpointsMapper = new();
 		Samples.MusicCollection.Api.Artists.ArtistQueryRouteEndpointsMapper artistQueryRouteEndpointsMapper = new();
 		Samples.MusicCollection.Api.Genres.GenreQueryRouteEndpointsMapper genreQueryRouteEndpointsMapper = new();
@@ -23,6 +24,9 @@ public static partial class EndpointRouteMappingExtension
 		Samples.MusicCollection.Api.Labels.LabelQueryRouteEndpointsMapper labelQueryRouteEndpointsMapper = new();
 		Samples.MusicCollection.Api.Tracks.TrackQueryRouteEndpointsMapper trackQueryRouteEndpointsMapper = new();
 
+		albumCommandRouteEndpointsMapper.MapPostV1(apiVersionRouteV1);
+		albumCommandRouteEndpointsMapper.MapPutV1(apiVersionRouteV1);
+		albumCommandRouteEndpointsMapper.MapDeleteV1(apiVersionRouteV1);
 		albumQueryRouteEndpointsMapper.MapGetV1(apiVersionRouteV1);
 		albumQueryRouteEndpointsMapper.MapGetByIdV1(apiVersionRouteV1);
 		artistQueryRouteEndpointsMapper.MapGetV1(apiVersionRouteV1);

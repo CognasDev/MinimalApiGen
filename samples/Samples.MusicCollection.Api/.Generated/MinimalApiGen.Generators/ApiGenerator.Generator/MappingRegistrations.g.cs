@@ -13,7 +13,8 @@ public static class MappingRegistrations
     /// <param name="builder"></param>
     public static void AddMinimalApiFramewokMappingServices(this WebApplicationBuilder builder)
     {
-		builder.Services.AddSingleton<IMappingService<Samples.MusicCollection.Api.Albums.Album, Samples.MusicCollection.Api.Albums.AlbumResponse>, Samples.MusicCollection.Api.Albums.GetAlbumToAlbumResponseMappingServiceV1>();
+		builder.Services.AddSingleton<IMappingService<Samples.MusicCollection.Api.Albums.Album, Samples.MusicCollection.Api.Albums.AlbumResponse>, Samples.MusicCollection.Api.Albums.PostAlbumToAlbumResponseMappingServiceV1>();
+		builder.Services.AddSingleton<IMappingService<Samples.MusicCollection.Api.Albums.AlbumRequest, Samples.MusicCollection.Api.Albums.Album>, Samples.MusicCollection.Api.Albums.PostAlbumRequestToAlbumMappingServiceV1>();
 		builder.Services.AddSingleton<IMappingService<Samples.MusicCollection.Api.Artists.Artist, Samples.MusicCollection.Api.Artists.ArtistResponse>, Samples.MusicCollection.Api.Artists.GetArtistToArtistResponseMappingServiceV1>();
 		builder.Services.AddSingleton<IMappingService<Samples.MusicCollection.Api.Genres.Genre, Samples.MusicCollection.Api.Genres.GenreResponse>, Samples.MusicCollection.Api.Genres.GetGenreToGenreResponseMappingServiceV1>();
 		builder.Services.AddSingleton<IMappingService<Samples.MusicCollection.Api.Keys.Key, Samples.MusicCollection.Api.Keys.KeyResponse>, Samples.MusicCollection.Api.Keys.GetKeyToKeyResponseMappingServiceV1>();
