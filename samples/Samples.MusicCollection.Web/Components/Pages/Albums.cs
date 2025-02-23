@@ -1,5 +1,5 @@
 ﻿using Samples.MusicCollection.Web.Albums;
-using System.Collections.Concurrent;
+using Samples.MusicCollection.Web.Sorting;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
 
@@ -7,11 +7,12 @@ namespace Samples.MusicCollection.Web.Components.Pages;
 /// 
 /// </summary>
 /// <param name="albumsApi"></param>
-public sealed partial class Albums(IAlbumsApi albumsApi)
+public sealed partial class Albums
 {
     #region Field Declarations
 
-    private readonly IAlbumsApi _albumsApi = albumsApi;
+    private readonly IAlbumsApi _albumsApi;
+    private readonly ISortingService<Album> _sortingService;
 
     #endregion
 
@@ -20,7 +21,25 @@ public sealed partial class Albums(IAlbumsApi albumsApi)
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<AlbumResponse>? AlbumResponses { get; private set; }
+    public IEnumerable<Album>? AlbumResponses { get; private set; }
+
+    #endregion
+
+    #region Constructor Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="albumsApi"></param>
+    /// <param name="sortingService"></param>
+    public Albums(IAlbumsApi albumsApi, ISortingService<Album> sortingService)
+    {
+        ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
+        ArgumentNullException.ThrowIfNull(sortingService, nameof(sortingService));
+
+        _albumsApi = albumsApi;
+        _sortingService = sortingService;
+    }
 
     #endregion
 
@@ -32,9 +51,19 @@ public sealed partial class Albums(IAlbumsApi albumsApi)
     /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
-        IEnumerable<AlbumResponse> albums = await _albumsApi.GetAlbumsAsync().ConfigureAwait(false);
+        IEnumerable<Album> albums = await _albumsApi.GetAlbumsAsync().ConfigureAwait(false);
         AlbumResponses = [.. albums.OrderBy(album => album.Name)];
     }
+
+    #endregion
+
+    #region Private Method Declarations 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sortKey"></param>
+    private void Sort(string sortKey) => AlbumResponses = _sortingService.Sort(AlbumResponses!, sortKey);
 
     #endregion
 }

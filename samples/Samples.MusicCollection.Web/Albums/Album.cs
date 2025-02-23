@@ -3,14 +3,14 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed record AlbumResponse
+public sealed record Album
 {
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public required int AlbumId { get; init; }
+    public int? AlbumId { get; init; }
 
     /// <summary>
     /// 

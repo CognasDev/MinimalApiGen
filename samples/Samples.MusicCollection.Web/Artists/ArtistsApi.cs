@@ -20,13 +20,13 @@ public sealed partial class ArtistsApi(IHttpClientFactory httpClientFactory) : I
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<ArtistResponse>> GetArtistsAsync()
+    public async Task<IEnumerable<Artist>> GetArtistsAsync()
     {
         HttpClient httpClient = _httpClientFactory.CreateClient();
-        IAsyncEnumerable<ArtistResponse?> response = httpClient.GetFromJsonAsAsyncEnumerable<ArtistResponse?>("https://localhost:7104/api/v1/artists");
-        ConcurrentBag<ArtistResponse> artists = [];
+        IAsyncEnumerable<Artist?> response = httpClient.GetFromJsonAsAsyncEnumerable<Artist?>("https://localhost:7104/api/v1/artists");
+        ConcurrentBag<Artist> artists = [];
 
-        await foreach (ArtistResponse? artist in response.ConfigureAwait(false))
+        await foreach (Artist? artist in response.ConfigureAwait(false))
         {
             if (artist is not null)
             {

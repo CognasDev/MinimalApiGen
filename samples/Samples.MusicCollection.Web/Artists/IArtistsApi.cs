@@ -11,7 +11,7 @@ public interface IArtistsApi
     /// 
     /// </summary>
     /// <returns></returns>
-    Task<IEnumerable<ArtistResponse>> GetArtistsAsync();
+    Task<IEnumerable<Artist>> GetArtistsAsync();
 
     #endregion
 }

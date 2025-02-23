@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed record ArtistRequest
+public sealed record Artist
 {
     #region Property Declarations
 

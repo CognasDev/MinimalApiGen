@@ -20,13 +20,13 @@ public sealed partial class AlbumsApi(IHttpClientFactory httpClientFactory) : IA
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<AlbumResponse>> GetAlbumsAsync()
+    public async Task<IEnumerable<Album>> GetAlbumsAsync()
     {
         HttpClient httpClient = _httpClientFactory.CreateClient();
-        IAsyncEnumerable<AlbumResponse?> response = httpClient.GetFromJsonAsAsyncEnumerable<AlbumResponse?>("https://localhost:7104/api/v1/albums");
-        ConcurrentBag<AlbumResponse> albums = [];
+        IAsyncEnumerable<Album?> response = httpClient.GetFromJsonAsAsyncEnumerable<Album?>("https://localhost:7104/api/v1/albums");
+        ConcurrentBag<Album> albums = [];
 
-        await foreach (AlbumResponse? album in response.ConfigureAwait(false))
+        await foreach (Album? album in response.ConfigureAwait(false))
         {
             if (album is not null)
             {

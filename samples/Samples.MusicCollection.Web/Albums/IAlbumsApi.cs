@@ -11,7 +11,7 @@ public interface IAlbumsApi
     /// 
     /// </summary>
     /// <returns></returns>
-    Task<IEnumerable<AlbumResponse>> GetAlbumsAsync();
+    Task<IEnumerable<Album>> GetAlbumsAsync();
 
     #endregion
 }

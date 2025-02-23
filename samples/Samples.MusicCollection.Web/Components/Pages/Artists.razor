@@ -1,5 +1,6 @@
 ﻿@page "/artists"
 @attribute [StreamRendering]
+@rendermode InteractiveServer
 @using Samples.MusicCollection.Web.Artists;
 
 <PageTitle>Artists</PageTitle>
@@ -18,11 +19,13 @@ else
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>
+                    <span class="sort-link" @onclick="@(e => Sort(nameof(Artist.Name)))">Name</span>
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (ArtistResponse artist in ArtistResponses)
+            @foreach (Artist artist in ArtistResponses)
             {
                 <tr>
                     <td>@artist.ArtistId</td>

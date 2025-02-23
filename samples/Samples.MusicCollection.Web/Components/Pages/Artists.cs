@@ -1,4 +1,5 @@
 ﻿using Samples.MusicCollection.Web.Artists;
+using Samples.MusicCollection.Web.Sorting;
 using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
@@ -7,11 +8,12 @@ namespace Samples.MusicCollection.Web.Components.Pages;
 /// 
 /// </summary>
 /// <param name="artistsApi"></param>
-public sealed partial class Artists(IArtistsApi artistsApi)
+public sealed partial class Artists
 {
     #region Field Declarations
 
-    private readonly IArtistsApi _artistsApi = artistsApi;
+    private readonly IArtistsApi _artistsApi;
+    private readonly ISortingService<Artist> _sortingService;
 
     #endregion
 
@@ -20,7 +22,25 @@ public sealed partial class Artists(IArtistsApi artistsApi)
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<ArtistResponse>? ArtistResponses { get; private set; }
+    public IEnumerable<Artist>? ArtistResponses { get; private set; }
+
+    #endregion
+
+    #region Constructor Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="artistsApi"></param>
+    /// <param name="sortingService"></param>
+    public Artists(IArtistsApi artistsApi, ISortingService<Artist> sortingService)
+    {
+        ArgumentNullException.ThrowIfNull(artistsApi, nameof(artistsApi));
+        ArgumentNullException.ThrowIfNull(sortingService, nameof(sortingService));
+
+        _artistsApi = artistsApi;
+        _sortingService = sortingService;
+    }
 
     #endregion
 
@@ -32,9 +52,19 @@ public sealed partial class Artists(IArtistsApi artistsApi)
     /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
-        IEnumerable<ArtistResponse> artists = await _artistsApi.GetArtistsAsync().ConfigureAwait(false);
+        IEnumerable<Artist> artists = await _artistsApi.GetArtistsAsync().ConfigureAwait(false);
         ArtistResponses = [.. artists.OrderBy(artist => artist.Name)];
     }
+
+    #endregion
+
+    #region Private Method Declarations 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sortKey"></param>
+    private void Sort(string sortKey) => ArtistResponses = _sortingService.Sort(ArtistResponses!, sortKey);
 
     #endregion
 }

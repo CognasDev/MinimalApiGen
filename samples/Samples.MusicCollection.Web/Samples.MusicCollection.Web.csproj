@@ -8,9 +8,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="Components\Pages\Counter.cs">
-			<DependentUpon>Counter.razor</DependentUpon>
-		</None>
 		<None Include="Components\Pages\Error.cs">
 			<DependentUpon>Error.razor</DependentUpon>
 		</None>

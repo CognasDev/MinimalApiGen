@@ -1,5 +1,6 @@
 ﻿@page "/albums"
 @attribute [StreamRendering]
+@rendermode InteractiveServer
 @using Samples.MusicCollection.Web.Albums;
 
 <PageTitle>Albums</PageTitle>
@@ -18,15 +19,21 @@ else
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>
+                    <span class="sort-link" @onclick="@(e => Sort(nameof(Album.Name)))">Name</span>
+                </th>
+                <th>
+                    <span class="sort-link" @onclick="@(e => Sort(nameof(Album.ReleaseDate)))">Release Date</span>
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (AlbumResponse album in AlbumResponses)
+            @foreach (Album album in AlbumResponses)
             {
                 <tr>
                     <td>@album.AlbumId</td>
                     <td>@album.Name</td>
+                    <td>@album.ReleaseDate.ToShortDateString()</td>
                 </tr>
             }
         </tbody>
