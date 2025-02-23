@@ -68,6 +68,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Samples.MusicCollection.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Api", "samples\Samples.MusicCollection.Api\Samples.MusicCollection.Api.csproj", "{D544945F-DF56-4A16-8356-81CD8C476393}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Web", "samples\Samples.MusicCollection.Web\Samples.MusicCollection.Web.csproj", "{18974716-C119-4D33-94B0-88A4F564EBEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,10 @@ Global
 		{D544945F-DF56-4A16-8356-81CD8C476393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D544945F-DF56-4A16-8356-81CD8C476393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D544945F-DF56-4A16-8356-81CD8C476393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18974716-C119-4D33-94B0-88A4F564EBEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18974716-C119-4D33-94B0-88A4F564EBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18974716-C119-4D33-94B0-88A4F564EBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18974716-C119-4D33-94B0-88A4F564EBEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +130,7 @@ Global
 		{5B201EAA-8A7C-4863-988F-98F1B2D7F7A2} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
 		{74FCF198-332C-4D19-9D44-14FBCC75B430} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{D544945F-DF56-4A16-8356-81CD8C476393} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
+		{18974716-C119-4D33-94B0-88A4F564EBEA} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5

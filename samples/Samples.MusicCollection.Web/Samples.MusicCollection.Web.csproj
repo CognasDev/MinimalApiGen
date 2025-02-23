@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>Latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Components\Pages\Counter.cs">
+			<DependentUpon>Counter.razor</DependentUpon>
+		</None>
+		<None Include="Components\Pages\Error.cs">
+			<DependentUpon>Error.razor</DependentUpon>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="appsettings.Development.json">
+			<DependentUpon>appsettings.json</DependentUpon>
+		</None>
+		<None Include="Components\Pages\Artists.cs">
+		  <DependentUpon>Artists.razor</DependentUpon>
+		</None>
+		<None Include="Components\Pages\Albums.cs">
+			<DependentUpon>Albums.razor</DependentUpon>
+		</None>
+	</ItemGroup>
+
+</Project>

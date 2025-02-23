@@ -1,0 +1,34 @@
+﻿@page "/albums"
+@attribute [StreamRendering]
+@using Samples.MusicCollection.Web.Albums;
+
+<PageTitle>Albums</PageTitle>
+
+<h1>Albums</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (AlbumResponses is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AlbumResponse album in AlbumResponses)
+            {
+                <tr>
+                    <td>@album.AlbumId</td>
+                    <td>@album.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,34 @@
+﻿@page "/artists"
+@attribute [StreamRendering]
+@using Samples.MusicCollection.Web.Artists;
+
+<PageTitle>Artists</PageTitle>
+
+<h1>Artists</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (ArtistResponses is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ArtistResponse artist in ArtistResponses)
+            {
+                <tr>
+                    <td>@artist.ArtistId</td>
+                    <td>@artist.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
