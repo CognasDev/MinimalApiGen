@@ -1,14 +1,14 @@
 ﻿using MinimalApiGen.Framework.Generation.Command.Shared;
 using MinimalApiGen.Generators.Abstractions.Command;
-using MinimalApiGen.Generators.Abstractions.Command.Post;
+using MinimalApiGen.Generators.Abstractions.Command.Put;
 using MinimalApiGen.Generators.Abstractions.Command.Shared;
 
-namespace MinimalApiGen.Framework.Generation.Command.Post;
+namespace MinimalApiGen.Framework.Generation.Command.Put;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithPostWithRequest : IWithPostWithRequest
+public sealed class WithPutWithFluentValidation : IWithPutWithFluentValidation
 {
     #region Public Method Declarations
 
@@ -17,7 +17,7 @@ public sealed class WithPostWithRequest : IWithPostWithRequest
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
-    public IWithPostWithResponse WithResponse<TResponse>() => new WithPostWithResponse();
+    public IWithPutWithResponse WithResponse<TResponse>() => new WithPutWithResponse();
 
     /// <summary>
     /// 
@@ -37,12 +37,6 @@ public sealed class WithPostWithRequest : IWithPostWithRequest
     /// <param name="version"></param>
     /// <returns></returns>
     public ICommandOperations WithVersion(int version) => new CommandOperations();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public IWithPostWithFluentValidation WithFluentValidation() => new WithPostWithFluentValidation();
 
     #endregion
 }

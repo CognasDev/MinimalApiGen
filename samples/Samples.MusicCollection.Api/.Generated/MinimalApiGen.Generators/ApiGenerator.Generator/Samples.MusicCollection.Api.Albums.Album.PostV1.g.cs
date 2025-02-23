@@ -24,18 +24,26 @@ public partial class AlbumCommandRouteEndpointsMapper
         return endpointRouteBuilder.MapPost
         (
             "/albums",
-            async Task<Results<CreatedAtRoute<AlbumResponse>, BadRequest>>
+            async Task<Results<CreatedAtRoute<AlbumResponse>, BadRequest, ValidationProblem>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] AlbumRequest request,
+				[FromServices] FluentValidation.IValidator<AlbumRequest> validator,
                 [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandBusinessLogic businessLogic,
                 [FromServices] IMappingService<AlbumRequest, Album> requestMappingService,
                 [FromServices] IMappingService<Album, AlbumResponse> responseMappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(validator, nameof(validator));
+				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
+                
+				FluentValidation.Results.ValidationResult validationResult = await validator.ValidateAsync(request).ConfigureAwait(false);
+				if (!validationResult.IsValid)
+				{
+					return TypedResults.ValidationProblem(validationResult.ToDictionary());
+				}
 
                 Album model = requestMappingService.Map(request);
                 Album? insertedModel = await businessLogic.InsertAlbumAsync(model).ConfigureAwait(false);

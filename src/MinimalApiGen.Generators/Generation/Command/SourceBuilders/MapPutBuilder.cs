@@ -123,6 +123,26 @@ internal sealed class MapPutBuilder(ICommandResult commandResult, ServicesBuilde
                                                                                      commandResult.KeyedServices,
                                                                                      commandResult.ModelFullyQualifiedName);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FluentValidationService => commandResult.WithFluentValidation ? BuildFluentValidationService() : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FluentValidationCall => commandResult.WithFluentValidation ? BuildFluentValidationCall() : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FluentValidationResult => commandResult.WithFluentValidation ? ", ValidationProblem" : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FluentValidatorNullCheck => commandResult.WithFluentValidation ? BuildFluentValidationNullCheck() : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -157,20 +177,20 @@ public partial class {ClassName}
         return endpointRouteBuilder.MapPut
         (
             ""/{ModelPluralNameLower}/{{id}}"",
-            async Task<Results<Ok<{ResponseName}>, BadRequest>>
+            async Task<Results<Ok<{ResponseName}>, BadRequest{FluentValidationResult}>>
             (
                 CancellationToken cancellationToken,
                 [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
-                [FromBody] {RequestName} request,
+                [FromBody] {RequestName} request,{FluentValidationService}
                 [FromServices] {BusinessLogic} businessLogic,
                 [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> responseMappingService{FromServices}{FromKeyedServices}
             ) =>
             {{
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                {FluentValidatorNullCheck}ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
-
+                {FluentValidationCall}
                 {ModelName} model = requestMappingService.Map(request);
 
                 if (model.{ModelIdPropertyName} != id)
@@ -258,6 +278,52 @@ public partial class {ClassName}
     /// <param name="underlyingType"></param>
     /// <returns></returns>
     private static string BuildModelIdPropertyNullCheck(string? underlyingType) => string.IsNullOrEmpty(underlyingType) ? string.Empty : $" ?? throw new {nameof(NullReferenceException)}()";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private string BuildFluentValidationService()
+    {
+        StringBuilder stringBuilder = new();
+        stringBuilder.AppendLine();
+        stringBuilder.Append("\t\t\t\t[FromServices] FluentValidation.IValidator");
+        stringBuilder.Append("<");
+        stringBuilder.Append(RequestName);
+        stringBuilder.Append("> validator,");
+        string result = stringBuilder.ToString();
+        return result;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private static string BuildFluentValidationCall()
+    {
+        StringBuilder stringBuilder = new();
+        stringBuilder.AppendLine();
+        stringBuilder.AppendLine("\t\t\t\tFluentValidation.Results.ValidationResult validationResult = await validator.ValidateAsync(request).ConfigureAwait(false);");
+        stringBuilder.AppendLine("\t\t\t\tif (!validationResult.IsValid)");
+        stringBuilder.AppendLine("\t\t\t\t{");
+        stringBuilder.AppendLine("\t\t\t\t\treturn TypedResults.ValidationProblem(validationResult.ToDictionary());");
+        stringBuilder.AppendLine("\t\t\t\t}");
+        string result = stringBuilder.ToString();
+        return result;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private static string BuildFluentValidationNullCheck()
+    {
+        StringBuilder stringBuilder = new();
+        stringBuilder.AppendLine("ArgumentNullException.ThrowIfNull(validator, nameof(validator));");
+        stringBuilder.Append("\t\t\t\t");
+        string result = stringBuilder.ToString();
+        return result;
+    }
 
     #endregion
 }

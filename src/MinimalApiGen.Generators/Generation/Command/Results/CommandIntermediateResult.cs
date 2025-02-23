@@ -86,5 +86,10 @@ internal sealed record CommandIntermediateResult
     /// </summary>
     public bool WithResponseMappingService { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithFluentValidation { get; set; }
+
     #endregion
 }

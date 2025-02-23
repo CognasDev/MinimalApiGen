@@ -1,3 +1,4 @@
+using FluentValidation;
 using MinimalApiGen.Framework.Data;
 using MinimalApiGen.Framework.Extensions;
 using MinimalApiGen.Framework.Generation;
@@ -16,6 +17,8 @@ builder.ConfigureLogging(LoggingType.File);
 builder.AddMinimalApiFramework();
 builder.AddMinimalApiFrameworkData();
 builder.AddMinimalApiFramewokMappingServices();
+
+builder.Services.AddValidatorsFromAssemblyContaining<ArtistRequestValidator>(ServiceLifetime.Singleton);
 
 builder.Services.AddSingleton<IArtistsCommandBusinessLogic, ArtistsCommandBusinessLogic>();
 builder.Services.AddSingleton<IAlbumsCommandBusinessLogic, AlbumsCommandBusinessLogic>();

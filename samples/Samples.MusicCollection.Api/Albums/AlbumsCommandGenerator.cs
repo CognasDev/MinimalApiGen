@@ -20,6 +20,7 @@ public sealed class AlbumsCommandGenerator
                                       .WithPost()
                                             .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.InsertAlbumAsync)
                                             .WithRequest<AlbumRequest>()
+                                            .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<AlbumResponse>()
                                             .WithResponseMappingService();
@@ -29,6 +30,7 @@ public sealed class AlbumsCommandGenerator
                                       .WithPut()
                                           .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.UpdateAlbumAsync)
                                           .WithRequest<AlbumRequest>()
+                                          .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<AlbumResponse>()
                                           .WithResponseMappingService();

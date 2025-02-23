@@ -35,5 +35,10 @@ internal interface ICommandResult : IResult
     /// </summary>
     EquatableArray<string> RequestProperties { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    bool WithFluentValidation { get; }
+
     #endregion
 }

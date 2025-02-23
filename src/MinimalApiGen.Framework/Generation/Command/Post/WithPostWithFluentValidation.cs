@@ -8,7 +8,7 @@ namespace MinimalApiGen.Framework.Generation.Command.Post;
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithPostWithRequest : IWithPostWithRequest
+public sealed class WithPostWithFluentValidation : IWithPostWithFluentValidation
 {
     #region Public Method Declarations
 
@@ -37,12 +37,6 @@ public sealed class WithPostWithRequest : IWithPostWithRequest
     /// <param name="version"></param>
     /// <returns></returns>
     public ICommandOperations WithVersion(int version) => new CommandOperations();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public IWithPostWithFluentValidation WithFluentValidation() => new WithPostWithFluentValidation();
 
     #endregion
 }

@@ -16,26 +16,28 @@ public sealed class ArtistsCommandGenerator
     public ArtistsCommandGenerator()
     {
         ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandBusinessLogic>()
-                                      .WithModelId(model => model.ArtistId)
-                                      .WithPost()
+                                       .WithModelId(model => model.ArtistId)
+                                       .WithPost()
                                             .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.InsertArtistAsync)
                                             .WithRequest<ArtistRequest>()
+                                            .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<ArtistResponse>()
                                             .WithResponseMappingService();
 
         ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandBusinessLogic>()
-                                      .WithModelId(model => model.ArtistId)
-                                      .WithPut()
-                                          .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.UpdateArtistAsync)
-                                          .WithRequest<ArtistRequest>()
-                                          .WithRequestMappingService()
-                                          .WithResponse<ArtistResponse>()
-                                          .WithResponseMappingService();
+                                       .WithModelId(model => model.ArtistId)
+                                       .WithPut()
+                                           .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.UpdateArtistAsync)
+                                           .WithRequest<ArtistRequest>()
+                                           .WithFluentValidation()
+                                           .WithRequestMappingService()
+                                           .WithResponse<ArtistResponse>()
+                                           .WithResponseMappingService();
 
         ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandBusinessLogic>()
-                                      .WithModelId(model => model.ArtistId)
-                                      .WithDelete()
+                                       .WithModelId(model => model.ArtistId)
+                                       .WithDelete()
                                             .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.DeleteArtistAsync);
 
     }

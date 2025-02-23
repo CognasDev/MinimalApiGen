@@ -3,6 +3,7 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MinimalApiGen.Framework.Collections;
 using System.Reflection;
 
 namespace MinimalApiGen.Framework.Swagger;
@@ -27,12 +28,12 @@ public static class SwaggerExtensions
             webApplication.UseSwaggerUI(swaggerUiOptions =>
             {
                 IReadOnlyList<ApiVersionDescription> apiVersionDescriptions = webApplication.DescribeApiVersions();
-                foreach (ApiVersionDescription apiVersionDescription in apiVersionDescriptions)
+                apiVersionDescriptions.FastForEach(apiVersionDescription =>
                 {
                     string url = $"/swagger/{apiVersionDescription.GroupName}/{jsonFilename}.json";
                     string name = apiVersionDescription.GroupName.ToUpperInvariant();
                     swaggerUiOptions.SwaggerEndpoint(url, name);
-                };
+                });
             });
         }
     }
@@ -56,10 +57,8 @@ public static class SwaggerExtensions
         {
             swaggerGenAction.DocumentFilter<SwaggerSortedDocumentFilter>();
             swaggerGenAction.DescribeAllParametersInCamelCase();
-            foreach (string xmlDocumentPath in xmlDocumentPaths)
-            {
-                swaggerGenAction.IncludeXmlComments(xmlDocumentPath);
-            }
+            swaggerGenAction.CustomSchemaIds(type => type.FullName);
+            xmlDocumentPaths.FastForEach(xmlDocumentPath => swaggerGenAction.IncludeXmlComments(xmlDocumentPath));
         });
     }
 
