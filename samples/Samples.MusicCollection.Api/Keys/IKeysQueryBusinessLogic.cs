@@ -5,7 +5,7 @@
 /// </summary>
 public interface IKeysQueryBusinessLogic
 {
-    #region Public Method Declarations
+    #region Method Declarations
 
     /// <summary>
     /// 

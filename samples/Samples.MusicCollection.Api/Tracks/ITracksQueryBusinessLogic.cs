@@ -5,7 +5,7 @@
 /// </summary>
 public interface ITracksQueryBusinessLogic
 {
-    #region Public Method Declarations
+    #region Method Declarations
 
     /// <summary>
     /// 

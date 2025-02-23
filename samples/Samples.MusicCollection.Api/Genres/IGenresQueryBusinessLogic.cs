@@ -5,7 +5,7 @@
 /// </summary>
 public interface IGenresQueryBusinessLogic
 {
-    #region Public Method Declarations
+    #region Method Declarations
 
     /// <summary>
     /// 
