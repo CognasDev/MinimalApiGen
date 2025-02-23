@@ -5,7 +5,7 @@
 /// </summary>
 public interface IArtistsQueryBusinessLogic
 {
-    #region Public Method Declarations
+    #region Method Declarations
 
     /// <summary>
     /// 

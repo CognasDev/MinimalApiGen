@@ -5,7 +5,7 @@
 /// </summary>
 public interface ILabelsQueryBusinessLogic
 {
-    #region Public Method Declarations
+    #region Method Declarations
 
     /// <summary>
     /// 

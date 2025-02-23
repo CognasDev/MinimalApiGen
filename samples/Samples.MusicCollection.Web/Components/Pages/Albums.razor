@@ -1,0 +1,41 @@
+﻿@page "/albums"
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+@using Samples.MusicCollection.Web.Albums;
+
+<PageTitle>Albums</PageTitle>
+
+<h1>Albums</h1>
+
+<p>This component demonstrates showing data.</p>
+
+@if (AlbumResponses is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>
+                    <span class="sort-link" @onclick="@(e => Sort(nameof(Album.Name)))">Name</span>
+                </th>
+                <th>
+                    <span class="sort-link" @onclick="@(e => Sort(nameof(Album.ReleaseDate)))">Release Date</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Album album in AlbumResponses)
+            {
+                <tr>
+                    <td>@album.AlbumId</td>
+                    <td>@album.Name</td>
+                    <td>@album.ReleaseDate.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
