@@ -37,7 +37,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
-
+                
                 SampleModel model = requestMappingService.Map(request);
 
                 if (model.Id != id)

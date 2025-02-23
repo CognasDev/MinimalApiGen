@@ -24,18 +24,26 @@ public partial class GenreCommandRouteEndpointsMapper
         return endpointRouteBuilder.MapPost
         (
             "/genres",
-            async Task<Results<CreatedAtRoute<GenreResponse>, BadRequest>>
+            async Task<Results<CreatedAtRoute<GenreResponse>, BadRequest, ValidationProblem>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] GenreRequest request,
+				[FromServices] FluentValidation.IValidator<GenreRequest> validator,
                 [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandBusinessLogic businessLogic,
                 [FromServices] IMappingService<GenreRequest, Genre> requestMappingService,
                 [FromServices] IMappingService<Genre, GenreResponse> responseMappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(validator, nameof(validator));
+				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
+                
+				FluentValidation.Results.ValidationResult validationResult = await validator.ValidateAsync(request).ConfigureAwait(false);
+				if (!validationResult.IsValid)
+				{
+					return TypedResults.ValidationProblem(validationResult.ToDictionary());
+				}
 
                 Genre model = requestMappingService.Map(request);
                 Genre? insertedModel = await businessLogic.InsertGenreAsync(model).ConfigureAwait(false);

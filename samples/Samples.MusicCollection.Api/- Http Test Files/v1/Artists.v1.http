@@ -29,16 +29,16 @@ Content-Type: application/json
 }
 
 ### PUT an existing artist - 200
-PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/5
+PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/1001
 Content-Type: application/json
 
 {
-    "artistId" : 5,
+    "artistId" : 1001,
     "name" : "updated"
 }
 
 ### DELETE a artist that exists
-DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/5
+DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/1001
 
 ### DELETE a artist that does not exist
 DELETE {{Samples.MusicCollection.Api_HostAddress}}/api/v1/artists/0

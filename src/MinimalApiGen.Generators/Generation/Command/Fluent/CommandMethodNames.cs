@@ -86,6 +86,11 @@ internal static class CommandMethodNames
     /// </summary>
     public static string WithPostResponse { get; } = $"{typeof(IPostResponse).FullName}.{nameof(IPostResponse.WithResponse)}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPostFluentValidation { get; } = $"{typeof(IPostFluentValidation).FullName}.{nameof(IPostFluentValidation.WithFluentValidation)}";
+
     #endregion
 
     #region Property Declarations - Put
@@ -119,6 +124,11 @@ internal static class CommandMethodNames
     /// 
     /// </summary>
     public static string WithPutResponse { get; } = $"{typeof(IPutResponse).FullName}.{nameof(IPutResponse.WithResponse)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutFluentValidation { get; } = $"{typeof(IPutFluentValidation).FullName}.{nameof(IPutFluentValidation.WithFluentValidation)}";
 
     #endregion
 

@@ -5,6 +5,6 @@ namespace MinimalApiGen.Generators.Abstractions.Command.Post;
 /// <summary>
 /// 
 /// </summary>
-public interface IWithPostWithRequest : IPostFluentValidation, IRequestMappingService, IResponseMappingService, IPostResponse, IVersion
+public interface IWithPostWithFluentValidation : IRequestMappingService, IResponseMappingService, IPostResponse, IVersion
 {
 }

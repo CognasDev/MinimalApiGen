@@ -20,6 +20,7 @@ public sealed class GenresCommandGenerator
                                       .WithPost()
                                             .WithBusinessLogic<IGenresCommandBusinessLogic>(command => command.InsertGenreAsync)
                                             .WithRequest<GenreRequest>()
+                                            .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<GenreResponse>()
                                             .WithResponseMappingService();
@@ -29,6 +30,7 @@ public sealed class GenresCommandGenerator
                                       .WithPut()
                                           .WithBusinessLogic<IGenresCommandBusinessLogic>(command => command.UpdateGenreAsync)
                                           .WithRequest<GenreRequest>()
+                                          .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<GenreResponse>()
                                           .WithResponseMappingService();

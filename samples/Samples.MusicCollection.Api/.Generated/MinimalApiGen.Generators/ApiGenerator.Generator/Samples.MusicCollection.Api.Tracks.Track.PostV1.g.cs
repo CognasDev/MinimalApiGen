@@ -24,18 +24,26 @@ public partial class TrackCommandRouteEndpointsMapper
         return endpointRouteBuilder.MapPost
         (
             "/tracks",
-            async Task<Results<CreatedAtRoute<TrackResponse>, BadRequest>>
+            async Task<Results<CreatedAtRoute<TrackResponse>, BadRequest, ValidationProblem>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] TrackRequest request,
+				[FromServices] FluentValidation.IValidator<TrackRequest> validator,
                 [FromServices] Samples.MusicCollection.Api.Tracks.ITracksCommandBusinessLogic businessLogic,
                 [FromServices] IMappingService<TrackRequest, Track> requestMappingService,
                 [FromServices] IMappingService<Track, TrackResponse> responseMappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(validator, nameof(validator));
+				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
+                
+				FluentValidation.Results.ValidationResult validationResult = await validator.ValidateAsync(request).ConfigureAwait(false);
+				if (!validationResult.IsValid)
+				{
+					return TypedResults.ValidationProblem(validationResult.ToDictionary());
+				}
 
                 Track model = requestMappingService.Map(request);
                 Track? insertedModel = await businessLogic.InsertTrackAsync(model).ConfigureAwait(false);

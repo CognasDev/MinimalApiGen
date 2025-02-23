@@ -38,5 +38,11 @@ public sealed class WithPutWithRequest : IWithPutWithRequest
     /// <returns></returns>
     public ICommandOperations WithVersion(int version) => new CommandOperations();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IWithPutWithFluentValidation WithFluentValidation() => new WithPutWithFluentValidation();
+
     #endregion
 }

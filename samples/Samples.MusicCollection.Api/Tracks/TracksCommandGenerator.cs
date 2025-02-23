@@ -20,6 +20,7 @@ public sealed class TracksCommandGenerator
                                       .WithPost()
                                             .WithBusinessLogic<ITracksCommandBusinessLogic>(command => command.InsertTrackAsync)
                                             .WithRequest<TrackRequest>()
+                                            .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<TrackResponse>()
                                             .WithResponseMappingService();
@@ -29,6 +30,7 @@ public sealed class TracksCommandGenerator
                                       .WithPut()
                                           .WithBusinessLogic<ITracksCommandBusinessLogic>(command => command.UpdateTrackAsync)
                                           .WithRequest<TrackRequest>()
+                                          .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<TrackResponse>()
                                           .WithResponseMappingService();

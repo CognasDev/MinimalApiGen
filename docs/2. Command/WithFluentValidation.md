@@ -1,0 +1,5 @@
+# MinimalApiGen
+
+## Command
+
+### WithFluentValidation

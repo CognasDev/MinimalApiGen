@@ -85,6 +85,11 @@ internal readonly record struct CommandResult : ICommandResult
     /// </summary>
     public EquatableArray<string> RequestProperties { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithFluentValidation { get; }
+
     #endregion
 
     #region Property Declarations - Response Details
@@ -169,6 +174,7 @@ internal readonly record struct CommandResult : ICommandResult
         OperationType = commandIntermediateResult.CommandType;
 
         RequestName = commandIntermediateResult.RequestResult.RequestName;
+        WithFluentValidation = commandIntermediateResult.WithFluentValidation;
         RequestFullyQualifiedName = commandIntermediateResult.RequestResult.RequestFullyQualifiedName;
         ResponseName = commandIntermediateResult.ResponseResult?.ResponseName;
         ResponseFullyQualifiedName = commandIntermediateResult.ResponseResult?.ResponseFullyQualifiedName;
@@ -221,7 +227,8 @@ internal readonly record struct CommandResult : ICommandResult
                KeyedServices == result.KeyedServices &&
                BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
                BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
-               BusinessLogicParameters == result.BusinessLogicParameters;
+               BusinessLogicParameters == result.BusinessLogicParameters &&
+               WithFluentValidation == result.WithFluentValidation;
     }
 
     #endregion

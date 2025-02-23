@@ -24,18 +24,26 @@ public partial class LabelCommandRouteEndpointsMapper
         return endpointRouteBuilder.MapPost
         (
             "/labels",
-            async Task<Results<CreatedAtRoute<LabelResponse>, BadRequest>>
+            async Task<Results<CreatedAtRoute<LabelResponse>, BadRequest, ValidationProblem>>
             (
                 CancellationToken cancellationToken,
                 [FromBody] LabelRequest request,
+				[FromServices] FluentValidation.IValidator<LabelRequest> validator,
                 [FromServices] Samples.MusicCollection.Api.Labels.ILabelsCommandBusinessLogic businessLogic,
                 [FromServices] IMappingService<LabelRequest, Label> requestMappingService,
                 [FromServices] IMappingService<Label, LabelResponse> responseMappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(validator, nameof(validator));
+				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
+                
+				FluentValidation.Results.ValidationResult validationResult = await validator.ValidateAsync(request).ConfigureAwait(false);
+				if (!validationResult.IsValid)
+				{
+					return TypedResults.ValidationProblem(validationResult.ToDictionary());
+				}
 
                 Label model = requestMappingService.Map(request);
                 Label? insertedModel = await businessLogic.InsertLabelAsync(model).ConfigureAwait(false);

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using MinimalApiGen.Framework.ExceptionHandling;
 using MinimalApiGen.Framework.HealthChecks;
 using MinimalApiGen.Framework.Services;
 using MinimalApiGen.Framework.Swagger;
 using MinimalApiGen.Framework.Versioning;
+using System.Diagnostics;
 
 namespace MinimalApiGen.Framework.Extensions;
 
@@ -28,8 +30,18 @@ public static class MinimalApiFrameworkExtensions
         serviceCollection.AddExceptionHandlers();
         serviceCollection.AddHttpClientServices();
         serviceCollection.AddOutputCache();
-        serviceCollection.AddProblemDetails();
         serviceCollection.AddVersioning();
+
+        serviceCollection.AddProblemDetails(options =>
+        {
+            options.CustomizeProblemDetails = context =>
+            {
+                context.ProblemDetails.Instance = $"{context.HttpContext.Request.Method} {context.HttpContext.Request.Path}";
+                context.ProblemDetails.Extensions.TryAdd("traceId", context.HttpContext.TraceIdentifier);
+                Activity? activity = context.HttpContext.Features.Get<IHttpActivityFeature>()?.Activity;
+                context.ProblemDetails.Extensions.TryAdd("activityId", activity?.Id);
+            };
+        });
 
         serviceCollection.ConfigureOptions<ConfigureSwaggerGenOptions>();
         serviceCollection.ConfigureSwaggerGen();

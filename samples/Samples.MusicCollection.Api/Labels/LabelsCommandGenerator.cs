@@ -20,6 +20,7 @@ public sealed class LabelsCommandGenerator
                                       .WithPost()
                                             .WithBusinessLogic<ILabelsCommandBusinessLogic>(command => command.InsertLabelAsync)
                                             .WithRequest<LabelRequest>()
+                                            .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<LabelResponse>()
                                             .WithResponseMappingService();
@@ -29,6 +30,7 @@ public sealed class LabelsCommandGenerator
                                       .WithPut()
                                           .WithBusinessLogic<ILabelsCommandBusinessLogic>(command => command.UpdateLabelAsync)
                                           .WithRequest<LabelRequest>()
+                                          .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<LabelResponse>()
                                           .WithResponseMappingService();

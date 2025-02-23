@@ -78,6 +78,9 @@ internal sealed class CommandProcessor
                 case string name when (name == CommandMethodNames.WithPostResponse || name == CommandMethodNames.WithPutResponse) && fluentMethod.IsGeneric:
                     intermediateResult!.ResponseResult = invocationInfo.ToResponse();
                     break;
+                case string name when (name == CommandMethodNames.WithPostFluentValidation || name == CommandMethodNames.WithPutFluentValidation):
+                    intermediateResult!.WithFluentValidation = true;
+                    break;
                 case string name when name == CommandMethodNames.WithRequestMappingService:
                     intermediateResult!.WithRequestMappingService = true;
                     break;
