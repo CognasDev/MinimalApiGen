@@ -1,16 +1,19 @@
+using MinimalApiGen.Framework.Pluralize;
 using Radzen;
-using Samples.MusicCollection.Web.Albums;
-using Samples.MusicCollection.Web.Artists;
+using Samples.MusicCollection.Web;
 using Samples.MusicCollection.Web.Components;
+using Samples.MusicCollection.Web.Config;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddHttpClient();
-
-builder.Services.AddSingleton<IAlbumsApi, AlbumsApi>();
-builder.Services.AddSingleton<IArtistsApi, ArtistsApi>();
 builder.Services.AddRadzenComponents();
+
+builder.BindConfigSection<ApiDetails>();
+
+builder.Services.AddSingleton<IPluralizer, Pluralizer>();
+builder.Services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
 
 WebApplication webApplication = builder.Build();
 

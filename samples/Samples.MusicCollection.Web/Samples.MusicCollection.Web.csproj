@@ -17,11 +17,8 @@
 		<None Include="appsettings.Development.json">
 			<DependentUpon>appsettings.json</DependentUpon>
 		</None>
-		<None Include="Components\Pages\Artists.cs">
-		  <DependentUpon>Artists.razor</DependentUpon>
-		</None>
-		<None Include="Components\Pages\Albums.cs">
-			<DependentUpon>Albums.razor</DependentUpon>
+		<None Include="Components\Pages\AlbumsPage.cs">
+			<DependentUpon>AlbumsPage.razor</DependentUpon>
 		</None>
 	</ItemGroup>
 
@@ -34,5 +31,7 @@
 	<ItemGroup>
 	  <PackageReference Include="Radzen.Blazor" Version="6.0.20" />
 	</ItemGroup>
+	
+	<Import Project="..\..\src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems" Label="Shared" />
 
 </Project>
