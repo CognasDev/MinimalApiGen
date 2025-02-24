@@ -1,23 +1,34 @@
 ﻿using Microsoft.Extensions.Options;
+using MinimalApiGen.Framework.Pluralize;
 using Samples.MusicCollection.Web.Config;
 using System.Collections.Concurrent;
-using System.Text.Json;
 
-namespace Samples.MusicCollection.Web.Albums;
+namespace Samples.MusicCollection.Web;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed partial class AlbumRepository : IAlbumRepository, IDisposable
+/// <typeparam name="TModel"></typeparam>
+public sealed class Repository<TModel> : IRepository<TModel>, IDisposable
 {
     #region Field Declarations
 
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ConcurrentBag<Album> _albums = [];
+    private readonly ConcurrentBag<TModel> _models = [];
     private ApiDetails _apiDetails;
 
     private readonly IDisposable? _configChangeListener;
     private bool _disposed;
+    private readonly string _pluralModelName;
+
+    #endregion
+
+    #region Property Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private string RequestUri => $"{_apiDetails.Url}/{_pluralModelName}";
 
     #endregion
 
@@ -27,15 +38,18 @@ public sealed partial class AlbumRepository : IAlbumRepository, IDisposable
     /// 
     /// </summary>
     /// <param name="httpClientFactory"></param>
+    /// <param name="pluralizer"></param>
     /// <param name="apiDetailsMonitor"></param>
-    public AlbumRepository(IHttpClientFactory httpClientFactory, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
+    public Repository(IHttpClientFactory httpClientFactory, IPluralizer pluralizer, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
     {
         ArgumentNullException.ThrowIfNull(httpClientFactory,nameof(httpClientFactory));
+        ArgumentNullException.ThrowIfNull(pluralizer, nameof(pluralizer));
         ArgumentNullException.ThrowIfNull(apiDetailsMonitor, nameof(apiDetailsMonitor));
 
         _configChangeListener = apiDetailsMonitor.OnChange(apiDetails => _apiDetails = apiDetails);
 
         _httpClientFactory = httpClientFactory;
+        _pluralModelName = pluralizer.Pluralize(typeof(TModel).Name).ToLowerInvariant();
         _apiDetails = apiDetailsMonitor.CurrentValue;
     }
 
@@ -46,35 +60,38 @@ public sealed partial class AlbumRepository : IAlbumRepository, IDisposable
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<Album>> GetAlbumsAsync()
+    public async Task<IEnumerable<TModel>> GetAsync(CancellationToken cancellationToken = default)
     {
         HttpClient httpClient = _httpClientFactory.CreateClient();
-        IAsyncEnumerable<Album?> response = httpClient.GetFromJsonAsAsyncEnumerable<Album?>($"{_apiDetails.Url}/albums");
-        _albums.Clear();
+        IAsyncEnumerable<TModel?> response = httpClient.GetFromJsonAsAsyncEnumerable<TModel?>(RequestUri, cancellationToken);
+        _models.Clear();
 
-        await foreach (Album? album in response.ConfigureAwait(false))
+        await foreach (TModel? model in response.ConfigureAwait(false))
         {
-            if (album is not null)
+            cancellationToken.ThrowIfCancellationRequested();
+            if (model is not null)
             {
-                _albums.Add(album);
+                _models.Add(model);
             }
         }
-        return _albums;
+        return _models;
     }
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="album"></param>
+    /// <param name="model"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<Album?> InsertAlbumAsync(Album album)
+    public async Task<TModel?> InsertAsync(TModel model, CancellationToken cancellationToken = default)
     {
         HttpClient httpClient = _httpClientFactory.CreateClient();
-        HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync($"{_apiDetails.Url}/albums", album).ConfigureAwait(false);
+        using HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync(RequestUri, model, cancellationToken).ConfigureAwait(false);
         responseMessage.EnsureSuccessStatusCode();
-        Album? insertedAlbum = await responseMessage.Content.ReadFromJsonAsync<Album>().ConfigureAwait(false);
-        return insertedAlbum;
+        TModel? insertedModel = await responseMessage.Content.ReadFromJsonAsync<TModel>(cancellationToken).ConfigureAwait(false);
+        return insertedModel;
     }
 
     /// <summary>

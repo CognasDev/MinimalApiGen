@@ -1,5 +1,6 @@
+using MinimalApiGen.Framework.Pluralize;
 using Radzen;
-using Samples.MusicCollection.Web.Albums;
+using Samples.MusicCollection.Web;
 using Samples.MusicCollection.Web.Components;
 using Samples.MusicCollection.Web.Config;
 
@@ -11,7 +12,8 @@ builder.Services.AddRadzenComponents();
 
 builder.BindConfigSection<ApiDetails>();
 
-builder.Services.AddSingleton<IAlbumRepository, AlbumRepository>();
+builder.Services.AddSingleton<IPluralizer, Pluralizer>();
+builder.Services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
 
 WebApplication webApplication = builder.Build();
 

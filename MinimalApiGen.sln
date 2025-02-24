@@ -133,6 +133,7 @@ Global
 		{18974716-C119-4D33-94B0-88A4F564EBEA} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{18974716-c119-4d33-94b0-88a4f564ebea}*SharedItemsImports = 5
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
 		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{5b201eaa-8a7c-4863-988f-98f1b2d7f7a2}*SharedItemsImports = 13

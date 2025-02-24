@@ -6,12 +6,11 @@ namespace Samples.MusicCollection.Web.Components.Pages;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="albumsApi"></param>
-public sealed partial class Albums
+public sealed partial class AlbumsPage
 {
     #region Field Declarations
 
-    private readonly IAlbumRepository _albumsRepository;
+    private readonly IRepository<Album> _albumsRepository;
     private RadzenDataGrid<Album>? _dataGrid;
 
     #endregion
@@ -21,7 +20,7 @@ public sealed partial class Albums
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<Album>? AlbumResponses { get; private set; }
+    public IEnumerable<Album>? Albums { get; private set; }
 
     #endregion
 
@@ -31,7 +30,7 @@ public sealed partial class Albums
     /// 
     /// </summary>
     /// <param name="albumsRepository"></param>
-    public Albums(IAlbumRepository albumsRepository)
+    public AlbumsPage(IRepository<Album> albumsRepository)
     {
         ArgumentNullException.ThrowIfNull(albumsRepository, nameof(albumsRepository));
         _albumsRepository = albumsRepository;
@@ -47,8 +46,8 @@ public sealed partial class Albums
     /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
-        IEnumerable<Album> albums = await _albumsRepository.GetAlbumsAsync().ConfigureAwait(false);
-        AlbumResponses = [.. albums.OrderBy(album => album.Name)];
+        IEnumerable<Album> albums = await _albumsRepository.GetAsync().ConfigureAwait(false);
+        Albums = [.. albums.OrderBy(album => album.Name)];
     }
 
     #endregion
@@ -69,7 +68,7 @@ public sealed partial class Albums
             Name = Guid.NewGuid().ToString(),
             ReleaseDate = DateTime.Now
         };
-        await _albumsRepository.InsertAlbumAsync(album).ConfigureAwait(false);
+        await _albumsRepository.InsertAsync(album).ConfigureAwait(false);
         await InvokeAsync(_dataGrid!.Reload).ConfigureAwait(false);
     }
 
