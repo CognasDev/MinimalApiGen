@@ -6,49 +6,13 @@
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="artists">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Artists
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="albums">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Albums
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="genres">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Genres
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="keys">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Keys
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="labels">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Labels
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="tracks">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Tracks
-            </NavLink>
-        </div>
-
-    </nav>
-</div>
+<RadzenStack AlignItems="AlignItems.Stretch">
+    <RadzenPanelMenu>
+        <RadzenPanelMenuItem Text="Artists" Path="artists" Icon="account_circle"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Albums" Path="albums" Icon="account_circle"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Genres" Path="genres" Icon="account_circle"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Keys" Path="keys" Icon="account_circle"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Labels" Path="lables" Icon="account_circle"></RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Tracks" Path="tracks" Icon="account_circle"></RadzenPanelMenuItem>
+    </RadzenPanelMenu>
+</RadzenStack>

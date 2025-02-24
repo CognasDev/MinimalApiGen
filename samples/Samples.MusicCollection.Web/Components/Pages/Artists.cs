@@ -1,5 +1,4 @@
 ﻿using Samples.MusicCollection.Web.Artists;
-using Samples.MusicCollection.Web.Sorting;
 using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
@@ -13,7 +12,6 @@ public sealed partial class Artists
     #region Field Declarations
 
     private readonly IArtistsApi _artistsApi;
-    private readonly ISortingService<Artist> _sortingService;
 
     #endregion
 
@@ -32,14 +30,10 @@ public sealed partial class Artists
     /// 
     /// </summary>
     /// <param name="artistsApi"></param>
-    /// <param name="sortingService"></param>
-    public Artists(IArtistsApi artistsApi, ISortingService<Artist> sortingService)
+    public Artists(IArtistsApi artistsApi)
     {
         ArgumentNullException.ThrowIfNull(artistsApi, nameof(artistsApi));
-        ArgumentNullException.ThrowIfNull(sortingService, nameof(sortingService));
-
         _artistsApi = artistsApi;
-        _sortingService = sortingService;
     }
 
     #endregion
@@ -55,16 +49,6 @@ public sealed partial class Artists
         IEnumerable<Artist> artists = await _artistsApi.GetArtistsAsync().ConfigureAwait(false);
         ArtistResponses = [.. artists.OrderBy(artist => artist.Name)];
     }
-
-    #endregion
-
-    #region Private Method Declarations 
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sortKey"></param>
-    private void Sort(string sortKey) => ArtistResponses = _sortingService.Sort(ArtistResponses!, sortKey);
 
     #endregion
 }

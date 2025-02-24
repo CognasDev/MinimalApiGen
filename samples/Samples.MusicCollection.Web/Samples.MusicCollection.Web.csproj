@@ -25,4 +25,8 @@
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Radzen.Blazor" Version="6.0.20" />
+	</ItemGroup>
+
 </Project>
