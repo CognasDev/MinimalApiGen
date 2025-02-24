@@ -3,17 +3,14 @@
 @rendermode InteractiveServer
 @using Samples.MusicCollection.Web.Albums;
 
-
 <PageTitle>Albums</PageTitle>
 
 <h1>Albums</h1>
-
-<p>This component demonstrates showing data.</p>
 
 <RadzenDataGrid Data="@AlbumResponses" AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center" ColumnWidth="200px">
     <Columns>
         <RadzenDataGridColumn Property="@nameof(Album.AlbumId)" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
         <RadzenDataGridColumn Property="@nameof(Album.Name)" Title="Name" Width="300px" />
-        <RadzenDataGridColumn Property="@nameof(Album.ReleaseDate)" Title="Release Date" Width="300px" />
+        <RadzenDataGridColumn Property="@nameof(Album.ReleaseDate)" Title="Release Date" Width="300px" FormatString="{0:dd MMM yyyy}" />
     </Columns>
 </RadzenDataGrid>

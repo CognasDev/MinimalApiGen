@@ -7,29 +7,9 @@
 
 <h1>Artists</h1>
 
-<p>This component demonstrates showing data.</p>
-
-@if (ArtistResponses is null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Artist artist in ArtistResponses)
-            {
-                <tr>
-                    <td>@artist.ArtistId</td>
-                    <td>@artist.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<RadzenDataGrid Data="@ArtistResponses" AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center" ColumnWidth="200px">
+    <Columns>
+        <RadzenDataGridColumn Property="@nameof(Artist.ArtistId)" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn Property="@nameof(Artist.Name)" Title="Name" Width="300px" />
+    </Columns>
+</RadzenDataGrid>

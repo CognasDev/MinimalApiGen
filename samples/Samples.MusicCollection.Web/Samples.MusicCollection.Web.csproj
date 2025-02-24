@@ -26,6 +26,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="Components\Layout\MainLayout.razor.cs">
+			<DependentUpon>MainLayout.razor</DependentUpon>
+		</None>
+	</ItemGroup>
+	
+	<ItemGroup>
 	  <PackageReference Include="Radzen.Blazor" Version="6.0.20" />
 	</ItemGroup>
 
