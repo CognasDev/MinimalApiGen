@@ -30,12 +30,12 @@ public readonly struct EquatableDictionary<TKey, TValue>(IDictionary<TKey, TValu
     /// <summary>
     /// 
     /// </summary>
-    private readonly TKey[]? _keysArray = [.. dictionary?.Keys];
+    private readonly TKey[]? _keysArray = dictionary is not null ? [.. dictionary.Keys] : null;
 
     /// <summary>
     /// 
     /// </summary>
-    private readonly TValue[]? _valuesArray = [.. dictionary?.Values];
+    private readonly TValue[]? _valuesArray = dictionary is not null ? [.. dictionary.Values] : null;
 
     #endregion
 

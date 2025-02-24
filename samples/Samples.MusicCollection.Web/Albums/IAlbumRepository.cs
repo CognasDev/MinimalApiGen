@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IAlbumsApi
+public interface IAlbumRepository
 {
     #region Method Declarations
 
@@ -12,6 +12,13 @@ public interface IAlbumsApi
     /// </summary>
     /// <returns></returns>
     Task<IEnumerable<Album>> GetAlbumsAsync();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="album"></param>
+    /// <returns></returns>
+    Task<IEnumerable<Album>> InsertAlbumAsync(Album album);
 
     #endregion
 }

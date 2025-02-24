@@ -17,9 +17,6 @@
 		<None Include="appsettings.Development.json">
 			<DependentUpon>appsettings.json</DependentUpon>
 		</None>
-		<None Include="Components\Pages\Artists.cs">
-		  <DependentUpon>Artists.razor</DependentUpon>
-		</None>
 		<None Include="Components\Pages\Albums.cs">
 			<DependentUpon>Albums.razor</DependentUpon>
 		</None>

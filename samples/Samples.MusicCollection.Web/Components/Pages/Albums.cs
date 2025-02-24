@@ -10,7 +10,7 @@ public sealed partial class Albums
 {
     #region Field Declarations
 
-    private readonly IAlbumsApi _albumsApi;
+    private readonly IAlbumRepository _albumsApi;
 
     #endregion
 
@@ -29,7 +29,7 @@ public sealed partial class Albums
     /// 
     /// </summary>
     /// <param name="albumsApi"></param>
-    public Albums(IAlbumsApi albumsApi)
+    public Albums(IAlbumRepository albumsApi)
     {
         ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
         _albumsApi = albumsApi;
