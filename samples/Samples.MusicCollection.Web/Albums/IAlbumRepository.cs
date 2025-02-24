@@ -18,7 +18,7 @@ public interface IAlbumRepository
     /// </summary>
     /// <param name="album"></param>
     /// <returns></returns>
-    Task<IEnumerable<Album>> InsertAlbumAsync(Album album);
+    Task<Album?> InsertAlbumAsync(Album album);
 
     #endregion
 }

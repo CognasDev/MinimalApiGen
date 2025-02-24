@@ -8,13 +8,16 @@ namespace Samples.MusicCollection.Web.Albums;
 /// <summary>
 /// 
 /// </summary>
-public sealed partial class AlbumRepository : IAlbumRepository
+public sealed partial class AlbumRepository : IAlbumRepository, IDisposable
 {
     #region Field Declarations
 
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ApiDetails _apiDetails;
     private readonly ConcurrentBag<Album> _albums = [];
+    private ApiDetails _apiDetails;
+
+    private readonly IDisposable? _configChangeListener;
+    private bool _disposed;
 
     #endregion
 
@@ -24,13 +27,16 @@ public sealed partial class AlbumRepository : IAlbumRepository
     /// 
     /// </summary>
     /// <param name="httpClientFactory"></param>
-    /// <param name="apiDetails"></param>
-    public AlbumRepository(IHttpClientFactory httpClientFactory, IOptionsMonitor<ApiDetails> apiDetails)
+    /// <param name="apiDetailsMonitor"></param>
+    public AlbumRepository(IHttpClientFactory httpClientFactory, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
     {
         ArgumentNullException.ThrowIfNull(httpClientFactory,nameof(httpClientFactory));
-        ArgumentNullException.ThrowIfNull(apiDetails, nameof(apiDetails));
+        ArgumentNullException.ThrowIfNull(apiDetailsMonitor, nameof(apiDetailsMonitor));
+
+        _configChangeListener = apiDetailsMonitor.OnChange(apiDetails => _apiDetails = apiDetails);
+
         _httpClientFactory = httpClientFactory;
-        _apiDetails = apiDetails.CurrentValue;
+        _apiDetails = apiDetailsMonitor.CurrentValue;
     }
 
     #endregion
@@ -62,18 +68,39 @@ public sealed partial class AlbumRepository : IAlbumRepository
     /// </summary>
     /// <param name="album"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<Album>> InsertAlbumAsync(Album album)
+    public async Task<Album?> InsertAlbumAsync(Album album)
     {
         HttpClient httpClient = _httpClientFactory.CreateClient();
         HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync($"{_apiDetails.Url}/albums", album).ConfigureAwait(false);
         responseMessage.EnsureSuccessStatusCode();
-        using Stream receiveStream = await responseMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
-        Album? insertedAlbum = await JsonSerializer.DeserializeAsync<Album>(receiveStream).ConfigureAwait(false);
-        if (insertedAlbum is not null)
+        Album? insertedAlbum = await responseMessage.Content.ReadFromJsonAsync<Album>().ConfigureAwait(false);
+        return insertedAlbum;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    #endregion
+
+    #region Private Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="disposing"></param>
+    private void Dispose(bool disposing)
+    {
+        if (!_disposed && disposing)
         {
-            _albums.Add(insertedAlbum);
+            _configChangeListener?.Dispose();
         }
-        return _albums;
+        _disposed = true;
     }
 
     #endregion

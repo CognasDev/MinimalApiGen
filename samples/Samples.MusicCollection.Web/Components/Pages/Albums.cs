@@ -1,4 +1,5 @@
-﻿using Samples.MusicCollection.Web.Albums;
+﻿using Radzen.Blazor;
+using Samples.MusicCollection.Web.Albums;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
 
@@ -10,7 +11,8 @@ public sealed partial class Albums
 {
     #region Field Declarations
 
-    private readonly IAlbumRepository _albumsApi;
+    private readonly IAlbumRepository _albumsRepository;
+    private RadzenDataGrid<Album>? _dataGrid;
 
     #endregion
 
@@ -28,16 +30,16 @@ public sealed partial class Albums
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="albumsApi"></param>
-    public Albums(IAlbumRepository albumsApi)
+    /// <param name="albumsRepository"></param>
+    public Albums(IAlbumRepository albumsRepository)
     {
-        ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
-        _albumsApi = albumsApi;
+        ArgumentNullException.ThrowIfNull(albumsRepository, nameof(albumsRepository));
+        _albumsRepository = albumsRepository;
     }
 
     #endregion
 
-    #region Public Override Declarations
+    #region Protected Method Declarations
 
     /// <summary>
     /// 
@@ -45,8 +47,30 @@ public sealed partial class Albums
     /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
-        IEnumerable<Album> albums = await _albumsApi.GetAlbumsAsync().ConfigureAwait(false);
+        IEnumerable<Album> albums = await _albumsRepository.GetAlbumsAsync().ConfigureAwait(false);
         AlbumResponses = [.. albums.OrderBy(album => album.Name)];
+    }
+
+    #endregion
+
+    #region Private Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private async Task NewAlbumAsync()
+    {
+        Album album = new()
+        {
+            ArtistId = 1,
+            GenreId = 1,
+            LabelId = 1,
+            Name = Guid.NewGuid().ToString(),
+            ReleaseDate = DateTime.Now
+        };
+        await _albumsRepository.InsertAlbumAsync(album).ConfigureAwait(false);
+        await InvokeAsync(_dataGrid!.Reload).ConfigureAwait(false);
     }
 
     #endregion

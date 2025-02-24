@@ -7,7 +7,7 @@
 
 <h1>Albums</h1>
 
-<RadzenDataGrid Data="@AlbumResponses" AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center" ColumnWidth="200px">
+<RadzenDataGrid @ref=_dataGrid Data="@AlbumResponses" AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center" ColumnWidth="200px">
     <Columns>
         <RadzenDataGridColumn Property="@nameof(Album.AlbumId)" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
         <RadzenDataGridColumn Property="@nameof(Album.Name)" Width="*" Title="Name" SortOrder="SortOrder.Ascending" />
