@@ -1,23 +1,29 @@
 ﻿@inherits LayoutComponentBase
+@using Radzen
+@using Radzen.Blazor
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<RadzenComponents @rendermode="InteractiveServer" />
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+<RadzenLayout Style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body'">
+    <RadzenHeader>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+            <RadzenSidebarToggle Click="@(() => SidebarExpanded = !SidebarExpanded)" />
+            <RadzenLabel Text="Music Collection"  />
+        </RadzenStack>
+    </RadzenHeader>
+    <RadzenSidebar @bind-Expanded="@SidebarExpanded">
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="Artists" Path="artists" Icon="face"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Albums" Path="albums" Icon="list"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Genres" Path="genres" Icon="dashboard"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Keys" Path="keys" Icon="build"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Labels" Path="labels" Icon="book"></RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Tracks" Path="tracks" Icon="description"></RadzenPanelMenuItem>
+        </RadzenPanelMenu>
+    </RadzenSidebar>
+    <RadzenBody>
+        <div class="rz-p-4">
             @Body
-        </article>
-    </main>
-</div>
-
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
+        </div>
+    </RadzenBody>
+</RadzenLayout>
