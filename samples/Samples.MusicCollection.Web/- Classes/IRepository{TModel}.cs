@@ -6,6 +6,15 @@
 /// <typeparam name="TModel"></typeparam>
 public interface IRepository<TModel>
 {
+    #region Property Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    IEnumerable<TModel> Models { get; }
+
+    #endregion
+
     #region Method Declarations
 
     /// <summary>

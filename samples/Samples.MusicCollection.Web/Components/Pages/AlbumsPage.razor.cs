@@ -1,5 +1,5 @@
 ﻿using Radzen.Blazor;
-using Samples.MusicCollection.Web.Albums;
+using Samples.MusicCollection.Web.Models;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
 

@@ -30,6 +30,11 @@ public sealed class Repository<TModel> : IRepository<TModel>, IDisposable
     /// </summary>
     private string RequestUri => $"{_apiDetails.Url}/{_pluralModelName}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<TModel> Models => _models;
+
     #endregion
 
     #region Constructor Declarations
