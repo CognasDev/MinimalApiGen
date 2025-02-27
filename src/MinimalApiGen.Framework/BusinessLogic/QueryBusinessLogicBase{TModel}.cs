@@ -33,6 +33,11 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
     /// </summary>
     protected virtual string SelectByIdStoredProcedure { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    protected string PluralModelName { get; }
+
     #endregion
 
     #region Constructor Declarations
@@ -52,9 +57,9 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
         Logger = logger;
         _databaseService = databaseService;
 
-        string pluralModelName = pluralizer.Pluralize(typeof(TModel).Name);
-        SelectStoredProcedure = $"[dbo].[{pluralModelName}_Select]";
-        SelectByIdStoredProcedure = $"[dbo].[{pluralModelName}_SelectById]";
+        PluralModelName = pluralizer.Pluralize(typeof(TModel).Name);
+        SelectStoredProcedure = $"[dbo].[{PluralModelName}_Select]";
+        SelectByIdStoredProcedure = $"[dbo].[{PluralModelName}_SelectById]";
     }
 
     #endregion
@@ -69,6 +74,19 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
     protected async Task<IEnumerable<TModel>> SelectModelsAsync(params IParameter[] parameters)
     {
         IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(SelectStoredProcedure, parameters).ConfigureAwait(false);
+        return selectedModels ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(SelectStoredProcedure)}: {SelectStoredProcedure}");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="storedProceduereName"></param>
+    /// <param name="parameters"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
+    protected async Task<IEnumerable<TModel>> SelectModelsAsync(string storedProceduereName, params IParameter[] parameters)
+    {
+        IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(storedProceduereName, parameters).ConfigureAwait(false);
         return selectedModels ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(SelectStoredProcedure)}: {SelectStoredProcedure}");
     }
 

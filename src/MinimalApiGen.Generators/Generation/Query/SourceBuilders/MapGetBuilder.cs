@@ -205,7 +205,7 @@ public partial class {ClassName}
     /// <param name="keyedServices"></param>
     /// <param name="queryParameters"></param>
     /// <returns></returns>
-    private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
+    private static string BuildDelegateParameters(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
                                                   EquatableArray<string> services,
                                                   EquatableDictionary<string, string> keyedServices,
                                                   EquatableArray<QueryParameterResult> queryParameters)
@@ -217,31 +217,31 @@ public partial class {ClassName}
 
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.AsSpan();
+        ReadOnlySpan<BusinessLogicParamterResult> businessLogicParametersSpan = businessLogicParameters.AsSpan();
         StringBuilder stringBuilder = new();
 
-        foreach (string parameter in businessLogicParametersSpan)
+        foreach (BusinessLogicParamterResult parameter in businessLogicParametersSpan)
         {
-            if (services.Contains(parameter))
+            string parameterType = parameter.Type;
+            if (queryParameters.SingleOrDefault(queryParameter => queryParameter.Name == parameter.Name) is QueryParameterResult queryParameterResult)
             {
-                string serviceName = parameter.Split('.').Last();
+                stringBuilder.Append(queryParameterResult.Name);
+                stringBuilder.Append(", ");
+            }
+            else if (services.Contains(parameterType))
+            {
+                string serviceName = parameterType.Split('.').Last();
                 string serviceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(serviceName);
                 stringBuilder.Append(serviceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (values.IndexOf(parameter) is int index && index != -1)
+            else if (values.IndexOf(parameterType) is int index && index != -1)
             {
                 string keyedServiceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(keys[index]);
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (queryParameters.SingleOrDefault(queryParameter => queryParameter.Name == parameter) is QueryParameterResult queryParameterResult)
-            {
-                //TODO: business logic parameters should contain names of parameters, currently they contain types only
-                stringBuilder.Append(queryParameterResult.Name);
-                stringBuilder.Append(", ");
-            }
-            else if (parameter == typeof(CancellationToken).FullName)
+            else if (parameterType == typeof(CancellationToken).FullName)
             {
                 stringBuilder.Append("cancellationToken, ");
             }

@@ -54,7 +54,7 @@ public sealed class WithBusinessLogicHandlerTests
         // Assert
         result.FullyQualifiedName.Should().Be("Namespace.BusinessLogic");
         result.DelegateName.Should().Be("TestMethod");
-        result.Parameters.Should().ContainSingle().Which.Should().Be("System.String");
+        result.Parameters.Should().ContainSingle().Which.Should().Be(new BusinessLogicParamterResult { Name = null, Type = "System.String"});
 
         #endregion
     }
