@@ -41,7 +41,7 @@ PUT {{Samples.MusicCollection.Api_HostAddress}}/api/v1/albums/1001
 Content-Type: application/json
 
 {
-    "albumId" : 2002,
+    "albumId" : 1001,
     "artistId" : 1,
     "genreId" : 1,
     "labelId" : 1,

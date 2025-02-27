@@ -28,7 +28,7 @@ public sealed class TracksQueryBusinessLogic(ILogger<TracksQueryBusinessLogic> l
     /// <returns></returns>
     public async Task<Track?> SelectTrackAsync(int id)
     {
-        Parameter parameter = new(nameof(Track.TrackId), id);
+        ModelParameter<Track> parameter = new(track => track.TrackId, id);
         Track? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
         return selectedModel;
     }

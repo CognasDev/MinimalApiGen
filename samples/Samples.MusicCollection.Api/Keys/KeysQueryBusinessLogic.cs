@@ -28,7 +28,7 @@ public sealed class KeysQueryBusinessLogic(ILogger<KeysQueryBusinessLogic> logge
     /// <returns></returns>
     public async Task<Key?> SelectKeyAsync(int id)
     {
-        Parameter parameter = new(nameof(Key.KeyId), id);
+        ModelParameter<Key> parameter = new(key => key.KeyId, id);
         Key? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
         return selectedModel;
     }

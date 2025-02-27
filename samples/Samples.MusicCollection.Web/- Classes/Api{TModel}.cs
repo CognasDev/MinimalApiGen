@@ -42,7 +42,7 @@ public sealed class Api<TModel> : IApi<TModel>, IDisposable
     /// <param name="apiDetailsMonitor"></param>
     public Api(IHttpClientFactory httpClientFactory, IPluralizer pluralizer, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
     {
-        ArgumentNullException.ThrowIfNull(httpClientFactory,nameof(httpClientFactory));
+        ArgumentNullException.ThrowIfNull(httpClientFactory, nameof(httpClientFactory));
         ArgumentNullException.ThrowIfNull(pluralizer, nameof(pluralizer));
         ArgumentNullException.ThrowIfNull(apiDetailsMonitor, nameof(apiDetailsMonitor));
 

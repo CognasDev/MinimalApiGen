@@ -34,7 +34,7 @@ public sealed class TracksCommandBusinessLogic(ILogger<TracksCommandBusinessLogi
     /// <returns></returns>
     public async Task DeleteTrackAsync(int id)
     {
-        Parameter parameter = new(nameof(Track.TrackId), id);
+        ModelParameter<Track> parameter = new(track => track.TrackId, id);
         await DeleteModelAsync(parameter).ConfigureAwait(false);
     }
 

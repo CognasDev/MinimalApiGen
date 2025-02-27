@@ -1,5 +1,3 @@
-﻿using System.Collections.Generic;
-
 namespace MinimalApiGen.Generators.Generation.Query.Results;
 
 /// <summary>

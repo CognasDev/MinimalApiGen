@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -54,7 +54,7 @@ public sealed class WithBusinessLogicHandlerTests
         // Assert
         result.FullyQualifiedName.Should().Be("Namespace.BusinessLogic");
         result.DelegateName.Should().Be("TestMethod");
-        result.Parameters.Should().ContainSingle().Which.Should().Be(new BusinessLogicParamterResult { Name = null, Type = "System.String"});
+        result.Parameters.Should().ContainSingle().Which.Should().Be(new BusinessLogicParamterResult { Name = null, Type = "System.String" });
 
         #endregion
     }

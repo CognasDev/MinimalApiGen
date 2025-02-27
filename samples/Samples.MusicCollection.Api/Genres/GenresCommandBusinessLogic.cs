@@ -34,7 +34,7 @@ public sealed class GenresCommandBusinessLogic(ILogger<GenresCommandBusinessLogi
     /// <returns></returns>
     public async Task DeleteGenreAsync(int id)
     {
-        Parameter parameter = new(nameof(Genre.GenreId), id);
+        ModelParameter<Genre> parameter = new(genre => genre.GenreId, id);
         await DeleteModelAsync(parameter).ConfigureAwait(false);
     }
 

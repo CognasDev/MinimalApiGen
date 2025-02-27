@@ -34,7 +34,7 @@ public sealed class LabelsCommandBusinessLogic(ILogger<LabelsCommandBusinessLogi
     /// <returns></returns>
     public async Task DeleteLabelAsync(int id)
     {
-        Parameter parameter = new(nameof(Label.LabelId), id);
+        ModelParameter<Label> parameter = new(label => label.LabelId, id);
         await DeleteModelAsync(parameter).ConfigureAwait(false);
     }
 

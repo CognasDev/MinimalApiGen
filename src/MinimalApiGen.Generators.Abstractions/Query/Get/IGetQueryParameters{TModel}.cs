@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq.Expressions;
 
 namespace MinimalApiGen.Generators.Abstractions.Query.Get;

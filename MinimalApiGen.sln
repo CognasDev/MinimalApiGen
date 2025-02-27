@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Query", "3. Query", "{A4
 		docs\3. Query\WithNamespace.md = docs\3. Query\WithNamespace.md
 		docs\3. Query\WithNamespaceOf.md = docs\3. Query\WithNamespaceOf.md
 		docs\3. Query\WithPagination.md = docs\3. Query\WithPagination.md
+		docs\3. Query\WithQueryParameters.md = docs\3. Query\WithQueryParameters.md
 		docs\3. Query\WithResponse.md = docs\3. Query\WithResponse.md
 		docs\3. Query\WithServices.md = docs\3. Query\WithServices.md
 		docs\3. Query\WithVersion.md = docs\3. Query\WithVersion.md
