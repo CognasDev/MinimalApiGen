@@ -1,4 +1,7 @@
-﻿namespace Samples.MusicCollection.Web.AllMusic;
+﻿using Samples.MusicCollection.Web.Models;
+using System.Collections.Concurrent;
+
+namespace Samples.MusicCollection.Web.AllMusic;
 
 /// <summary>
 /// 
@@ -7,7 +10,7 @@ public sealed record ArtistDetail
 {
     #region Field Declarations
 
-    private List<AlbumDetail>? _albums;
+    private readonly ConcurrentBag<Album> _albums = [];
 
     #endregion
 
@@ -26,7 +29,7 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<AlbumDetail> Albums => _albums ?? [];
+    public IEnumerable<Album> Albums => _albums;
 
     #endregion
 
@@ -36,9 +39,9 @@ public sealed record ArtistDetail
     /// 
     /// </summary>
     /// <param name="album"></param>
-    public void AddAlbums(IEnumerable<AlbumDetail> albums)
+    public void AddAlbum(Album album)
     {
-        _albums = [.. albums];
+        _albums.Add(album);
     }
 
     #endregion

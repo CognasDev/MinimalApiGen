@@ -3,23 +3,19 @@ using MinimalApiGen.Framework.Pluralize;
 using Samples.MusicCollection.Web.Config;
 using System.Collections.Concurrent;
 
-namespace Samples.MusicCollection.Web;
+namespace Samples.MusicCollection.Web.Api;
 
 /// <summary>
 /// 
 /// </summary>
 /// <typeparam name="TModel"></typeparam>
-public sealed class Api<TModel> : IApi<TModel>, IDisposable
+public class Api<TModel> : IApi<TModel>, IDisposable
 {
     #region Field Declarations
 
-    private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ConcurrentBag<TModel> _models = [];
     private ApiDetails _apiDetails;
-
     private readonly IDisposable? _configChangeListener;
     private bool _disposed;
-    private readonly string _pluralModelName;
 
     #endregion
 
@@ -28,7 +24,17 @@ public sealed class Api<TModel> : IApi<TModel>, IDisposable
     /// <summary>
     /// 
     /// </summary>
-    private string RequestUri => $"{_apiDetails.Url}/{_pluralModelName}";
+    protected IHttpClientFactory HttpClientFactory { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    protected string PluralModelName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    protected string RequestUri => $"{_apiDetails.Url}/{PluralModelName}";
 
     #endregion
 
@@ -48,8 +54,8 @@ public sealed class Api<TModel> : IApi<TModel>, IDisposable
 
         _configChangeListener = apiDetailsMonitor.OnChange(apiDetails => _apiDetails = apiDetails);
 
-        _httpClientFactory = httpClientFactory;
-        _pluralModelName = pluralizer.Pluralize(typeof(TModel).Name).ToLowerInvariant();
+        HttpClientFactory = httpClientFactory;
+        PluralModelName = pluralizer.Pluralize(typeof(TModel).Name).ToLowerInvariant();
         _apiDetails = apiDetailsMonitor.CurrentValue;
     }
 
@@ -64,7 +70,7 @@ public sealed class Api<TModel> : IApi<TModel>, IDisposable
     /// <returns></returns>
     public IAsyncEnumerable<TModel?> GetAsync(CancellationToken cancellationToken = default)
     {
-        HttpClient httpClient = _httpClientFactory.CreateClient();
+        HttpClient httpClient = HttpClientFactory.CreateClient();
         return httpClient.GetFromJsonAsAsyncEnumerable<TModel?>(RequestUri, cancellationToken);
     }
 
@@ -76,7 +82,7 @@ public sealed class Api<TModel> : IApi<TModel>, IDisposable
     /// <returns></returns>
     public async Task<TModel?> InsertAsync(TModel model, CancellationToken cancellationToken = default)
     {
-        HttpClient httpClient = _httpClientFactory.CreateClient();
+        HttpClient httpClient = HttpClientFactory.CreateClient();
         using HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync(RequestUri, model, cancellationToken).ConfigureAwait(false);
         responseMessage.EnsureSuccessStatusCode();
         TModel? insertedModel = await responseMessage.Content.ReadFromJsonAsync<TModel>(cancellationToken).ConfigureAwait(false);

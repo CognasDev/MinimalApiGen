@@ -1,4 +1,6 @@
-﻿using Samples.MusicCollection.Web.Models;
+﻿using Radzen;
+using Samples.MusicCollection.Web.Api;
+using Samples.MusicCollection.Web.Models;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -17,7 +19,7 @@ public interface IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    IApi<Album> AlbumsApi { get; }
+    IAlbumsApi AlbumsApi { get; }
 
     /// <summary>
     /// 
@@ -54,6 +56,14 @@ public interface IAllMusicLogic
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task GetArtistsAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="artistId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    IAsyncEnumerable<Album> GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default);
 
     #endregion
 }

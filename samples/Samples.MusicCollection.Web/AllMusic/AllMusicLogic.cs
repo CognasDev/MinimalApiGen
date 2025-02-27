@@ -1,4 +1,6 @@
-﻿using Samples.MusicCollection.Web.Models;
+﻿using Radzen;
+using Samples.MusicCollection.Web.Api;
+using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.AllMusic;
@@ -10,7 +12,6 @@ public sealed class AllMusicLogic : IAllMusicLogic
 {
     #region Field Declarations
 
-    private readonly ConcurrentBag<ArtistDetail> _artists = [];
     private readonly SemaphoreSlim _semaphore = new(1, 1);
 
     #endregion
@@ -25,7 +26,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    public IApi<Album> AlbumsApi { get; }
+    public IAlbumsApi AlbumsApi { get; }
 
     /// <summary>
     /// 
@@ -50,7 +51,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<ArtistDetail> Artists => _artists;
+    public IEnumerable<ArtistDetail> Artists { get; private set; } = [];
 
     #endregion
 
@@ -66,7 +67,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <param name="labelsApi"></param>
     /// <param name="tracksApi"></param>
     public AllMusicLogic(IApi<Artist> artistsApi,
-                         IApi<Album> albumsApi,
+                         IAlbumsApi albumsApi,
                          IApi<Genre> genresApi,
                          IApi<Key> keysApi,
                          IApi<Label> labelsApi,
@@ -101,7 +102,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
         await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
-            _artists.Clear();
+            List<ArtistDetail> artists = [];
             await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -112,9 +113,10 @@ public sealed class AllMusicLogic : IAllMusicLogic
                         ArtistId = artist.ArtistId,
                         Name = artist.Name,
                     };
-                    _artists.Add(artistDetail);
+                    artists.Add(artistDetail);
                 }
             }
+            Artists = artists;
         }
         finally
         {
@@ -125,31 +127,18 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<Album> GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default)
     {
-        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
-        try
+        await foreach (Album? albumDetail in AlbumsApi.GetAsync(artistId, cancellationToken).ConfigureAwait(false))
         {
-            _artists.Clear();
-            await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            cancellationToken.ThrowIfCancellationRequested();
+            if (albumDetail is not null)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (artist is not null)
-                {
-                    ArtistDetail artistDetail = new()
-                    {
-                        ArtistId = artist.ArtistId,
-                        Name = artist.Name,
-                    };
-                    _artists.Add(artistDetail);
-                }
+                yield return albumDetail;
             }
-        }
-        finally
-        {
-            _semaphore.Release();
         }
     }
 
