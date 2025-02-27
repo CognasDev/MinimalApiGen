@@ -8,8 +8,8 @@ on:
     branches: [ "main" ]
   push:
     branches:
-      - '**'        # matches every branch
-      - '!master'   # excludes master
+      - '**'
+      - '!main'
 
 jobs:
   build:
