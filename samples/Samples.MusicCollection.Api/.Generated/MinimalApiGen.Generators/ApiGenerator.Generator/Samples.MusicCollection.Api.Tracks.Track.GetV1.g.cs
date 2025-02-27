@@ -24,6 +24,7 @@ public partial class TrackQueryRouteEndpointsMapper
             "/tracks",
             (
                 CancellationToken cancellationToken,
+				[FromQuery] int? albumId,
                 [FromServices] Samples.MusicCollection.Api.Tracks.ITracksQueryBusinessLogic businessLogic,
                 [FromServices] IMappingService<Track, TrackResponse> mappingService
             ) =>
@@ -32,7 +33,7 @@ public partial class TrackQueryRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<TrackResponse> TrackResponseStreamAsync()
                 {
-                    IEnumerable<Track> models = await businessLogic.SelectTracksAsync().ConfigureAwait(false);
+                    IEnumerable<Track> models = await businessLogic.SelectTracksAsync(albumId).ConfigureAwait(false);
                     IEnumerable<TrackResponse> responses = mappingService.Map(models);
 
                     foreach (TrackResponse response in responses)

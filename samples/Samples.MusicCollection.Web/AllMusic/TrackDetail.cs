@@ -17,28 +17,28 @@ public sealed record TrackDetail
     /// <summary>
     /// 
     /// </summary>
-    public required int TrackNumber { get; set; }
+    public int? TrackNumber { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public required string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Genre? Genre { get; set; }
+    public int? GenreId { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
 
-    public required double? Bpm { get; set; }
+    public double? Bpm { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Key? Key { get; set; }
+    public int? KeyId { get; set; }
 
     #endregion
 }

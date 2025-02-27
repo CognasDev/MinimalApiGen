@@ -1,4 +1,7 @@
-﻿namespace Samples.MusicCollection.Web.AllMusic;
+﻿using Samples.MusicCollection.Web.Models;
+using System.Collections.Concurrent;
+
+namespace Samples.MusicCollection.Web.AllMusic;
 
 /// <summary>
 /// 
@@ -7,7 +10,7 @@ public sealed record ArtistDetail
 {
     #region Field Declarations
 
-    private List<AlbumDetail>? _albums;
+    private readonly ConcurrentBag<AlbumDetail> _albums = [];
 
     #endregion
 
@@ -26,7 +29,12 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<AlbumDetail> Albums => _albums ?? [];
+    public IEnumerable<AlbumDetail> Albums => _albums;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool HasAlbums => !_albums.IsEmpty;
 
     #endregion
 
@@ -35,11 +43,13 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
+    public void ClearAlbums() => _albums.Clear();
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="album"></param>
-    public void AddAlbums(IEnumerable<AlbumDetail> albums)
-    {
-        _albums = [.. albums];
-    }
+    public void AddAlbum(AlbumDetail album) => _albums.Add(album);
 
     #endregion
 }

@@ -1,9 +1,8 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MinimalApiGen.Generators.Generation.Shared.FluentHandlers;

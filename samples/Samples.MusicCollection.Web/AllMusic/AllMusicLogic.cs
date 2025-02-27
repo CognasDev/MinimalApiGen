@@ -1,6 +1,8 @@
-﻿using Samples.MusicCollection.Web.Models;
+﻿using Radzen;
+using Samples.MusicCollection.Web.Api;
+using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -11,8 +13,13 @@ public sealed class AllMusicLogic : IAllMusicLogic
 {
     #region Field Declarations
 
-    private readonly ConcurrentBag<ArtistDetail> _artists = [];
     private readonly SemaphoreSlim _semaphore = new(1, 1);
+    private readonly IApi<Artist> _artistsApi;
+    private readonly IAlbumsApi _albumsApi;
+    private readonly IApi<Genre> _genresApi;
+    private readonly IApi<Key> _keysApi;
+    private readonly IApi<Label> _labelsApi;
+    private readonly ITracksApi _tracksApi;
 
     #endregion
 
@@ -21,37 +28,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    public IApi<Artist> ArtistsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Album> AlbumsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Genre> GenresApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Key> KeysApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Label> LabelsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Track> TracksApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IEnumerable<ArtistDetail> Artists => _artists;
+    public IEnumerable<ArtistDetail> Artists { get; private  set; } = [];
 
     #endregion
 
@@ -67,11 +44,11 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <param name="labelsApi"></param>
     /// <param name="tracksApi"></param>
     public AllMusicLogic(IApi<Artist> artistsApi,
-                         IApi<Album> albumsApi,
+                         IAlbumsApi albumsApi,
                          IApi<Genre> genresApi,
                          IApi<Key> keysApi,
                          IApi<Label> labelsApi,
-                         IApi<Track> tracksApi)
+                         ITracksApi tracksApi)
     {
         ArgumentNullException.ThrowIfNull(artistsApi, nameof(artistsApi));
         ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
@@ -80,12 +57,12 @@ public sealed class AllMusicLogic : IAllMusicLogic
         ArgumentNullException.ThrowIfNull(labelsApi, nameof(labelsApi));
         ArgumentNullException.ThrowIfNull(tracksApi, nameof(tracksApi));
 
-        ArtistsApi = artistsApi;
-        AlbumsApi = albumsApi;
-        GenresApi = genresApi;
-        KeysApi = keysApi;
-        LabelsApi = labelsApi;
-        TracksApi = tracksApi;
+        _artistsApi = artistsApi;
+        _albumsApi = albumsApi;
+        _genresApi = genresApi;
+        _keysApi = keysApi;
+        _labelsApi = labelsApi;
+        _tracksApi = tracksApi;
     }
 
     #endregion
@@ -102,8 +79,8 @@ public sealed class AllMusicLogic : IAllMusicLogic
         await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
-            _artists.Clear();
-            await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            List<ArtistDetail> artists = [];
+            await foreach (Artist? artist in _artistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (artist is not null)
@@ -113,9 +90,10 @@ public sealed class AllMusicLogic : IAllMusicLogic
                         ArtistId = artist.ArtistId,
                         Name = artist.Name,
                     };
-                    _artists.Add(artistDetail);
+                    artists.Add(artistDetail);
                 }
             }
+            Artists = artists;
         }
         finally
         {
@@ -126,31 +104,54 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<AlbumDetail> GetAlbumsAsync(int artistId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
-        try
+        await foreach (Album? album in _albumsApi.GetAsync(artistId, cancellationToken).ConfigureAwait(false))
         {
-            _artists.Clear();
-            await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            cancellationToken.ThrowIfCancellationRequested();
+            if (album is not null)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (artist is not null)
+                AlbumDetail albumDetail = new()
                 {
-                    ArtistDetail artistDetail = new()
-                    {
-                        ArtistId = artist.ArtistId,
-                        Name = artist.Name,
-                    };
-                    _artists.Add(artistDetail);
-                }
+                    AlbumId = album.AlbumId,
+                    ArtistId = album.ArtistId,
+                    GenreId = album.GenreId,
+                    LabelId = album.LabelId,
+                    Name = album.Name,
+                    ReleaseDate = album.ReleaseDate,
+                };
+                yield return albumDetail;
             }
         }
-        finally
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="albumId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        await foreach (Track? track in _tracksApi.GetAsync(albumId, cancellationToken).ConfigureAwait(false))
         {
-            _semaphore.Release();
+            cancellationToken.ThrowIfCancellationRequested();
+            if (track is not null)
+            {
+                TrackDetail trackDetail = new()
+                {
+                    TrackId = track.TrackId,
+                    Name = track.Name,
+                    Bpm = track.Bpm,
+                    GenreId = track.GenreId,
+                    KeyId = track.KeyId,
+                    TrackNumber = track.TrackNumber,
+                };
+                yield return trackDetail;
+            }
         }
     }
 

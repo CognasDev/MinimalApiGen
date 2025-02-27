@@ -1,7 +1,6 @@
-﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
-using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Query.Results;
 

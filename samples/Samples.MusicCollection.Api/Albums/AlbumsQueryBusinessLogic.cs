@@ -7,12 +7,27 @@ namespace Samples.MusicCollection.Api.Albums;
 /// <summary>
 /// 
 /// </summary>
-/// <param name="logger"></param>
-/// <param name="pluralizer"></param>
-/// <param name="databaseService"></param>
-public sealed class AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
-    : QueryBusinessLogicBase<Album>(logger, pluralizer, databaseService), IAlbumsQueryBusinessLogic
+public sealed class AlbumsQueryBusinessLogic : QueryBusinessLogicBase<Album>, IAlbumsQueryBusinessLogic
 {
+    #region Field Declarations
+
+    private readonly string _selectByArtistIdStoredProcedure;
+    #endregion
+
+    #region Constructor Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logger"></param>
+    /// <param name="pluralizer"></param>
+    /// <param name="databaseService"></param>
+    public AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
+        : base(logger, pluralizer, databaseService)
+        => _selectByArtistIdStoredProcedure = $"[dbo].[{PluralModelName}_SelectByArtistId]";
+
+    #endregion
+
     #region Public Method Declarations
 
     /// <summary>
@@ -22,18 +37,17 @@ public sealed class AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> l
     /// <returns></returns>
     public async Task<IEnumerable<Album>> SelectAlbumsAsync(int? artistId)
     {
-        IEnumerable<Album> selectedModels;
+        IEnumerable<Album> albums;
         if (artistId.HasValue)
         {
-            Parameter artistIdParameter = new(nameof(Album.ArtistId), artistId);
-            string storedProcedueName = $"[dbo].[{PluralModelName}_SelectByArtistId]";
-            selectedModels = await SelectModelsAsync(storedProcedueName, artistIdParameter).ConfigureAwait(false);
+            ModelParameter<Album> artistIdParameter = new(album => album.ArtistId, artistId);
+            albums = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter).ConfigureAwait(false);
         }
         else
         {
-            selectedModels = await SelectModelsAsync().ConfigureAwait(false);
+            albums = await SelectModelsAsync().ConfigureAwait(false);
         }
-        return selectedModels;
+        return albums;
     }
 
     /// <summary>
@@ -43,9 +57,9 @@ public sealed class AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> l
     /// <returns></returns>
     public async Task<Album?> SelectAlbumAsync(int id)
     {
-        Parameter parameter = new(nameof(Album.AlbumId), id);
-        Album? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
-        return selectedModel;
+        ModelParameter<Album> parameter = new(album => album.AlbumId, id);
+        Album? album = await SelectModelAsync(parameter).ConfigureAwait(false);
+        return album;
     }
 
     #endregion

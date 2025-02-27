@@ -33,7 +33,7 @@ public sealed partial class Error
     /// <summary>
     /// 
     /// </summary>
-    protected override void OnInitialized() =>  RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+    protected override void OnInitialized() => RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
 
     #endregion
 }

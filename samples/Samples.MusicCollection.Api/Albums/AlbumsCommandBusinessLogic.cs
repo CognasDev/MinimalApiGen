@@ -34,7 +34,7 @@ public sealed class AlbumsCommandBusinessLogic(ILogger<AlbumsCommandBusinessLogi
     /// <returns></returns>
     public async Task DeleteAlbumAsync(int id)
     {
-        Parameter parameter = new(nameof(Album.AlbumId), id);
+        ModelParameter<Album> parameter = new(album => album.AlbumId, id);
         await DeleteModelAsync(parameter).ConfigureAwait(false);
     }
 

@@ -28,9 +28,9 @@ public sealed class LabelsQueryBusinessLogic(ILogger<LabelsQueryBusinessLogic> l
     /// <returns></returns>
     public async Task<Label?> SelectLabelAsync(int id)
     {
-        Parameter parameter = new(nameof(Label.LabelId), id);
-        Label? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
-        return selectedModel;
+        ModelParameter<Label> parameter = new(label => label.LabelId, id);
+        Label? label = await SelectModelAsync(parameter).ConfigureAwait(false);
+        return label;
     }
 
     #endregion

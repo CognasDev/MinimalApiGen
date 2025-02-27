@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using MinimalApiGen.Framework.Data;
 using MinimalApiGen.Framework.Pluralize;
 
@@ -38,6 +38,11 @@ public abstract class CommandBusinessLogicBase<TModel> where TModel : class
     /// </summary>
     protected virtual string DeleteStoredProcedure { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    protected string PluralModelName { get; }
+
     #endregion
 
     #region Constructor Declarations
@@ -57,10 +62,10 @@ public abstract class CommandBusinessLogicBase<TModel> where TModel : class
         Logger = logger;
         _databaseService = databaseService;
 
-        string pluralModelName = pluralizer.Pluralize(typeof(TModel).Name);
-        InsertStoredProcedure = $"[dbo].[{pluralModelName}_Insert]";
-        UpdateStoredProcedure = $"[dbo].[{pluralModelName}_Update]";
-        DeleteStoredProcedure = $"[dbo].[{pluralModelName}_Delete]";
+        PluralModelName = pluralizer.Pluralize(typeof(TModel).Name);
+        InsertStoredProcedure = $"[dbo].[{PluralModelName}_Insert]";
+        UpdateStoredProcedure = $"[dbo].[{PluralModelName}_Update]";
+        DeleteStoredProcedure = $"[dbo].[{PluralModelName}_Delete]";
     }
 
     #endregion

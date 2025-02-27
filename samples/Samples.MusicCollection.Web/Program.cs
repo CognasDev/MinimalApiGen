@@ -2,6 +2,7 @@ using MinimalApiGen.Framework.Pluralize;
 using Radzen;
 using Samples.MusicCollection.Web;
 using Samples.MusicCollection.Web.AllMusic;
+using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Components;
 using Samples.MusicCollection.Web.Config;
 
@@ -16,6 +17,8 @@ builder.BindConfigSection<ApiDetails>();
 builder.Services.AddSingleton<IAllMusicLogic, AllMusicLogic>();
 builder.Services.AddSingleton<IPluralizer, Pluralizer>();
 builder.Services.AddSingleton(typeof(IApi<>), typeof(Api<>));
+builder.Services.AddSingleton<IAlbumsApi, AlbumsApi>();
+builder.Services.AddSingleton<ITracksApi, TracksApi>();
 
 WebApplication webApplication = builder.Build();
 

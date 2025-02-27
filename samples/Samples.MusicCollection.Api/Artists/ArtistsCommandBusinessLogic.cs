@@ -34,7 +34,7 @@ public sealed class ArtistsCommandBusinessLogic(ILogger<ArtistsCommandBusinessLo
     /// <returns></returns>
     public async Task DeleteArtistAsync(int id)
     {
-        Parameter parameter = new(nameof(Artist.ArtistId), id);
+        ModelParameter<Artist> parameter = new(artist => artist.ArtistId, id);
         await DeleteModelAsync(parameter).ConfigureAwait(false);
     }
 

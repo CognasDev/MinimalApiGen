@@ -1,4 +1,4 @@
-﻿namespace MinimalApiGen.Framework.Logging;
+namespace MinimalApiGen.Framework.Logging;
 
 /// <summary>
 /// 
