@@ -14,6 +14,12 @@ public sealed class AllMusicLogic : IAllMusicLogic
     #region Field Declarations
 
     private readonly SemaphoreSlim _semaphore = new(1, 1);
+    private readonly IApi<Artist> _artistsApi;
+    private readonly IAlbumsApi _albumsApi;
+    private readonly IApi<Genre> _genresApi;
+    private readonly IApi<Key> _keysApi;
+    private readonly IApi<Label> _labelsApi;
+    private readonly ITracksApi _tracksApi;
 
     #endregion
 
@@ -22,37 +28,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    public IApi<Artist> ArtistsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IAlbumsApi AlbumsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Genre> GenresApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Key> KeysApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IApi<Label> LabelsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public ITracksApi TracksApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public IEnumerable<ArtistDetail> Artists { get; private set; } = [];
+    public IEnumerable<ArtistDetail> Artists { get; private  set; } = [];
 
     #endregion
 
@@ -81,12 +57,12 @@ public sealed class AllMusicLogic : IAllMusicLogic
         ArgumentNullException.ThrowIfNull(labelsApi, nameof(labelsApi));
         ArgumentNullException.ThrowIfNull(tracksApi, nameof(tracksApi));
 
-        ArtistsApi = artistsApi;
-        AlbumsApi = albumsApi;
-        GenresApi = genresApi;
-        KeysApi = keysApi;
-        LabelsApi = labelsApi;
-        TracksApi = tracksApi;
+        _artistsApi = artistsApi;
+        _albumsApi = albumsApi;
+        _genresApi = genresApi;
+        _keysApi = keysApi;
+        _labelsApi = labelsApi;
+        _tracksApi = tracksApi;
     }
 
     #endregion
@@ -104,7 +80,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
         try
         {
             List<ArtistDetail> artists = [];
-            await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            await foreach (Artist? artist in _artistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (artist is not null)
@@ -133,7 +109,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <returns></returns>
     public async IAsyncEnumerable<AlbumDetail> GetAlbumsAsync(int artistId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        await foreach (Album? album in AlbumsApi.GetAsync(artistId, cancellationToken).ConfigureAwait(false))
+        await foreach (Album? album in _albumsApi.GetAsync(artistId, cancellationToken).ConfigureAwait(false))
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (album is not null)
@@ -160,7 +136,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <returns></returns>
     public async IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        await foreach (Track? track in TracksApi.GetAsync(albumId, cancellationToken).ConfigureAwait(false))
+        await foreach (Track? track in _tracksApi.GetAsync(albumId, cancellationToken).ConfigureAwait(false))
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (track is not null)

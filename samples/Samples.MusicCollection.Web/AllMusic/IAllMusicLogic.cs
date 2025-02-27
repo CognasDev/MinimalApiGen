@@ -11,37 +11,6 @@ namespace Samples.MusicCollection.Web.AllMusic;
 public interface IAllMusicLogic
 {
     #region Property Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    IApi<Artist> ArtistsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    IAlbumsApi AlbumsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    IApi<Genre> GenresApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    IApi<Key> KeysApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    IApi<Label> LabelsApi { get; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    ITracksApi TracksApi { get; }
-
     /// <summary>
     /// 
     /// </summary>
