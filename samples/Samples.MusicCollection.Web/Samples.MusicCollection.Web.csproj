@@ -30,7 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Radzen.Blazor" Version="6.0.20" />
+		<PackageReference Include="Radzen.Blazor" Version="6.1.2" />
 	</ItemGroup>
 
 	<Import Project="..\..\src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems" Label="Shared" />
