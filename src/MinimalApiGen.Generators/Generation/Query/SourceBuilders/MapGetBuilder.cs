@@ -1,9 +1,10 @@
-﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -115,7 +116,13 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// </summary>
     public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(queryResult.BusinessLogicParameters,
                                                                                      queryResult.Services,
-                                                                                     queryResult.KeyedServices);
+                                                                                     queryResult.KeyedServices,
+                                                                                     queryResult.QueryParameterResults);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string QueryParameters { get; } = BuildQueryParameters(queryResult.QueryParameterResults);
 
     /// <summary>
     /// 
@@ -155,7 +162,7 @@ public partial class {ClassName}
         (
             ""/{ModelPluralNameLower}"",
             (
-                CancellationToken cancellationToken,
+                CancellationToken cancellationToken,{QueryParameters}
                 [FromServices] {BusinessLogic} businessLogic,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService{FromServices}{FromKeyedServices}{PaginationServiceAndQuery}
             ) =>
@@ -196,10 +203,12 @@ public partial class {ClassName}
     /// <param name="businessLogicParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
+    /// <param name="queryParameters"></param>
     /// <returns></returns>
-    private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
+    private static string BuildDelegateParameters(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
                                                   EquatableArray<string> services,
-                                                  EquatableDictionary<string, string> keyedServices)
+                                                  EquatableDictionary<string, string> keyedServices,
+                                                  EquatableArray<QueryParameterResult> queryParameters)
     {
         if (businessLogicParameters.Count == 0)
         {
@@ -208,25 +217,31 @@ public partial class {ClassName}
 
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.AsSpan();
+        ReadOnlySpan<BusinessLogicParamterResult> businessLogicParametersSpan = businessLogicParameters.AsSpan();
         StringBuilder stringBuilder = new();
 
-        foreach (string parameter in businessLogicParametersSpan)
+        foreach (BusinessLogicParamterResult parameter in businessLogicParametersSpan)
         {
-            if (services.Contains(parameter))
+            string parameterType = parameter.Type;
+            if (queryParameters.SingleOrDefault(queryParameter => queryParameter.Name == parameter.Name) is QueryParameterResult queryParameterResult)
             {
-                string serviceName = parameter.Split('.').Last();
+                stringBuilder.Append(queryParameterResult.Name);
+                stringBuilder.Append(", ");
+            }
+            else if (services.Contains(parameterType))
+            {
+                string serviceName = parameterType.Split('.').Last();
                 string serviceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(serviceName);
                 stringBuilder.Append(serviceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (values.IndexOf(parameter) is int index && index != -1)
+            else if (values.IndexOf(parameterType) is int index && index != -1)
             {
                 string keyedServiceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(keys[index]);
                 stringBuilder.Append(keyedServiceNameCamelCase);
                 stringBuilder.Append(", ");
             }
-            else if (parameter == typeof(CancellationToken).FullName)
+            else if (parameterType == typeof(CancellationToken).FullName)
             {
                 stringBuilder.Append("cancellationToken, ");
             }
@@ -235,6 +250,36 @@ public partial class {ClassName}
         stringBuilder.Length -= 2;
         string delegateParameters = stringBuilder.ToString();
         return delegateParameters;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="queryParameterResults"></param>
+    /// <returns></returns>
+    private static string BuildQueryParameters(EquatableArray<QueryParameterResult> queryParameterResults)
+    {
+        if (queryParameterResults.Count == 0)
+        {
+            return string.Empty;
+        }
+        StringBuilder stringBuilder = new();
+        stringBuilder.AppendLine();
+        foreach (QueryParameterResult queryParameterResult in queryParameterResults)
+        {
+            stringBuilder.Append("\t\t\t\t[FromQuery] ");
+            stringBuilder.Append(queryParameterResult.Type);
+            if (!queryParameterResult.Type.EndsWith("?"))
+            {
+                stringBuilder.Append("?");
+            }
+            stringBuilder.Append(" ");
+            stringBuilder.Append(queryParameterResult.Name);
+            stringBuilder.AppendLine(",");
+        }
+        stringBuilder.Length -= 1;
+        string queryParameters = stringBuilder.ToString();
+        return queryParameters;
     }
 
     #endregion

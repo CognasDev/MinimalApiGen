@@ -115,7 +115,7 @@ internal interface IResult : IEquatable<IResult>
     /// <summary>
     /// 
     /// </summary>
-    EquatableArray<string> BusinessLogicParameters { get; }
+    EquatableArray<BusinessLogicParamterResult> BusinessLogicParameters { get; }
 
     #endregion
 }

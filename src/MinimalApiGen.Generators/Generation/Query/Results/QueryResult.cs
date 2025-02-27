@@ -1,6 +1,7 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
+using System.Collections.Generic;
 
 namespace MinimalApiGen.Generators.Generation.Query.Results;
 
@@ -60,6 +61,11 @@ internal readonly record struct QueryResult : IQueryResult
     /// 
     /// </summary>
     public string? ModelIdUnderlyingPropertyType { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public EquatableArray<QueryParameterResult> QueryParameterResults { get; }
 
     #endregion
 
@@ -131,7 +137,7 @@ internal readonly record struct QueryResult : IQueryResult
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<string> BusinessLogicParameters { get; }
+    public EquatableArray<BusinessLogicParamterResult> BusinessLogicParameters { get; }
 
     #endregion
 
@@ -168,6 +174,8 @@ internal readonly record struct QueryResult : IQueryResult
         BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
         BusinessLogicDelegateName = queryIntermediateResult.BusinessLogicResult!.DelegateName;
         BusinessLogicParameters = new(queryIntermediateResult.BusinessLogicResult!.Parameters);
+
+        QueryParameterResults = new(queryIntermediateResult.QueryParameterResults);
     }
 
     #endregion
@@ -203,7 +211,8 @@ internal readonly record struct QueryResult : IQueryResult
                KeyedServices.Equals(result.KeyedServices) &&
                BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
                BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
-               BusinessLogicParameters.Equals(result.BusinessLogicParameters);
+               BusinessLogicParameters.Equals(result.BusinessLogicParameters) &&
+               QueryParameterResults.Equals(result.QueryParameterResults);
     }
 
     #endregion

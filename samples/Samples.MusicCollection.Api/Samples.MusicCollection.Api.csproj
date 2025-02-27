@@ -27,16 +27,13 @@
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
 		<CompilerGeneratedFilesOutputPath>.Generated</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
+
 	<ItemGroup>
-		<None Include="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
-	</ItemGroup>
-	<ItemGroup>
-		<Folder Include=".Generated\MinimalApiGen.Generators\" />
+		<None Include="$(CompilerGeneratedFilesOutputPath)\MinimalApiGen.Generators\ApiGenerator.Generator\*.cs" />
+		<Compile Remove="$(CompilerGeneratedFilesOutputPath)\MinimalApiGen.Generators\ApiGenerator.Generator\*.cs" />
 		<Folder Include=".Generated\MinimalApiGen.Generators\ApiGenerator.Generator\" />
 	</ItemGroup>
+	
 	<ItemGroup>
 		<None Include="appsettings.Development.json">
 			<DependentUpon>appsettings.json</DependentUpon>

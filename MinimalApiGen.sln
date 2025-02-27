@@ -70,6 +70,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Api
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Web", "samples\Samples.MusicCollection.Web\Samples.MusicCollection.Web.csproj", "{18974716-C119-4D33-94B0-88A4F564EBEA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci-test-nuget.yml = .github\workflows\ci-test-nuget.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +136,9 @@ Global
 		{74FCF198-332C-4D19-9D44-14FBCC75B430} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{D544945F-DF56-4A16-8356-81CD8C476393} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{18974716-C119-4D33-94B0-88A4F564EBEA} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {160B1408-CAC3-462D-8788-AFE85104788D}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{18974716-c119-4d33-94b0-88a4f564ebea}*SharedItemsImports = 5
