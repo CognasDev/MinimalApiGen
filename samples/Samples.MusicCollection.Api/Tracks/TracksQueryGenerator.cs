@@ -16,9 +16,10 @@ public sealed class TracksQueryGenerator
     public TracksQueryGenerator()
     {
         ApiGeneration.Query<Track>().WithNamespaceOf<ITracksQueryBusinessLogic>()
-                                     .WithModelId(model => model.TrackId)
+                                     .WithModelId(track => track.TrackId)
                                      .WithGet()
                                          .WithBusinessLogic<ITracksQueryBusinessLogic>(query => query.SelectTracksAsync)
+                                         .WithQueryParameters<Track>(track => track.AlbumId)
                                          .WithResponse<TrackResponse>()
                                          .WithMappingService()
                                          .WithVersion(1)

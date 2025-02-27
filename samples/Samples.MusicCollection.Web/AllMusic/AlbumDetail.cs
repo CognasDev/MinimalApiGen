@@ -1,4 +1,5 @@
 ﻿using Samples.MusicCollection.Web.Models;
+using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -9,7 +10,7 @@ public sealed record AlbumDetail
 {
     #region Field Declarations
 
-    private List<TrackDetail>? _tracks;
+    private readonly ConcurrentBag<TrackDetail> _tracks = [];
 
     #endregion
 
@@ -23,27 +24,37 @@ public sealed record AlbumDetail
     /// <summary>
     /// 
     /// </summary>
-    public required string Name { get; set; }
+    public int? ArtistId { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Genre? Genre { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public Label? Label { get; set; }
+    public int? GenreId { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public required DateTime ReleaseDate { get; init; }
+    public int? LabelId { get; set; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<TrackDetail> Tracks => _tracks ?? [];
+    public DateTime? ReleaseDate { get; init; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<TrackDetail> Tracks => _tracks;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool HasTracks => !_tracks.IsEmpty;
 
     #endregion
 
@@ -52,11 +63,13 @@ public sealed record AlbumDetail
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="tracks"></param>
-    public void AddTracks(IEnumerable<TrackDetail> tracks)
-    {
-        _tracks = [.. tracks];
-    }
+    public void ClearTracks() => _tracks.Clear();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="track"></param>
+    public void AddTrack(TrackDetail track) => _tracks.Add(track);
 
     #endregion
 }

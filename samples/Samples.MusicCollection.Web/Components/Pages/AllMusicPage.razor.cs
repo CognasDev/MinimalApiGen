@@ -31,7 +31,12 @@ public sealed partial class AllMusicPage
     /// <summary>
     /// 
     /// </summary>
-    public RadzenDataGrid<Album> AlbumsGrid { get; private set; } = default!;
+    public RadzenDataGrid<AlbumDetail> AlbumsGrid { get; private set; } = default!;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public RadzenDataGrid<TrackDetail> TracksGrid { get; private set; } = default!;
 
     /// <summary>
     /// 
@@ -74,13 +79,44 @@ public sealed partial class AllMusicPage
         IsLoading = false;
     }
 
-    async void RowExpand(ArtistDetail artistDetail)
+    #endregion
+
+    #region Private Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="artistDetail"></param>
+    /// <returns></returns>
+    private async Task ArtistsGrid_RowExpand(ArtistDetail artistDetail)
     {
-        await foreach (Album albumDetail in AllMusicLogic.GetAlbumsAsync(artistDetail.ArtistId!.Value).ConfigureAwait(false))
+        if (!artistDetail.HasAlbums)
         {
-            artistDetail.AddAlbum(albumDetail);
+            artistDetail.ClearAlbums();
+            await foreach (AlbumDetail albumDetail in AllMusicLogic.GetAlbumsAsync(artistDetail.ArtistId!.Value).ConfigureAwait(false))
+            {
+                artistDetail.AddAlbum(albumDetail);
+            }
+            await InvokeAsync(AlbumsGrid.Reload).ConfigureAwait(false);
         }
-        await InvokeAsync(AlbumsGrid.Reload).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="albumDetail"></param>
+    /// <returns></returns>
+    private async Task AlbumsGrid_RowExpand(AlbumDetail albumDetail)
+    {
+        if (!albumDetail.HasTracks)
+        {
+            albumDetail.ClearTracks();
+            await foreach (TrackDetail trackDetail in AllMusicLogic.GetTracksAsync(albumDetail.AlbumId!.Value).ConfigureAwait(false))
+            {
+                albumDetail.AddTrack(trackDetail);
+            }
+            await InvokeAsync(TracksGrid.Reload).ConfigureAwait(false);
+        }
     }
 
     #endregion

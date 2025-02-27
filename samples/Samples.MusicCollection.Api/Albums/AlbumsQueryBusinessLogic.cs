@@ -37,17 +37,17 @@ public sealed class AlbumsQueryBusinessLogic : QueryBusinessLogicBase<Album>, IA
     /// <returns></returns>
     public async Task<IEnumerable<Album>> SelectAlbumsAsync(int? artistId)
     {
-        IEnumerable<Album> selectedModels;
+        IEnumerable<Album> albums;
         if (artistId.HasValue)
         {
             ModelParameter<Album> artistIdParameter = new(album => album.ArtistId, artistId);
-            selectedModels = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter).ConfigureAwait(false);
+            albums = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter).ConfigureAwait(false);
         }
         else
         {
-            selectedModels = await SelectModelsAsync().ConfigureAwait(false);
+            albums = await SelectModelsAsync().ConfigureAwait(false);
         }
-        return selectedModels;
+        return albums;
     }
 
     /// <summary>
@@ -58,8 +58,8 @@ public sealed class AlbumsQueryBusinessLogic : QueryBusinessLogicBase<Album>, IA
     public async Task<Album?> SelectAlbumAsync(int id)
     {
         ModelParameter<Album> parameter = new(album => album.AlbumId, id);
-        Album? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
-        return selectedModel;
+        Album? album = await SelectModelAsync(parameter).ConfigureAwait(false);
+        return album;
     }
 
     #endregion

@@ -8,9 +8,18 @@
 
 <RadzenDataGrid @ref=ArtistsGrid Data="@AllMusicLogic.Artists" IsLoading="@IsLoading" Count="@ArtistsCount" TItem="ArtistDetail"
                 AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center"
-                ColumnWidth="200px" RowExpand="RowExpand" ExpandMode="DataGridExpandMode.Single">
-    <Template Context="artistDetail">
-        <RadzenDataGrid @ref=AlbumsGrid Data="@artistDetail.Albums" AllowFiltering="true" AllowPaging="true" AllowSorting="true">
+                ColumnWidth="200px" RowExpand="ArtistsGrid_RowExpand" ExpandMode="DataGridExpandMode.Single">
+    <Template Context="ArtistDetail">
+        <RadzenDataGrid @ref=AlbumsGrid Data="@ArtistDetail.Albums" AllowFiltering="true" AllowPaging="true" AllowSorting="true" TItem="AlbumDetail"
+                        RowExpand="AlbumsGrid_RowExpand" ExpandMode="DataGridExpandMode.Single">
+            <Template Context="AlbumDetail">
+                <RadzenDataGrid @ref=TracksGrid Data="@AlbumDetail.Tracks" AllowFiltering="true" AllowPaging="false" AllowSorting="true">
+                    <Columns>
+                        <RadzenDataGridColumn Property="@nameof(Track.TrackNumber)" Width="200px" Title="Track Number" SortOrder="SortOrder.Ascending" />
+                        <RadzenDataGridColumn Property="@nameof(Track.Name)" Width="*" Title="Track Name" />
+                    </Columns>
+                </RadzenDataGrid>
+            </Template>
             <Columns>
                 <RadzenDataGridColumn Property="@nameof(Album.Name)" Width="*" Title="Album Name" SortOrder="SortOrder.Ascending" />
             </Columns>

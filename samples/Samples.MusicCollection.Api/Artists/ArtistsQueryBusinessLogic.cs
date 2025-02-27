@@ -29,8 +29,8 @@ public sealed class ArtistsQueryBusinessLogic(ILogger<ArtistsQueryBusinessLogic>
     public async Task<Artist?> SelectArtistAsync(int id)
     {
         ModelParameter<Artist> parameter = new(artist => artist.ArtistId, id);
-        Artist? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
-        return selectedModel;
+        Artist? artist = await SelectModelAsync(parameter).ConfigureAwait(false);
+        return artist;
     }
 
     #endregion

@@ -10,8 +10,9 @@ public interface ITracksQueryBusinessLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="albumId"></param>
     /// <returns></returns>
-    Task<IEnumerable<Track>> SelectTracksAsync();
+    Task<IEnumerable<Track>> SelectTracksAsync(int? albumId);
 
     /// <summary>
     /// 

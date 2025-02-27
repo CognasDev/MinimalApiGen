@@ -1,6 +1,7 @@
 ﻿using Radzen;
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Models;
+using System.Runtime.CompilerServices;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -39,7 +40,7 @@ public interface IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    IApi<Track> TracksApi { get; }
+    ITracksApi TracksApi { get; }
 
     /// <summary>
     /// 
@@ -63,7 +64,15 @@ public interface IAllMusicLogic
     /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    IAsyncEnumerable<Album> GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default);
+    IAsyncEnumerable<AlbumDetail> GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="albumId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, CancellationToken cancellationToken = default);
 
     #endregion
 }

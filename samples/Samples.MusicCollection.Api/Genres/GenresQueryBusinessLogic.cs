@@ -29,8 +29,8 @@ public sealed class GenresQueryBusinessLogic(ILogger<GenresQueryBusinessLogic> l
     public async Task<Genre?> SelectGenreAsync(int id)
     {
         ModelParameter<Genre> parameter = new(genre => genre.GenreId, id);
-        Genre? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
-        return selectedModel;
+        Genre? genre = await SelectModelAsync(parameter).ConfigureAwait(false);
+        return genre;
     }
 
     #endregion

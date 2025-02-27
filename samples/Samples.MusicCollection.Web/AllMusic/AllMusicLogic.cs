@@ -2,6 +2,7 @@
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -46,7 +47,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    public IApi<Track> TracksApi { get; }
+    public ITracksApi TracksApi { get; }
 
     /// <summary>
     /// 
@@ -71,7 +72,7 @@ public sealed class AllMusicLogic : IAllMusicLogic
                          IApi<Genre> genresApi,
                          IApi<Key> keysApi,
                          IApi<Label> labelsApi,
-                         IApi<Track> tracksApi)
+                         ITracksApi tracksApi)
     {
         ArgumentNullException.ThrowIfNull(artistsApi, nameof(artistsApi));
         ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
@@ -130,14 +131,50 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async IAsyncEnumerable<Album> GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default)
+    public async IAsyncEnumerable<AlbumDetail> GetAlbumsAsync(int artistId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
-        await foreach (Album? albumDetail in AlbumsApi.GetAsync(artistId, cancellationToken).ConfigureAwait(false))
+        await foreach (Album? album in AlbumsApi.GetAsync(artistId, cancellationToken).ConfigureAwait(false))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            if (albumDetail is not null)
+            if (album is not null)
             {
+                AlbumDetail albumDetail = new()
+                {
+                    AlbumId = album.AlbumId,
+                    ArtistId = album.ArtistId,
+                    GenreId = album.GenreId,
+                    LabelId = album.LabelId,
+                    Name = album.Name,
+                    ReleaseDate = album.ReleaseDate,
+                };
                 yield return albumDetail;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="albumId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, [EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        await foreach (Track? track in TracksApi.GetAsync(albumId, cancellationToken).ConfigureAwait(false))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (track is not null)
+            {
+                TrackDetail trackDetail = new()
+                {
+                    TrackId = track.TrackId,
+                    Name = track.Name,
+                    Bpm = track.Bpm,
+                    GenreId = track.GenreId,
+                    KeyId = track.KeyId,
+                    TrackNumber = track.TrackNumber,
+                };
+                yield return trackDetail;
             }
         }
     }

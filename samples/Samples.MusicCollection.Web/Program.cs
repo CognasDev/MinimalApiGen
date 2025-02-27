@@ -18,6 +18,7 @@ builder.Services.AddSingleton<IAllMusicLogic, AllMusicLogic>();
 builder.Services.AddSingleton<IPluralizer, Pluralizer>();
 builder.Services.AddSingleton(typeof(IApi<>), typeof(Api<>));
 builder.Services.AddSingleton<IAlbumsApi, AlbumsApi>();
+builder.Services.AddSingleton<ITracksApi, TracksApi>();
 
 WebApplication webApplication = builder.Build();
 

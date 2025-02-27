@@ -10,7 +10,7 @@ public sealed record ArtistDetail
 {
     #region Field Declarations
 
-    private readonly ConcurrentBag<Album> _albums = [];
+    private readonly ConcurrentBag<AlbumDetail> _albums = [];
 
     #endregion
 
@@ -29,7 +29,12 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<Album> Albums => _albums;
+    public IEnumerable<AlbumDetail> Albums => _albums;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool HasAlbums => !_albums.IsEmpty;
 
     #endregion
 
@@ -38,11 +43,13 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
+    public void ClearAlbums() => _albums.Clear();
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="album"></param>
-    public void AddAlbum(Album album)
-    {
-        _albums.Add(album);
-    }
+    public void AddAlbum(AlbumDetail album) => _albums.Add(album);
 
     #endregion
 }
