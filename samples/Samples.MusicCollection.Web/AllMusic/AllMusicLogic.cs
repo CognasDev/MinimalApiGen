@@ -1,4 +1,6 @@
 ﻿using Samples.MusicCollection.Web.Models;
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -7,37 +9,49 @@ namespace Samples.MusicCollection.Web.AllMusic;
 /// </summary>
 public sealed class AllMusicLogic : IAllMusicLogic
 {
+    #region Field Declarations
+
+    private readonly ConcurrentBag<ArtistDetail> _artists = [];
+    private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+    #endregion
+
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public IRepository<Artist> ArtistsRepository { get; }
+    public IApi<Artist> ArtistsApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IRepository<Album> AlbumsRepository { get; }
+    public IApi<Album> AlbumsApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IRepository<Genre> GenresRepository { get; }
+    public IApi<Genre> GenresApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IRepository<Key> KeysRepository { get; }
+    public IApi<Key> KeysApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IRepository<Label> LabelsRepository { get; }
+    public IApi<Label> LabelsApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public IRepository<Track> TracksRepository { get; }
+    public IApi<Track> TracksApi { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<ArtistDetail> Artists => _artists;
 
     #endregion
 
@@ -46,32 +60,98 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="artistsRepository"></param>
-    /// <param name="albumsRepository"></param>
-    /// <param name="genresRepository"></param>
-    /// <param name="keysRepository"></param>
-    /// <param name="labelsRepository"></param>
-    /// <param name="tracksRepository"></param>
-    public AllMusicLogic(IRepository<Artist> artistsRepository,
-                         IRepository<Album> albumsRepository,
-                         IRepository<Genre> genresRepository,
-                         IRepository<Key> keysRepository,
-                         IRepository<Label> labelsRepository,
-                         IRepository<Track> tracksRepository)
+    /// <param name="artistsApi"></param>
+    /// <param name="albumsApi"></param>
+    /// <param name="genresApi"></param>
+    /// <param name="keysApi"></param>
+    /// <param name="labelsApi"></param>
+    /// <param name="tracksApi"></param>
+    public AllMusicLogic(IApi<Artist> artistsApi,
+                         IApi<Album> albumsApi,
+                         IApi<Genre> genresApi,
+                         IApi<Key> keysApi,
+                         IApi<Label> labelsApi,
+                         IApi<Track> tracksApi)
     {
-        ArgumentNullException.ThrowIfNull(artistsRepository, nameof(artistsRepository));
-        ArgumentNullException.ThrowIfNull(albumsRepository, nameof(albumsRepository));
-        ArgumentNullException.ThrowIfNull(genresRepository, nameof(genresRepository));
-        ArgumentNullException.ThrowIfNull(keysRepository, nameof(keysRepository));
-        ArgumentNullException.ThrowIfNull(labelsRepository, nameof(labelsRepository));
-        ArgumentNullException.ThrowIfNull(tracksRepository, nameof(tracksRepository));
+        ArgumentNullException.ThrowIfNull(artistsApi, nameof(artistsApi));
+        ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
+        ArgumentNullException.ThrowIfNull(genresApi, nameof(genresApi));
+        ArgumentNullException.ThrowIfNull(keysApi, nameof(keysApi));
+        ArgumentNullException.ThrowIfNull(labelsApi, nameof(labelsApi));
+        ArgumentNullException.ThrowIfNull(tracksApi, nameof(tracksApi));
 
-        ArtistsRepository = artistsRepository;
-        AlbumsRepository = albumsRepository;
-        GenresRepository = genresRepository;
-        KeysRepository = keysRepository;
-        LabelsRepository = labelsRepository;
-        TracksRepository = tracksRepository;
+        ArtistsApi = artistsApi;
+        AlbumsApi = albumsApi;
+        GenresApi = genresApi;
+        KeysApi = keysApi;
+        LabelsApi = labelsApi;
+        TracksApi = tracksApi;
+    }
+
+    #endregion
+
+    #region Public Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetArtistsAsync(CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            _artists.Clear();
+            await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (artist is not null)
+                {
+                    ArtistDetail artistDetail = new()
+                    {
+                        ArtistId = artist.ArtistId,
+                        Name = artist.Name,
+                    };
+                    _artists.Add(artistDetail);
+                }
+            }
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetAlbumsAsync(int artistId, CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            _artists.Clear();
+            await foreach (Artist? artist in ArtistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (artist is not null)
+                {
+                    ArtistDetail artistDetail = new()
+                    {
+                        ArtistId = artist.ArtistId,
+                        Name = artist.Name,
+                    };
+                    _artists.Add(artistDetail);
+                }
+            }
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
     }
 
     #endregion

@@ -15,7 +15,7 @@ builder.BindConfigSection<ApiDetails>();
 
 builder.Services.AddSingleton<IAllMusicLogic, AllMusicLogic>();
 builder.Services.AddSingleton<IPluralizer, Pluralizer>();
-builder.Services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddSingleton(typeof(IApi<>), typeof(Api<>));
 
 WebApplication webApplication = builder.Build();
 

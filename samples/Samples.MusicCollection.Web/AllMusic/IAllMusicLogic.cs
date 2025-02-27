@@ -12,32 +12,48 @@ public interface IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    IRepository<Artist> ArtistsRepository { get; }
+    IApi<Artist> ArtistsApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    IRepository<Album> AlbumsRepository { get; }
+    IApi<Album> AlbumsApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    IRepository<Genre> GenresRepository { get; }
+    IApi<Genre> GenresApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    IRepository<Key> KeysRepository { get; }
+    IApi<Key> KeysApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    IRepository<Label> LabelsRepository { get; }
+    IApi<Label> LabelsApi { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    IRepository<Track> TracksRepository { get; }
+    IApi<Track> TracksApi { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    IEnumerable<ArtistDetail> Artists { get; }
+
+    #endregion
+
+    #region Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task GetArtistsAsync(CancellationToken cancellationToken = default);
 
     #endregion
 }

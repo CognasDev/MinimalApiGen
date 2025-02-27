@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetOptionals : IGetServices, IGetKeyedServices, IGetResponse
+public interface IWithGetOptionals : IGetQueryParameters, IGetServices, IGetKeyedServices, IGetResponse
 {
 }

@@ -3,15 +3,20 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed record ArtistAlbumsResponse
+public sealed record ArtistDetail
 {
     #region Field Declarations
 
-    private List<ArtistAlbumResponse>? _albumResponses;
+    private List<AlbumDetail>? _albums;
 
     #endregion
 
     #region Property Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int? ArtistId { get; set; }
 
     /// <summary>
     /// 
@@ -21,7 +26,7 @@ public sealed record ArtistAlbumsResponse
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<ArtistAlbumResponse> Albums => _albumResponses ?? [];
+    public IEnumerable<AlbumDetail> Albums => _albums ?? [];
 
     #endregion
 
@@ -30,10 +35,10 @@ public sealed record ArtistAlbumsResponse
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="albumResponses"></param>
-    public void AddAlbums(IEnumerable<ArtistAlbumResponse> albumResponses)
+    /// <param name="album"></param>
+    public void AddAlbums(IEnumerable<AlbumDetail> albums)
     {
-        _albumResponses = [.. albumResponses];
+        _albums = [.. albums];
     }
 
     #endregion

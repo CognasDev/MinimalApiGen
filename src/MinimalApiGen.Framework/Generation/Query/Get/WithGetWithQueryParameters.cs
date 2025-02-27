@@ -1,22 +1,15 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-using System.Linq.Expressions;
+﻿using MinimalApiGen.Framework.Generation.Query.Shared;
+using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.Shared;
 
 namespace MinimalApiGen.Framework.Generation.Query.Get;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetOptionals : IWithGetOptionals
+public sealed class WithGetWithQueryParameters : IWithGetWithQueryParameters
 {
     #region Public Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TModel"></typeparam>
-    /// <param name="properties"></param>
-    /// <returns></returns>
-    public IWithGetWithQueryParameters WithQueryParameters<TModel>(params Expression<Func<TModel, object?>>[] properties) => new WithGetWithQueryParameters();
 
     /// <summary>
     /// 
@@ -24,6 +17,13 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
     public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="timeSpan"></param>
+    /// <returns></returns>
+    public IQueryWithCache CachedFor(TimeSpan timeSpan) => new QueryWithCache();
 
     #endregion
 

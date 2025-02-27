@@ -62,6 +62,9 @@ internal sealed class QueryProcessor
                     intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace, modelIdPropertyResult);
                     intermediateResult = invocationResult.InitialiseQueryIntermediateResult(OperationType.GetById);
                     break;
+                case string name when name == QueryMethodNames.WithQueryParameters && fluentMethod.IsGeneric:
+                    intermediateResult!.QueryParameterResults = invocationInfo.ToQueryParameters();
+                    break;
                 case string name when (name == QueryMethodNames.WithGetServices || name == QueryMethodNames.WithGetByIdServices)
                                       && fluentMethod.IsGeneric:
                     IReadOnlyList<string> services = invocationInfo.ToServices();

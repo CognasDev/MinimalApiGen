@@ -9,7 +9,7 @@ namespace Samples.MusicCollection.Web;
 /// 
 /// </summary>
 /// <typeparam name="TModel"></typeparam>
-public sealed class Repository<TModel> : IRepository<TModel>, IDisposable
+public sealed class Api<TModel> : IApi<TModel>, IDisposable
 {
     #region Field Declarations
 
@@ -30,11 +30,6 @@ public sealed class Repository<TModel> : IRepository<TModel>, IDisposable
     /// </summary>
     private string RequestUri => $"{_apiDetails.Url}/{_pluralModelName}";
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public IEnumerable<TModel> Models => _models;
-
     #endregion
 
     #region Constructor Declarations
@@ -45,7 +40,7 @@ public sealed class Repository<TModel> : IRepository<TModel>, IDisposable
     /// <param name="httpClientFactory"></param>
     /// <param name="pluralizer"></param>
     /// <param name="apiDetailsMonitor"></param>
-    public Repository(IHttpClientFactory httpClientFactory, IPluralizer pluralizer, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
+    public Api(IHttpClientFactory httpClientFactory, IPluralizer pluralizer, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
     {
         ArgumentNullException.ThrowIfNull(httpClientFactory,nameof(httpClientFactory));
         ArgumentNullException.ThrowIfNull(pluralizer, nameof(pluralizer));
@@ -67,21 +62,10 @@ public sealed class Repository<TModel> : IRepository<TModel>, IDisposable
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<TModel>> GetAsync(CancellationToken cancellationToken = default)
+    public IAsyncEnumerable<TModel?> GetAsync(CancellationToken cancellationToken = default)
     {
         HttpClient httpClient = _httpClientFactory.CreateClient();
-        IAsyncEnumerable<TModel?> response = httpClient.GetFromJsonAsAsyncEnumerable<TModel?>(RequestUri, cancellationToken);
-        _models.Clear();
-
-        await foreach (TModel? model in response.ConfigureAwait(false))
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (model is not null)
-            {
-                _models.Add(model);
-            }
-        }
-        return _models;
+        return httpClient.GetFromJsonAsAsyncEnumerable<TModel?>(RequestUri, cancellationToken);
     }
 
     /// <summary>

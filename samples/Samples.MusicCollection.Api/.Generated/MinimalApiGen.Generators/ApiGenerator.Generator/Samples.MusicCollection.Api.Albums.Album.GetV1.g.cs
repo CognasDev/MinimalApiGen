@@ -25,6 +25,8 @@ public partial class AlbumQueryRouteEndpointsMapper
             "/albums",
             (
                 CancellationToken cancellationToken,
+				[FromQuery] int? artistId,
+				[FromQuery] int? genreId,
                 [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryBusinessLogic businessLogic,
                 [FromServices] IMappingService<Album, AlbumResponse> mappingService,
                 [FromServices] IPaginationService paginationService,
