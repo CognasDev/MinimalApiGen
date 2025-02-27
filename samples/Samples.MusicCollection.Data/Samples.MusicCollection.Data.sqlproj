@@ -119,6 +119,7 @@
     <Build Include="Stored Procedures\- ETL and Reporting\AllMusic_ArtistAlbums_DetailsAndJSON.sql" />
     <Build Include="Stored Procedures\- ETL and Reporting\AllMusic_LabelsStats_Pivot.sql" />
     <Build Include="Stored Procedures\- ETL and Reporting\AllMusic_GenreStatistics.sql" />
+    <Build Include="Stored Procedures\Albums\Albums_SelectByArtistId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Samples.MusicCollection.Data.publish.xml" />

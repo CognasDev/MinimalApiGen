@@ -197,7 +197,7 @@ public partial class {ClassName}
     /// <param name="keyedServices"></param>
     /// <param name="modelIdPropertyType"></param>
     /// <returns></returns>
-    private static string BuildDelegateParameters(EquatableArray<string> businessLogicParameters,
+    private static string BuildDelegateParameters(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
                                                   EquatableArray<string> services,
                                                   EquatableDictionary<string, string> keyedServices,
                                                   string modelIdPropertyType)
@@ -209,7 +209,7 @@ public partial class {ClassName}
 
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.AsSpan();
+        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.Select(param => param.Type).ToArray();
         StringBuilder stringBuilder = new();
 
         foreach (string parameter in businessLogicParametersSpan)

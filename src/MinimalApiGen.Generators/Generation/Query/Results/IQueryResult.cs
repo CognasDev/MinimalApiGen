@@ -1,4 +1,5 @@
-﻿using MinimalApiGen.Generators.Generation.Shared.Results;
+﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Shared.Results;
 
 namespace MinimalApiGen.Generators.Generation.Query.Results;
 
@@ -23,6 +24,11 @@ internal interface IQueryResult : IResult
     /// 
     /// </summary>
     string? CachedFor { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    EquatableArray<QueryParameterResult> QueryParameterResults { get; }
 
     #endregion
 }

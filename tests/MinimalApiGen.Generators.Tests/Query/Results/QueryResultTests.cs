@@ -35,8 +35,7 @@ public sealed class QueryResultTests
             BusinessLogicResult = new BusinessLogicResult
             {
                 FullyQualifiedName = "Namespace.BusinessLogic",
-                DelegateName = "BusinessLogicDelegate",
-                Parameters = { "param1", "param2" }
+                DelegateName = "BusinessLogicDelegate"
             },
             Services = { "Service1", "Service2" },
             KeyedServices = { ["Key1"] = "Value1", ["Key2"] = "Value2" },
@@ -61,7 +60,6 @@ public sealed class QueryResultTests
         queryResult.KeyedServices.Should().BeEquivalentTo(new EquatableDictionary<string, string>(new Dictionary<string, string> { ["Key1"] = "Value1", ["Key2"] = "Value2" }));
         queryResult.BusinessLogicFullyQualifiedName.Should().Be("Namespace.BusinessLogic");
         queryResult.BusinessLogicDelegateName.Should().Be("BusinessLogicDelegate");
-        queryResult.BusinessLogicParameters.Should().BeEquivalentTo(new EquatableArray<string>(["param1", "param2"]));
     }
 
     #endregion

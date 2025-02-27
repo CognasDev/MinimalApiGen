@@ -49,6 +49,11 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
+    public static string WithQueryParameters { get; } = $"{typeof(IGetQueryParameters).FullName}.{nameof(IGetQueryParameters.WithQueryParameters)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static string WithVersion { get; } = $"{typeof(IVersion).FullName}.{nameof(IVersion.WithVersion)}";
 
     /// <summary>

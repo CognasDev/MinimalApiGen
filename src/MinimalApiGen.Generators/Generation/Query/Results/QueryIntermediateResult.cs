@@ -65,6 +65,11 @@ internal sealed record QueryIntermediateResult
     /// <summary>
     /// 
     /// </summary>
+    public IEnumerable<QueryParameterResult> QueryParameterResults { get; set; } = [];
+
+    /// <summary>
+    /// 
+    /// </summary>
     public List<string> Services { get; } = [];
 
     /// <summary>

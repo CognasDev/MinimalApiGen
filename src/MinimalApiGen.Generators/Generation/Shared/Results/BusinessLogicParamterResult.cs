@@ -5,24 +5,19 @@ namespace MinimalApiGen.Generators.Generation.Shared.Results;
 /// <summary>
 /// 
 /// </summary>
-internal sealed record BusinessLogicResult
+internal sealed record BusinessLogicParamterResult
 {
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public required string FullyQualifiedName { get; init; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// 
     /// </summary>
-    public required string DelegateName { get; init; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public List<BusinessLogicParamterResult> Parameters { get; } = [];
+    public required string Type { get; init; }
 
     #endregion
 }

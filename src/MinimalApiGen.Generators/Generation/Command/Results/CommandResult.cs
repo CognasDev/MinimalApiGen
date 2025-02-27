@@ -150,7 +150,7 @@ internal readonly record struct CommandResult : ICommandResult
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<string> BusinessLogicParameters { get; }
+    public EquatableArray<BusinessLogicParamterResult> BusinessLogicParameters { get; }
 
     #endregion
 
