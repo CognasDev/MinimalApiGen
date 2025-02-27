@@ -1,4 +1,4 @@
-﻿namespace Samples.MusicCollection.Web.Models;
+﻿namespace Samples.MusicCollection.Web.Albums;
 
 /// <summary>
 /// 

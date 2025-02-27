@@ -1,21 +1,16 @@
-﻿namespace Samples.MusicCollection.Web.Models;
+﻿namespace Samples.MusicCollection.Web.Artists;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed record Key
+public sealed record Artist
 {
     #region Property Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    public required int KeyId { get; init; }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public required string CamelotCode { get; init; }
+    public int? ArtistId { get; init; }
 
     /// <summary>
     /// 

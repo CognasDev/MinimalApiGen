@@ -10,9 +10,8 @@ public interface IAlbumsQueryBusinessLogic
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="artistId"></param>
     /// <returns></returns>
-    Task<IEnumerable<Album>> SelectAlbumsAsync(int? artistId);
+    Task<IEnumerable<Album>> SelectAlbumsAsync();
 
     /// <summary>
     /// 

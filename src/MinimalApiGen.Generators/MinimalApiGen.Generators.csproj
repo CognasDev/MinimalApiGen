@@ -15,7 +15,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0">
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="System.Text.Json" Version="9.0.2">
@@ -45,7 +45,7 @@
 
 	<!--Nuget package configuration-->
 	<PropertyGroup>
-		<Version>$(VersionPrefix)1.0.3-alpha</Version>
+		<Version>$(VersionPrefix)1.0.2-alpha</Version>
 		<Title>MinimalApiGen.Generators</Title>
 		<Authors>CognasDev</Authors>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>

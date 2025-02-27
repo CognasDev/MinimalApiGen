@@ -1,5 +1,4 @@
 ﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-using System.Linq.Expressions;
 
 namespace MinimalApiGen.Framework.Generation.Query.Get;
 
@@ -9,14 +8,6 @@ namespace MinimalApiGen.Framework.Generation.Query.Get;
 public sealed class WithGetOptionals : IWithGetOptionals
 {
     #region Public Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TModel"></typeparam>
-    /// <param name="properties"></param>
-    /// <returns></returns>
-    public IWithGetWithQueryParameters WithQueryParameters<TModel>(params Expression<Func<TModel, object?>>[] properties) => new WithGetWithQueryParameters();
 
     /// <summary>
     /// 

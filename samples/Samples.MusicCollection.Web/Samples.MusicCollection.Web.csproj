@@ -8,31 +8,30 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Components\Pages\Home - Copy.razor.cs" />
+		<None Include="Components\Pages\Error.cs">
+			<DependentUpon>Error.razor</DependentUpon>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="appsettings.Development.json">
 			<DependentUpon>appsettings.json</DependentUpon>
 		</None>
-		<None Include="Components\Pages\ArtistsPage.razor.cs">
-			<DependentUpon>ArtistsPage.razor</DependentUpon>
-		</None>
-		<None Include="Components\Pages\Error.razor.cs">
-			<DependentUpon>Error.razor</DependentUpon>
-		</None>
-		<None Include="Components\Pages\AllMusicPage.razor.cs">
-		  <DependentUpon>AllMusicPage.razor</DependentUpon>
-		</None>
-		<None Include="Components\Layout\MainLayout.razor.cs">
-			<DependentUpon>MainLayout.razor</DependentUpon>
+		<None Include="Components\Pages\AlbumsPage.cs">
+			<DependentUpon>AlbumsPage.razor</DependentUpon>
 		</None>
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Radzen.Blazor" Version="6.1.2" />
+		<None Include="Components\Layout\MainLayout.razor.cs">
+			<DependentUpon>MainLayout.razor</DependentUpon>
+		</None>
 	</ItemGroup>
-
+	
+	<ItemGroup>
+	  <PackageReference Include="Radzen.Blazor" Version="6.0.20" />
+	</ItemGroup>
+	
 	<Import Project="..\..\src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems" Label="Shared" />
 
 </Project>

@@ -25,8 +25,6 @@ public partial class AlbumQueryRouteEndpointsMapper
             "/albums",
             (
                 CancellationToken cancellationToken,
-				[FromQuery] int? artistId,
-				[FromQuery] int? genreId,
                 [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryBusinessLogic businessLogic,
                 [FromServices] IMappingService<Album, AlbumResponse> mappingService,
                 [FromServices] IPaginationService paginationService,
@@ -37,7 +35,7 @@ public partial class AlbumQueryRouteEndpointsMapper
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<AlbumResponse> AlbumResponseStreamAsync()
                 {
-                    IEnumerable<Album> models = await businessLogic.SelectAlbumsAsync(artistId).ConfigureAwait(false);
+                    IEnumerable<Album> models = await businessLogic.SelectAlbumsAsync().ConfigureAwait(false);
                     IEnumerable<AlbumResponse> responses = mappingService.Map(models);
 
                     if (paginationService.IsPaginationQueryValidOrNotRequested<AlbumResponse>(paginationQuery) == true)
