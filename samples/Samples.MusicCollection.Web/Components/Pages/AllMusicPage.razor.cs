@@ -41,12 +41,32 @@ public sealed partial class AllMusicPage
     /// <summary>
     /// 
     /// </summary>
-    public bool IsLoading { get; private set; }
+    public bool ArtistsLoading { get; private set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool AlbumsLoading { get; private set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool TracksLoading { get; private set; }
 
     /// <summary>
     /// 
     /// </summary>
     public int ArtistsCount { get; private set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int AlbumsCount { get; private set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public int TracksCount { get; private set; }
 
     #endregion
 
@@ -72,11 +92,11 @@ public sealed partial class AllMusicPage
     /// <returns></returns>
     protected override async Task OnInitializedAsync()
     {
-        IsLoading = true;
+        ArtistsLoading = true;
         await AllMusicLogic.GetArtistsAsync().ConfigureAwait(false);
         ArtistsCount = AllMusicLogic.Artists.Count();
         await InvokeAsync(ArtistsGrid.Reload).ConfigureAwait(false);
-        IsLoading = false;
+        ArtistsLoading = false;
     }
 
     #endregion
@@ -90,6 +110,15 @@ public sealed partial class AllMusicPage
     /// <returns></returns>
     private async Task ArtistsGrid_RowExpand(ArtistDetail artistDetail)
     {
+        AlbumsLoading = true;
+        if (!AllMusicLogic.Genres.Any())
+        {
+            await AllMusicLogic.GetGenresAsync().ConfigureAwait(false);
+        }
+        if (!AllMusicLogic.Keys.Any())
+        {
+            await AllMusicLogic.GetKeysAsync().ConfigureAwait(false);
+        }
         if (!artistDetail.HasAlbums)
         {
             artistDetail.ClearAlbums();
@@ -97,8 +126,10 @@ public sealed partial class AllMusicPage
             {
                 artistDetail.AddAlbum(albumDetail);
             }
+            AlbumsCount = artistDetail.Albums.Count();
             await InvokeAsync(AlbumsGrid.Reload).ConfigureAwait(false);
         }
+        AlbumsLoading = false;
     }
 
     /// <summary>
@@ -108,15 +139,19 @@ public sealed partial class AllMusicPage
     /// <returns></returns>
     private async Task AlbumsGrid_RowExpand(AlbumDetail albumDetail)
     {
+        TracksLoading = true;
         if (!albumDetail.HasTracks)
         {
             albumDetail.ClearTracks();
+            await AllMusicLogic.GetGenresAsync().ConfigureAwait(false);
             await foreach (TrackDetail trackDetail in AllMusicLogic.GetTracksAsync(albumDetail.AlbumId!.Value).ConfigureAwait(false))
             {
                 albumDetail.AddTrack(trackDetail);
             }
+            TracksCount = albumDetail.Tracks.Count();
             await InvokeAsync(TracksGrid.Reload).ConfigureAwait(false);
         }
+        TracksLoading = false;
     }
 
     #endregion

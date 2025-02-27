@@ -16,6 +16,16 @@ public interface IAllMusicLogic
     /// </summary>
     IEnumerable<ArtistDetail> Artists { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    IEnumerable<Genre> Genres { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    IEnumerable<Key> Keys { get; }
+
     #endregion
 
     #region Method Declarations
@@ -42,6 +52,20 @@ public interface IAllMusicLogic
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task GetGenresAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task GetKeysAsync(CancellationToken cancellationToken = default);
 
     #endregion
 }

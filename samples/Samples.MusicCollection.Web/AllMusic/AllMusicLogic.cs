@@ -13,7 +13,6 @@ public sealed class AllMusicLogic : IAllMusicLogic
 {
     #region Field Declarations
 
-    private readonly SemaphoreSlim _semaphore = new(1, 1);
     private readonly IApi<Artist> _artistsApi;
     private readonly IAlbumsApi _albumsApi;
     private readonly IApi<Genre> _genresApi;
@@ -29,6 +28,16 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// 
     /// </summary>
     public IEnumerable<ArtistDetail> Artists { get; private  set; } = [];
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<Genre> Genres { get; private set; } = [];
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<Key> Keys { get; private set; } = [];
 
     #endregion
 
@@ -76,29 +85,21 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <returns></returns>
     public async Task GetArtistsAsync(CancellationToken cancellationToken = default)
     {
-        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
-        try
+        List<ArtistDetail> artists = [];
+        await foreach (Artist? artist in _artistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
         {
-            List<ArtistDetail> artists = [];
-            await foreach (Artist? artist in _artistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            cancellationToken.ThrowIfCancellationRequested();
+            if (artist is not null)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (artist is not null)
+                ArtistDetail artistDetail = new()
                 {
-                    ArtistDetail artistDetail = new()
-                    {
-                        ArtistId = artist.ArtistId,
-                        Name = artist.Name,
-                    };
-                    artists.Add(artistDetail);
-                }
+                    ArtistId = artist.ArtistId,
+                    Name = artist.Name,
+                };
+                artists.Add(artistDetail);
             }
-            Artists = artists;
         }
-        finally
-        {
-            _semaphore.Release();
-        }
+        Artists = artists;
     }
 
     /// <summary>
@@ -153,6 +154,44 @@ public sealed class AllMusicLogic : IAllMusicLogic
                 yield return trackDetail;
             }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetGenresAsync(CancellationToken cancellationToken = default)
+    {
+        List<Genre> genres = [];
+        await foreach (Genre? genre in _genresApi.GetAsync(cancellationToken).ConfigureAwait(false))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (genre is not null)
+            {
+                genres.Add(genre);
+            }
+        }
+        Genres = genres;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetKeysAsync(CancellationToken cancellationToken = default)
+    {
+        List<Key> keys = [];
+        await foreach (Key? key in _keysApi.GetAsync(cancellationToken).ConfigureAwait(false))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (key is not null)
+            {
+                keys.Add(key);
+            }
+        }
+        Keys = keys.OrderBy(key => key.Name);
     }
 
     #endregion
