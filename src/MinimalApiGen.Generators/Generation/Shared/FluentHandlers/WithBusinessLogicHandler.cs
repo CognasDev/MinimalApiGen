@@ -25,20 +25,13 @@ internal static class WithBusinessLogicHandler
         SimpleLambdaExpressionSyntax lambdaExpression = (SimpleLambdaExpressionSyntax)fluentInvocation.GetSingleArgumentExpression();
         string delegateName = lambdaExpression.ExpressionBody?.TryGetInferredMemberName() ?? throw new NullReferenceException();
         IMethodSymbol methodSymbol = businessLogicTypeSymbol.GetAllMembers().OfType<IMethodSymbol>().Single(method => method.Name == delegateName);
+        IEnumerable<string> parameters = methodSymbol.Parameters.Select(parameter => parameter.Type.ToDisplayString());
         BusinessLogicResult result = new()
         {
             FullyQualifiedName = businessLogicTypeSymbol.ToDisplayString(),
             DelegateName = delegateName,
         };
-        foreach (IParameterSymbol parameterSymbol in methodSymbol.Parameters)
-        {
-            BusinessLogicParamterResult parameterResult = new()
-            {
-                Name = parameterSymbol.Name,
-                Type = parameterSymbol.Type.ToDisplayString(),
-            };
-            result.Parameters.Add(parameterResult);
-        }
+        result.Parameters.AddRange(parameters);
         return result;
     }
 

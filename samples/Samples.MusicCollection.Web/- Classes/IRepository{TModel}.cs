@@ -4,7 +4,7 @@
 /// 
 /// </summary>
 /// <typeparam name="TModel"></typeparam>
-public interface IApi<TModel>
+public interface IRepository<TModel>
 {
     #region Method Declarations
 
@@ -13,7 +13,7 @@ public interface IApi<TModel>
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    IAsyncEnumerable<TModel?> GetAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<TModel>> GetAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// 

@@ -22,7 +22,7 @@ internal sealed record BusinessLogicResult
     /// <summary>
     /// 
     /// </summary>
-    public List<BusinessLogicParamterResult> Parameters { get; } = [];
+    public List<string> Parameters { get; } = [];
 
     #endregion
 }

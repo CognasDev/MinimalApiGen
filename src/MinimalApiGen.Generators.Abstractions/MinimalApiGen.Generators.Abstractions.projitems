@@ -11,8 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithFluentValidation.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IGetQueryParameters{TModel}.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithQueryParameters.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Command\Post\IPostFluentValidation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Command\Put\IPutFluentValidation.cs" />

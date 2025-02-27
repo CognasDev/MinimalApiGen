@@ -18,23 +18,8 @@ public sealed class AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> l
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="artistId"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<Album>> SelectAlbumsAsync(int? artistId)
-    {
-        IEnumerable<Album> selectedModels;
-        if (artistId.HasValue)
-        {
-            Parameter artistIdParameter = new(nameof(Album.ArtistId), artistId);
-            string storedProcedueName = $"[dbo].[{PluralModelName}_SelectByArtistId]";
-            selectedModels = await SelectModelsAsync(storedProcedueName, artistIdParameter).ConfigureAwait(false);
-        }
-        else
-        {
-            selectedModels = await SelectModelsAsync().ConfigureAwait(false);
-        }
-        return selectedModels;
-    }
+    public async Task<IEnumerable<Album>> SelectAlbumsAsync() => await SelectModelsAsync().ConfigureAwait(false);
 
     /// <summary>
     /// 

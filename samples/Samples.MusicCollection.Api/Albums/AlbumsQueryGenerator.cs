@@ -19,7 +19,6 @@ public sealed class AlbumsQueryGenerator
                                     .WithModelId(model => model.AlbumId)
                                     .WithGet()
                                         .WithBusinessLogic<IAlbumsQueryBusinessLogic>(query => query.SelectAlbumsAsync)
-                                        .WithQueryParameters<Album>(model => model.ArtistId, model => model.GenreId)
                                         .WithResponse<AlbumResponse>()
                                         .WithPagination()
                                         .WithMappingService()

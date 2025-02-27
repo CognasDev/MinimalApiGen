@@ -91,13 +91,6 @@ internal static class InvocationExtensions
     /// 
     /// </summary>
     /// <param name="fluentInvocation"></param>
-    public static IEnumerable<ExpressionSyntax> GetAllArgumentExpressions(this InvocationInfo fluentInvocation)
-        => fluentInvocation.InvocationExpressionSyntax.ArgumentList.Arguments.Select(argument => argument.Expression);
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="fluentInvocation"></param>
     /// <param name="semanticModel"></param>
     /// <returns></returns>
     public static TReturn GetSingleArgumentValue<TReturn>(this InvocationInfo fluentInvocation, SemanticModel semanticModel)
