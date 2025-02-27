@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<EmitCompilerGeneratedFiles>false</EmitCompilerGeneratedFiles>
 		<CompilerGeneratedFilesOutputPath>.Generated</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
 
