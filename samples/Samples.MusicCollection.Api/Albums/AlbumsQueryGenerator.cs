@@ -21,7 +21,7 @@ public sealed class AlbumsQueryGenerator
                                         .WithBusinessLogic<IAlbumsQueryBusinessLogic>(query => query.SelectAlbumsAsync)
                                         .WithQueryParameters<Album>(model => model.ArtistId)
                                         .WithResponse<AlbumResponse>()
-                                     //   .WithPagination()
+                                        .WithPagination()
                                         .WithMappingService()
                                         .WithVersion(1)
                                     .WithGetById()

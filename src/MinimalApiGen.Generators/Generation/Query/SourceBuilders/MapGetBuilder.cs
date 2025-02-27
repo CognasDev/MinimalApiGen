@@ -1,4 +1,4 @@
-﻿using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
@@ -277,7 +277,7 @@ public partial class {ClassName}
             stringBuilder.Append(queryParameterResult.Name);
             stringBuilder.AppendLine(",");
         }
-        stringBuilder.Length -= 2;
+        stringBuilder.Length -= 1;
         string queryParameters = stringBuilder.ToString();
         return queryParameters;
     }
