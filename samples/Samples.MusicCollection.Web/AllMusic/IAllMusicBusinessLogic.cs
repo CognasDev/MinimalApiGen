@@ -8,7 +8,7 @@ namespace Samples.MusicCollection.Web.AllMusic;
 /// <summary>
 /// 
 /// </summary>
-public interface IAllMusicLogic
+public interface IAllMusicBusinessLogic
 {
     #region Property Declarations
     /// <summary>
@@ -25,6 +25,11 @@ public interface IAllMusicLogic
     /// 
     /// </summary>
     IEnumerable<Key> Keys { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    IEnumerable<Label> Labels { get; }
 
     #endregion
 
@@ -48,14 +53,6 @@ public interface IAllMusicLogic
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="albumId"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, CancellationToken cancellationToken = default);
-
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task GetGenresAsync(CancellationToken cancellationToken = default);
@@ -66,6 +63,21 @@ public interface IAllMusicLogic
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task GetKeysAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task GetLabelsAsync(CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="albumId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, CancellationToken cancellationToken = default);
 
     #endregion
 }

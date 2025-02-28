@@ -7,7 +7,7 @@
 <PageTitle>All Music</PageTitle>
 
 <RadzenDataGrid @ref=ArtistsGrid
-                Data="@AllMusicLogic.Artists" IsLoading="@ArtistsLoading" Count="@ArtistsCount" TItem="ArtistDetail"
+                Data="@AllMusicBusinessLogic.Artists" IsLoading="@ArtistsLoading" Count="@ArtistsCount" TItem="ArtistDetail"
                 AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center"
                 RowExpand="ArtistsGrid_RowExpand" ExpandMode="DataGridExpandMode.Single">
 
@@ -23,10 +23,20 @@
                         AllowFiltering="true" AllowPaging="true" AllowSorting="true"
                         RowExpand="AlbumsGrid_RowExpand" ExpandMode="DataGridExpandMode.Single">
 
-            @* Artist Columns *@
+            @* Album Columns *@
             <Columns>
-                <RadzenDataGridColumn Property="@nameof(Album.Name)" Width="*" Title="@nameof(Album)" SortOrder="SortOrder.Ascending" />
-                <RadzenDataGridColumn Property="@nameof(Album.ReleaseDate)" Width="200px" Title="Release Date" FormatString="{0:dd MMM yyyy}" />
+                <RadzenDataGridColumn Property="@nameof(Album.Name)" Width="300px" Title="@nameof(Album)" SortOrder="SortOrder.Ascending" />
+                <RadzenDataGridColumn Property="@nameof(Album.LabelId)" Width="300px" Title="@nameof(Label)">
+                    <Template Context="AlbumDetail">
+                        <RadzenLabel Text="@AllMusicBusinessLogic.Labels.SingleOrDefault(label => label.LabelId == @AlbumDetail.LabelId)?.Name" />
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn Property="@nameof(Album.GenreId)" Width="300px" Title="@nameof(Genre)">
+                    <Template Context="AlbumDetail">
+                        <RadzenLabel Text="@AllMusicBusinessLogic.Genres.SingleOrDefault(genre => genre.GenreId == @AlbumDetail.GenreId)?.Name" />
+                    </Template>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn Property="@nameof(Album.ReleaseDate)" Title="Release Date" FormatString="{0:dd MMM yyyy}" />
             </Columns>
 
             @* Album Tracks *@
@@ -39,17 +49,23 @@
                         <RadzenDataGridColumn Property="@nameof(Track.Name)" Width="*" Title="@nameof(Track)" />
                         <RadzenDataGridColumn Property="@nameof(Track.GenreId)" Width="200px" Title="@nameof(Genre)">
                             <Template Context="TrackDetail">
-                                <RadzenDropDown TValue="Genre" Data="@AllMusicLogic.Genres"
+                                <RadzenLabel Text="@AllMusicBusinessLogic.Genres.SingleOrDefault(genre => genre.GenreId == @TrackDetail.GenreId)?.Name" />
+                            </Template>
+                            <EditTemplate Context="TrackDetail">
+                                <RadzenDropDown TValue="Genre" Data="@AllMusicBusinessLogic.Genres"
                                                 Value="@TrackDetail.GenreId"
                                                 ValueProperty="@nameof(Genre.GenreId)"  TextProperty="@nameof(Genre.Name)" />
-                            </Template>
+                            </EditTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn Property="@nameof(Track.KeyId)" Width="200px" Title="@nameof(Key)">
                             <Template Context="TrackDetail">
-                                <RadzenDropDown TValue="Key" Data="@AllMusicLogic.Keys"
+                                <RadzenLabel Text="@AllMusicBusinessLogic.Keys.SingleOrDefault(key => key.KeyId == @TrackDetail.KeyId)?.Name" />
+                            </Template>
+                            <EditTemplate Context="TrackDetail">
+                                <RadzenDropDown TValue="Key" Data="@AllMusicBusinessLogic.Keys"
                                                 Value="@TrackDetail.KeyId"
                                                 ValueProperty="@nameof(Key.KeyId)" TextProperty="@nameof(Key.Name)" />
-                            </Template>
+                            </EditTemplate>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn Property="@nameof(Track.Bpm)" Width="200px" Title="@nameof(Track.Bpm)" />
                     </Columns>
