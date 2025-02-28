@@ -33,6 +33,7 @@
 
 	<Import Project="..\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems" Label="Shared" />
 	<Import Project="..\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems" Label="Shared" />
+	<Import Project="..\MinimalApiGen.Shared\MinimalApiGen.Shared.projitems" Label="Shared" />
 
 	<!--Nuget package configuration-->
 	<PropertyGroup>

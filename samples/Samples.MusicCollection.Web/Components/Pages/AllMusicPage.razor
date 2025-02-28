@@ -28,12 +28,12 @@
                 <RadzenDataGridColumn Property="@nameof(Album.Name)" Width="300px" Title="@nameof(Album)" SortOrder="SortOrder.Ascending" />
                 <RadzenDataGridColumn Property="@nameof(Album.LabelId)" Width="300px" Title="@nameof(Label)">
                     <Template Context="AlbumDetail">
-                        <RadzenLabel Text="@AllMusicBusinessLogic.Labels.SingleOrDefault(label => label.LabelId == @AlbumDetail.LabelId)?.Name" />
+                        <RadzenLabel Text="@AllMusicBusinessLogic.LabelName(@AlbumDetail.LabelId)" />
                     </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn Property="@nameof(Album.GenreId)" Width="300px" Title="@nameof(Genre)">
                     <Template Context="AlbumDetail">
-                        <RadzenLabel Text="@AllMusicBusinessLogic.Genres.SingleOrDefault(genre => genre.GenreId == @AlbumDetail.GenreId)?.Name" />
+                        <RadzenLabel Text="@AllMusicBusinessLogic.GenreName(@AlbumDetail.GenreId)" />
                     </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn Property="@nameof(Album.ReleaseDate)" Title="Release Date" FormatString="{0:dd MMM yyyy}" />
@@ -49,7 +49,7 @@
                         <RadzenDataGridColumn Property="@nameof(Track.Name)" Width="*" Title="@nameof(Track)" />
                         <RadzenDataGridColumn Property="@nameof(Track.GenreId)" Width="200px" Title="@nameof(Genre)">
                             <Template Context="TrackDetail">
-                                <RadzenLabel Text="@AllMusicBusinessLogic.Genres.SingleOrDefault(genre => genre.GenreId == @TrackDetail.GenreId)?.Name" />
+                                <RadzenLabel Text="@AllMusicBusinessLogic.GenreName(@TrackDetail.GenreId)" />
                             </Template>
                             <EditTemplate Context="TrackDetail">
                                 <RadzenDropDown TValue="Genre" Data="@AllMusicBusinessLogic.Genres"
@@ -59,7 +59,7 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn Property="@nameof(Track.KeyId)" Width="200px" Title="@nameof(Key)">
                             <Template Context="TrackDetail">
-                                <RadzenLabel Text="@AllMusicBusinessLogic.Keys.SingleOrDefault(key => key.KeyId == @TrackDetail.KeyId)?.Name" />
+                                <RadzenLabel Text="@AllMusicBusinessLogic.KeyNameAndCamelot(@TrackDetail.KeyId)" />
                             </Template>
                             <EditTemplate Context="TrackDetail">
                                 <RadzenDropDown TValue="Key" Data="@AllMusicBusinessLogic.Keys"

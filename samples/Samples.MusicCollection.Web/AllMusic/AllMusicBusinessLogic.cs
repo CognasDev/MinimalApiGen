@@ -1,4 +1,5 @@
-﻿using Radzen;
+﻿using MinimalApiGen.Shared.Collections;
+using Radzen;
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
@@ -227,6 +228,36 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
             }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="genreId"></param>
+    /// <returns></returns>
+    public string GenreName(int? genreId) => genreId.HasValue ? Genres.FastSingle(genre => genre.GenreId == genreId.Value).Name : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keyId"></param>
+    /// <returns></returns>
+    public string KeyNameAndCamelot(int? keyId)
+    {
+        if (!keyId.HasValue)
+        {
+            return string.Empty;
+        }
+        Key key = Keys.FastSingle(key => key.KeyId == keyId.Value);
+        string nameAndCamelot = $"{key.Name} ({key.CamelotCode})";
+        return nameAndCamelot;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="labelId"></param>
+    /// <returns></returns>
+    public string LabelName(int? labelId) => labelId.HasValue ? Labels.FastSingle(label => label.LabelId == labelId.Value).Name : string.Empty;
 
     #endregion
 }

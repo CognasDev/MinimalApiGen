@@ -79,5 +79,26 @@ public interface IAllMusicBusinessLogic
     /// <returns></returns>
     IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, CancellationToken cancellationToken = default);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="genreId"></param>
+    /// <returns></returns>
+    string GenreName(int? genreId);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keyId"></param>
+    /// <returns></returns>
+    string KeyNameAndCamelot(int? keyId);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="labelId"></param>
+    /// <returns></returns>
+    string LabelName(int? labelId);
+
     #endregion
 }

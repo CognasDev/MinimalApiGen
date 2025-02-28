@@ -3,7 +3,7 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MinimalApiGen.Framework.Collections;
+using MinimalApiGen.Shared.Collections;
 using System.Reflection;
 
 namespace MinimalApiGen.Framework.Swagger;
