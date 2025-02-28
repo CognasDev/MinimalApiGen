@@ -2,6 +2,7 @@
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
+using System.Collections.Frozen;
 using System.Runtime.CompilerServices;
 
 namespace Samples.MusicCollection.Web.AllMusic;
@@ -9,11 +10,11 @@ namespace Samples.MusicCollection.Web.AllMusic;
 /// <summary>
 /// 
 /// </summary>
-public sealed class AllMusicLogic : IAllMusicLogic
+public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
 {
     #region Field Declarations
 
-    private readonly SemaphoreSlim _semaphore = new(1, 1);
+    private static readonly SemaphoreSlim _semaphore = new(1, 1);
     private readonly IApi<Artist> _artistsApi;
     private readonly IAlbumsApi _albumsApi;
     private readonly IApi<Genre> _genresApi;
@@ -30,6 +31,21 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// </summary>
     public IEnumerable<ArtistDetail> Artists { get; private  set; } = [];
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<Genre> Genres { get; private set; } = [];
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<Key> Keys { get; private set; } = [];
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public IEnumerable<Label> Labels { get; private set; } = [];
+
     #endregion
 
     #region Constructor Declarations
@@ -43,12 +59,12 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <param name="keysApi"></param>
     /// <param name="labelsApi"></param>
     /// <param name="tracksApi"></param>
-    public AllMusicLogic(IApi<Artist> artistsApi,
-                         IAlbumsApi albumsApi,
-                         IApi<Genre> genresApi,
-                         IApi<Key> keysApi,
-                         IApi<Label> labelsApi,
-                         ITracksApi tracksApi)
+    public AllMusicBusinessLogic(IApi<Artist> artistsApi,
+                                 IAlbumsApi albumsApi,
+                                 IApi<Genre> genresApi,
+                                 IApi<Key> keysApi,
+                                 IApi<Label> labelsApi,
+                                 ITracksApi tracksApi)
     {
         ArgumentNullException.ThrowIfNull(artistsApi, nameof(artistsApi));
         ArgumentNullException.ThrowIfNull(albumsApi, nameof(albumsApi));
@@ -76,29 +92,21 @@ public sealed class AllMusicLogic : IAllMusicLogic
     /// <returns></returns>
     public async Task GetArtistsAsync(CancellationToken cancellationToken = default)
     {
-        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
-        try
+        ConcurrentBag<ArtistDetail> artists = [];
+        await foreach (Artist? artist in _artistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
         {
-            List<ArtistDetail> artists = [];
-            await foreach (Artist? artist in _artistsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            cancellationToken.ThrowIfCancellationRequested();
+            if (artist is not null)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (artist is not null)
+                ArtistDetail artistDetail = new()
                 {
-                    ArtistDetail artistDetail = new()
-                    {
-                        ArtistId = artist.ArtistId,
-                        Name = artist.Name,
-                    };
-                    artists.Add(artistDetail);
-                }
+                    ArtistId = artist.ArtistId,
+                    Name = artist.Name,
+                };
+                artists.Add(artistDetail);
             }
-            Artists = artists;
         }
-        finally
-        {
-            _semaphore.Release();
-        }
+        Artists = artists;
     }
 
     /// <summary>
@@ -126,6 +134,71 @@ public sealed class AllMusicLogic : IAllMusicLogic
                 yield return albumDetail;
             }
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetGenresAsync(CancellationToken cancellationToken = default)
+    {
+        ConcurrentBag<Genre> genres = [];
+        await foreach (Genre? genre in _genresApi.GetAsync(cancellationToken).ConfigureAwait(false))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (genre is not null)
+            {
+                genres.Add(genre);
+            }
+        }
+        Genres = genres;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetKeysAsync(CancellationToken cancellationToken = default)
+    {
+        await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
+        try
+        {
+            ConcurrentBag<Key> keys = [];
+            await foreach (Key? key in _keysApi.GetAsync(cancellationToken).ConfigureAwait(false))
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                if (key is not null)
+                {
+                    keys.Add(key);
+                }
+            }
+            Keys = keys.OrderBy(key => key.Name).ToFrozenSet();
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task GetLabelsAsync(CancellationToken cancellationToken = default)
+    {
+        ConcurrentBag<Label> labels = [];
+        await foreach (Label? label in _labelsApi.GetAsync(cancellationToken).ConfigureAwait(false))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (label is not null)
+            {
+                labels.Add(label);
+            }
+        }
+        Labels = labels;
     }
 
     /// <summary>
