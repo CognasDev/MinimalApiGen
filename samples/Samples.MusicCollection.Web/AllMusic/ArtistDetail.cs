@@ -1,5 +1,4 @@
-﻿using Samples.MusicCollection.Web.Models;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 

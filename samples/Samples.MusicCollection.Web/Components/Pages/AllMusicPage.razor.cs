@@ -1,9 +1,5 @@
-﻿using Radzen;
-using Radzen.Blazor;
+﻿using Radzen.Blazor;
 using Samples.MusicCollection.Web.AllMusic;
-using Samples.MusicCollection.Web.Api;
-using Samples.MusicCollection.Web.Models;
-using System.Threading;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
 
@@ -113,15 +109,8 @@ public sealed partial class AllMusicPage
         AlbumsLoading = true;
         artistDetail.ClearAlbums();
 
-        if (!AllMusicBusinessLogic.Genres.Any())
-        {
-            await AllMusicBusinessLogic.GetGenresAsync().ConfigureAwait(false);
-        }
-        if (!AllMusicBusinessLogic.Labels.Any())
-        {
-            await AllMusicBusinessLogic.GetLabelsAsync().ConfigureAwait(false);
-        }
-
+        await AllMusicBusinessLogic.GetGenresAsync().ConfigureAwait(false);
+        await AllMusicBusinessLogic.GetLabelsAsync().ConfigureAwait(false);
         await foreach (AlbumDetail albumDetail in AllMusicBusinessLogic.GetAlbumsAsync(artistDetail.ArtistId!.Value).ConfigureAwait(false))
         {
             artistDetail.AddAlbum(albumDetail);
@@ -142,14 +131,8 @@ public sealed partial class AllMusicPage
         TracksLoading = true;
         albumDetail.ClearTracks();
 
-        if (!AllMusicBusinessLogic.Genres.Any())
-        {
-            await AllMusicBusinessLogic.GetGenresAsync().ConfigureAwait(false);
-        }
-        if (!AllMusicBusinessLogic.Keys.Any())
-        {
-            await AllMusicBusinessLogic.GetKeysAsync().ConfigureAwait(false);
-        }
+        await AllMusicBusinessLogic.GetGenresAsync().ConfigureAwait(false);
+        await AllMusicBusinessLogic.GetKeysAsync().ConfigureAwait(false);
 
         await foreach (TrackDetail trackDetail in AllMusicBusinessLogic.GetTracksAsync(albumDetail.AlbumId!.Value).ConfigureAwait(false))
         {

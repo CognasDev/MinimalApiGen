@@ -1,5 +1,4 @@
 ﻿using MinimalApiGen.Shared.Collections;
-using Radzen;
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
@@ -30,7 +29,7 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<ArtistDetail> Artists { get; private  set; } = [];
+    public IEnumerable<ArtistDetail> Artists { get; private set; } = [];
 
     /// <summary>
     /// 
@@ -144,6 +143,10 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <returns></returns>
     public async Task GetGenresAsync(CancellationToken cancellationToken = default)
     {
+        if (Genres.Any())
+        {
+            return;
+        }
         ConcurrentBag<Genre> genres = [];
         await foreach (Genre? genre in _genresApi.GetAsync(cancellationToken).ConfigureAwait(false))
         {
@@ -166,6 +169,10 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
         await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
+            if (Keys.Any())
+            {
+                return;
+            }
             ConcurrentBag<Key> keys = [];
             await foreach (Key? key in _keysApi.GetAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -175,7 +182,7 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
                     keys.Add(key);
                 }
             }
-            Keys = keys.OrderBy(key => key.Name).ToFrozenSet();
+            Keys = keys.ToFrozenSet();
         }
         finally
         {
@@ -190,6 +197,10 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <returns></returns>
     public async Task GetLabelsAsync(CancellationToken cancellationToken = default)
     {
+        if (Labels.Any())
+        {
+            return;
+        }
         ConcurrentBag<Label> labels = [];
         await foreach (Label? label in _labelsApi.GetAsync(cancellationToken).ConfigureAwait(false))
         {
@@ -248,7 +259,7 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
             return string.Empty;
         }
         Key key = Keys.FastSingle(key => key.KeyId == keyId.Value);
-        string nameAndCamelot = $"{key.Name} ({key.CamelotCode})";
+        string nameAndCamelot = $"{key.CamelotCode} - {key.Name}";
         return nameAndCamelot;
     }
 

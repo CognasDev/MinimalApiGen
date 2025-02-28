@@ -1,6 +1,5 @@
 using MinimalApiGen.Framework.Pluralize;
 using Radzen;
-using Samples.MusicCollection.Web;
 using Samples.MusicCollection.Web.AllMusic;
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Components;

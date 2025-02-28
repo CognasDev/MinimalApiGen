@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using MinimalApiGen.Framework.Pluralize;
 using Samples.MusicCollection.Web.Config;
-using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.Api;
 

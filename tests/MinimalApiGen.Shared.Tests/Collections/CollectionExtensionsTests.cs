@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using MinimalApiGen.Shared.Collections;
-using System;
 using System.Collections.Frozen;
 
 namespace MinimalApiGen.Shared.Tests.Collections;
