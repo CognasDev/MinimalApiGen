@@ -11,9 +11,24 @@
                 AllowSorting="true" AllowFiltering="true" AllowPaging="true" PageSize="10" PagerHorizontalAlign="HorizontalAlign.Center"
                 RowExpand="ArtistsGrid_RowExpand" ExpandMode="DataGridExpandMode.Single">
 
+    <HeaderTemplate>
+        <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="add_circle" Text="New Artist" Click="@NewAritstAsync" />
+    </HeaderTemplate>
+
     @* Artist Columns *@
     <Columns>
-        <RadzenDataGridColumn Property="@nameof(Artist.Name)" Width="*" Title="@nameof(Artist)" SortOrder="SortOrder.Ascending" />
+        <RadzenDataGridColumn Property="@nameof(Artist.Name)" Width="*" Title="@nameof(Artist)" SortOrder="SortOrder.Ascending">
+            <EditTemplate Context="ArtistDetail">
+                <RadzenTextBox Name="ArtistNameTextBox" @bind-Value="ArtistDetail.Name" MaxLength="250" 
+                               Style="width:200px; display: block" aria-label="Enter artist name" />
+                <RadzenRequiredValidator Text="Artist name is required" Component="ArtistNameTextBox" Popup="true" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn Context="ArtistDetail" Filterable="false" Sortable="false" Width="100px" TextAlign="TextAlign.Right" Frozen="true" FrozenPosition="FrozenColumnPosition.Right">
+            <EditTemplate Context="ArtistDetail">
+                <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Size="ButtonSize.Medium" Click="@((args) => SaveArtistAsync(ArtistDetail))" aria-label="Save" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
     </Columns>
 
     @* Artist Albums *@
@@ -22,6 +37,10 @@
                         Data="@ArtistDetail.Albums" IsLoading="@AlbumsLoading" Count="@AlbumsCount" TItem="AlbumDetail"
                         AllowFiltering="true" AllowPaging="true" AllowSorting="true"
                         RowExpand="AlbumsGrid_RowExpand" ExpandMode="DataGridExpandMode.Single">
+
+            <HeaderTemplate>
+                <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="add_circle" Text="New Album" />
+            </HeaderTemplate>
 
             @* Album Columns *@
             <Columns>
@@ -44,6 +63,11 @@
                 <RadzenDataGrid @ref=TracksGrid
                                 Data="@AlbumDetail.Tracks" IsLoading="@TracksLoading" Count="@TracksCount"
                                 AllowFiltering="true" AllowPaging="false" AllowSorting="true">
+
+                    <HeaderTemplate>
+                        <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="add_circle" Text="New Track" />
+                    </HeaderTemplate>
+
                     <Columns>
                         <RadzenDataGridColumn Property="@nameof(Track.TrackNumber)" Width="200px" Title="Track Number" SortOrder="SortOrder.Ascending" />
                         <RadzenDataGridColumn Property="@nameof(Track.Name)" Width="*" Title="@nameof(Track)" />

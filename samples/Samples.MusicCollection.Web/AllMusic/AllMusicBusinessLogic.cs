@@ -112,6 +112,23 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="artistDetail"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
+    public async Task<Artist> InsertArtistAsync(ArtistDetail artistDetail, CancellationToken cancellationToken = default)
+    {
+        Artist artist = new()
+        {
+            Name = artistDetail.Name!
+        };
+        Artist insertedArtist = await _artistsApi.InsertAsync(artist, cancellationToken).ConfigureAwait(false) ?? throw new NullReferenceException(nameof(insertedArtist));
+        return insertedArtist;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

@@ -42,6 +42,14 @@ public interface IAllMusicBusinessLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="artistDetail"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Artist> InsertArtistAsync(ArtistDetail artistDetail, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>

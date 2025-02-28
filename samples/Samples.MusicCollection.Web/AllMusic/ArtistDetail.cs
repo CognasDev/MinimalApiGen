@@ -23,7 +23,7 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
-    public required string Name { get; init; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// 

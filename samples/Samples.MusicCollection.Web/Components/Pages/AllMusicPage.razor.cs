@@ -1,5 +1,7 @@
-﻿using Radzen.Blazor;
+﻿using Radzen;
+using Radzen.Blazor;
 using Samples.MusicCollection.Web.AllMusic;
+using Samples.MusicCollection.Web.Models;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
 
@@ -119,6 +121,34 @@ public sealed partial class AllMusicPage
         AlbumsCount = artistDetail.Albums.Count();
         await InvokeAsync(AlbumsGrid.Reload).ConfigureAwait(false);
         AlbumsLoading = false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private async Task NewAritstAsync()
+    {
+        if (!ArtistsGrid.IsValid)
+        {
+            return;
+        }
+
+        ArtistDetail order = new();
+        await ArtistsGrid.InsertRow(order).ConfigureAwait(false);
+        await ArtistsGrid.EditRow(order).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="artist"></param>
+    /// <returns></returns>
+    private async Task SaveArtistAsync(ArtistDetail artist)
+    {
+        await ArtistsGrid.UpdateRow(artist).ConfigureAwait(false);
+        Artist insertedArtist = await AllMusicBusinessLogic.InsertArtistAsync(artist).ConfigureAwait(false);
+        artist.ArtistId = insertedArtist.ArtistId;
     }
 
     /// <summary>
