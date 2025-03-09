@@ -26,9 +26,9 @@ public sealed class SwaggerSortedDocumentFilter : IDocumentFilter
             foreach (KeyValuePair<OperationType, OpenApiOperation> operation in path.Value.Operations.OrderBy(operation => operation.Key.GetDisplayName()))
             {
                 openApiPathItem.AddOperation(operation.Key, operation.Value);
-            };
+            }
             sortedApiPaths.Add(path.Key, openApiPathItem);
-        };
+        }
         swaggerDoc.Paths = sortedApiPaths;
     }
 

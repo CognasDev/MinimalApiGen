@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using MinimalApiGen.Framework.Pluralize;
 
 namespace MinimalApiGen.Framework.Data;
 
@@ -23,7 +22,6 @@ public static class WebApplicationBuilderDataExtensions
         builder.Services.AddSingleton<IIdsParameterFactory, IdsParameterFactory>();
         builder.Services.AddSingleton<ICommandDatabaseService, CommandDatabaseService>();
         builder.Services.AddSingleton<IQueryDatabaseService, QueryDatabaseService>();
-        builder.Services.AddSingleton<IPluralizer, Pluralizer>();
     }
 
     #endregion

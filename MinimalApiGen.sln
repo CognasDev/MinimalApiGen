@@ -76,6 +76,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{
 		.github\workflows\ci-test-nuget.yml = .github\workflows\ci-test-nuget.yml
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MinimalApiGen.Shared", "src\MinimalApiGen.Shared\MinimalApiGen.Shared.shproj", "{4EB82823-075F-4B3A-97F3-DDF91EF20720}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Shared.Tests", "tests\MinimalApiGen.Shared.Tests\MinimalApiGen.Shared.Tests.csproj", "{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +122,10 @@ Global
 		{18974716-C119-4D33-94B0-88A4F564EBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18974716-C119-4D33-94B0-88A4F564EBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18974716-C119-4D33-94B0-88A4F564EBEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,14 +145,20 @@ Global
 		{74FCF198-332C-4D19-9D44-14FBCC75B430} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{D544945F-DF56-4A16-8356-81CD8C476393} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{18974716-C119-4D33-94B0-88A4F564EBEA} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
+		{4EB82823-075F-4B3A-97F3-DDF91EF20720} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
+		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {160B1408-CAC3-462D-8788-AFE85104788D}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{18974716-c119-4d33-94b0-88a4f564ebea}*SharedItemsImports = 5
+		src\MinimalApiGen.Shared\MinimalApiGen.Shared.projitems*{18974716-c119-4d33-94b0-88a4f564ebea}*SharedItemsImports = 5
+		src\MinimalApiGen.Shared\MinimalApiGen.Shared.projitems*{3ffecd3f-4e60-4b59-a683-1efe833fe3b9}*SharedItemsImports = 5
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
 		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
+		src\MinimalApiGen.Shared\MinimalApiGen.Shared.projitems*{4d78fc8b-1b87-429a-9b53-0c8a974d0867}*SharedItemsImports = 5
+		src\MinimalApiGen.Shared\MinimalApiGen.Shared.projitems*{4eb82823-075f-4b3a-97f3-ddf91ef20720}*SharedItemsImports = 13
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{5b201eaa-8a7c-4863-988f-98f1b2d7f7a2}*SharedItemsImports = 13
 		src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems*{9ecdd303-259f-42a2-9e3c-27ad571f0170}*SharedItemsImports = 5
 		src\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems*{9ecdd303-259f-42a2-9e3c-27ad571f0170}*SharedItemsImports = 5

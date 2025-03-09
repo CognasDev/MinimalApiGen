@@ -16,7 +16,7 @@ public sealed class PluralizerTests
     [Fact]
     public void InputData()
     {
-        Pluralizer pluralizer = new();
+        IPluralizer pluralizer = Pluralizer.Instance;
         string[] input = ResourceReader.InputData.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
         foreach (string line in input)
         {
@@ -34,7 +34,7 @@ public sealed class PluralizerTests
     [Fact]
     public void ExceptionSingularToPluralException()
     {
-        Pluralizer pluralizer = new();
+        IPluralizer pluralizer = Pluralizer.Instance;
         string[] input = ResourceReader.SingularToPluralExceptions.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
         foreach (string line in input)
         {
@@ -52,7 +52,7 @@ public sealed class PluralizerTests
     [Fact]
     public void PluralizeEmptyString_ReturnsEmptyString()
     {
-        Pluralizer pluralizer = new();
+        IPluralizer pluralizer = Pluralizer.Instance;
         pluralizer.Pluralize(string.Empty).Should().BeEmpty();
     }
 

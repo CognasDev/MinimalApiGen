@@ -46,18 +46,16 @@ public abstract class QueryBusinessLogicBase<TModel> where TModel : class
     /// Default constructor for <see cref="QueryBusinessLogicBase{TModel}"/>
     /// </summary>
     /// <param name="logger"></param>
-    /// <param name="pluralizer"></param>
     /// <param name="databaseService"></param>
-    protected QueryBusinessLogicBase(ILogger logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
+    protected QueryBusinessLogicBase(ILogger logger, IQueryDatabaseService databaseService)
     {
         ArgumentNullException.ThrowIfNull(logger, nameof(logger));
-        ArgumentNullException.ThrowIfNull(pluralizer, nameof(pluralizer));
         ArgumentNullException.ThrowIfNull(databaseService, nameof(databaseService));
 
         Logger = logger;
         _databaseService = databaseService;
 
-        PluralModelName = pluralizer.Pluralize(typeof(TModel).Name);
+        PluralModelName = Pluralizer.Instance.Pluralize(typeof(TModel).Name);
         SelectStoredProcedure = $"[dbo].[{PluralModelName}_Select]";
         SelectByIdStoredProcedure = $"[dbo].[{PluralModelName}_SelectById]";
     }

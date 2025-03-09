@@ -1,5 +1,4 @@
-﻿using Samples.MusicCollection.Web.Models;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -24,7 +23,7 @@ public sealed record ArtistDetail
     /// <summary>
     /// 
     /// </summary>
-    public required string Name { get; init; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// 

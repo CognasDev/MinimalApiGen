@@ -1,6 +1,5 @@
 ﻿using MinimalApiGen.Framework.BusinessLogic;
 using MinimalApiGen.Framework.Data;
-using MinimalApiGen.Framework.Pluralize;
 
 namespace Samples.MusicCollection.Api.Artists;
 
@@ -8,10 +7,9 @@ namespace Samples.MusicCollection.Api.Artists;
 /// 
 /// </summary>
 /// <param name="logger"></param>
-/// <param name="pluralizer"></param>
 /// <param name="databaseService"></param>
-public sealed class ArtistsCommandBusinessLogic(ILogger<ArtistsCommandBusinessLogic> logger, IPluralizer pluralizer, ICommandDatabaseService databaseService)
-    : CommandBusinessLogicBase<Artist>(logger, pluralizer, databaseService), IArtistsCommandBusinessLogic
+public sealed class ArtistsCommandBusinessLogic(ILogger<ArtistsCommandBusinessLogic> logger, ICommandDatabaseService databaseService)
+    : CommandBusinessLogicBase<Artist>(logger, databaseService), IArtistsCommandBusinessLogic
 {
     #region Public Method Declarations
 

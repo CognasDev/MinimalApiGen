@@ -14,12 +14,6 @@ namespace MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 /// </summary>
 internal static class QueryHandler
 {
-    #region Field Declarations
-
-    private static readonly Pluralizer _pluralizer = new();
-
-    #endregion
-
     #region Public Method Declarations
 
     /// <summary>
@@ -36,7 +30,7 @@ internal static class QueryHandler
         InvocationResult details = new()
         {
             ModelName = modelSymbol.Name,
-            ModelPluralName = _pluralizer.Pluralize(modelSymbol.Name),
+            ModelPluralName = Pluralizer.Instance.Pluralize(modelSymbol.Name),
             ModelFullyQualifiedName = modelSymbol.ToDisplayString()
         };
 

@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using MinimalApiGen.Framework.Collections;
+using MinimalApiGen.Shared.Collections;
 using System.Data;
 using static Dapper.SqlMapper;
 

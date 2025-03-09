@@ -1,4 +1,4 @@
-﻿using MinimalApiGen.Framework.Collections;
+﻿using MinimalApiGen.Shared.Collections;
 using System.Transactions;
 
 namespace MinimalApiGen.Framework.Data;

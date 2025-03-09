@@ -1,6 +1,4 @@
-﻿using Samples.MusicCollection.Web.Models;
-
-namespace Samples.MusicCollection.Web.AllMusic;
+﻿namespace Samples.MusicCollection.Web.AllMusic;
 
 /// <summary>
 /// 

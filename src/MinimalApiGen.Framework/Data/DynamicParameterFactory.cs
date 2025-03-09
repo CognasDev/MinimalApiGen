@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using MinimalApiGen.Framework.Collections;
+using MinimalApiGen.Shared.Collections;
 
 namespace MinimalApiGen.Framework.Data;
 

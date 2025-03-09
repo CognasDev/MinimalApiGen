@@ -1,6 +1,5 @@
 ﻿using MinimalApiGen.Framework.BusinessLogic;
 using MinimalApiGen.Framework.Data;
-using MinimalApiGen.Framework.Pluralize;
 
 namespace Samples.MusicCollection.Api.Albums;
 
@@ -22,8 +21,8 @@ public sealed class AlbumsQueryBusinessLogic : QueryBusinessLogicBase<Album>, IA
     /// <param name="logger"></param>
     /// <param name="pluralizer"></param>
     /// <param name="databaseService"></param>
-    public AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
-        : base(logger, pluralizer, databaseService)
+    public AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
+        : base(logger, databaseService)
         => _selectByArtistIdStoredProcedure = $"[dbo].[{PluralModelName}_SelectByArtistId]";
 
     #endregion

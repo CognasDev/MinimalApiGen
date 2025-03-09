@@ -1,4 +1,4 @@
-﻿using Radzen;
+﻿using MinimalApiGen.Shared.Collections;
 using Samples.MusicCollection.Web.Api;
 using Samples.MusicCollection.Web.Models;
 using System.Collections.Concurrent;
@@ -29,7 +29,7 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <summary>
     /// 
     /// </summary>
-    public IEnumerable<ArtistDetail> Artists { get; private  set; } = [];
+    public IEnumerable<ArtistDetail> Artists { get; private set; } = [];
 
     /// <summary>
     /// 
@@ -112,6 +112,23 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="artistDetail"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
+    public async Task<Artist> InsertArtistAsync(ArtistDetail artistDetail, CancellationToken cancellationToken = default)
+    {
+        Artist artist = new()
+        {
+            Name = artistDetail.Name!
+        };
+        Artist insertedArtist = await _artistsApi.InsertAsync(artist, cancellationToken).ConfigureAwait(false) ?? throw new NullReferenceException(nameof(insertedArtist));
+        return insertedArtist;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -143,6 +160,10 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <returns></returns>
     public async Task GetGenresAsync(CancellationToken cancellationToken = default)
     {
+        if (Genres.Any())
+        {
+            return;
+        }
         ConcurrentBag<Genre> genres = [];
         await foreach (Genre? genre in _genresApi.GetAsync(cancellationToken).ConfigureAwait(false))
         {
@@ -165,6 +186,10 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
         await _semaphore.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
+            if (Keys.Any())
+            {
+                return;
+            }
             ConcurrentBag<Key> keys = [];
             await foreach (Key? key in _keysApi.GetAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -174,7 +199,7 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
                     keys.Add(key);
                 }
             }
-            Keys = keys.OrderBy(key => key.Name).ToFrozenSet();
+            Keys = keys.ToFrozenSet();
         }
         finally
         {
@@ -189,6 +214,10 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <returns></returns>
     public async Task GetLabelsAsync(CancellationToken cancellationToken = default)
     {
+        if (Labels.Any())
+        {
+            return;
+        }
         ConcurrentBag<Label> labels = [];
         await foreach (Label? label in _labelsApi.GetAsync(cancellationToken).ConfigureAwait(false))
         {
@@ -227,6 +256,36 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
             }
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="genreId"></param>
+    /// <returns></returns>
+    public string GenreName(int? genreId) => genreId.HasValue ? Genres.FastSingle(genre => genre.GenreId == genreId.Value).Name : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keyId"></param>
+    /// <returns></returns>
+    public string KeyNameAndCamelot(int? keyId)
+    {
+        if (!keyId.HasValue)
+        {
+            return string.Empty;
+        }
+        Key key = Keys.FastSingle(key => key.KeyId == keyId.Value);
+        string nameAndCamelot = $"{key.CamelotCode} - {key.Name}";
+        return nameAndCamelot;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="labelId"></param>
+    /// <returns></returns>
+    public string LabelName(int? labelId) => labelId.HasValue ? Labels.FastSingle(label => label.LabelId == labelId.Value).Name : string.Empty;
 
     #endregion
 }

@@ -1,7 +1,4 @@
-﻿using Radzen;
-using Samples.MusicCollection.Web.Api;
-using Samples.MusicCollection.Web.Models;
-using System.Runtime.CompilerServices;
+﻿using Samples.MusicCollection.Web.Models;
 
 namespace Samples.MusicCollection.Web.AllMusic;
 
@@ -45,6 +42,14 @@ public interface IAllMusicBusinessLogic
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="artistDetail"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<Artist> InsertArtistAsync(ArtistDetail artistDetail, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="artistId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
@@ -78,6 +83,27 @@ public interface IAllMusicBusinessLogic
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     IAsyncEnumerable<TrackDetail> GetTracksAsync(int albumId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="genreId"></param>
+    /// <returns></returns>
+    string GenreName(int? genreId);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="keyId"></param>
+    /// <returns></returns>
+    string KeyNameAndCamelot(int? keyId);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="labelId"></param>
+    /// <returns></returns>
+    string LabelName(int? labelId);
 
     #endregion
 }

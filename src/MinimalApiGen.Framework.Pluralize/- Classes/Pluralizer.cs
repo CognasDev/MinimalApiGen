@@ -8,18 +8,38 @@ namespace MinimalApiGen.Framework.Pluralize;
 /// <summary>
 /// 
 /// </summary>
-public sealed class Pluralizer : IPluralizer
+internal sealed class Pluralizer : IPluralizer
 {
     #region Field Declarations
 
+    private static readonly Lazy<IPluralizer> _instance = new(() => new Pluralizer());
     private static readonly ReplaceRule[] _pluralRules = PluralRules.GetRules();
     private static readonly ICollection<string> _noPlurals = NoPlurals.GetNoPlurals();
     private static readonly IDictionary<string, string> _irregularPlurals = IrregularRules.GetIrregularPlurals();
     private static readonly IDictionary<string, string> _irregularSingles = IrregularRules.GetIrregularSingulars();
-    private static readonly Regex _replacementRegex = new("\\$(\\d{1,2})");
+    private static readonly Regex _replacementRegex = new("\\$(\\d{1,2})", RegexOptions.Compiled);
 
     #endregion
 
+    #region Property Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static IPluralizer Instance => _instance.Value;
+
+    #endregion
+
+    #region Constructor Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private Pluralizer()
+    {
+    }
+
+    #endregion
     #region Public Method Declarations
 
     /// <summary>
