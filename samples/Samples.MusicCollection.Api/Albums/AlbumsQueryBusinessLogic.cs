@@ -1,6 +1,5 @@
 ﻿using MinimalApiGen.Framework.BusinessLogic;
 using MinimalApiGen.Framework.Data;
-using MinimalApiGen.Framework.Pluralize;
 
 namespace Samples.MusicCollection.Api.Albums;
 

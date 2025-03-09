@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using MinimalApiGen.Framework.Pluralize;
 using Samples.MusicCollection.Web.Config;
 using Samples.MusicCollection.Web.Models;
 
