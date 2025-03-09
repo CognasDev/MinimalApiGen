@@ -22,8 +22,8 @@ public sealed class TracksQueryBusinessLogic : QueryBusinessLogicBase<Track>, IT
     /// <param name="logger"></param>
     /// <param name="pluralizer"></param>
     /// <param name="databaseService"></param>
-    public TracksQueryBusinessLogic(ILogger<TracksQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
-        : base(logger, pluralizer, databaseService)
+    public TracksQueryBusinessLogic(ILogger<TracksQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
+        : base(logger, databaseService)
         => _selectByArtistIdStoredProcedure = $"[dbo].[{PluralModelName}_SelectByAlbumId]";
 
     #endregion

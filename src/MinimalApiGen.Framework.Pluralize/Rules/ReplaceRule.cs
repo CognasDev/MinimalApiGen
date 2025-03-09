@@ -5,7 +5,7 @@ namespace MinimalApiGen.Framework.Pluralize.Rules;
 /// <summary>
 /// 
 /// </summary>
-public sealed record ReplaceRule
+internal sealed record ReplaceRule
 {
     #region Property Declarations
 

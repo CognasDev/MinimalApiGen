@@ -14,12 +14,6 @@ namespace MinimalApiGen.Generators.Generation.Command.FluentHandlers;
 /// </summary>
 internal static class CommandHandler
 {
-    #region Field Declarations
-
-    private static readonly Pluralizer _pluralizer = new();
-
-    #endregion
-
     #region Public Method Declarations
 
     /// <summary>
@@ -36,7 +30,7 @@ internal static class CommandHandler
         InvocationResult details = new()
         {
             ModelName = modelSymbol.Name,
-            ModelPluralName = _pluralizer.Pluralize(modelSymbol.Name),
+            ModelPluralName = Pluralizer.Instance.Pluralize(modelSymbol.Name),
             ModelFullyQualifiedName = modelSymbol.ToDisplayString()
         };
 

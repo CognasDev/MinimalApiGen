@@ -8,10 +8,9 @@ namespace Samples.MusicCollection.Api.Labels;
 /// 
 /// </summary>
 /// <param name="logger"></param>
-/// <param name="pluralizer"></param>
 /// <param name="databaseService"></param>
-public sealed class LabelsQueryBusinessLogic(ILogger<LabelsQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
-    : QueryBusinessLogicBase<Label>(logger, pluralizer, databaseService), ILabelsQueryBusinessLogic
+public sealed class LabelsQueryBusinessLogic(ILogger<LabelsQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
+    : QueryBusinessLogicBase<Label>(logger, databaseService), ILabelsQueryBusinessLogic
 {
     #region Public Method Declarations
 

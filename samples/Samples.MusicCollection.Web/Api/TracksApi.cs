@@ -8,8 +8,10 @@ namespace Samples.MusicCollection.Web.Api;
 /// <summary>
 /// 
 /// </summary>
-public sealed class TracksApi(IHttpClientFactory httpClientFactory, IPluralizer pluralizer, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
-    : Api<Track>(httpClientFactory, pluralizer, apiDetailsMonitor), ITracksApi
+/// <param name="httpClientFactory"></param>
+/// <param name="apiDetailsMonitor"></param>
+public sealed class TracksApi(IHttpClientFactory httpClientFactory, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
+    : Api<Track>(httpClientFactory, apiDetailsMonitor), ITracksApi
 {
     #region Public Method Declarations
 

@@ -8,10 +8,9 @@ namespace Samples.MusicCollection.Api.Tracks;
 /// 
 /// </summary>
 /// <param name="logger"></param>
-/// <param name="pluralizer"></param>
 /// <param name="databaseService"></param>
-public sealed class TracksCommandBusinessLogic(ILogger<TracksCommandBusinessLogic> logger, IPluralizer pluralizer, ICommandDatabaseService databaseService)
-    : CommandBusinessLogicBase<Track>(logger, pluralizer, databaseService), ITracksCommandBusinessLogic
+public sealed class TracksCommandBusinessLogic(ILogger<TracksCommandBusinessLogic> logger, ICommandDatabaseService databaseService)
+    : CommandBusinessLogicBase<Track>(logger, databaseService), ITracksCommandBusinessLogic
 {
     #region Public Method Declarations
 

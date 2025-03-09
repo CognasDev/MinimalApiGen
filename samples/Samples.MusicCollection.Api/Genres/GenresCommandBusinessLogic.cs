@@ -8,10 +8,9 @@ namespace Samples.MusicCollection.Api.Genres;
 /// 
 /// </summary>
 /// <param name="logger"></param>
-/// <param name="pluralizer"></param>
 /// <param name="databaseService"></param>
-public sealed class GenresCommandBusinessLogic(ILogger<GenresCommandBusinessLogic> logger, IPluralizer pluralizer, ICommandDatabaseService databaseService)
-    : CommandBusinessLogicBase<Genre>(logger, pluralizer, databaseService), IGenresCommandBusinessLogic
+public sealed class GenresCommandBusinessLogic(ILogger<GenresCommandBusinessLogic> logger, ICommandDatabaseService databaseService)
+    : CommandBusinessLogicBase<Genre>(logger, databaseService), IGenresCommandBusinessLogic
 {
     #region Public Method Declarations
 

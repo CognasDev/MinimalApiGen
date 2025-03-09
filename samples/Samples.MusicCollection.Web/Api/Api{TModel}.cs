@@ -45,16 +45,15 @@ public class Api<TModel> : IApi<TModel>, IDisposable
     /// <param name="httpClientFactory"></param>
     /// <param name="pluralizer"></param>
     /// <param name="apiDetailsMonitor"></param>
-    public Api(IHttpClientFactory httpClientFactory, IPluralizer pluralizer, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
+    public Api(IHttpClientFactory httpClientFactory, IOptionsMonitor<ApiDetails> apiDetailsMonitor)
     {
         ArgumentNullException.ThrowIfNull(httpClientFactory, nameof(httpClientFactory));
-        ArgumentNullException.ThrowIfNull(pluralizer, nameof(pluralizer));
         ArgumentNullException.ThrowIfNull(apiDetailsMonitor, nameof(apiDetailsMonitor));
 
         _configChangeListener = apiDetailsMonitor.OnChange(apiDetails => _apiDetails = apiDetails);
 
         HttpClientFactory = httpClientFactory;
-        PluralModelName = pluralizer.Pluralize(typeof(TModel).Name).ToLowerInvariant();
+        PluralModelName = Pluralizer.Instance.Pluralize(typeof(TModel).Name).ToLowerInvariant();
         _apiDetails = apiDetailsMonitor.CurrentValue;
     }
 

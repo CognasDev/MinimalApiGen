@@ -8,10 +8,9 @@ namespace Samples.MusicCollection.Api.Keys;
 /// 
 /// </summary>
 /// <param name="logger"></param>
-/// <param name="pluralizer"></param>
 /// <param name="databaseService"></param>
-public sealed class KeysQueryBusinessLogic(ILogger<KeysQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
-    : QueryBusinessLogicBase<Key>(logger, pluralizer, databaseService), IKeysQueryBusinessLogic
+public sealed class KeysQueryBusinessLogic(ILogger<KeysQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
+    : QueryBusinessLogicBase<Key>(logger, databaseService), IKeysQueryBusinessLogic
 {
     #region Public Method Declarations
 

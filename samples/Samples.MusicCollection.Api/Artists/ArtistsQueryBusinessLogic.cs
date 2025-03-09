@@ -8,10 +8,9 @@ namespace Samples.MusicCollection.Api.Artists;
 /// 
 /// </summary>
 /// <param name="logger"></param>
-/// <param name="pluralizer"></param>
 /// <param name="databaseService"></param>
-public sealed class ArtistsQueryBusinessLogic(ILogger<ArtistsQueryBusinessLogic> logger, IPluralizer pluralizer, IQueryDatabaseService databaseService)
-    : QueryBusinessLogicBase<Artist>(logger, pluralizer, databaseService), IArtistsQueryBusinessLogic
+public sealed class ArtistsQueryBusinessLogic(ILogger<ArtistsQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
+    : QueryBusinessLogicBase<Artist>(logger, databaseService), IArtistsQueryBusinessLogic
 {
     #region Public Method Declarations
 
