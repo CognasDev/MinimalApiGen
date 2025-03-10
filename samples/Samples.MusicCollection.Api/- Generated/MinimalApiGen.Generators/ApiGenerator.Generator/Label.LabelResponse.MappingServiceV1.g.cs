@@ -21,7 +21,8 @@ public sealed class PostLabelToLabelResponseMappingServiceV1 : MappingServiceBas
         LabelResponse response = new()
         {
 			LabelId = model.LabelId,
-			Name = model.Name
+			Name = model.Name,
+
         };
         return response;
     }

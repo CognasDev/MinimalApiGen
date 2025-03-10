@@ -26,7 +26,8 @@ public sealed class PostTrackToTrackResponseMappingServiceV1 : MappingServiceBas
 			KeyId = model.KeyId,
 			TrackNumber = model.TrackNumber,
 			Name = model.Name,
-			Bpm = model.Bpm
+			Bpm = model.Bpm,
+
         };
         return response;
     }

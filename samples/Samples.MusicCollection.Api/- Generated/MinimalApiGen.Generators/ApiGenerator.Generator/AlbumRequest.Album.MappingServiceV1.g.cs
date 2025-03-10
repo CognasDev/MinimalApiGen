@@ -25,7 +25,8 @@ public sealed class PostAlbumRequestToAlbumMappingServiceV1 : MappingServiceBase
 			GenreId = request.GenreId,
 			LabelId = request.LabelId,
 			Name = request.Name,
-			ReleaseDate = request.ReleaseDate
+			ReleaseDate = request.ReleaseDate,
+
         };
         return model;
     }

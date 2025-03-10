@@ -22,7 +22,8 @@ public sealed class PutSampleModelRequestToSampleModelMappingServiceV1 : Mapping
         SampleModel model = new()
         {
 			Id = request.Id,
-			Name = request.Name
+			Name = request.Name,
+
         };
         return model;
     }

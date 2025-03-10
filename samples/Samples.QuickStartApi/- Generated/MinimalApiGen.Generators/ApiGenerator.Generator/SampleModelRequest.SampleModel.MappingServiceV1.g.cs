@@ -21,7 +21,8 @@ public sealed class PostSampleModelRequestToSampleModelMappingServiceV1 : Mappin
         SampleModel model = new()
         {
 			Id = request.Id,
-			Name = request.Name
+			Name = request.Name,
+
         };
         return model;
     }

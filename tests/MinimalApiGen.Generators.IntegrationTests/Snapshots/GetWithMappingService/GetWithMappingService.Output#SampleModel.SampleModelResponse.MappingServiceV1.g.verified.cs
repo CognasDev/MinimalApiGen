@@ -22,7 +22,8 @@ public sealed class GetSampleModelToSampleModelResponseMappingServiceV1 : Mappin
         SampleModelResponse response = new()
         {
 			Id = model.Id,
-			Name = model.Name
+			Name = model.Name,
+
         };
         return response;
     }

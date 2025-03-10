@@ -21,7 +21,8 @@ public sealed class PostArtistRequestToArtistMappingServiceV1 : MappingServiceBa
         Artist model = new()
         {
 			ArtistId = request.ArtistId,
-			Name = request.Name
+			Name = request.Name,
+
         };
         return model;
     }

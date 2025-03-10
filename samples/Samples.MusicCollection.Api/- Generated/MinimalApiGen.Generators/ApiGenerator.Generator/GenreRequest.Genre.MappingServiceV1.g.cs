@@ -21,7 +21,8 @@ public sealed class PostGenreRequestToGenreMappingServiceV1 : MappingServiceBase
         Genre model = new()
         {
 			GenreId = request.GenreId,
-			Name = request.Name
+			Name = request.Name,
+
         };
         return model;
     }

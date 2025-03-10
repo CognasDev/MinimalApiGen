@@ -21,7 +21,8 @@ public sealed class PostLabelRequestToLabelMappingServiceV1 : MappingServiceBase
         Label model = new()
         {
 			LabelId = request.LabelId,
-			Name = request.Name
+			Name = request.Name,
+
         };
         return model;
     }
