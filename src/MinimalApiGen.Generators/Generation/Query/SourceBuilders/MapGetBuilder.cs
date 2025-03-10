@@ -4,10 +4,7 @@ using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
-using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Threading;
 
 namespace MinimalApiGen.Generators.Generation.Query.SourceBuilders;
 
@@ -113,10 +110,10 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(queryResult.BusinessLogicParameters,
-                                                                                     queryResult.Services,
-                                                                                     queryResult.KeyedServices,
-                                                                                     queryResult.QueryParameterResults);
+    public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.Build(queryResult.BusinessLogicParameters,
+                                                                                             queryResult.Services,
+                                                                                             queryResult.KeyedServices,
+                                                                                             queryResult.QueryParameterResults);
 
     /// <summary>
     /// 
@@ -199,61 +196,6 @@ public partial class {ClassName}
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="businessLogicParameters"></param>
-    /// <param name="services"></param>
-    /// <param name="keyedServices"></param>
-    /// <param name="queryParameters"></param>
-    /// <returns></returns>
-    private static string BuildDelegateParameters(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
-                                                  EquatableArray<string> services,
-                                                  EquatableDictionary<string, string> keyedServices,
-                                                  EquatableArray<QueryParameterResult> queryParameters)
-    {
-        if (businessLogicParameters.Count == 0)
-        {
-            return string.Empty;
-        }
-
-        ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
-        ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<BusinessLogicParamterResult> businessLogicParametersSpan = businessLogicParameters.AsSpan();
-        StringBuilder stringBuilder = new();
-
-        foreach (BusinessLogicParamterResult parameter in businessLogicParametersSpan)
-        {
-            string parameterType = parameter.Type;
-            if (queryParameters.SingleOrDefault(queryParameter => queryParameter.Name == parameter.Name) is QueryParameterResult queryParameterResult)
-            {
-                stringBuilder.Append(queryParameterResult.Name);
-                stringBuilder.Append(", ");
-            }
-            else if (services.Contains(parameterType))
-            {
-                string serviceName = parameterType.Split('.').Last();
-                string serviceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(serviceName);
-                stringBuilder.Append(serviceNameCamelCase);
-                stringBuilder.Append(", ");
-            }
-            else if (values.IndexOf(parameterType) is int index && index != -1)
-            {
-                string keyedServiceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(keys[index]);
-                stringBuilder.Append(keyedServiceNameCamelCase);
-                stringBuilder.Append(", ");
-            }
-            else if (parameterType == typeof(CancellationToken).FullName)
-            {
-                stringBuilder.Append("cancellationToken, ");
-            }
-        }
-
-        stringBuilder.Length -= 2;
-        string delegateParameters = stringBuilder.ToString();
-        return delegateParameters;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     /// <param name="queryParameterResults"></param>
     /// <returns></returns>
     private static string BuildQueryParameters(EquatableArray<QueryParameterResult> queryParameterResults)
@@ -264,7 +206,8 @@ public partial class {ClassName}
         }
         StringBuilder stringBuilder = new();
         stringBuilder.AppendLine();
-        foreach (QueryParameterResult queryParameterResult in queryParameterResults)
+        ReadOnlySpan<QueryParameterResult> span = queryParameterResults.AsSpan();
+        foreach (QueryParameterResult queryParameterResult in span)
         {
             stringBuilder.Append("\t\t\t\t[FromQuery] ");
             stringBuilder.Append(queryParameterResult.Type);

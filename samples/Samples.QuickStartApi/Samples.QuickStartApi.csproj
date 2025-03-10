@@ -16,16 +16,12 @@
 
 	<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-		<CompilerGeneratedFilesOutputPath>.Generated</CompilerGeneratedFilesOutputPath>
+		<CompilerGeneratedFilesOutputPath>- Generated</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
-	</ItemGroup>
-	<ItemGroup>
 		<Compile Remove="$(CompilerGeneratedFilesOutputPath)/**/*.cs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include=".Generated\MinimalApiGen.Generators\" />
+		<Folder Include="- Generated\MinimalApiGen.Generators\" />
 	</ItemGroup>
 
 </Project>

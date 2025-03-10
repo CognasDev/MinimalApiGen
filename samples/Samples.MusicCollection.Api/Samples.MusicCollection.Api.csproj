@@ -20,13 +20,13 @@
 
 	<PropertyGroup>
 		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-		<CompilerGeneratedFilesOutputPath>.Generated</CompilerGeneratedFilesOutputPath>
+		<CompilerGeneratedFilesOutputPath>- Generated</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="$(CompilerGeneratedFilesOutputPath)\MinimalApiGen.Generators\ApiGenerator.Generator\*.cs" />
 		<Compile Remove="$(CompilerGeneratedFilesOutputPath)\MinimalApiGen.Generators\ApiGenerator.Generator\*.cs" />
-		<Folder Include=".Generated\MinimalApiGen.Generators\ApiGenerator.Generator\" />
+		<Folder Include="- Generated\MinimalApiGen.Generators\ApiGenerator.Generator\" />
 	</ItemGroup>
 	
 	<ItemGroup>
