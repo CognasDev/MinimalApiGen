@@ -13,7 +13,7 @@ namespace MinimalApiGen.Framework.Testing;
 /// 
 /// </summary>
 /// <typeparam name="TEntryPoint"></typeparam>
-public sealed class TestServer<TEntryPoint>  : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
+public class TestServer<TEntryPoint>  : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
 {
     #region Property Declarations
 
@@ -25,6 +25,15 @@ public sealed class TestServer<TEntryPoint>  : WebApplicationFactory<TEntryPoint
     #endregion
 
     #region Protected Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="services"></param>
+    protected virtual void ConfigureTestServices(IServiceCollection services)
+    {
+        return;
+    }
 
     /// <summary>
     /// 
@@ -48,6 +57,7 @@ public sealed class TestServer<TEntryPoint>  : WebApplicationFactory<TEntryPoint
             });
             services.RemoveAll<IHttpClientFactory>();
             services.AddSingleton<IHttpClientFactory>(new TestHttpClientFactory<TEntryPoint>(this));
+            ConfigureTestServices(services);
         });
 
         builder.ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) =>
