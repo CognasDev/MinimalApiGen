@@ -21,8 +21,7 @@ public sealed class PostArtistToArtistResponseMappingServiceV1 : MappingServiceB
         ArtistResponse response = new()
         {
 			ArtistId = model.ArtistId,
-			Name = model.Name,
-
+			Name = model.Name
         };
         return response;
     }

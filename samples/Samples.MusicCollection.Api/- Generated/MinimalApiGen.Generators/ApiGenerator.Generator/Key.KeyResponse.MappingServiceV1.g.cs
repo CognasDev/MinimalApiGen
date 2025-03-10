@@ -22,8 +22,7 @@ public sealed class GetKeyToKeyResponseMappingServiceV1 : MappingServiceBase<Key
         {
 			KeyId = model.KeyId,
 			CamelotCode = model.CamelotCode,
-			Name = model.Name,
-
+			Name = model.Name
         };
         return response;
     }

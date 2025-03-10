@@ -1,4 +1,6 @@
-﻿namespace MinimalApiGen.Framework.Mapping;
+﻿using System.Collections.Frozen;
+
+namespace MinimalApiGen.Framework.Mapping;
 
 /// <summary>
 /// 

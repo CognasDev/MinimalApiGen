@@ -1,13 +1,9 @@
-﻿using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Command.Results;
+﻿using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 using System;
-using System.Linq;
 using System.Text;
-using System.Text.Json;
-using System.Threading;
 
 namespace MinimalApiGen.Generators.Generation.Command.SourceBuilders;
 
@@ -118,10 +114,10 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateParameters { get; } = BuildDelegateParameters(commandResult.BusinessLogicParameters,
-                                                                                     commandResult.Services,
-                                                                                     commandResult.KeyedServices,
-                                                                                     commandResult.ModelFullyQualifiedName);
+    public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.BuildForModel(commandResult.BusinessLogicParameters,
+                                                                                                     commandResult.Services,
+                                                                                                     commandResult.KeyedServices,
+                                                                                                     commandResult.ModelFullyQualifiedName);
 
     /// <summary>
     /// 
@@ -218,54 +214,6 @@ public partial class {ClassName}
     #endregion
 
     #region Private Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="businessLogicParameters"></param>
-    /// <param name="services"></param>
-    /// <param name="keyedServices"></param>
-    /// <param name="modelName"></param>
-    /// <returns></returns>
-    private static string BuildDelegateParameters(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
-                                                  EquatableArray<string> services,
-                                                  EquatableDictionary<string, string> keyedServices,
-                                                  string modelName)
-    {
-        ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
-        ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.Select(param => param.Type).ToArray();
-        StringBuilder stringBuilder = new();
-
-        foreach (string parameter in businessLogicParametersSpan)
-        {
-            if (services.Contains(parameter))
-            {
-                string serviceName = parameter.Split('.').Last();
-                string serviceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(serviceName);
-                stringBuilder.Append(serviceNameCamelCase);
-                stringBuilder.Append(", ");
-            }
-            else if (values.IndexOf(parameter) is int index && index != -1)
-            {
-                string keyedServiceNameCamelCase = JsonNamingPolicy.CamelCase.ConvertName(keys[index]);
-                stringBuilder.Append(keyedServiceNameCamelCase);
-                stringBuilder.Append(", ");
-            }
-            else if (parameter == modelName)
-            {
-                stringBuilder.Append("model, ");
-            }
-            else if (parameter == typeof(CancellationToken).FullName)
-            {
-                stringBuilder.Append("cancellationToken, ");
-            }
-        }
-
-        stringBuilder.Length -= 2;
-        string delegateParameters = stringBuilder.ToString();
-        return delegateParameters;
-    }
 
     /// <summary>
     /// 

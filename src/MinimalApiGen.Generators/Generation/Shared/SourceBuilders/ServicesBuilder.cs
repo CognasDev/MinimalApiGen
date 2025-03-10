@@ -67,7 +67,7 @@ public sealed class ServicesBuilder
     /// <summary>
     /// 
     /// </summary>
-    private ReadOnlySpan<string> InitiateServiceCamelCaseNames(ReadOnlySpan<string> servicesSpan)
+    private static ReadOnlySpan<string> InitiateServiceCamelCaseNames(ReadOnlySpan<string> servicesSpan)
     {
         List<string> camelCaseNames = new(servicesSpan.Length);
         foreach (string service in servicesSpan)
@@ -82,7 +82,7 @@ public sealed class ServicesBuilder
     /// <summary>
     /// 
     /// </summary>
-    private ReadOnlySpan<string> InitiateKeyedServiceCamelCaseNames(ReadOnlySpan<string> keyedServiceKeys)
+    private static ReadOnlySpan<string> InitiateKeyedServiceCamelCaseNames(ReadOnlySpan<string> keyedServiceKeys)
     {
         List<string> camelCaseNames = new(keyedServiceKeys.Length);
         foreach (string key in keyedServiceKeys)
@@ -101,10 +101,10 @@ public sealed class ServicesBuilder
     /// <param name="serviceCamelCaseNames"></param>
     /// <param name="keyedServiceCamelCaseNames"></param>
     /// <returns></returns>
-    private string BuildServices(ReadOnlySpan<string> keyedServiceTypes,
-                                 ReadOnlySpan<string> servicesSpan,
-                                 ReadOnlySpan<string> serviceCamelCaseNames,
-                                 ReadOnlySpan<string> keyedServiceCamelCaseNames)
+    private static string BuildServices(ReadOnlySpan<string> keyedServiceTypes,
+                                        ReadOnlySpan<string> servicesSpan,
+                                        ReadOnlySpan<string> serviceCamelCaseNames,
+                                        ReadOnlySpan<string> keyedServiceCamelCaseNames)
     {
         StringBuilder builder = new();
         for (int i = 0; i < servicesSpan.Length; i++)
@@ -134,7 +134,7 @@ public sealed class ServicesBuilder
     /// <param name="serviceCamelCaseNames"></param>
     /// <param name="keyedServiceCamelCaseNames"></param>
     /// <returns></returns>
-    private string BuildServicesSummary(ReadOnlySpan<string> serviceCamelCaseNames, ReadOnlySpan<string> keyedServiceCamelCaseNames)
+    private static string BuildServicesSummary(ReadOnlySpan<string> serviceCamelCaseNames, ReadOnlySpan<string> keyedServiceCamelCaseNames)
     {
         StringBuilder builder = new();
         foreach (string name in serviceCamelCaseNames)
@@ -160,7 +160,7 @@ public sealed class ServicesBuilder
     /// <param name="servicesSpan"></param>
     /// <param name="serviceCamelCaseNames"></param>
     /// <returns></returns>
-    private string BuildFromServices(ReadOnlySpan<string> servicesSpan, ReadOnlySpan<string> serviceCamelCaseNames)
+    private static string BuildFromServices(ReadOnlySpan<string> servicesSpan, ReadOnlySpan<string> serviceCamelCaseNames)
     {
         StringBuilder builder = new();
         for (int i = 0; i < servicesSpan.Length; i++)
@@ -181,7 +181,7 @@ public sealed class ServicesBuilder
     /// <param name="keyedServices"></param>
     /// <param name="keyedServiceCamelCaseNames"></param>
     /// <returns></returns>
-    private string BuildFromKeyedServices(EquatableDictionary<string, string> keyedServices, ReadOnlySpan<string> keyedServiceCamelCaseNames)
+    private static string BuildFromKeyedServices(EquatableDictionary<string, string> keyedServices, ReadOnlySpan<string> keyedServiceCamelCaseNames)
     {
         StringBuilder builder = new();
         int index = 0;
@@ -203,7 +203,7 @@ public sealed class ServicesBuilder
     /// 
     /// </summary>
     /// <returns></returns>
-    private string BuildServiceNames(ReadOnlySpan<string> serviceCamelCaseNames, ReadOnlySpan<string> keyedServiceCamelCaseNames)
+    private static string BuildServiceNames(ReadOnlySpan<string> serviceCamelCaseNames, ReadOnlySpan<string> keyedServiceCamelCaseNames)
     {
         StringBuilder builder = new();
         foreach (string name in serviceCamelCaseNames)

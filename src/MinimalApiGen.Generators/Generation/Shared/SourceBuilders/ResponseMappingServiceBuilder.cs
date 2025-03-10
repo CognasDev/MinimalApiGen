@@ -129,6 +129,7 @@ public sealed class {MappingServiceName} : MappingServiceBase<{ModelName}, {Resp
             stringBuilder.Append(propertyName);
             stringBuilder.AppendLine(",");
         }
+        stringBuilder.Length -= 3;
         string propertyMap = stringBuilder.ToString();
         return propertyMap;
     }
