@@ -19,7 +19,6 @@ public sealed class AlbumsQueryBusinessLogic : QueryBusinessLogicBase<Album>, IA
     /// 
     /// </summary>
     /// <param name="logger"></param>
-    /// <param name="pluralizer"></param>
     /// <param name="databaseService"></param>
     public AlbumsQueryBusinessLogic(ILogger<AlbumsQueryBusinessLogic> logger, IQueryDatabaseService databaseService)
         : base(logger, databaseService)
