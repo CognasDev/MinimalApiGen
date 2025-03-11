@@ -17,6 +17,7 @@
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
 		<PackageReference Include="FluentValidation" Version="11.11.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="9.0.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="7.3.1" />
 		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="6.1.0" />
@@ -31,10 +32,6 @@
 		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
 		<PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.1.1" />
 		<PackageReference Include="xunit.v3.extensibility.core" Version="2.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Authentication\" />
 	</ItemGroup>
 
 	<Import Project="..\MinimalApiGen.Generators.Abstractions\MinimalApiGen.Generators.Abstractions.projitems" Label="Shared" />

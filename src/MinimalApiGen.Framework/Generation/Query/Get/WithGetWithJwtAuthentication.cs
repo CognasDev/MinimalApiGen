@@ -1,4 +1,7 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
+﻿using MinimalApiGen.Framework.Generation.Query.Shared;
+using MinimalApiGen.Generators.Abstractions.Query;
+using MinimalApiGen.Generators.Abstractions.Query.Get;
+using MinimalApiGen.Generators.Abstractions.Query.Shared;
 using System.Linq.Expressions;
 
 namespace MinimalApiGen.Framework.Generation.Query.Get;
@@ -6,7 +9,7 @@ namespace MinimalApiGen.Framework.Generation.Query.Get;
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetOptionals : IWithGetOptionals
+public sealed class WithGetWithJwtAuthentication : IWithGetWithJwtAuthentication
 {
     #region Public Method Declarations
 
@@ -24,12 +27,6 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
     public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public IWithGetWithJwtAuthentication WithJwtAuthentication() => new WithGetWithJwtAuthentication();
 
     #endregion
 

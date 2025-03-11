@@ -9,10 +9,20 @@
     <Import_RootNamespace>MinimalApiGen.Generators.Abstractions</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IPutJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithFluentValidation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IGetQueryParameters{TModel}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithQueryParameters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IGetJwtAuthentication.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Command\Post\IPostFluentValidation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostRequest.cs" />
     <Compile Include="..\MinimalApiGen.Generators.Abstractions\Command\Put\IPutFluentValidation.cs" />

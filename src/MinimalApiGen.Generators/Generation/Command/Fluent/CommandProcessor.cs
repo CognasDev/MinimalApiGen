@@ -91,6 +91,9 @@ internal sealed class CommandProcessor
                     int version = invocationInfo.ToVersion(semanticModel);
                     intermediateResult!.Version = version;
                     break;
+                case string name when (name == CommandMethodNames.WithPostJwtAuthentication || name == CommandMethodNames.WithPutJwtAuthentication || name == CommandMethodNames.WithDeleteJwtAuthentication):
+                    intermediateResult!.WithJwtAuthentication = true;
+                    break;
             }
         }
 

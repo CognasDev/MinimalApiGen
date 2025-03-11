@@ -139,6 +139,11 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// </summary>
     public string FluentValidatorNullCheck => commandResult.WithFluentValidation ? BuildFluentValidationNullCheck() : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string JwtAuthentication { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -207,7 +212,7 @@ public partial class {ClassName}
         .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces<{ResponseName}>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication};
      }}
 }}";
 

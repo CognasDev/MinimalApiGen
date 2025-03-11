@@ -111,5 +111,15 @@ internal static class QueryMethodNames
     /// </summary>
     public static string CachedFor { get; } = $"{typeof(ICache).FullName}.{nameof(ICache.CachedFor)}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetJwtAuthentication { get; } = $"{typeof(IGetJwtAuthentication).FullName}.{nameof(IGetJwtAuthentication.WithJwtAuthentication)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdJwtAuthentication { get; } = $"{typeof(IGetByIdJwtAuthentication).FullName}.{nameof(IGetByIdJwtAuthentication.WithJwtAuthentication)}";
+
     #endregion
 }

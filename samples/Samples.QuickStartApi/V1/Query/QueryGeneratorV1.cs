@@ -20,11 +20,13 @@ public sealed class QueryGeneratorV1
                                           .WithModelId(model => model.Id)
                                           .WithGet()
                                                 .WithBusinessLogic<IQueryBusinessLogicV1>(query => query.GetModelsAsync)
+                                                .WithJwtAuthentication()
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithMappingService()
                                                 .WithVersion(1)
                                           .WithGetById()
                                                 .WithBusinessLogic<IQueryBusinessLogicV1>(query => query.GetModelByIdAsync)
+                                                .WithJwtAuthentication()
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithMappingService()
                                                 .WithVersion(1);

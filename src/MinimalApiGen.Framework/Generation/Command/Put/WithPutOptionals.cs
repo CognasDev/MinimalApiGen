@@ -23,6 +23,12 @@ public sealed class WithPutOptionals : IWithPutOptionals
     /// <returns></returns>
     public IWithPutWithResponse WithResponse<TResponse>() => new WithPutWithResponse();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IWithPutWithJwtAuthentication WithJwtAuthentication() => new WithPutWithJwtAuthentication();
+
     #endregion
 
     #region Public Method Declarations - Services

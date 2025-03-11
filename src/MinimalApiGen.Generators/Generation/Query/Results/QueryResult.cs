@@ -119,6 +119,11 @@ internal readonly record struct QueryResult : IQueryResult
     /// </summary>
     public EquatableDictionary<string, string> KeyedServices { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithJwtAuthentication { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -162,6 +167,7 @@ internal readonly record struct QueryResult : IQueryResult
         ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
         ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
         WithPagination = queryIntermediateResult.WithPagination;
+        WithJwtAuthentication = queryIntermediateResult.WithJwtAuthentication;
         WithResponseMappingService = queryIntermediateResult.WithResponseMappingService;
         ResponseProperties = new(queryIntermediateResult.ResponseResult.PropertyNames);
         CachedFor = queryIntermediateResult.CachedFor;
@@ -202,6 +208,7 @@ internal readonly record struct QueryResult : IQueryResult
                ResponseName == result.ResponseName &&
                ResponseFullyQualifiedName == result.ResponseFullyQualifiedName &&
                WithPagination == result.WithPagination &&
+               WithJwtAuthentication == result.WithJwtAuthentication &&
                WithResponseMappingService == result.WithResponseMappingService &&
                ResponseProperties.Equals(result.ResponseProperties) &&
                CachedFor == result.CachedFor &&

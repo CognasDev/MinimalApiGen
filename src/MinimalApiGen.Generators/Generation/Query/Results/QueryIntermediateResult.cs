@@ -92,5 +92,10 @@ internal sealed record QueryIntermediateResult
     /// </summary>
     public bool WithResponseMappingService { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithJwtAuthentication { get; set; }
+
     #endregion
 }

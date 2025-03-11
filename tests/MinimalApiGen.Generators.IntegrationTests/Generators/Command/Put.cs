@@ -32,6 +32,7 @@ public sealed class TestGenerator
                                             .WithModelId(model => model.Id)
                                             .WithPut()
                                                 .WithBusinessLogic<ISimpleBusinessLogic>(command => command.PutModelAsync)
+                                                .WithJwtAuthentication()
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService()
                                                 .WithResponse<SampleModelResponse>()

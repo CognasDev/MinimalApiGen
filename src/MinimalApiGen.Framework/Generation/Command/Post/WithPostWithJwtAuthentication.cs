@@ -1,35 +1,27 @@
-﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
-using System.Linq.Expressions;
+﻿using MinimalApiGen.Generators.Abstractions.Command.Post;
 
-namespace MinimalApiGen.Framework.Generation.Query.Get;
+namespace MinimalApiGen.Framework.Generation.Command.Post;
 
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetOptionals : IWithGetOptionals
+public sealed class WithPostWithJwtAuthentication : IWithPostWithJwtAuthentication
 {
     #region Public Method Declarations
 
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TModel"></typeparam>
-    /// <param name="properties"></param>
+    /// <typeparam name="TRequest"></typeparam>
     /// <returns></returns>
-    public IWithGetWithQueryParameters WithQueryParameters<TModel>(params Expression<Func<TModel, object?>>[] properties) => new WithGetWithQueryParameters();
+    public IWithPostWithRequest WithRequest<TRequest>() => new WithPostWithRequest();
 
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
-    public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    public IWithGetWithJwtAuthentication WithJwtAuthentication() => new WithGetWithJwtAuthentication();
+    public IWithPostWithResponse WithResponse<TResponse>() => new WithPostWithResponse();
 
     #endregion
 
@@ -39,14 +31,14 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// 
     /// </summary>
     /// <typeparam name="TService1"></typeparam>
-    public IWithGetWithServices WithServices<TService1>() => new WithGetWithServices();
+    public IWithPostWithServices WithServices<TService1>() => new WithPostWithServices();
 
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="TService1"></typeparam>
     /// <typeparam name="TService2"></typeparam>
-    public IWithGetWithServices WithServices<TService1, TService2>() => new WithGetWithServices();
+    public IWithPostWithServices WithServices<TService1, TService2>() => new WithPostWithServices();
 
     /// <summary>
     /// 
@@ -54,7 +46,7 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <typeparam name="TService1"></typeparam>
     /// <typeparam name="TService2"></typeparam>
     /// <typeparam name="TService3"></typeparam>
-    public IWithGetWithServices WithServices<TService1, TService2, TService3>() => new WithGetWithServices();
+    public IWithPostWithServices WithServices<TService1, TService2, TService3>() => new WithPostWithServices();
 
     /// <summary>
     /// 
@@ -63,7 +55,7 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <typeparam name="TService2"></typeparam>
     /// <typeparam name="TService3"></typeparam>
     /// <typeparam name="TService4"></typeparam>
-    public IWithGetWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithGetWithServices();
+    public IWithPostWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithPostWithServices();
 
     #endregion
 
@@ -75,7 +67,7 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <typeparam name="TService1"></typeparam>
     /// <param name="key1"></param>
     /// <returns></returns>
-    public IWithGetWithKeyedServices WithKeyedServices<TService1>(string key1) => new WithGetWithKeyedServices();
+    public IWithPostWithKeyedServices WithKeyedServices<TService1>(string key1) => new WithPostWithKeyedServices();
 
     /// <summary>
     /// 
@@ -85,7 +77,7 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <param name="key1"></param>
     /// <param name="key2"></param>
     /// <returns></returns>
-    public IWithGetWithKeyedServices WithKeyedServices<TService1, TService2>(string key1, string key2) => new WithGetWithKeyedServices();
+    public IWithPostWithKeyedServices WithKeyedServices<TService1, TService2>(string key1, string key2) => new WithPostWithKeyedServices();
 
     /// <summary>
     /// 
@@ -97,7 +89,7 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <param name="key2"></param>
     /// <param name="key3"></param>
     /// <returns></returns>
-    public IWithGetWithKeyedServices WithKeyedServices<TService1, TService2, TService3>(string key1, string key2, string key3) => new WithGetWithKeyedServices();
+    public IWithPostWithKeyedServices WithKeyedServices<TService1, TService2, TService3>(string key1, string key2, string key3) => new WithPostWithKeyedServices();
 
     /// <summary>
     /// 
@@ -111,7 +103,7 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <param name="key3"></param>
     /// <param name="key4"></param>
     /// <returns></returns>
-    public IWithGetWithKeyedServices WithKeyedServices<TService1, TService2, TService3, TService4>(string key1, string key2, string key3, string key4) => new WithGetWithKeyedServices();
+    public IWithPostWithKeyedServices WithKeyedServices<TService1, TService2, TService3, TService4>(string key1, string key2, string key3, string key4) => new WithPostWithKeyedServices();
 
     #endregion
 }

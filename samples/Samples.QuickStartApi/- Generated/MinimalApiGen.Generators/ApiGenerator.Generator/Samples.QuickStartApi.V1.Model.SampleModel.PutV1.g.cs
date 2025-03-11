@@ -63,6 +63,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
         .Accepts<SampleModelRequest>(MediaTypeNames.Application.Json)
         .Produces<SampleModelResponse>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)
+        .RequireAuthorization();
      }
 }

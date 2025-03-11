@@ -1,11 +1,12 @@
-﻿using MinimalApiGen.Framework.Mapping;
+﻿//HintName: MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel.GetV2.g.cs
+using MinimalApiGen.Framework.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
-using SampleModel = Samples.QuickStartApi.V1.Model.SampleModel;
-using SampleModelResponse = Samples.QuickStartApi.V1.Model.SampleModelResponse;
+using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
+using SampleModelResponse = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelResponse;
 
-namespace Samples.QuickStartApi.V1.Query;
+namespace MinimalApiGen.Generators.IntegrationTests.Fixtures;
 
 /// <summary>
 /// 
@@ -17,14 +18,14 @@ public partial class SampleModelQueryRouteEndpointsMapper
     /// 
     /// </summary>
     /// <param name="endpointRouteBuilder"></param>
-    public virtual RouteHandlerBuilder MapGetV1(IEndpointRouteBuilder endpointRouteBuilder)
+    public virtual RouteHandlerBuilder MapGetV2(IEndpointRouteBuilder endpointRouteBuilder)
     {
         return endpointRouteBuilder.MapGet
         (
             "/samplemodels",
             (
                 CancellationToken cancellationToken,
-                [FromServices] Samples.QuickStartApi.V1.Query.IQueryBusinessLogicV1 businessLogic,
+                [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISimpleBusinessLogic businessLogic,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService
             ) =>
             {
@@ -44,10 +45,10 @@ public partial class SampleModelQueryRouteEndpointsMapper
                 return SampleModelResponseStreamAsync();   
             }
         )
-        .WithName("SampleModels-Get-V1")
+        .WithName("SampleModels-Get-V2")
         .WithTags("samplemodels")
         .WithOpenApi(operation => new(operation) { Summary = "Gets a collection of SampleModels mapped to SampleModelResponse responses." })
-        .MapToApiVersion(1)
+        .MapToApiVersion(2)
         .Produces<IEnumerable<SampleModelResponse>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)
