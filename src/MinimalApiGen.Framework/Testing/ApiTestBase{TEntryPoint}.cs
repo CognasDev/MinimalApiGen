@@ -9,12 +9,14 @@ namespace MinimalApiGen.Framework.Testing;
 /// <summary>
 /// 
 /// </summary>
+/// <typeparam name="TEntryPoint"></typeparam>
 public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<TestServer<TEntryPoint>> where TEntryPoint : class
 {
     #region Field Declarations
 
     private readonly TestServer<TEntryPoint> _testServer;
     private AsyncServiceScope _scope;
+    private bool _disposed = false;
 
     #endregion
 
@@ -40,6 +42,11 @@ public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<T
     /// </summary>
     public HttpClient HttpClient { get; private set; } = default!;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    protected string BaseAddress { get; set; } = "https://localhost/";
+
     #endregion
 
     #region Constructor Declarations
@@ -49,6 +56,11 @@ public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<T
     /// </summary>
     /// <param name="testServer"></param>
     protected ApiTestBase(TestServer<TEntryPoint> testServer) => _testServer = testServer;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    ~ApiTestBase() => DisposeAsyncCore().AsTask().GetAwaiter().GetResult();
 
     #endregion
 
@@ -62,7 +74,7 @@ public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<T
     {
         WebApplicationFactoryClientOptions options = new()
         {
-            BaseAddress = new Uri("https://localhost/")
+            BaseAddress = new Uri(BaseAddress)
         };
         HttpClient = _testServer.CreateClient(options);
         Configuration = _testServer.Configuration;
@@ -77,8 +89,26 @@ public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<T
     /// <returns></returns>
     public async ValueTask DisposeAsync()
     {
-        HttpClient?.Dispose();
-        await _scope.DisposeAsync();
+        await DisposeAsyncCore().ConfigureAwait(false);
+        GC.SuppressFinalize(this);
+    }
+
+    #endregion
+
+    #region Protected Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    protected virtual async ValueTask DisposeAsyncCore()
+    {
+        if (!_disposed)
+        {
+            HttpClient?.Dispose();
+            await _scope.DisposeAsync().ConfigureAwait(false);
+            _disposed = true;
+        }
     }
 
     #endregion
