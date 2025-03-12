@@ -17,7 +17,7 @@ public sealed class CommandDatabaseService : ICommandDatabaseService
 
     #endregion
 
-    #region Constructor / Finaliser Declarations
+    #region Constructor Declarations
 
     /// <summary>
     /// Default constructor for <see cref="CommandDatabaseService"/>

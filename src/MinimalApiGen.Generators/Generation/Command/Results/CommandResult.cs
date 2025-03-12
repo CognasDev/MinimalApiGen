@@ -235,7 +235,8 @@ internal readonly record struct CommandResult : ICommandResult
                BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
                BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
                BusinessLogicParameters == result.BusinessLogicParameters &&
-               WithFluentValidation == result.WithFluentValidation;
+               WithFluentValidation == result.WithFluentValidation &&
+               WithJwtAuthentication == result.WithJwtAuthentication;
     }
 
     #endregion
