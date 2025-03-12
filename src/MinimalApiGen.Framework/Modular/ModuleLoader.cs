@@ -21,7 +21,7 @@ public static class ModuleLoader
     public static void AddModules(this IServiceCollection serviceCollection, string name)
     {
         Type abstraction = typeof(IModule);
-        FrozenSet<Assembly> assemblies = GetDomainAssemblies(name);
+        FrozenSet<Assembly> assemblies = GetAssemblies(name);
         ReadOnlySpan<Type> moduleTypes = assemblies.SelectMany(assembly => assembly.GetTypes())
                                                    .Where(type => abstraction.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
                                                    .ToArray();
@@ -44,7 +44,7 @@ public static class ModuleLoader
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    private static FrozenSet<Assembly> GetDomainAssemblies(string name)
+    private static FrozenSet<Assembly> GetAssemblies(string name)
     {
         IEnumerable<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies();
         List<Assembly> moduleAssemblies = [];

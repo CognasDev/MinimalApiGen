@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public interface ITokenGenerator
+public interface IEmailVerificationLinkFactory
 {
     #region Method Declarations  
 
@@ -11,9 +11,9 @@ public interface ITokenGenerator
     /// 
     /// </summary>
     /// <param name="userId"></param>
-    /// <param name="email"></param>
+    /// <param name="verifyRouteName"></param>
     /// <returns></returns>
-    string GenerateToken(string userId, string email);
+    string Create(string userId, string verifyRouteName);
 
     #endregion
 }

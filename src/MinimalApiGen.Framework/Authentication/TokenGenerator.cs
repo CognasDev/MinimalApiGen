@@ -1,7 +1,8 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
-using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
+using System.Text;
 
 namespace MinimalApiGen.Framework.Authentication;
 
@@ -10,46 +11,49 @@ namespace MinimalApiGen.Framework.Authentication;
 /// </summary>
 public sealed class TokenGenerator : ITokenGenerator
 {
+    #region Field Declarations
+
+    private readonly IConfiguration _configuration;
+
+    #endregion
+
+    #region Constructor Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="configuration"></param>
+    public TokenGenerator(IConfiguration configuration)
+    {
+        ArgumentNullException.ThrowIfNull(configuration, nameof(configuration));
+        _configuration = configuration;
+    }
+
+    #endregion
+
     #region Public Method Declarations  
 
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="userId"></param>
     /// <param name="email"></param>
-    /// <param name="domain"></param>
-    /// <param name="expiresMinutes"></param>
     /// <returns></returns>
-    public string GenerateToken(string email, string domain, int expiresMinutes = 60)
+    public string GenerateToken(string userId, string email)
     {
-        string issuer = $"https://id.{domain}";
-        string audience = $"https://{domain}";
-        return GenerateToken(email, issuer, audience, expiresMinutes);
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="email"></param>
-    /// <param name="issuer"></param>
-    /// <param name="audience"></param>
-    /// <param name="expiresMinutes"></param>
-    /// <returns></returns>
-    public string GenerateToken(string email, string issuer, string audience, int expiresMinutes = 60)
-    {
-        JwtSecurityTokenHandler tokenHandler = new();
-        DateTime expiry = DateTime.UtcNow.AddMinutes(expiresMinutes);
+        JsonWebTokenHandler tokenHandler = new();
+        DateTime expiry = DateTime.UtcNow.AddMinutes(_configuration.GetValue<int>(JwtConfigNames.Expiration));
 
         SecurityTokenDescriptor tokenDescriptor = new()
         {
-            Subject = GetSubject(email),
+            Subject = GetSubject(userId, email),
             Expires = expiry,
-            Issuer = issuer,
-            Audience = audience,
+            Issuer = _configuration[JwtConfigNames.Issuer],
+            Audience = _configuration[JwtConfigNames.Audience],
             SigningCredentials = GetSigningCredentials()
         };
 
-        SecurityToken securityToken = tokenHandler.CreateToken(tokenDescriptor);
-        string token = tokenHandler.WriteToken(securityToken);
+        string token = tokenHandler.CreateToken(tokenDescriptor);
         return token;
     }
 
@@ -59,16 +63,15 @@ public sealed class TokenGenerator : ITokenGenerator
 
     /// <summary>
     /// 
+    /// </summary>
+    /// <param name="userId"></param>
     /// <param name="email"></param>
     /// <returns></returns>
-    /// </summary>
-    private static ClaimsIdentity GetSubject(string email)
+    private static ClaimsIdentity GetSubject(string userId, string email)
     {
-        string jti = Guid.NewGuid().ToString();
         List<Claim> claims =
         [
-            new(JwtRegisteredClaimNames.Jti, jti),
-            new(JwtRegisteredClaimNames.Sub, email),
+            new(JwtRegisteredClaimNames.Sub, userId),
             new(JwtRegisteredClaimNames.Email, email)
         ];
         ClaimsIdentity subject = new(claims);
@@ -79,12 +82,23 @@ public sealed class TokenGenerator : ITokenGenerator
     /// 
     /// </summary>
     /// <returns></returns>
-    private static SigningCredentials GetSigningCredentials()
+    private SigningCredentials GetSigningCredentials()
     {
-        byte[] key = "ForTheLoveOfGodStoreAndLoadThisSecurely"u8.ToArray();
-        SymmetricSecurityKey symmetricSecurityKey = new(key);
+        SymmetricSecurityKey symmetricSecurityKey = GetSymmetricSecurityKey();
         SigningCredentials signingCredentials = new(symmetricSecurityKey, SecurityAlgorithms.HmacSha256Signature);
         return signingCredentials;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private SymmetricSecurityKey GetSymmetricSecurityKey()
+    {
+        string secret = _configuration[JwtConfigNames.Secret]!;
+        byte[] key = Encoding.UTF8.GetBytes(secret);
+        SymmetricSecurityKey symmetricSecurityKey = new(key);
+        return symmetricSecurityKey;
     }
 
     #endregion
