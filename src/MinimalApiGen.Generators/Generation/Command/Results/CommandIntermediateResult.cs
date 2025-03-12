@@ -91,5 +91,10 @@ internal sealed record CommandIntermediateResult
     /// </summary>
     public bool WithFluentValidation { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithJwtAuthentication { get; set; }
+
     #endregion
 }

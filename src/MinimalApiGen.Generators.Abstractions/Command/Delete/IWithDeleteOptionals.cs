@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithDeleteOptionals : IDeleteServices, IDeleteKeyedServices
+public interface IWithDeleteOptionals : IDeleteJwtAuthentication, IDeleteServices, IDeleteKeyedServices
 {
 }

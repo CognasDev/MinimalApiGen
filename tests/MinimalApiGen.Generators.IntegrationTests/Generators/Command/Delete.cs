@@ -32,6 +32,7 @@ public sealed class TestGenerator
                                             .WithModelId(model => model.Id)
                                             .WithDelete()
                                                 .WithBusinessLogic<ISimpleBusinessLogic>(command => command.DeleteModelAsync)
+                                                .WithJwtAuthentication()
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService();
     }

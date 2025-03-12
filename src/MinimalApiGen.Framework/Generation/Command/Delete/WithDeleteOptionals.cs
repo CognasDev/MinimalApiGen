@@ -39,6 +39,12 @@ public sealed class WithDeleteOptionals : IWithDeleteOptionals
     /// <typeparam name="TService4"></typeparam>
     public IWithDeleteWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithDeleteWithServices();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IWithDeleteWithJwtAuthentication WithJwtAuthentication() => new WithDeleteWithJwtAuthentication();
+
     #endregion
 
     #region Public Method Declarations - KeyedServices

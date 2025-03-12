@@ -23,6 +23,12 @@ public sealed class WithPostOptionals : IWithPostOptionals
     /// <returns></returns>
     public IWithPostWithResponse WithResponse<TResponse>() => new WithPostWithResponse();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IWithPostWithJwtAuthentication WithJwtAuthentication() => new WithPostWithJwtAuthentication();
+
     #endregion
 
     #region Public Method Declarations - Services

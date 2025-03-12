@@ -98,6 +98,11 @@ internal interface IResult : IEquatable<IResult>
     /// </summary>
     EquatableDictionary<string, string> KeyedServices { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    bool WithJwtAuthentication { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details

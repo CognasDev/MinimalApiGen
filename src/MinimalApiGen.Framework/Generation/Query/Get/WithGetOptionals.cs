@@ -25,6 +25,12 @@ public sealed class WithGetOptionals : IWithGetOptionals
     /// <returns></returns>
     public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IWithGetWithJwtAuthentication WithJwtAuthentication() => new WithGetWithJwtAuthentication();
+
     #endregion
 
     #region Public Method Declarations - Services

@@ -5,6 +5,7 @@ namespace MinimalApiGen.Framework.Testing;
 /// <summary>
 /// 
 /// </summary>
+/// <typeparam name="TEntryPoint"></typeparam>
 /// <param name="webApplicationFactory"></param>
 public sealed class TestHttpClientFactory<TEntryPoint>(WebApplicationFactory<TEntryPoint> webApplicationFactory) : IHttpClientFactory
     where TEntryPoint : class

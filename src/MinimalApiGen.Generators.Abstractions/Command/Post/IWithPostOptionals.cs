@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithPostOptionals : IPostServices, IPostKeyedServices, IPostRequest, IPostResponse
+public interface IWithPostOptionals : IPostJwtAuthentication, IPostServices, IPostKeyedServices, IPostRequest, IPostResponse
 {
 }

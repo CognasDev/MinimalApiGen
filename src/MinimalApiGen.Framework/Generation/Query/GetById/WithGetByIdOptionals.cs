@@ -16,6 +16,12 @@ public sealed class WithGetByIdOptionals : IWithGetByIdOptionals
     /// <returns></returns>
     public IWithGetByIdWithResponse WithResponse<TResponse>() => new WithGetByIdWithResponse();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public IWithGetByIdWithJwtAuthentication WithJwtAuthentication() => new WithGetByIdWithJwtAuthentication();
+
     #endregion
 
     #region Public Method Declarations - Services

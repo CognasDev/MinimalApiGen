@@ -133,6 +133,11 @@ internal readonly record struct CommandResult : ICommandResult
     /// </summary>
     public EquatableDictionary<string, string> KeyedServices { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool WithJwtAuthentication { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -190,6 +195,8 @@ internal readonly record struct CommandResult : ICommandResult
         BusinessLogicFullyQualifiedName = commandIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
         BusinessLogicDelegateName = commandIntermediateResult.BusinessLogicResult!.DelegateName;
         BusinessLogicParameters = new(commandIntermediateResult.BusinessLogicResult!.Parameters);
+
+        WithJwtAuthentication = commandIntermediateResult.WithJwtAuthentication;
     }
 
     #endregion
@@ -228,7 +235,8 @@ internal readonly record struct CommandResult : ICommandResult
                BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
                BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
                BusinessLogicParameters == result.BusinessLogicParameters &&
-               WithFluentValidation == result.WithFluentValidation;
+               WithFluentValidation == result.WithFluentValidation &&
+               WithJwtAuthentication == result.WithJwtAuthentication;
     }
 
     #endregion

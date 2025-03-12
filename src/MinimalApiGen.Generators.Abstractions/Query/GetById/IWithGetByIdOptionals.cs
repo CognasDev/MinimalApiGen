@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetByIdOptionals : IGetByIdServices, IGetByIdKeyedServices, IGetByIdResponse
+public interface IWithGetByIdOptionals : IGetByIdJwtAuthentication, IGetByIdServices, IGetByIdKeyedServices, IGetByIdResponse
 {
 }

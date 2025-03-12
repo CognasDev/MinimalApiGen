@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithPutOptionals : IPutServices, IPutKeyedServices, IPutRequest, IPutResponse
+public interface IWithPutOptionals : IPutJwtAuthentication, IPutServices, IPutKeyedServices, IPutRequest, IPutResponse
 {
 }

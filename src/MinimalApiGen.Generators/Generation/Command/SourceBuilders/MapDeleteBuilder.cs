@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Generation.Command.Results;
+using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 
@@ -92,9 +93,14 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// 
     /// </summary>
     public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.BuildForId(commandResult.BusinessLogicParameters,
-                                                                                             commandResult.Services,
-                                                                                             commandResult.KeyedServices,
-                                                                                             commandResult.ModelIdUnderlyingPropertyType ?? commandResult.ModelIdPropertyType);
+                                                                                                  commandResult.Services,
+                                                                                                  commandResult.KeyedServices,
+                                                                                                  commandResult.ModelIdUnderlyingPropertyType ?? commandResult.ModelIdPropertyType);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string JwtAuthentication { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
 
     #endregion
 
@@ -146,7 +152,7 @@ public partial class {ClassName}
         .MapToApiVersion({ApiVersion})
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication};
      }}
 }}";
 

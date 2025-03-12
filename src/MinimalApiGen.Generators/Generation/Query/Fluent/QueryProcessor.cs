@@ -85,6 +85,9 @@ internal sealed class QueryProcessor
                 case string name when name == QueryMethodNames.WithPagination:
                     intermediateResult!.WithPagination = true;
                     break;
+                case string name when (name == QueryMethodNames.WithGetJwtAuthentication || name == QueryMethodNames.WithGetByIdJwtAuthentication):
+                    intermediateResult!.WithJwtAuthentication = true;
+                    break;
                 case string name when name == QueryMethodNames.CachedFor:
                     intermediateResult!.CachedFor = invocationInfo.GetCachedForTimeSpan();
                     break;

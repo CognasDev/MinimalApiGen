@@ -114,6 +114,11 @@ internal sealed class MapGetByIdBuilder(IQueryResult queryResult, ServicesBuilde
     /// </summary>
     public string CachedFor { get; } = CachedForBuilder.Build(queryResult.CachedFor);
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string JwtAuthentication { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -176,7 +181,7 @@ public partial class {ClassName}
         .Produces<{ResponseName}>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status404NotFound)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor};
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor}{JwtAuthentication};
      }}
 }}";
 
