@@ -13,10 +13,10 @@ public interface IWithPutOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    IWithPutOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression);
+    IWithPutOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression);
 
     #endregion
 }

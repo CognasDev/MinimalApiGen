@@ -145,17 +145,17 @@ internal readonly record struct CommandResult : ICommandResult
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicFullyQualifiedName { get; }
+    public string HandlerFullyQualifiedName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateName { get; }
+    public string HandlerDelegateName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<BusinessLogicParamterResult> BusinessLogicParameters { get; }
+    public EquatableArray<HandlerParamterResult> HandlerParameters { get; }
 
     #endregion
 
@@ -192,9 +192,9 @@ internal readonly record struct CommandResult : ICommandResult
         ApiVersion = commandIntermediateResult.Version;
         KeyedServices = new(commandIntermediateResult.KeyedServices);
 
-        BusinessLogicFullyQualifiedName = commandIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
-        BusinessLogicDelegateName = commandIntermediateResult.BusinessLogicResult!.DelegateName;
-        BusinessLogicParameters = new(commandIntermediateResult.BusinessLogicResult!.Parameters);
+        HandlerFullyQualifiedName = commandIntermediateResult.HandlerResult!.FullyQualifiedName;
+        HandlerDelegateName = commandIntermediateResult.HandlerResult!.DelegateName;
+        HandlerParameters = new(commandIntermediateResult.HandlerResult!.Parameters);
 
         WithJwtAuthentication = commandIntermediateResult.WithJwtAuthentication;
     }
@@ -232,9 +232,9 @@ internal readonly record struct CommandResult : ICommandResult
                Services == result.Services &&
                ApiVersion == result.ApiVersion &&
                KeyedServices == result.KeyedServices &&
-               BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
-               BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
-               BusinessLogicParameters == result.BusinessLogicParameters &&
+               HandlerFullyQualifiedName == result.HandlerFullyQualifiedName &&
+               HandlerDelegateName == result.HandlerDelegateName &&
+               HandlerParameters == result.HandlerParameters &&
                WithFluentValidation == result.WithFluentValidation &&
                WithJwtAuthentication == result.WithJwtAuthentication;
     }

@@ -17,10 +17,13 @@ public static class ExtensionMethods
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="serviceCollection"></param>
-    /// <param name="configuration"></param>
-    public static void AddJwtAuthentication(this IServiceCollection serviceCollection, IConfiguration configuration)
+    /// <param name="builder"></param>
+    public static void AddJwtAuthentication(this WebApplicationBuilder builder)
     {
+        IServiceCollection serviceCollection = builder.Services;
+        IConfiguration configuration = builder.Configuration;
+
+        serviceCollection.AddHttpContextAccessor();
         serviceCollection.AddSingleton<IEmailVerificationLinkFactory, EmailVerificationLinkFactory>();
         serviceCollection.AddSingleton<IPasswordHasher, PasswordHasher>();
         serviceCollection.AddSingleton<ITokenGenerator, TokenGenerator>();

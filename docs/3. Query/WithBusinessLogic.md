@@ -1,5 +1,0 @@
-# MinimalApiGen
-
-## Query
-
-### WithBusinessLogic

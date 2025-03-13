@@ -27,14 +27,14 @@ public partial class TrackQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksQueryHandler handler,
                 [FromServices] IMappingService<Track, TrackResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Track? model = await businessLogic.SelectTrackAsync(id).ConfigureAwait(false);
+                Track? model = await handler.SelectTrackAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {

@@ -13,7 +13,7 @@ public sealed partial class AllMusicPage
     /// <summary>
     /// 
     /// </summary>
-    public IAllMusicBusinessLogic AllMusicBusinessLogic { get; }
+    public IAllMusicHandler AllMusicHandler { get; }
 
     #endregion
 
@@ -56,11 +56,11 @@ public sealed partial class AllMusicPage
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="allMusicBusinessLogic"></param>
-    public AllMusicPage(IAllMusicBusinessLogic allMusicBusinessLogic)
+    /// <param name="allMusicHandler"></param>
+    public AllMusicPage(IAllMusicHandler allMusicHandler)
     {
-        ArgumentNullException.ThrowIfNull(allMusicBusinessLogic, nameof(allMusicBusinessLogic));
-        AllMusicBusinessLogic = allMusicBusinessLogic;
+        ArgumentNullException.ThrowIfNull(allMusicHandler, nameof(allMusicHandler));
+        AllMusicHandler = allMusicHandler;
     }
 
     #endregion
@@ -74,8 +74,8 @@ public sealed partial class AllMusicPage
     protected override async Task OnInitializedAsync()
     {
         ArtistsLoading = true;
-        await AllMusicBusinessLogic.GetArtistsAsync().ConfigureAwait(false);
-        ArtistsCount = AllMusicBusinessLogic.Artists.Count();
+        await AllMusicHandler.GetArtistsAsync().ConfigureAwait(false);
+        ArtistsCount = AllMusicHandler.Artists.Count();
         ArtistsLoading = false;
     }
 

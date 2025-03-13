@@ -24,15 +24,15 @@ public partial class KeyQueryRouteEndpointsMapper
             "/keys",
             (
                 CancellationToken cancellationToken,
-                [FromServices] Samples.MusicCollection.Api.Keys.IKeysQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Keys.IKeysQueryHandler handler,
                 [FromServices] IMappingService<Key, KeyResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<KeyResponse> KeyResponseStreamAsync()
                 {
-                    IEnumerable<Key> models = await businessLogic.SelectKeysAsync().ConfigureAwait(false);
+                    IEnumerable<Key> models = await handler.SelectKeysAsync().ConfigureAwait(false);
                     IEnumerable<KeyResponse> responses = mappingService.Map(models);
 
                     foreach (KeyResponse response in responses)

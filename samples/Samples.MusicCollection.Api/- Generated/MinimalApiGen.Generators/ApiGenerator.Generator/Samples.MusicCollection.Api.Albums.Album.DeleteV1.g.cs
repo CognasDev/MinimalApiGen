@@ -26,11 +26,11 @@ public partial class AlbumCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandBusinessLogic businessLogic
+                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandHandler handler
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.DeleteAlbumAsync(id).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.DeleteAlbumAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )

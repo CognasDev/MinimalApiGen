@@ -13,10 +13,10 @@ public interface IWithDeleteOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    IWithDeleteOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression);
+    IWithDeleteOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression);
 
     #endregion
 }

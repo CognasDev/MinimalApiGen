@@ -29,13 +29,13 @@ public partial class ArtistCommandRouteEndpointsMapper
                 CancellationToken cancellationToken,
                 [FromBody] ArtistRequest request,
 				[FromServices] FluentValidation.IValidator<ArtistRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandHandler handler,
                 [FromServices] IMappingService<ArtistRequest, Artist> requestMappingService,
                 [FromServices] IMappingService<Artist, ArtistResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -46,7 +46,7 @@ public partial class ArtistCommandRouteEndpointsMapper
 				}
 
                 Artist model = requestMappingService.Map(request);
-                Artist? insertedModel = await businessLogic.InsertArtistAsync(model).ConfigureAwait(false);
+                Artist? insertedModel = await handler.InsertArtistAsync(model).ConfigureAwait(false);
 
                 if (insertedModel is null)
                 {

@@ -28,10 +28,10 @@ public sealed class TestGenerator
 {
     public TestGenerator()
     {
-        ApiGeneration.Query<SampleModel>().WithNamespaceOf<ISimpleBusinessLogic>()
+        ApiGeneration.Query<SampleModel>().WithNamespaceOf<ISimpleHandler>()
                                           .WithModelId(model => model.Id)
                                           .WithGetById()
-                                          .WithBusinessLogic<ISimpleBusinessLogic>(logic => logic.GetModelByIdAsync)
+                                          .WithHandler<ISimpleHandler>(logic => logic.GetModelByIdAsync)
                                           .WithResponse<SampleModelResponse>();
     }
 }";

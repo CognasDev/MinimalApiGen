@@ -5,7 +5,7 @@ namespace Samples.MusicCollection.Web.AllMusic;
 /// <summary>
 /// 
 /// </summary>
-public interface IAllMusicBusinessLogic
+public interface IAllMusicHandler
 {
     #region Property Declarations
     /// <summary>

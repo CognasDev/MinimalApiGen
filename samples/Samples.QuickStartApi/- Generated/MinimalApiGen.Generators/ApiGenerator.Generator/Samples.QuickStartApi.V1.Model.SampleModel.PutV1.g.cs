@@ -29,12 +29,12 @@ public partial class SampleModelCommandRouteEndpointsMapper
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
                 [FromBody] SampleModelRequest request,
-                [FromServices] Samples.QuickStartApi.V1.Command.ICommandBusinessLogicV1 businessLogic,
+                [FromServices] Samples.QuickStartApi.V1.Command.ICommandHandlerV1 handler,
                 [FromServices] IMappingService<SampleModelRequest, SampleModel> requestMappingService,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> responseMappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -45,7 +45,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
                     return TypedResults.BadRequest();
                 }
 
-                SampleModel? updatedModel = await businessLogic.PutModelAsync(model, cancellationToken).ConfigureAwait(false);
+                SampleModel? updatedModel = await handler.PutModelAsync(model, cancellationToken).ConfigureAwait(false);
 
                 if (updatedModel is null)
                 {

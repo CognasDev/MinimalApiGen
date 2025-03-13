@@ -28,14 +28,14 @@ public partial class SampleModelQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISimpleBusinessLogic businessLogic,
+                [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISimpleHandler handler,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                SampleModel? model = await businessLogic.GetModelByIdAsync(id, cancellationToken).ConfigureAwait(false);
+                SampleModel? model = await handler.GetModelByIdAsync(id, cancellationToken).ConfigureAwait(false);
 
                 if (model is null)
                 {

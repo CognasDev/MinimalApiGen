@@ -49,8 +49,8 @@ internal sealed class CommandProcessor
                 case string name when name == CommandMethodNames.WithModelId:
                     modelIdPropertyResult = invocationInfo.ToModelIdPropertyName(semanticModel);
                     break;
-                case string name when (name == CommandMethodNames.WithPostBusinessLogic || name == CommandMethodNames.WithPutBusinessLogic || name == CommandMethodNames.WithDeleteBusinessLogic) && fluentMethod.IsGeneric:
-                    intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
+                case string name when (name == CommandMethodNames.WithPostHandler || name == CommandMethodNames.WithPutHandler || name == CommandMethodNames.WithDeleteHandler) && fluentMethod.IsGeneric:
+                    intermediateResult!.HandlerResult = invocationInfo.ToHandler();
                     break;
                 case string name when name == CommandMethodNames.WithPost:
                     intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, commandNamespace, modelIdPropertyResult);

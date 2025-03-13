@@ -26,11 +26,11 @@ public partial class TrackCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksCommandBusinessLogic businessLogic
+                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksCommandHandler handler
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.DeleteTrackAsync(id).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.DeleteTrackAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )

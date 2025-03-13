@@ -15,30 +15,30 @@ public sealed class ArtistsCommandGenerator
     /// </summary>
     public ArtistsCommandGenerator()
     {
-        ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandBusinessLogic>()
+        ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandHandler>()
                                        .WithModelId(model => model.ArtistId)
                                        .WithPost()
-                                            .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.InsertArtistAsync)
+                                            .WithHandler<IArtistsCommandHandler>(command => command.InsertArtistAsync)
                                             .WithRequest<ArtistRequest>()
                                             .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<ArtistResponse>()
                                             .WithResponseMappingService();
 
-        ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandBusinessLogic>()
+        ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandHandler>()
                                        .WithModelId(model => model.ArtistId)
                                        .WithPut()
-                                           .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.UpdateArtistAsync)
+                                           .WithHandler<IArtistsCommandHandler>(command => command.UpdateArtistAsync)
                                            .WithRequest<ArtistRequest>()
                                            .WithFluentValidation()
                                            .WithRequestMappingService()
                                            .WithResponse<ArtistResponse>()
                                            .WithResponseMappingService();
 
-        ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandBusinessLogic>()
+        ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandHandler>()
                                        .WithModelId(model => model.ArtistId)
                                        .WithDelete()
-                                            .WithBusinessLogic<IArtistsCommandBusinessLogic>(command => command.DeleteArtistAsync);
+                                            .WithHandler<IArtistsCommandHandler>(command => command.DeleteArtistAsync);
 
     }
 

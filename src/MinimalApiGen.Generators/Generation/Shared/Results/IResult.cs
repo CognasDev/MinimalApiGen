@@ -110,17 +110,17 @@ internal interface IResult : IEquatable<IResult>
     /// <summary>
     /// 
     /// </summary>
-    string BusinessLogicFullyQualifiedName { get; }
+    string HandlerFullyQualifiedName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    string BusinessLogicDelegateName { get; }
+    string HandlerDelegateName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    EquatableArray<BusinessLogicParamterResult> BusinessLogicParameters { get; }
+    EquatableArray<HandlerParamterResult> HandlerParameters { get; }
 
     #endregion
 }

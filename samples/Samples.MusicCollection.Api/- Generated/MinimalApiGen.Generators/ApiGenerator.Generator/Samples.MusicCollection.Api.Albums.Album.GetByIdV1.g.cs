@@ -27,14 +27,14 @@ public partial class AlbumQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsQueryHandler handler,
                 [FromServices] IMappingService<Album, AlbumResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Album? model = await businessLogic.SelectAlbumAsync(id).ConfigureAwait(false);
+                Album? model = await handler.SelectAlbumAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {

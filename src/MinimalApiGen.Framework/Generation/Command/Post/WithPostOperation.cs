@@ -13,10 +13,10 @@ public sealed class WithPostOperation : IWithPostOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public IWithPostOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression) => new WithPostOptionals();
+    public IWithPostOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression) => new WithPostOptionals();
 
     #endregion
 }

@@ -13,10 +13,10 @@ public sealed class WithPutOperation : IWithPutOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public IWithPutOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression) => new WithPutOptionals();
+    public IWithPutOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression) => new WithPutOptionals();
 
     #endregion
 }

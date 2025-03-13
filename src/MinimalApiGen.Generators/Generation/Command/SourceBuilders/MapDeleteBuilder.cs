@@ -82,17 +82,17 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogic { get; } = commandResult.BusinessLogicFullyQualifiedName;
+    public string Handler { get; } = commandResult.HandlerFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateName { get; } = commandResult.BusinessLogicDelegateName;
+    public string HandlerDelegateName { get; } = commandResult.HandlerDelegateName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.BuildForId(commandResult.BusinessLogicParameters,
+    public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.BuildForId(commandResult.HandlerParameters,
                                                                                                   commandResult.Services,
                                                                                                   commandResult.KeyedServices,
                                                                                                   commandResult.ModelIdUnderlyingPropertyType ?? commandResult.ModelIdPropertyType);
@@ -138,11 +138,11 @@ public partial class {ClassName}
             (
                 CancellationToken cancellationToken,
                 [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
-                [FromServices] {BusinessLogic} businessLogic
+                [FromServices] {Handler} handler
             ) =>
             {{
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.{HandlerDelegateName}({HandlerDelegateParameters}).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }}
         )

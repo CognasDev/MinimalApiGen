@@ -28,10 +28,10 @@ public sealed class TestGenerator
 {
     public TestGenerator()
     {
-        ApiGeneration.Query<SampleModel>().WithNamespaceOf<IServicesBusinessLogic>()
+        ApiGeneration.Query<SampleModel>().WithNamespaceOf<IServicesHandler>()
                                           .WithModelId(model => model.Id)
                                           .WithGet()
-                                          .WithBusinessLogic<IServicesBusinessLogic>(logic => logic.GetModelsAsync)
+                                          .WithHandler<IServicesHandler>(logic => logic.GetModelsAsync)
                                           .WithServices<ISampleService1>()
                                           .WithKeyedServices<ISampleService2>(nameof(SampleService2))
                                           .WithResponse<SampleModelResponse>();

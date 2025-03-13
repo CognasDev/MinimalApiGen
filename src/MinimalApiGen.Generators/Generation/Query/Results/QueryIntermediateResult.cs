@@ -60,7 +60,7 @@ internal sealed record QueryIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public BusinessLogicResult? BusinessLogicResult { get; set; }
+    public HandlerResult? HandlerResult { get; set; }
 
     /// <summary>
     /// 

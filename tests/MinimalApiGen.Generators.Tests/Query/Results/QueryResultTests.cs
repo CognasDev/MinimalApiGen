@@ -32,10 +32,10 @@ public sealed class QueryResultTests
                 ResponseName = "TestResponse",
                 ResponseFullyQualifiedName = "Namespace.TestResponse"
             },
-            BusinessLogicResult = new BusinessLogicResult
+            HandlerResult = new HandlerResult
             {
-                FullyQualifiedName = "Namespace.BusinessLogic",
-                DelegateName = "BusinessLogicDelegate"
+                FullyQualifiedName = "Namespace.Handler",
+                DelegateName = "HandlerDelegate"
             },
             Services = { "Service1", "Service2" },
             KeyedServices = { ["Key1"] = "Value1", ["Key2"] = "Value2" },
@@ -58,8 +58,8 @@ public sealed class QueryResultTests
         queryResult.Services.Should().BeEquivalentTo(new EquatableArray<string>(["Service1", "Service2"]));
         queryResult.ApiVersion.Should().Be(2);
         queryResult.KeyedServices.Should().BeEquivalentTo(new EquatableDictionary<string, string>(new Dictionary<string, string> { ["Key1"] = "Value1", ["Key2"] = "Value2" }));
-        queryResult.BusinessLogicFullyQualifiedName.Should().Be("Namespace.BusinessLogic");
-        queryResult.BusinessLogicDelegateName.Should().Be("BusinessLogicDelegate");
+        queryResult.HandlerFullyQualifiedName.Should().Be("Namespace.Handler");
+        queryResult.HandlerDelegateName.Should().Be("HandlerDelegate");
     }
 
     #endregion

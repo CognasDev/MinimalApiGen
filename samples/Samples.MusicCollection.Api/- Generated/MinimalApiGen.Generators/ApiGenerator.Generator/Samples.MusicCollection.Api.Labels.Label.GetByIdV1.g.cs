@@ -27,14 +27,14 @@ public partial class LabelQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsQueryHandler handler,
                 [FromServices] IMappingService<Label, LabelResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Label? model = await businessLogic.SelectLabelAsync(id).ConfigureAwait(false);
+                Label? model = await handler.SelectLabelAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {

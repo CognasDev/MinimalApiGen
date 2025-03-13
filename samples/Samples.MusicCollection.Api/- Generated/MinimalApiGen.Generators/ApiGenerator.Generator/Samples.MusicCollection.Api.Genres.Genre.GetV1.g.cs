@@ -25,17 +25,17 @@ public partial class GenreQueryRouteEndpointsMapper
             "/genres",
             (
                 CancellationToken cancellationToken,
-                [FromServices] Samples.MusicCollection.Api.Genres.IGenresQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Genres.IGenresQueryHandler handler,
                 [FromServices] IMappingService<Genre, GenreResponse> mappingService,
                 [FromServices] IPaginationService paginationService,
                 [AsParameters] PaginationQuery paginationQuery
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<GenreResponse> GenreResponseStreamAsync()
                 {
-                    IEnumerable<Genre> models = await businessLogic.SelectGenresAsync().ConfigureAwait(false);
+                    IEnumerable<Genre> models = await handler.SelectGenresAsync().ConfigureAwait(false);
                     IEnumerable<GenreResponse> responses = mappingService.Map(models);
 
                     if (paginationService.IsPaginationQueryValidOrNotRequested<GenreResponse>(paginationQuery) == true)

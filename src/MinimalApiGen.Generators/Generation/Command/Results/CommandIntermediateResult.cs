@@ -59,7 +59,7 @@ internal sealed record CommandIntermediateResult
     /// <summary>
     /// 
     /// </summary>
-    public BusinessLogicResult? BusinessLogicResult { get; set; }
+    public HandlerResult? HandlerResult { get; set; }
 
     /// <summary>
     /// 

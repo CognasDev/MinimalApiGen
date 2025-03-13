@@ -30,13 +30,13 @@ public partial class GenreCommandRouteEndpointsMapper
                 [FromRoute] int id,
                 [FromBody] GenreRequest request,
 				[FromServices] FluentValidation.IValidator<GenreRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandHandler handler,
                 [FromServices] IMappingService<GenreRequest, Genre> requestMappingService,
                 [FromServices] IMappingService<Genre, GenreResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -53,7 +53,7 @@ public partial class GenreCommandRouteEndpointsMapper
                     return TypedResults.BadRequest();
                 }
 
-                Genre? updatedModel = await businessLogic.UpdateGenreAsync(model).ConfigureAwait(false);
+                Genre? updatedModel = await handler.UpdateGenreAsync(model).ConfigureAwait(false);
 
                 if (updatedModel is null)
                 {
