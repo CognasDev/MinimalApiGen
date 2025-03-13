@@ -27,14 +27,14 @@ public partial class KeyQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Keys.IKeysQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Keys.IKeysQueryHandler handler,
                 [FromServices] IMappingService<Key, KeyResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Key? model = await businessLogic.SelectKeyAsync(id).ConfigureAwait(false);
+                Key? model = await handler.SelectKeyAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {

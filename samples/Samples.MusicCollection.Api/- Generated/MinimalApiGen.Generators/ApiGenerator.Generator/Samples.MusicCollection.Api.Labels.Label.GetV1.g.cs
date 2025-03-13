@@ -25,17 +25,17 @@ public partial class LabelQueryRouteEndpointsMapper
             "/labels",
             (
                 CancellationToken cancellationToken,
-                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsQueryHandler handler,
                 [FromServices] IMappingService<Label, LabelResponse> mappingService,
                 [FromServices] IPaginationService paginationService,
                 [AsParameters] PaginationQuery paginationQuery
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<LabelResponse> LabelResponseStreamAsync()
                 {
-                    IEnumerable<Label> models = await businessLogic.SelectLabelsAsync().ConfigureAwait(false);
+                    IEnumerable<Label> models = await handler.SelectLabelsAsync().ConfigureAwait(false);
                     IEnumerable<LabelResponse> responses = mappingService.Map(models);
 
                     if (paginationService.IsPaginationQueryValidOrNotRequested<LabelResponse>(paginationQuery) == true)

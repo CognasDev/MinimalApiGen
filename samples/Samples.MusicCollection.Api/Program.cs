@@ -20,18 +20,18 @@ builder.AddMinimalApiFramewokMappingServices();
 
 builder.Services.AddValidatorsFromAssemblyContaining<ArtistRequestValidator>(ServiceLifetime.Singleton);
 
-builder.Services.AddSingleton<IArtistsCommandBusinessLogic, ArtistsCommandBusinessLogic>();
-builder.Services.AddSingleton<IAlbumsCommandBusinessLogic, AlbumsCommandBusinessLogic>();
-builder.Services.AddSingleton<IGenresCommandBusinessLogic, GenresCommandBusinessLogic>();
-builder.Services.AddSingleton<ILabelsCommandBusinessLogic, LabelsCommandBusinessLogic>();
-builder.Services.AddSingleton<ITracksCommandBusinessLogic, TracksCommandBusinessLogic>();
+builder.Services.AddSingleton<IArtistsCommandHandler, ArtistsCommandHandler>();
+builder.Services.AddSingleton<IAlbumsCommandHandler, AlbumsCommandHandler>();
+builder.Services.AddSingleton<IGenresCommandHandler, GenresCommandHandler>();
+builder.Services.AddSingleton<ILabelsCommandHandler, LabelsCommandHandler>();
+builder.Services.AddSingleton<ITracksCommandHandler, TracksCommandHandler>();
 
-builder.Services.AddSingleton<IArtistsQueryBusinessLogic, ArtistsQueryBusinessLogic>();
-builder.Services.AddSingleton<IAlbumsQueryBusinessLogic, AlbumsQueryBusinessLogic>();
-builder.Services.AddSingleton<IGenresQueryBusinessLogic, GenresQueryBusinessLogic>();
-builder.Services.AddSingleton<IKeysQueryBusinessLogic, KeysQueryBusinessLogic>();
-builder.Services.AddSingleton<ILabelsQueryBusinessLogic, LabelsQueryBusinessLogic>();
-builder.Services.AddSingleton<ITracksQueryBusinessLogic, TracksQueryBusinessLogic>();
+builder.Services.AddSingleton<IArtistsQueryHandler, ArtistsQueryHandler>();
+builder.Services.AddSingleton<IAlbumsQueryHandler, AlbumsQueryHandler>();
+builder.Services.AddSingleton<IGenresQueryHandler, GenresQueryHandler>();
+builder.Services.AddSingleton<IKeysQueryHandler, KeysQueryHandler>();
+builder.Services.AddSingleton<ILabelsQueryHandler, LabelsQueryHandler>();
+builder.Services.AddSingleton<ITracksQueryHandler, TracksQueryHandler>();
 
 WebApplication webApplication = builder.Build();
 webApplication.UseMinimalApiFrameworkRoutes();

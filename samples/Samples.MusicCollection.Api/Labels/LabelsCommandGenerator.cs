@@ -15,30 +15,30 @@ public sealed class LabelsCommandGenerator
     /// </summary>
     public LabelsCommandGenerator()
     {
-        ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandBusinessLogic>()
+        ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandHandler>()
                                       .WithModelId(model => model.LabelId)
                                       .WithPost()
-                                            .WithBusinessLogic<ILabelsCommandBusinessLogic>(command => command.InsertLabelAsync)
+                                            .WithHandler<ILabelsCommandHandler>(command => command.InsertLabelAsync)
                                             .WithRequest<LabelRequest>()
                                             .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<LabelResponse>()
                                             .WithResponseMappingService();
 
-        ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandBusinessLogic>()
+        ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandHandler>()
                                       .WithModelId(model => model.LabelId)
                                       .WithPut()
-                                          .WithBusinessLogic<ILabelsCommandBusinessLogic>(command => command.UpdateLabelAsync)
+                                          .WithHandler<ILabelsCommandHandler>(command => command.UpdateLabelAsync)
                                           .WithRequest<LabelRequest>()
                                           .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<LabelResponse>()
                                           .WithResponseMappingService();
 
-        ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandBusinessLogic>()
+        ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandHandler>()
                                       .WithModelId(model => model.LabelId)
                                       .WithDelete()
-                                            .WithBusinessLogic<ILabelsCommandBusinessLogic>(command => command.DeleteLabelAsync);
+                                            .WithHandler<ILabelsCommandHandler>(command => command.DeleteLabelAsync);
 
     }
 

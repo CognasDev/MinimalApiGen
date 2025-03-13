@@ -30,13 +30,13 @@ public partial class AlbumCommandRouteEndpointsMapper
                 [FromRoute] int id,
                 [FromBody] AlbumRequest request,
 				[FromServices] FluentValidation.IValidator<AlbumRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Albums.IAlbumsCommandHandler handler,
                 [FromServices] IMappingService<AlbumRequest, Album> requestMappingService,
                 [FromServices] IMappingService<Album, AlbumResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -53,7 +53,7 @@ public partial class AlbumCommandRouteEndpointsMapper
                     return TypedResults.BadRequest();
                 }
 
-                Album? updatedModel = await businessLogic.UpdateAlbumAsync(model).ConfigureAwait(false);
+                Album? updatedModel = await handler.UpdateAlbumAsync(model).ConfigureAwait(false);
 
                 if (updatedModel is null)
                 {

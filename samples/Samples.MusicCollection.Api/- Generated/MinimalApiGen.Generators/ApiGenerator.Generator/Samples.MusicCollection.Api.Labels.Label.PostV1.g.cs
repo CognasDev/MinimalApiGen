@@ -29,13 +29,13 @@ public partial class LabelCommandRouteEndpointsMapper
                 CancellationToken cancellationToken,
                 [FromBody] LabelRequest request,
 				[FromServices] FluentValidation.IValidator<LabelRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsCommandHandler handler,
                 [FromServices] IMappingService<LabelRequest, Label> requestMappingService,
                 [FromServices] IMappingService<Label, LabelResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -46,7 +46,7 @@ public partial class LabelCommandRouteEndpointsMapper
 				}
 
                 Label model = requestMappingService.Map(request);
-                Label? insertedModel = await businessLogic.InsertLabelAsync(model).ConfigureAwait(false);
+                Label? insertedModel = await handler.InsertLabelAsync(model).ConfigureAwait(false);
 
                 if (insertedModel is null)
                 {

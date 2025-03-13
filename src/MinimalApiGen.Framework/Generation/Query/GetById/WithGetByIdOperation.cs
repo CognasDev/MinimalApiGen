@@ -13,10 +13,10 @@ public sealed class WithGetByIdOperation : IWithGetByIdOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public IWithGetByIdOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression) => new WithGetByIdOptionals();
+    public IWithGetByIdOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression) => new WithGetByIdOptionals();
 
     #endregion
 }

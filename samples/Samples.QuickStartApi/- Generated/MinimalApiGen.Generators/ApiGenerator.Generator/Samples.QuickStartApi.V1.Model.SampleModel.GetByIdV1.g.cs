@@ -27,14 +27,14 @@ public partial class SampleModelQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.QuickStartApi.V1.Query.IQueryBusinessLogicV1 businessLogic,
+                [FromServices] Samples.QuickStartApi.V1.Query.IQueryHandlerV1 handler,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                SampleModel? model = await businessLogic.GetModelByIdAsync(id, cancellationToken).ConfigureAwait(false);
+                SampleModel? model = await handler.GetModelByIdAsync(id, cancellationToken).ConfigureAwait(false);
 
                 if (model is null)
                 {

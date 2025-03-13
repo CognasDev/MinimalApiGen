@@ -29,13 +29,13 @@ public partial class GenreCommandRouteEndpointsMapper
                 CancellationToken cancellationToken,
                 [FromBody] GenreRequest request,
 				[FromServices] FluentValidation.IValidator<GenreRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandHandler handler,
                 [FromServices] IMappingService<GenreRequest, Genre> requestMappingService,
                 [FromServices] IMappingService<Genre, GenreResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -46,7 +46,7 @@ public partial class GenreCommandRouteEndpointsMapper
 				}
 
                 Genre model = requestMappingService.Map(request);
-                Genre? insertedModel = await businessLogic.InsertGenreAsync(model).ConfigureAwait(false);
+                Genre? insertedModel = await handler.InsertGenreAsync(model).ConfigureAwait(false);
 
                 if (insertedModel is null)
                 {

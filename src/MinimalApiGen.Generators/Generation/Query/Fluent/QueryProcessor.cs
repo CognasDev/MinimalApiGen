@@ -50,9 +50,9 @@ internal sealed class QueryProcessor
                 case string name when name == QueryMethodNames.WithModelId:
                     modelIdPropertyResult = invocationInfo.ToModelIdPropertyName(semanticModel);
                     break;
-                case string name when (name == QueryMethodNames.WithGetBusinessLogic || name == QueryMethodNames.WithGetByIdBusinessLogic)
+                case string name when (name == QueryMethodNames.WithGetHandler || name == QueryMethodNames.WithGetByIdHandler)
                                       && fluentMethod.IsGeneric:
-                    intermediateResult!.BusinessLogicResult = invocationInfo.ToBusinessLogic();
+                    intermediateResult!.HandlerResult = invocationInfo.ToHandler();
                     break;
                 case string name when name == QueryMethodNames.WithGet:
                     intermediateResults.TryFinaliseAndCollectIntermediateResult(intermediateResult, queryNamespace, modelIdPropertyResult);

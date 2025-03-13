@@ -19,7 +19,7 @@ public sealed class CommandGeneratorV1
         ApiGeneration.Command<SampleModel>().WithNamespaceOf<CommandGeneratorV1>()
                                             .WithModelId(model => model.Id)
                                             .WithPost()
-                                                .WithBusinessLogic<ICommandBusinessLogicV1>(command => command.PostModelAsync)
+                                                .WithHandler<ICommandHandlerV1>(command => command.PostModelAsync)
                                                 .WithJwtAuthentication()
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService()
@@ -29,7 +29,7 @@ public sealed class CommandGeneratorV1
         ApiGeneration.Command<SampleModel>().WithNamespaceOf<CommandGeneratorV1>()
                                             .WithModelId(model => model.Id)
                                             .WithPut()
-                                                .WithBusinessLogic<ICommandBusinessLogicV1>(command => command.PutModelAsync)
+                                                .WithHandler<ICommandHandlerV1>(command => command.PutModelAsync)
                                                 .WithJwtAuthentication()
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService()
@@ -39,7 +39,7 @@ public sealed class CommandGeneratorV1
         ApiGeneration.Command<SampleModel>().WithNamespaceOf<CommandGeneratorV1>()
                                             .WithModelId(model => model.Id)
                                             .WithDelete()
-                                                .WithBusinessLogic<ICommandBusinessLogicV1>(command => command.DeleteModelAsync)
+                                                .WithHandler<ICommandHandlerV1>(command => command.DeleteModelAsync)
                                                 .WithJwtAuthentication();
 
 

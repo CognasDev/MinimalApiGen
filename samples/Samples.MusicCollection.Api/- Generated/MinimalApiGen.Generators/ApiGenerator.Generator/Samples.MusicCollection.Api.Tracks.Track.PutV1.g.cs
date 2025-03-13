@@ -30,13 +30,13 @@ public partial class TrackCommandRouteEndpointsMapper
                 [FromRoute] int id,
                 [FromBody] TrackRequest request,
 				[FromServices] FluentValidation.IValidator<TrackRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Tracks.ITracksCommandHandler handler,
                 [FromServices] IMappingService<TrackRequest, Track> requestMappingService,
                 [FromServices] IMappingService<Track, TrackResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -53,7 +53,7 @@ public partial class TrackCommandRouteEndpointsMapper
                     return TypedResults.BadRequest();
                 }
 
-                Track? updatedModel = await businessLogic.UpdateTrackAsync(model).ConfigureAwait(false);
+                Track? updatedModel = await handler.UpdateTrackAsync(model).ConfigureAwait(false);
 
                 if (updatedModel is null)
                 {

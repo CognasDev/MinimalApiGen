@@ -26,11 +26,11 @@ public partial class LabelCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsCommandBusinessLogic businessLogic
+                [FromServices] Samples.MusicCollection.Api.Labels.ILabelsCommandHandler handler
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.DeleteLabelAsync(id).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.DeleteLabelAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )

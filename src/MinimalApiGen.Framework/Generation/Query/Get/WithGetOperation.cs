@@ -13,10 +13,10 @@ public sealed class WithGetOperation : IWithGetOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public IWithGetOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression) => new WithGetOptionals();
+    public IWithGetOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression) => new WithGetOptionals();
 
     #endregion
 }

@@ -15,16 +15,16 @@ public sealed class ArtistsQueryGenerator
     /// </summary>
     public ArtistsQueryGenerator()
     {
-        ApiGeneration.Query<Artist>().WithNamespaceOf<IArtistsQueryBusinessLogic>()
+        ApiGeneration.Query<Artist>().WithNamespaceOf<IArtistsQueryHandler>()
                                      .WithModelId(model => model.ArtistId)
                                      .WithGet()
-                                         .WithBusinessLogic<IArtistsQueryBusinessLogic>(query => query.SelectArtistsAsync)
+                                         .WithHandler<IArtistsQueryHandler>(query => query.SelectArtistsAsync)
                                          .WithResponse<ArtistResponse>()
                                          .WithPagination()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()
-                                         .WithBusinessLogic<IArtistsQueryBusinessLogic>(query => query.SelectArtistAsync)
+                                         .WithHandler<IArtistsQueryHandler>(query => query.SelectArtistAsync)
                                          .WithResponse<ArtistResponse>()
                                          .WithMappingService()
                                          .WithVersion(1);

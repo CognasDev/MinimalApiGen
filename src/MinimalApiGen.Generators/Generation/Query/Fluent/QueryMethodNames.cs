@@ -84,12 +84,12 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithGetBusinessLogic { get; } = $"{typeof(IWithGetOperation).FullName}.{nameof(IWithGetOperation.WithBusinessLogic)}";
+    public static string WithGetHandler { get; } = $"{typeof(IWithGetOperation).FullName}.{nameof(IWithGetOperation.WithHandler)}";
 
     /// <summary>
     /// 
     /// </summary>
-    public static string WithGetByIdBusinessLogic { get; } = $"{typeof(IWithGetByIdOperation).FullName}.{nameof(IWithGetByIdOperation.WithBusinessLogic)}";
+    public static string WithGetByIdHandler { get; } = $"{typeof(IWithGetByIdOperation).FullName}.{nameof(IWithGetByIdOperation.WithHandler)}";
 
     /// <summary>
     /// 

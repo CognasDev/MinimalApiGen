@@ -13,10 +13,10 @@ public interface IWithGetOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    IWithGetOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression);
+    IWithGetOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression);
 
     #endregion
 }

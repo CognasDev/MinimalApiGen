@@ -100,17 +100,17 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogic { get; } = queryResult.BusinessLogicFullyQualifiedName;
+    public string Handler { get; } = queryResult.HandlerFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateName { get; } = queryResult.BusinessLogicDelegateName;
+    public string HandlerDelegateName { get; } = queryResult.HandlerDelegateName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.Build(queryResult.BusinessLogicParameters,
+    public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.Build(queryResult.HandlerParameters,
                                                                                              queryResult.Services,
                                                                                              queryResult.KeyedServices,
                                                                                              queryResult.QueryParameterResults);
@@ -164,15 +164,15 @@ public partial class {ClassName}
             ""/{ModelPluralNameLower}"",
             (
                 CancellationToken cancellationToken,{QueryParameters}
-                [FromServices] {BusinessLogic} businessLogic,
+                [FromServices] {Handler} handler,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService{FromServices}{FromKeyedServices}{PaginationServiceAndQuery}
             ) =>
             {{
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<{ResponseName}> {ResponseName}StreamAsync()
                 {{
-                    IEnumerable<{ModelName}> models = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+                    IEnumerable<{ModelName}> models = await handler.{HandlerDelegateName}({HandlerDelegateParameters}).ConfigureAwait(false);
                     IEnumerable<{ResponseName}> responses = mappingService.Map(models);
 {PaginationCode}
                     foreach ({ResponseName} response in responses)

@@ -25,10 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Generators.In
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Query", "3. Query", "{A4894BF9-1973-43D7-AF2D-DD2F2F8C061C}"
 	ProjectSection(SolutionItems) = preProject
-		docs\3. Query\WithBusinessLogic.md = docs\3. Query\WithBusinessLogic.md
 		docs\3. Query\WithGet.md = docs\3. Query\WithGet.md
 		docs\3. Query\WithGetById.md = docs\3. Query\WithGetById.md
 		docs\3. Query\WithKeyedServices.md = docs\3. Query\WithKeyedServices.md
+		docs\3. Query\WithHandler.md = docs\3. Query\WithHandler.md
 		docs\3. Query\WithMappingService.md = docs\3. Query\WithMappingService.md
 		docs\3. Query\WithNamespace.md = docs\3. Query\WithNamespace.md
 		docs\3. Query\WithNamespaceOf.md = docs\3. Query\WithNamespaceOf.md
@@ -47,10 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Getting Started", "1. Ge
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Command", "2. Command", "{FFADCDC9-DE02-40FB-AA85-59060DE51126}"
 	ProjectSection(SolutionItems) = preProject
-		docs\2. Command\WithBusinessLogic.md = docs\2. Command\WithBusinessLogic.md
 		docs\2. Command\WithDelete.md = docs\2. Command\WithDelete.md
 		docs\2. Command\WithFluentValidation.md = docs\2. Command\WithFluentValidation.md
 		docs\2. Command\WithKeyedServices.md = docs\2. Command\WithKeyedServices.md
+		docs\2. Command\WithHandler.md = docs\2. Command\WithHandler.md
 		docs\2. Command\WithMappingService.md = docs\2. Command\WithMappingService.md
 		docs\2. Command\WithNamespace.md = docs\2. Command\WithNamespace.md
 		docs\2. Command\WithNamespaceOf.md = docs\2. Command\WithNamespaceOf.md

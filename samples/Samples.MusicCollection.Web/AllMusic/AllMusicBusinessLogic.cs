@@ -10,7 +10,7 @@ namespace Samples.MusicCollection.Web.AllMusic;
 /// <summary>
 /// 
 /// </summary>
-public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
+public sealed class AllMusicHandler : IAllMusicHandler
 {
     #region Field Declarations
 
@@ -59,7 +59,7 @@ public sealed class AllMusicBusinessLogic : IAllMusicBusinessLogic
     /// <param name="keysApi"></param>
     /// <param name="labelsApi"></param>
     /// <param name="tracksApi"></param>
-    public AllMusicBusinessLogic(IApi<Artist> artistsApi,
+    public AllMusicHandler(IApi<Artist> artistsApi,
                                  IAlbumsApi albumsApi,
                                  IApi<Genre> genresApi,
                                  IApi<Key> keysApi,

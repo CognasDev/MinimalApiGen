@@ -26,11 +26,11 @@ public partial class SampleModelCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.QuickStartApi.V1.Command.ICommandBusinessLogicV1 businessLogic
+                [FromServices] Samples.QuickStartApi.V1.Command.ICommandHandlerV1 handler
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.DeleteModelAsync(id, cancellationToken).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.DeleteModelAsync(id, cancellationToken).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )

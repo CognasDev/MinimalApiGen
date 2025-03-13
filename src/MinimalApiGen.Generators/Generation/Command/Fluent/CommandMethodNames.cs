@@ -64,7 +64,7 @@ internal static class CommandMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithPostBusinessLogic { get; } = $"{typeof(IWithPostOperation).FullName}.{nameof(IWithPostOperation.WithBusinessLogic)}";
+    public static string WithPostHandler { get; } = $"{typeof(IWithPostOperation).FullName}.{nameof(IWithPostOperation.WithHandler)}";
 
     /// <summary>
     /// 
@@ -108,7 +108,7 @@ internal static class CommandMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithPutBusinessLogic { get; } = $"{typeof(IWithPutOperation).FullName}.{nameof(IWithPutOperation.WithBusinessLogic)}";
+    public static string WithPutHandler { get; } = $"{typeof(IWithPutOperation).FullName}.{nameof(IWithPutOperation.WithHandler)}";
 
     /// <summary>
     /// 
@@ -152,7 +152,7 @@ internal static class CommandMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithDeleteBusinessLogic { get; } = $"{typeof(IWithDeleteOperation).FullName}.{nameof(IWithDeleteOperation.WithBusinessLogic)}";
+    public static string WithDeleteHandler { get; } = $"{typeof(IWithDeleteOperation).FullName}.{nameof(IWithDeleteOperation.WithHandler)}";
 
     /// <summary>
     /// 

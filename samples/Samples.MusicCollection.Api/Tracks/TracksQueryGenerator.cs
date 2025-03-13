@@ -15,16 +15,16 @@ public sealed class TracksQueryGenerator
     /// </summary>
     public TracksQueryGenerator()
     {
-        ApiGeneration.Query<Track>().WithNamespaceOf<ITracksQueryBusinessLogic>()
+        ApiGeneration.Query<Track>().WithNamespaceOf<ITracksQueryHandler>()
                                      .WithModelId(track => track.TrackId)
                                      .WithGet()
-                                         .WithBusinessLogic<ITracksQueryBusinessLogic>(query => query.SelectTracksAsync)
+                                         .WithHandler<ITracksQueryHandler>(query => query.SelectTracksAsync)
                                          .WithQueryParameters<Track>(track => track.AlbumId)
                                          .WithResponse<TrackResponse>()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()
-                                         .WithBusinessLogic<ITracksQueryBusinessLogic>(query => query.SelectTrackAsync)
+                                         .WithHandler<ITracksQueryHandler>(query => query.SelectTrackAsync)
                                          .WithResponse<TrackResponse>()
                                          .WithMappingService()
                                          .WithVersion(1);

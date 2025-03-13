@@ -31,7 +31,7 @@ public sealed class TestGenerator
         ApiGeneration.Command<SampleModel>().WithNamespaceOf<TestGenerator>()
                                             .WithModelId(model => model.Id)
                                             .WithDelete()
-                                                .WithBusinessLogic<ISimpleBusinessLogic>(command => command.DeleteModelAsync)
+                                                .WithHandler<ISimpleHandler>(command => command.DeleteModelAsync)
                                                 .WithJwtAuthentication()
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService();

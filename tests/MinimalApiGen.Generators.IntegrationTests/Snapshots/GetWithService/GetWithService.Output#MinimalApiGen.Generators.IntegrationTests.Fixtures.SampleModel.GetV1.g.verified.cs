@@ -25,16 +25,16 @@ public partial class SampleModelQueryRouteEndpointsMapper
             "/samplemodels",
             (
                 CancellationToken cancellationToken,
-                [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.IServiceBusinessLogic businessLogic,
+                [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.IServiceHandler handler,
                 [FromServices] IMappingService<SampleModel, SampleModelResponse> mappingService,
 				[FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISampleService1 iSampleService1
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<SampleModelResponse> SampleModelResponseStreamAsync()
                 {
-                    IEnumerable<SampleModel> models = await businessLogic.GetModelsAsync(iSampleService1, cancellationToken).ConfigureAwait(false);
+                    IEnumerable<SampleModel> models = await handler.GetModelsAsync(iSampleService1, cancellationToken).ConfigureAwait(false);
                     IEnumerable<SampleModelResponse> responses = mappingService.Map(models);
 
                     foreach (SampleModelResponse response in responses)

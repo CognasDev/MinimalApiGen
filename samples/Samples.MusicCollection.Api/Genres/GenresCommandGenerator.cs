@@ -15,30 +15,30 @@ public sealed class GenresCommandGenerator
     /// </summary>
     public GenresCommandGenerator()
     {
-        ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandBusinessLogic>()
+        ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandHandler>()
                                       .WithModelId(model => model.GenreId)
                                       .WithPost()
-                                            .WithBusinessLogic<IGenresCommandBusinessLogic>(command => command.InsertGenreAsync)
+                                            .WithHandler<IGenresCommandHandler>(command => command.InsertGenreAsync)
                                             .WithRequest<GenreRequest>()
                                             .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<GenreResponse>()
                                             .WithResponseMappingService();
 
-        ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandBusinessLogic>()
+        ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandHandler>()
                                       .WithModelId(model => model.GenreId)
                                       .WithPut()
-                                          .WithBusinessLogic<IGenresCommandBusinessLogic>(command => command.UpdateGenreAsync)
+                                          .WithHandler<IGenresCommandHandler>(command => command.UpdateGenreAsync)
                                           .WithRequest<GenreRequest>()
                                           .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<GenreResponse>()
                                           .WithResponseMappingService();
 
-        ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandBusinessLogic>()
+        ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandHandler>()
                                       .WithModelId(model => model.GenreId)
                                       .WithDelete()
-                                            .WithBusinessLogic<IGenresCommandBusinessLogic>(command => command.DeleteGenreAsync);
+                                            .WithHandler<IGenresCommandHandler>(command => command.DeleteGenreAsync);
 
     }
 

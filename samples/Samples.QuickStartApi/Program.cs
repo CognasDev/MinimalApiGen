@@ -10,8 +10,8 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.AddMinimalApiFramework();
 builder.AddMinimalApiFramewokMappingServices();
 
-builder.Services.AddScoped<ICommandBusinessLogicV1, CommandBusinessLogicV1>();
-builder.Services.AddScoped<IQueryBusinessLogicV1, QueryBusinessLogicV1>();
+builder.Services.AddScoped<ICommandHandlerV1, CommandHandlerV1>();
+builder.Services.AddScoped<IQueryHandlerV1, QueryHandlerV1>();
 builder.Services.AddScoped<SampleService1>();
 builder.Services.AddScoped<SampleService2>();
 

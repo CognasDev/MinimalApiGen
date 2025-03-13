@@ -131,17 +131,17 @@ internal readonly record struct QueryResult : IQueryResult
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicFullyQualifiedName { get; }
+    public string HandlerFullyQualifiedName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateName { get; }
+    public string HandlerDelegateName { get; }
 
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<BusinessLogicParamterResult> BusinessLogicParameters { get; }
+    public EquatableArray<HandlerParamterResult> HandlerParameters { get; }
 
     #endregion
 
@@ -176,9 +176,9 @@ internal readonly record struct QueryResult : IQueryResult
         ApiVersion = queryIntermediateResult.Version;
         KeyedServices = new(queryIntermediateResult.KeyedServices);
 
-        BusinessLogicFullyQualifiedName = queryIntermediateResult.BusinessLogicResult!.FullyQualifiedName;
-        BusinessLogicDelegateName = queryIntermediateResult.BusinessLogicResult!.DelegateName;
-        BusinessLogicParameters = new(queryIntermediateResult.BusinessLogicResult!.Parameters);
+        HandlerFullyQualifiedName = queryIntermediateResult.HandlerResult!.FullyQualifiedName;
+        HandlerDelegateName = queryIntermediateResult.HandlerResult!.DelegateName;
+        HandlerParameters = new(queryIntermediateResult.HandlerResult!.Parameters);
 
         QueryParameterResults = new(queryIntermediateResult.QueryParameterResults);
     }
@@ -215,9 +215,9 @@ internal readonly record struct QueryResult : IQueryResult
                Services.Equals(result.Services) &&
                ApiVersion == result.ApiVersion &&
                KeyedServices.Equals(result.KeyedServices) &&
-               BusinessLogicFullyQualifiedName == result.BusinessLogicFullyQualifiedName &&
-               BusinessLogicDelegateName == result.BusinessLogicDelegateName &&
-               BusinessLogicParameters.Equals(result.BusinessLogicParameters) &&
+               HandlerFullyQualifiedName == result.HandlerFullyQualifiedName &&
+               HandlerDelegateName == result.HandlerDelegateName &&
+               HandlerParameters.Equals(result.HandlerParameters) &&
                QueryParameterResults.Equals(result.QueryParameterResults);
     }
 

@@ -15,30 +15,30 @@ public sealed class TracksCommandGenerator
     /// </summary>
     public TracksCommandGenerator()
     {
-        ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandBusinessLogic>()
+        ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandHandler>()
                                       .WithModelId(model => model.TrackId)
                                       .WithPost()
-                                            .WithBusinessLogic<ITracksCommandBusinessLogic>(command => command.InsertTrackAsync)
+                                            .WithHandler<ITracksCommandHandler>(command => command.InsertTrackAsync)
                                             .WithRequest<TrackRequest>()
                                             .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<TrackResponse>()
                                             .WithResponseMappingService();
 
-        ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandBusinessLogic>()
+        ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandHandler>()
                                       .WithModelId(model => model.TrackId)
                                       .WithPut()
-                                          .WithBusinessLogic<ITracksCommandBusinessLogic>(command => command.UpdateTrackAsync)
+                                          .WithHandler<ITracksCommandHandler>(command => command.UpdateTrackAsync)
                                           .WithRequest<TrackRequest>()
                                           .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<TrackResponse>()
                                           .WithResponseMappingService();
 
-        ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandBusinessLogic>()
+        ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandHandler>()
                                       .WithModelId(model => model.TrackId)
                                       .WithDelete()
-                                            .WithBusinessLogic<ITracksCommandBusinessLogic>(command => command.DeleteTrackAsync);
+                                            .WithHandler<ITracksCommandHandler>(command => command.DeleteTrackAsync);
 
     }
 

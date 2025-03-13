@@ -15,30 +15,30 @@ public sealed class AlbumsCommandGenerator
     /// </summary>
     public AlbumsCommandGenerator()
     {
-        ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandBusinessLogic>()
+        ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandHandler>()
                                       .WithModelId(model => model.AlbumId)
                                       .WithPost()
-                                            .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.InsertAlbumAsync)
+                                            .WithHandler<IAlbumsCommandHandler>(command => command.InsertAlbumAsync)
                                             .WithRequest<AlbumRequest>()
                                             .WithFluentValidation()
                                             .WithRequestMappingService()
                                             .WithResponse<AlbumResponse>()
                                             .WithResponseMappingService();
 
-        ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandBusinessLogic>()
+        ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandHandler>()
                                       .WithModelId(model => model.AlbumId)
                                       .WithPut()
-                                          .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.UpdateAlbumAsync)
+                                          .WithHandler<IAlbumsCommandHandler>(command => command.UpdateAlbumAsync)
                                           .WithRequest<AlbumRequest>()
                                           .WithFluentValidation()
                                           .WithRequestMappingService()
                                           .WithResponse<AlbumResponse>()
                                           .WithResponseMappingService();
 
-        ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandBusinessLogic>()
+        ApiGeneration.Command<Album>().WithNamespaceOf<IAlbumsCommandHandler>()
                                       .WithModelId(model => model.AlbumId)
                                       .WithDelete()
-                                            .WithBusinessLogic<IAlbumsCommandBusinessLogic>(command => command.DeleteAlbumAsync);
+                                            .WithHandler<IAlbumsCommandHandler>(command => command.DeleteAlbumAsync);
 
     }
 

@@ -26,11 +26,11 @@ public partial class GenreCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandBusinessLogic businessLogic
+                [FromServices] Samples.MusicCollection.Api.Genres.IGenresCommandHandler handler
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.DeleteGenreAsync(id).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.DeleteGenreAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )

@@ -27,14 +27,14 @@ public partial class ArtistQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsQueryHandler handler,
                 [FromServices] IMappingService<Artist, ArtistResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Artist? model = await businessLogic.SelectArtistAsync(id).ConfigureAwait(false);
+                Artist? model = await handler.SelectArtistAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {

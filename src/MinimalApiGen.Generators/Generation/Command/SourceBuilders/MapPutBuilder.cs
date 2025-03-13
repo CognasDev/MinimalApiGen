@@ -104,17 +104,17 @@ internal sealed class MapPutBuilder(ICommandResult commandResult, ServicesBuilde
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogic { get; } = commandResult.BusinessLogicFullyQualifiedName;
+    public string Handler { get; } = commandResult.HandlerFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateName { get; } = commandResult.BusinessLogicDelegateName;
+    public string HandlerDelegateName { get; } = commandResult.HandlerDelegateName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.BuildForModel(commandResult.BusinessLogicParameters,
+    public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.BuildForModel(commandResult.HandlerParameters,
                                                                                                      commandResult.Services,
                                                                                                      commandResult.KeyedServices,
                                                                                                      commandResult.ModelFullyQualifiedName);
@@ -183,12 +183,12 @@ public partial class {ClassName}
                 CancellationToken cancellationToken,
                 [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
                 [FromBody] {RequestName} request,{FluentValidationService}
-                [FromServices] {BusinessLogic} businessLogic,
+                [FromServices] {Handler} handler,
                 [FromServices] IMappingService<{RequestName}, {ModelName}> requestMappingService,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> responseMappingService{FromServices}{FromKeyedServices}
             ) =>
             {{
-                {FluentValidatorNullCheck}ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                {FluentValidatorNullCheck}ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 {FluentValidationCall}
@@ -199,7 +199,7 @@ public partial class {ClassName}
                     return TypedResults.BadRequest();
                 }}
 
-                {ModelName}? updatedModel = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+                {ModelName}? updatedModel = await handler.{HandlerDelegateName}({HandlerDelegateParameters}).ConfigureAwait(false);
 
                 if (updatedModel is null)
                 {{

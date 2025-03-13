@@ -19,22 +19,22 @@ public static class DelegateParametersBuilder
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="businessLogicParameters"></param>
+    /// <param name="handlerParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
     /// <param name="modelIdPropertyType"></param>
     /// <returns></returns>
-    internal static string BuildForId(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
+    internal static string BuildForId(EquatableArray<HandlerParamterResult> handlerParameters,
                                       EquatableArray<string> services,
                                       EquatableDictionary<string, string> keyedServices,
                                       string modelIdPropertyType)
     {
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.Select(param => param.Type).ToArray();
+        ReadOnlySpan<string> handlerParametersSpan = handlerParameters.Select(param => param.Type).ToArray();
         StringBuilder stringBuilder = new();
 
-        foreach (string parameter in businessLogicParametersSpan)
+        foreach (string parameter in handlerParametersSpan)
         {
             if (services.Contains(parameter))
             {
@@ -67,22 +67,22 @@ public static class DelegateParametersBuilder
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="businessLogicParameters"></param>
+    /// <param name="handlerParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
     /// <param name="modelName"></param>
     /// <returns></returns>
-    internal static string BuildForModel(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
+    internal static string BuildForModel(EquatableArray<HandlerParamterResult> handlerParameters,
                                          EquatableArray<string> services,
                                          EquatableDictionary<string, string> keyedServices,
                                          string modelName)
     {
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<string> businessLogicParametersSpan = businessLogicParameters.Select(param => param.Type).ToArray();
+        ReadOnlySpan<string> handlerParametersSpan = handlerParameters.Select(param => param.Type).ToArray();
         StringBuilder stringBuilder = new();
 
-        foreach (string parameter in businessLogicParametersSpan)
+        foreach (string parameter in handlerParametersSpan)
         {
             if (services.Contains(parameter))
             {
@@ -115,27 +115,27 @@ public static class DelegateParametersBuilder
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="businessLogicParameters"></param>
+    /// <param name="handlerParameters"></param>
     /// <param name="services"></param>
     /// <param name="keyedServices"></param>
     /// <param name="queryParameters"></param>
     /// <returns></returns>
-    internal static string Build(EquatableArray<BusinessLogicParamterResult> businessLogicParameters,
+    internal static string Build(EquatableArray<HandlerParamterResult> handlerParameters,
                                  EquatableArray<string> services,
                                  EquatableDictionary<string, string> keyedServices,
                                  EquatableArray<QueryParameterResult> queryParameters)
     {
-        if (businessLogicParameters.Count == 0)
+        if (handlerParameters.Count == 0)
         {
             return string.Empty;
         }
 
         ReadOnlySpan<string> keys = keyedServices.KeysAsSpan();
         ReadOnlySpan<string> values = keyedServices.ValuesAsSpan();
-        ReadOnlySpan<BusinessLogicParamterResult> businessLogicParametersSpan = businessLogicParameters.AsSpan();
+        ReadOnlySpan<HandlerParamterResult> handlerParametersSpan = handlerParameters.AsSpan();
         StringBuilder stringBuilder = new();
 
-        foreach (BusinessLogicParamterResult parameter in businessLogicParametersSpan)
+        foreach (HandlerParamterResult parameter in handlerParametersSpan)
         {
             string parameterType = parameter.Type;
             if (queryParameters.SingleOrDefault(queryParameter => queryParameter.Name == parameter.Name) is QueryParameterResult queryParameterResult)

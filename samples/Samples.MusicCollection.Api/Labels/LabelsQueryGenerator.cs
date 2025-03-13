@@ -15,16 +15,16 @@ public sealed class LabelsQueryGenerator
     /// </summary>
     public LabelsQueryGenerator()
     {
-        ApiGeneration.Query<Label>().WithNamespaceOf<ILabelsQueryBusinessLogic>()
+        ApiGeneration.Query<Label>().WithNamespaceOf<ILabelsQueryHandler>()
                                      .WithModelId(model => model.LabelId)
                                      .WithGet()
-                                         .WithBusinessLogic<ILabelsQueryBusinessLogic>(query => query.SelectLabelsAsync)
+                                         .WithHandler<ILabelsQueryHandler>(query => query.SelectLabelsAsync)
                                          .WithResponse<LabelResponse>()
                                          .WithPagination()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()
-                                         .WithBusinessLogic<ILabelsQueryBusinessLogic>(query => query.SelectLabelAsync)
+                                         .WithHandler<ILabelsQueryHandler>(query => query.SelectLabelAsync)
                                          .WithResponse<LabelResponse>()
                                          .WithMappingService()
                                          .WithVersion(1);

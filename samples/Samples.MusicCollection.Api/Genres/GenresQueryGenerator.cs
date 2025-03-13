@@ -15,16 +15,16 @@ public sealed class GenresQueryGenerator
     /// </summary>
     public GenresQueryGenerator()
     {
-        ApiGeneration.Query<Genre>().WithNamespaceOf<IGenresQueryBusinessLogic>()
+        ApiGeneration.Query<Genre>().WithNamespaceOf<IGenresQueryHandler>()
                                      .WithModelId(model => model.GenreId)
                                      .WithGet()
-                                         .WithBusinessLogic<IGenresQueryBusinessLogic>(query => query.SelectGenresAsync)
+                                         .WithHandler<IGenresQueryHandler>(query => query.SelectGenresAsync)
                                          .WithResponse<GenreResponse>()
                                          .WithPagination()
                                          .WithMappingService()
                                          .WithVersion(1)
                                      .WithGetById()
-                                         .WithBusinessLogic<IGenresQueryBusinessLogic>(query => query.SelectGenreAsync)
+                                         .WithHandler<IGenresQueryHandler>(query => query.SelectGenreAsync)
                                          .WithResponse<GenreResponse>()
                                          .WithMappingService()
                                          .WithVersion(1);

@@ -26,11 +26,11 @@ public partial class ArtistCommandRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandBusinessLogic businessLogic
+                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandHandler handler
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
-                await businessLogic.DeleteArtistAsync(id).ConfigureAwait(false);
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                await handler.DeleteArtistAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )

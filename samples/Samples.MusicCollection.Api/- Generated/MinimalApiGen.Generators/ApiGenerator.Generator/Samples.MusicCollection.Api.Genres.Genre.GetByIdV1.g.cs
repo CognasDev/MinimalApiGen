@@ -27,14 +27,14 @@ public partial class GenreQueryRouteEndpointsMapper
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Genres.IGenresQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Genres.IGenresQueryHandler handler,
                 [FromServices] IMappingService<Genre, GenreResponse> mappingService
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                Genre? model = await businessLogic.SelectGenreAsync(id).ConfigureAwait(false);
+                Genre? model = await handler.SelectGenreAsync(id).ConfigureAwait(false);
 
                 if (model is null)
                 {

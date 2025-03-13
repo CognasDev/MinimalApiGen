@@ -12,7 +12,7 @@ builder.Services.AddRadzenComponents();
 
 builder.BindConfigSection<ApiDetails>();
 
-builder.Services.AddSingleton<IAllMusicBusinessLogic, AllMusicBusinessLogic>();
+builder.Services.AddSingleton<IAllMusicHandler, AllMusicHandler>();
 builder.Services.AddSingleton(typeof(IApi<>), typeof(Api<>));
 builder.Services.AddSingleton<IAlbumsApi, AlbumsApi>();
 builder.Services.AddSingleton<ITracksApi, TracksApi>();

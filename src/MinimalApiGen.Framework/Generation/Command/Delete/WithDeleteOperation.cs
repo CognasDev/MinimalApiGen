@@ -13,10 +13,10 @@ public sealed class WithDeleteOperation : IWithDeleteOperation
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="TBusinessLogic"></typeparam>
+    /// <typeparam name="THandler"></typeparam>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public IWithDeleteOptionals WithBusinessLogic<TBusinessLogic>(Expression<Func<TBusinessLogic, Delegate>> expression) => new WithDeleteOptionals();
+    public IWithDeleteOptionals WithHandler<THandler>(Expression<Func<THandler, Delegate>> expression) => new WithDeleteOptionals();
 
     #endregion
 }

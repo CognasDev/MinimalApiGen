@@ -94,17 +94,17 @@ internal sealed class MapGetByIdBuilder(IQueryResult queryResult, ServicesBuilde
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogic { get; } = queryResult.BusinessLogicFullyQualifiedName;
+    public string Handler { get; } = queryResult.HandlerFullyQualifiedName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateName { get; } = queryResult.BusinessLogicDelegateName;
+    public string HandlerDelegateName { get; } = queryResult.HandlerDelegateName;
 
     /// <summary>
     /// 
     /// </summary>
-    public string BusinessLogicDelegateParameters { get; } = DelegateParametersBuilder.BuildForId(queryResult.BusinessLogicParameters,
+    public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.BuildForId(queryResult.HandlerParameters,
                                                                                                   queryResult.Services,
                                                                                                   queryResult.KeyedServices,
                                                                                                   queryResult.ModelIdUnderlyingPropertyType ?? queryResult.ModelIdPropertyType);
@@ -156,14 +156,14 @@ public partial class {ClassName}
             (
                 CancellationToken cancellationToken,
                 [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
-                [FromServices] {BusinessLogic} businessLogic,
+                [FromServices] {Handler} handler,
                 [FromServices] IMappingService<{ModelName}, {ResponseName}> mappingService{FromServices}{FromKeyedServices}
             ) =>
             {{
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
 
-                {ModelName}? model = await businessLogic.{BusinessLogicDelegateName}({BusinessLogicDelegateParameters}).ConfigureAwait(false);
+                {ModelName}? model = await handler.{HandlerDelegateName}({HandlerDelegateParameters}).ConfigureAwait(false);
 
                 if (model is null)
                 {{

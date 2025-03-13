@@ -30,13 +30,13 @@ public partial class ArtistCommandRouteEndpointsMapper
                 [FromRoute] int id,
                 [FromBody] ArtistRequest request,
 				[FromServices] FluentValidation.IValidator<ArtistRequest> validator,
-                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandHandler handler,
                 [FromServices] IMappingService<ArtistRequest, Artist> requestMappingService,
                 [FromServices] IMappingService<Artist, ArtistResponse> responseMappingService
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(validator, nameof(validator));
-				ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+				ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(requestMappingService, nameof(requestMappingService));
                 ArgumentNullException.ThrowIfNull(responseMappingService, nameof(responseMappingService));
                 
@@ -53,7 +53,7 @@ public partial class ArtistCommandRouteEndpointsMapper
                     return TypedResults.BadRequest();
                 }
 
-                Artist? updatedModel = await businessLogic.UpdateArtistAsync(model).ConfigureAwait(false);
+                Artist? updatedModel = await handler.UpdateArtistAsync(model).ConfigureAwait(false);
 
                 if (updatedModel is null)
                 {

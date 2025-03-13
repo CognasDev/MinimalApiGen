@@ -10,7 +10,7 @@ public sealed partial class ArtistsPage
 {
     #region Field Declarations
 
-    private readonly IAllMusicBusinessLogic _allMusicLogic;
+    private readonly IAllMusicHandler _allMusicLogic;
     private RadzenDataGrid<ArtistDetail>? _dataGrid;
 
     #endregion
@@ -30,7 +30,7 @@ public sealed partial class ArtistsPage
     /// 
     /// </summary>
     /// <param name="allMusicLogic"></param>
-    public ArtistsPage(IAllMusicBusinessLogic allMusicLogic)
+    public ArtistsPage(IAllMusicHandler allMusicLogic)
     {
         ArgumentNullException.ThrowIfNull(allMusicLogic, nameof(allMusicLogic));
         _allMusicLogic = allMusicLogic;

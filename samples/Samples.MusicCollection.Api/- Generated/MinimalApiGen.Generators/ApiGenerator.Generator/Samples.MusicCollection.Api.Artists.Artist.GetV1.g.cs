@@ -25,17 +25,17 @@ public partial class ArtistQueryRouteEndpointsMapper
             "/artists",
             (
                 CancellationToken cancellationToken,
-                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsQueryBusinessLogic businessLogic,
+                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsQueryHandler handler,
                 [FromServices] IMappingService<Artist, ArtistResponse> mappingService,
                 [FromServices] IPaginationService paginationService,
                 [AsParameters] PaginationQuery paginationQuery
             ) =>
             {
-                ArgumentNullException.ThrowIfNull(businessLogic, nameof(businessLogic));
+                ArgumentNullException.ThrowIfNull(handler, nameof(handler));
                 ArgumentNullException.ThrowIfNull(mappingService, nameof(mappingService));
                 async IAsyncEnumerable<ArtistResponse> ArtistResponseStreamAsync()
                 {
-                    IEnumerable<Artist> models = await businessLogic.SelectArtistsAsync().ConfigureAwait(false);
+                    IEnumerable<Artist> models = await handler.SelectArtistsAsync().ConfigureAwait(false);
                     IEnumerable<ArtistResponse> responses = mappingService.Map(models);
 
                     if (paginationService.IsPaginationQueryValidOrNotRequested<ArtistResponse>(paginationQuery) == true)
