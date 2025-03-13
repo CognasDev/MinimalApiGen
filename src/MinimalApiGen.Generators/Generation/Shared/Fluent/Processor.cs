@@ -74,14 +74,13 @@ internal sealed class Processor
     /// <returns></returns>
     private static ImmutableArray<InvocationInfo> GetInvocations(StatementSyntax statement, SemanticModel semanticModel, string name)
     {
-        IReadOnlyList<InvocationExpressionSyntax> expressions = statement.DescendantNodes().OfType<InvocationExpressionSyntax>().ToList();
+        IReadOnlyList<InvocationExpressionSyntax> expressions = [.. statement.DescendantNodes().OfType<InvocationExpressionSyntax>()];
         bool hasInvocation = expressions.Any(expression => expression.GetMethodSymbol(semanticModel)?.ConstructedFrom?.ToDisplayString() == name);
 
         return hasInvocation ?
-               expressions.Select(invocationExpressionSyntax => invocationExpressionSyntax.ToInvocationInfo(semanticModel))
-                          .Reverse()
-                          .ToImmutableArray()
-              : [];
+               [.. expressions.Select(invocationExpressionSyntax => invocationExpressionSyntax.ToInvocationInfo(semanticModel)).Reverse()]
+               :
+               [];
     }
 
     #endregion

@@ -39,10 +39,7 @@ public static class CollectionExtensions
     /// <returns></returns>
     public static void AddRange<TKey, TValue>(this IDictionary<TKey, TValue> source, IDictionary<TKey, TValue> dictionary)
     {
-        foreach (KeyValuePair<TKey, TValue> keyValuePair in dictionary)
-        {
-            source[keyValuePair.Key] = keyValuePair.Value;
-        }
+        dictionary.FastForEach(keyValuePair => source[keyValuePair.Key] = keyValuePair.Value);
     }
 
     #endregion

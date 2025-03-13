@@ -13,7 +13,7 @@ namespace MinimalApiGen.Framework.Testing;
 /// 
 /// </summary>
 /// <typeparam name="TEntryPoint"></typeparam>
-public class TestServer<TEntryPoint>  : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
+public class TestServer<TEntryPoint> : WebApplicationFactory<TEntryPoint> where TEntryPoint : class
 {
     #region Property Declarations
 

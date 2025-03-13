@@ -115,9 +115,9 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// 
     /// </summary>
     public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.BuildForModel(commandResult.HandlerParameters,
-                                                                                                     commandResult.Services,
-                                                                                                     commandResult.KeyedServices,
-                                                                                                     commandResult.ModelFullyQualifiedName);
+                                                                                               commandResult.Services,
+                                                                                               commandResult.KeyedServices,
+                                                                                               commandResult.ModelFullyQualifiedName);
 
     /// <summary>
     /// 
