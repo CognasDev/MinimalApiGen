@@ -61,7 +61,7 @@ public static class UseMinimalApiFrameworkExtensions
     /// </summary>
     /// <param name="withJwtAuthentication"></param>
     /// <returns></returns>
-    private static string AddAuthentication(bool withJwtAuthentication) => withJwtAuthentication? $"webApplication.UseAuthentication();\r\n\t\twebApplication.UseAuthorization();" : string.Empty;
+    private static string AddAuthentication(bool withJwtAuthentication) => withJwtAuthentication ? $"webApplication.UseAuthentication();\r\n\t\twebApplication.UseAuthorization();" : string.Empty;
 
     /// <summary>
     /// 
