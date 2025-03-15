@@ -17,6 +17,7 @@ builder.ConfigureLogging(LoggingType.File);
 builder.AddMinimalApiFramework();
 builder.AddMinimalApiFrameworkData();
 builder.AddMinimalApiFramewokMappingServices();
+builder.AddMinimalApiAuthorization();
 
 builder.Services.AddValidatorsFromAssemblyContaining<ArtistRequestValidator>(ServiceLifetime.Singleton);
 
