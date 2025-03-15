@@ -21,7 +21,7 @@ public static class ExtensionMethods
     public static void AddJwtAuthentication(this WebApplicationBuilder builder)
     {
         IServiceCollection serviceCollection = builder.Services;
-        IConfiguration configuration = builder.Configuration;
+        ConfigurationManager configuration = builder.Configuration;
 
         serviceCollection.AddHttpContextAccessor();
         serviceCollection.AddSingleton<IEmailVerificationLinkFactory, EmailVerificationLinkFactory>();
@@ -50,7 +50,7 @@ public static class ExtensionMethods
     /// </summary>
     /// <param name="configuration"></param>
     /// <exception cref="InvalidOperationException"></exception>
-    private static SymmetricSecurityKey GetKey(IConfiguration configuration)
+    private static SymmetricSecurityKey GetKey(ConfigurationManager configuration)
     {
         string? secret = configuration[JwtConfigNames.Secret];
         if (string.IsNullOrWhiteSpace(secret))

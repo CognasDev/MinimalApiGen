@@ -18,6 +18,8 @@ internal static class AuthenticationRolesBuilder
     public static string Build(ReadOnlySpan<string> authenticationRoles) =>
 $@"namespace MinimalApiGen.Framework.Generation;
 
+using MinimalApiGen.Framework.Authentication;
+
 /// <summary>
 /// 
 /// </summary>
@@ -31,6 +33,7 @@ public static class AuthorizationAuthenticationRoles
     /// <param name=""builder""></param>
     public static void AddMinimalApiAuthorization(this WebApplicationBuilder builder)
     {{
+        builder.AddJwtAuthentication();
         builder.Services.AddAuthorization({BuildRoles(authenticationRoles)});
     }}
 
