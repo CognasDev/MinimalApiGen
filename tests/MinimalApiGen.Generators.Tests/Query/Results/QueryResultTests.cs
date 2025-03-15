@@ -26,7 +26,7 @@ public sealed class QueryResultTests
             ModelPluralName = "TestModels",
             ModelFullyQualifiedName = "Namespace.TestModel",
             OperationType = OperationType.Get,
-            QueryNamespace = "Namespace",
+            Namespace = "Namespace",
             ResponseResult = new WithResponseResult
             {
                 ResponseName = "TestResponse",
@@ -48,7 +48,7 @@ public sealed class QueryResultTests
 
         // Assert
         queryResult.OperationType.Should().Be(OperationType.Get);
-        queryResult.ClassNamespace.Should().Be("Namespace");
+        queryResult.Namespace.Should().Be("Namespace");
         queryResult.ModelName.Should().Be("TestModel");
         queryResult.ModelPluralName.Should().Be("TestModels");
         queryResult.ModelFullyQualifiedName.Should().Be("Namespace.TestModel");

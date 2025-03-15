@@ -25,7 +25,7 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = queryResult.ClassNamespace;
+    public string Namespace { get; } = queryResult.Namespace;
 
     /// <summary>
     /// 
@@ -156,7 +156,7 @@ using System.Net.Mime;
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 

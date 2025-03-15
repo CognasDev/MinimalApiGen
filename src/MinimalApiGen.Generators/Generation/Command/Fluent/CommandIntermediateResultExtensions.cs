@@ -25,7 +25,7 @@ internal static class CommandIntermediateResultExtensions
             ModelFullyQualifiedName = commandInvocationDetails.ModelFullyQualifiedName,
             ModelPluralName = commandInvocationDetails.ModelPluralName,
             ModelName = commandInvocationDetails.ModelName,
-            CommandType = commandType
+            OperationType = commandType
         };
         result.ModelProperties.AddRange(commandInvocationDetails.PropertyNames);
         return result;
@@ -45,7 +45,7 @@ internal static class CommandIntermediateResultExtensions
     {
         if (commandIntermediateResult is not null)
         {
-            commandIntermediateResult.CommandNamespace = commandNamespace;
+            commandIntermediateResult.Namespace = commandNamespace;
             commandIntermediateResult.ModelIdPropertyResult = modelIdPropertyResult;
             commandIntermediateResults.Add(commandIntermediateResult);
         }

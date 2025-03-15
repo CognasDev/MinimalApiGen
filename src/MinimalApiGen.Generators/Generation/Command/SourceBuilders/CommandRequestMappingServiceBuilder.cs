@@ -17,7 +17,7 @@ internal sealed class CommandRequestMappingServiceBuilder(ICommandResult command
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = commandResult.ClassNamespace;
+    public string Namespace { get; } = commandResult.Namespace;
 
     /// <summary>
     /// 
@@ -77,7 +77,7 @@ $@"using MinimalApiGen.Framework.Mapping;
 using {ModelName} = {ModelFullyQualifiedName};
 using {RequestName} = {RequestFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 

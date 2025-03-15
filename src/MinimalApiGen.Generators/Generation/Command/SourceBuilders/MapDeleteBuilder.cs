@@ -21,7 +21,7 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = commandResult.ClassNamespace;
+    public string Namespace { get; } = commandResult.Namespace;
 
     /// <summary>
     /// 
@@ -126,7 +126,7 @@ using System.Net.Mime;
 {AuthenticationNamespace}
 using {ModelName} = {ModelFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 

@@ -17,7 +17,7 @@ internal sealed class ResponseMappingServiceBuilder(IResult result)
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = result.ClassNamespace;
+    public string Namespace { get; } = result.Namespace;
 
     /// <summary>
     /// 
@@ -77,7 +77,7 @@ $@"using MinimalApiGen.Framework.Mapping;
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 

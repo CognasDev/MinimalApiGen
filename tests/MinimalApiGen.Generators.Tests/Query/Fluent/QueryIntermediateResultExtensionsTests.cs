@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.Fluent;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
@@ -59,7 +58,7 @@ public sealed class QueryIntermediateResultExtensionsTests
 
         // Assert
         queryIntermediateResults.Should().ContainSingle();
-        queryIntermediateResults[0].QueryNamespace.Should().Be("QueryNamespace");
+        queryIntermediateResults[0].Namespace.Should().Be("QueryNamespace");
     }
 
     #endregion

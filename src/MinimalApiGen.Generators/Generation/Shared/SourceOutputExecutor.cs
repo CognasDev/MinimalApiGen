@@ -67,7 +67,7 @@ internal sealed class SourceOutputExecutor
                     ResponseMappingServiceBuilder builder = new(result);
                     string mappingService = builder.Build();
                     context.AddSource(mappingServiceName, mappingService);
-                    string registration = BuildMappingServiceRegistration(result.ModelFullyQualifiedName, result.ResponseFullyQualifiedName!, result.ClassNamespace, builder.MappingServiceName);
+                    string registration = BuildMappingServiceRegistration(result.ModelFullyQualifiedName, result.ResponseFullyQualifiedName!, result.Namespace, builder.MappingServiceName);
                     registrationsBuilder.AppendLine(registration);
                 }
             }
@@ -80,7 +80,7 @@ internal sealed class SourceOutputExecutor
                     CommandRequestMappingServiceBuilder builder = new(commandResult);
                     string mappingService = builder.Build();
                     context.AddSource(mappingServiceName, mappingService);
-                    string registration = BuildMappingServiceRegistration(commandResult.RequestFullyQualifiedName, commandResult.ModelFullyQualifiedName, commandResult.ClassNamespace, builder.MappingServiceName);
+                    string registration = BuildMappingServiceRegistration(commandResult.RequestFullyQualifiedName, commandResult.ModelFullyQualifiedName, commandResult.Namespace, builder.MappingServiceName);
                     registrationsBuilder.AppendLine(registration);
                 }
             }
@@ -134,7 +134,7 @@ internal sealed class SourceOutputExecutor
                 result => new RouteMappingResult
                 {
                     ClassName = result.ClassName,
-                    ClassNamespace = result.ClassNamespace,
+                    Namespace = result.Namespace,
                     Version = result.ApiVersion,
                     OperationType = result.OperationType
                 }

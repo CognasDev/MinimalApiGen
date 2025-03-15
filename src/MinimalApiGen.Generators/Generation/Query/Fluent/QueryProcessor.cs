@@ -1,6 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;

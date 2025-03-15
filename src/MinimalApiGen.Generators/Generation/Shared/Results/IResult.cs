@@ -18,7 +18,7 @@ internal interface IResult : IEquatable<IResult>
     /// <summary>
     /// 
     /// </summary>
-    string ClassNamespace { get; }
+    string Namespace { get; }
 
     /// <summary>
     /// 

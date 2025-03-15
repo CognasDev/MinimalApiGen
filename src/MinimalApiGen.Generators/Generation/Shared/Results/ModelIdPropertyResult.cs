@@ -1,4 +1,4 @@
-﻿namespace MinimalApiGen.Generators.Generation.Command.Results;
+﻿namespace MinimalApiGen.Generators.Generation.Shared.Results;
 
 /// <summary>
 /// 

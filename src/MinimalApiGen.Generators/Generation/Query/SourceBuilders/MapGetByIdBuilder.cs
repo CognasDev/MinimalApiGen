@@ -23,7 +23,7 @@ internal sealed class MapGetByIdBuilder(IQueryResult queryResult, ServicesBuilde
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = queryResult.ClassNamespace;
+    public string Namespace { get; } = queryResult.Namespace;
 
     /// <summary>
     /// 
@@ -145,7 +145,7 @@ using System.Net.Mime;
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 

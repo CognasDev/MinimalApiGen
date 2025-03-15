@@ -19,7 +19,7 @@ internal readonly record struct QueryResult : IQueryResult
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; }
+    public string Namespace { get; }
 
     /// <summary>
     /// 
@@ -159,7 +159,7 @@ internal readonly record struct QueryResult : IQueryResult
     public QueryResult(QueryIntermediateResult queryIntermediateResult)
     {
         ClassName = $"{queryIntermediateResult.ModelName}QueryRouteEndpointsMapper";
-        ClassNamespace = queryIntermediateResult.QueryNamespace!;
+        Namespace = queryIntermediateResult.Namespace!;
         ModelName = queryIntermediateResult.ModelName;
         ModelPluralName = queryIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;
@@ -203,7 +203,7 @@ internal readonly record struct QueryResult : IQueryResult
     {
         return other is QueryResult result &&
                ClassName == result.ClassName &&
-               ClassNamespace == result.ClassNamespace &&
+               Namespace == result.Namespace &&
                ModelName == result.ModelName &&
                ModelPluralName == result.ModelPluralName &&
                ModelFullyQualifiedName == result.ModelFullyQualifiedName &&

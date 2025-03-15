@@ -24,7 +24,7 @@ internal sealed class MapPutBuilder(ICommandResult commandResult, ServicesBuilde
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = commandResult.ClassNamespace;
+    public string Namespace { get; } = commandResult.Namespace;
 
     /// <summary>
     /// 
@@ -171,7 +171,7 @@ using {ModelName} = {ModelFullyQualifiedName};
 using {RequestName} = {RequestFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 
