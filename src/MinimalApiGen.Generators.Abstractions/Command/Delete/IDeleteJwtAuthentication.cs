@@ -10,8 +10,9 @@ public interface IDeleteJwtAuthentication
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    IWithDeleteWithJwtAuthentication WithJwtAuthentication();
+    IWithDeleteWithJwtAuthentication WithJwtAuthentication(string role = "");
 
     #endregion
 }

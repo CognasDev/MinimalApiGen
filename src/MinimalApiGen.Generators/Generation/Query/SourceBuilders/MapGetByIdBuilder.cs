@@ -105,9 +105,9 @@ internal sealed class MapGetByIdBuilder(IQueryResult queryResult, ServicesBuilde
     /// 
     /// </summary>
     public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.BuildForId(queryResult.HandlerParameters,
-                                                                                                  queryResult.Services,
-                                                                                                  queryResult.KeyedServices,
-                                                                                                  queryResult.ModelIdUnderlyingPropertyType ?? queryResult.ModelIdPropertyType);
+                                                                                            queryResult.Services,
+                                                                                            queryResult.KeyedServices,
+                                                                                            queryResult.ModelIdUnderlyingPropertyType ?? queryResult.ModelIdPropertyType);
 
     /// <summary>
     /// 
@@ -118,6 +118,16 @@ internal sealed class MapGetByIdBuilder(IQueryResult queryResult, ServicesBuilde
     /// 
     /// </summary>
     public string JwtAuthentication { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildRole(queryResult.AuthenticationRole) : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationNamespace { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(queryResult.AuthenticationRole) : string.Empty;
 
     #endregion
 
@@ -131,7 +141,7 @@ $@"using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
-
+{AuthenticationNamespace}
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
@@ -151,7 +161,7 @@ public partial class {ClassName}
     {{
         return endpointRouteBuilder.MapGet
         (
-            ""/{ModelPluralNameLower}/{{id}}"",
+            ""/{ModelPluralNameLower}/{{id}}"",{AuthenticationRole}
             async Task<Results<Ok<{ResponseName}>, NotFound>>
             (
                 CancellationToken cancellationToken,

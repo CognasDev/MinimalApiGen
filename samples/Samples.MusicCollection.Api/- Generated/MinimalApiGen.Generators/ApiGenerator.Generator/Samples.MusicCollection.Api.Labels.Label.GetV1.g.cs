@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using MinimalApiGen.Framework.Pagination;
 using System.ComponentModel;
+
 using Label = Samples.MusicCollection.Api.Labels.Label;
 using LabelResponse = Samples.MusicCollection.Api.Labels.LabelResponse;
 

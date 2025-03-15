@@ -1,4 +1,5 @@
 using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
@@ -111,9 +112,9 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// 
     /// </summary>
     public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.Build(queryResult.HandlerParameters,
-                                                                                             queryResult.Services,
-                                                                                             queryResult.KeyedServices,
-                                                                                             queryResult.QueryParameterResults);
+                                                                                       queryResult.Services,
+                                                                                       queryResult.KeyedServices,
+                                                                                       queryResult.QueryParameterResults);
 
     /// <summary>
     /// 
@@ -130,6 +131,16 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// </summary>
     public string JwtAuthentication { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildRole(queryResult.AuthenticationRole) : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationNamespace { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(queryResult.AuthenticationRole) : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -142,6 +153,7 @@ $@"using MinimalApiGen.Framework.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 {PaginationUsings}
+{AuthenticationNamespace}
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
@@ -161,7 +173,7 @@ public partial class {ClassName}
     {{
         return endpointRouteBuilder.MapGet
         (
-            ""/{ModelPluralNameLower}"",
+            ""/{ModelPluralNameLower}"",{AuthenticationRole}
             (
                 CancellationToken cancellationToken,{QueryParameters}
                 [FromServices] {Handler} handler,

@@ -10,8 +10,9 @@ public interface IGetByIdJwtAuthentication
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    IWithGetByIdWithJwtAuthentication WithJwtAuthentication();
+    IWithGetByIdWithJwtAuthentication WithJwtAuthentication(string role = "");
 
     #endregion
 }

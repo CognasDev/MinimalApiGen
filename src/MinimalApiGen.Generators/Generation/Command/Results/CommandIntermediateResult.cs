@@ -96,5 +96,10 @@ internal sealed record CommandIntermediateResult
     /// </summary>
     public bool WithJwtAuthentication { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; set; } = string.Empty;
+
     #endregion
 }

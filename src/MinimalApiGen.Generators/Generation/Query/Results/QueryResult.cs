@@ -124,6 +124,11 @@ internal readonly record struct QueryResult : IQueryResult
     /// </summary>
     public bool WithJwtAuthentication { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -167,7 +172,6 @@ internal readonly record struct QueryResult : IQueryResult
         ResponseName = queryIntermediateResult.ResponseResult!.ResponseName;
         ResponseFullyQualifiedName = queryIntermediateResult.ResponseResult!.ResponseFullyQualifiedName;
         WithPagination = queryIntermediateResult.WithPagination;
-        WithJwtAuthentication = queryIntermediateResult.WithJwtAuthentication;
         WithResponseMappingService = queryIntermediateResult.WithResponseMappingService;
         ResponseProperties = new(queryIntermediateResult.ResponseResult.PropertyNames);
         CachedFor = queryIntermediateResult.CachedFor;
@@ -179,6 +183,9 @@ internal readonly record struct QueryResult : IQueryResult
         HandlerFullyQualifiedName = queryIntermediateResult.HandlerResult!.FullyQualifiedName;
         HandlerDelegateName = queryIntermediateResult.HandlerResult!.DelegateName;
         HandlerParameters = new(queryIntermediateResult.HandlerResult!.Parameters);
+
+        WithJwtAuthentication = queryIntermediateResult.WithJwtAuthentication;
+        AuthenticationRole = queryIntermediateResult.AuthenticationRole;
 
         QueryParameterResults = new(queryIntermediateResult.QueryParameterResults);
     }
@@ -208,7 +215,6 @@ internal readonly record struct QueryResult : IQueryResult
                ResponseName == result.ResponseName &&
                ResponseFullyQualifiedName == result.ResponseFullyQualifiedName &&
                WithPagination == result.WithPagination &&
-               WithJwtAuthentication == result.WithJwtAuthentication &&
                WithResponseMappingService == result.WithResponseMappingService &&
                ResponseProperties.Equals(result.ResponseProperties) &&
                CachedFor == result.CachedFor &&
@@ -218,7 +224,9 @@ internal readonly record struct QueryResult : IQueryResult
                HandlerFullyQualifiedName == result.HandlerFullyQualifiedName &&
                HandlerDelegateName == result.HandlerDelegateName &&
                HandlerParameters.Equals(result.HandlerParameters) &&
-               QueryParameterResults.Equals(result.QueryParameterResults);
+               QueryParameterResults.Equals(result.QueryParameterResults) &&
+               WithJwtAuthentication == result.WithJwtAuthentication &&
+               AuthenticationRole == result.AuthenticationRole;
     }
 
     #endregion

@@ -93,6 +93,7 @@ internal sealed class CommandProcessor
                     break;
                 case string name when (name == CommandMethodNames.WithPostJwtAuthentication || name == CommandMethodNames.WithPutJwtAuthentication || name == CommandMethodNames.WithDeleteJwtAuthentication):
                     intermediateResult!.WithJwtAuthentication = true;
+                    intermediateResult.AuthenticationRole = invocationInfo.GetAuthenticationRole(semanticModel);
                     break;
             }
         }

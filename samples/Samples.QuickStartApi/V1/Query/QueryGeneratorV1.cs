@@ -26,7 +26,7 @@ public sealed class QueryGeneratorV1
                                                 .WithVersion(1)
                                           .WithGetById()
                                                 .WithHandler<IQueryHandlerV1>(query => query.GetModelByIdAsync)
-                                                .WithJwtAuthentication()
+                                                .WithJwtAuthentication("Test")
                                                 .WithResponse<SampleModelResponse>()
                                                 .WithMappingService()
                                                 .WithVersion(1);

@@ -3,6 +3,7 @@ using MinimalApiGen.Framework.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
+
 using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
 using SampleModelResponse = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelResponse;
 

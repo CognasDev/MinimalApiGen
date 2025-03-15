@@ -20,7 +20,7 @@ public sealed class CommandGeneratorV1
                                             .WithModelId(model => model.Id)
                                             .WithPost()
                                                 .WithHandler<ICommandHandlerV1>(command => command.PostModelAsync)
-                                                .WithJwtAuthentication()
+                                                .WithJwtAuthentication("ExampleRole")
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService()
                                                 .WithResponse<SampleModelResponse>()

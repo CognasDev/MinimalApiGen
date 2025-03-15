@@ -31,7 +31,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="System.Linq.Async" Version="6.0.1" />
-		<PackageReference Include="Radzen.Blazor" Version="6.2.6" />
+		<PackageReference Include="Radzen.Blazor" Version="6.2.7" />
 	</ItemGroup>
 
 	<Import Project="..\..\src\MinimalApiGen.Framework.Pluralize\MinimalApiGen.Framework.Pluralize.projitems" Label="Shared" />

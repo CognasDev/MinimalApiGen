@@ -26,8 +26,9 @@ public sealed class WithPostOptionals : IWithPostOptionals
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    public IWithPostWithJwtAuthentication WithJwtAuthentication() => new WithPostWithJwtAuthentication();
+    public IWithPostWithJwtAuthentication WithJwtAuthentication(string role = "") => new WithPostWithJwtAuthentication();
 
     #endregion
 

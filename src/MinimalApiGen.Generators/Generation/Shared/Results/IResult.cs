@@ -103,6 +103,11 @@ internal interface IResult : IEquatable<IResult>
     /// </summary>
     bool WithJwtAuthentication { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    string AuthenticationRole { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details

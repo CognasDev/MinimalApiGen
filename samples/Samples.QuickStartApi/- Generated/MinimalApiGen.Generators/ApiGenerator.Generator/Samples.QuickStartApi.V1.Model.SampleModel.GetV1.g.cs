@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
+
 using SampleModel = Samples.QuickStartApi.V1.Model.SampleModel;
 using SampleModelResponse = Samples.QuickStartApi.V1.Model.SampleModelResponse;
 
