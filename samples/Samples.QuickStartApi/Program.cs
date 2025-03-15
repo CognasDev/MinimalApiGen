@@ -9,6 +9,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.AddMinimalApiFramework();
 builder.AddMinimalApiFramewokMappingServices();
+builder.AddMinimalApiAuthorization();
 
 builder.Services.AddScoped<ICommandHandlerV1, CommandHandlerV1>();
 builder.Services.AddScoped<IQueryHandlerV1, QueryHandlerV1>();
@@ -16,7 +17,6 @@ builder.Services.AddScoped<SampleService1>();
 builder.Services.AddScoped<SampleService2>();
 
 WebApplication webApplication = builder.Build();
-webApplication.UseMinimalApiFrameworkRoutes();
 
 if (webApplication.Environment.IsDevelopment())
 {
@@ -24,5 +24,4 @@ if (webApplication.Environment.IsDevelopment())
 }
 
 webApplication.UseMinimalApiFramework();
-webApplication.UseHttpsRedirection();
 webApplication.Run();

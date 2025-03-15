@@ -27,7 +27,6 @@ public static class ExtensionMethods
         serviceCollection.AddSingleton<IEmailVerificationLinkFactory, EmailVerificationLinkFactory>();
         serviceCollection.AddSingleton<IPasswordHasher, PasswordHasher>();
         serviceCollection.AddSingleton<ITokenGenerator, TokenGenerator>();
-        serviceCollection.AddAuthorization();
         serviceCollection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -40,16 +39,6 @@ public static class ExtensionMethods
                     ClockSkew = TimeSpan.Zero
                 };
             });
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="webApplication"></param>
-    public static void UseJwtAuthentication(this WebApplication webApplication)
-    {
-        webApplication.UseAuthentication();
-        webApplication.UseAuthorization();
     }
 
     #endregion
