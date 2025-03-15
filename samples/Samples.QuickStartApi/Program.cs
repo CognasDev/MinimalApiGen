@@ -8,8 +8,6 @@ using Samples.QuickStartApi.V1.Services;
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.AddMinimalApiFramework();
-builder.AddMinimalApiFramewokMappingServices();
-builder.AddMinimalApiAuthorization();
 
 builder.Services.AddScoped<ICommandHandlerV1, CommandHandlerV1>();
 builder.Services.AddScoped<IQueryHandlerV1, QueryHandlerV1>();

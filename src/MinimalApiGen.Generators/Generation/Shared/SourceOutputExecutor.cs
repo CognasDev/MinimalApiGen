@@ -94,6 +94,9 @@ internal sealed class SourceOutputExecutor
         string authenticationRolesSource = AuthenticationRolesBuilder.Build(authenticationRoles);
         context.AddSource($"AuthorizationAuthenticationRoles.g.cs", authenticationRolesSource);
 
+        string addMinimalApiFramework = BuildAddMinimalApiFramework(results, mappingServiceNames);
+        context.AddSource($"AddMinimalApiFramework.g.cs", addMinimalApiFramework);
+
         string useMinimalApiFramework = BuildUseMinimalApiFramework(results);
         context.AddSource($"UseMinimalApiFramework.g.cs", useMinimalApiFramework);
 
@@ -234,7 +237,29 @@ internal sealed class SourceOutputExecutor
         string registration = SourceBuilders.MappingServiceSingletonBuilder.Build(source, target, mappingServiceFullyQualifiedName);
         return registration;
     }
-    
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="results"></param>
+    /// <param name="mappingServiceNames"></param>
+    /// <returns></returns>
+    private static string BuildAddMinimalApiFramework(ImmutableArray<IResult> results, List<string> mappingServiceNames)
+    {
+        IQueryResult[] queryResults = [.. results.Where(result => result is IQueryResult).Select(result => (IQueryResult)result)];
+        ICommandResult[] commandResults = [.. results.Where(result => result is ICommandResult).Select(result => (ICommandResult)result)];
+
+        bool hasCommandResults = commandResults.Any();
+        bool hasQueryResults = queryResults.Any();
+        bool withJwtAuthentication = results.Any(result => result.WithJwtAuthentication);
+        bool withPagination = queryResults.Any(queryResult => queryResult.WithPagination);
+        bool withCaching = queryResults.Any(queryResult => !string.IsNullOrWhiteSpace(queryResult.CachedFor));
+        bool withMappingServices = mappingServiceNames.Any();
+
+        string addMinimalApiFramework = AddMinimalApiFrameworkBuilder.Build(hasCommandResults, hasQueryResults, withJwtAuthentication, withPagination, withCaching, withMappingServices);
+        return addMinimalApiFramework;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -242,8 +267,12 @@ internal sealed class SourceOutputExecutor
     /// <returns></returns>
     private static string BuildUseMinimalApiFramework(ImmutableArray<IResult> results)
     {
+        IQueryResult[] queryResults = [.. results.Where(result => result is IQueryResult).Select(result => (IQueryResult)result)];
+
         bool withJwtAuthentication = results.Any(result => result.WithJwtAuthentication);
-        string useMinimalApiFramework = UseMinimalApiFrameworkBuilder.Build(withJwtAuthentication);
+        bool withCaching = queryResults.Any(queryResult => !string.IsNullOrWhiteSpace(queryResult.CachedFor));
+
+        string useMinimalApiFramework = UseMinimalApiFrameworkBuilder.Build(withJwtAuthentication, withCaching);
         return useMinimalApiFramework;
     }
 

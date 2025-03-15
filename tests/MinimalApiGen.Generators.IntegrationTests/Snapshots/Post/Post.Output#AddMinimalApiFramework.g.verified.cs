@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿//HintName: AddMinimalApiFramework.g.cs
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
+using MinimalApiGen.Framework.Data;
 using MinimalApiGen.Framework.ExceptionHandling;
+using MinimalApiGen.Framework.Generation;
 using MinimalApiGen.Framework.HealthChecks;
 using MinimalApiGen.Framework.Services;
 using MinimalApiGen.Framework.Swagger;
@@ -13,7 +16,7 @@ namespace MinimalApiGen.Framework.Extensions;
 /// <summary>
 /// 
 /// </summary>
-public static class MinimalApiFrameworkExtensions
+public static class AddMinimalApiFrameworkExtensions
 {
     #region Public Method Declarations
 
@@ -24,13 +27,24 @@ public static class MinimalApiFrameworkExtensions
     public static void AddMinimalApiFramework(this WebApplicationBuilder builder)
     {
         IServiceCollection serviceCollection = builder.Services;
-        serviceCollection.AddPagination(); //needs to be ahead of AddExceptionHandlers
+
+        
+        
+        builder.AddMinimalApiAuthorization();
+        builder.AddMinimalApiFramewokMappingServices();
 
         serviceCollection.AddDefaultHealthChecks();
         serviceCollection.AddExceptionHandlers();
         serviceCollection.AddHttpClientServices();
-        serviceCollection.AddOutputCache();
         serviceCollection.AddVersioning();
+
+        //Data
+        serviceCollection.AddSingleton<IDatabaseConnectionFactory, DatabaseConnectionFactory>();
+        serviceCollection.AddSingleton<IDatabaseTransactionService, DatabaseTransactionService>();
+        serviceCollection.AddSingleton<IDynamicParameterFactory, DynamicParameterFactory>();
+        serviceCollection.AddSingleton<IIdsParameterFactory, IdsParameterFactory>();
+        serviceCollection.AddSingleton<ICommandDatabaseService, CommandDatabaseService>();
+        
 
         serviceCollection.AddProblemDetails(options =>
         {
