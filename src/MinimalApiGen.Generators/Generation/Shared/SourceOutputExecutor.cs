@@ -90,6 +90,13 @@ internal sealed class SourceOutputExecutor
         string mappingExtension = MappingExtensionsBuilder.Build(endpointRouteMappings);
         context.AddSource($"EndpointRouteMappingExtension.g.cs", mappingExtension);
 
+        ReadOnlySpan<string> authenticationRoles = GetAuthenticationRoles(results);
+        string authenticationRolesSource = AuthenticationRolesBuilder.Build(authenticationRoles);
+        context.AddSource($"AuthorizationAuthenticationRoles.g.cs", authenticationRolesSource);
+
+        string useMinimalApiFramework = BuildUseMinimalApiFramework(results);
+        context.AddSource($"UseMinimalApiFramework.g.cs", useMinimalApiFramework);
+
         string registrations = registrationsBuilder.ToString();
         if (!string.IsNullOrEmpty(registrations))
         {
@@ -114,21 +121,36 @@ internal sealed class SourceOutputExecutor
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="commandResults"></param>
+    /// <param name="results"></param>
     /// <returns></returns>
-    private static ReadOnlySpan<RouteMappingResult> GetEndpointRouteMappings(ImmutableArray<IResult> commandResults)
+    private static ReadOnlySpan<RouteMappingResult> GetEndpointRouteMappings(ImmutableArray<IResult> results)
     {
-        return commandResults
+        return results
             .Select
              (
-                commandResult => new RouteMappingResult
+                result => new RouteMappingResult
                 {
-                    ClassName = commandResult.ClassName,
-                    ClassNamespace = commandResult.ClassNamespace,
-                    Version = commandResult.ApiVersion,
-                    OperationType = commandResult.OperationType
+                    ClassName = result.ClassName,
+                    ClassNamespace = result.ClassNamespace,
+                    Version = result.ApiVersion,
+                    OperationType = result.OperationType
                 }
              )
+            .Distinct()
+            .ToArray();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="results"></param>
+    /// <returns></returns>
+    private static ReadOnlySpan<string> GetAuthenticationRoles(ImmutableArray<IResult> results)
+    {
+        return results
+            .Where(result => result.WithJwtAuthentication)
+            .Select(result => result.AuthenticationRole)
+            .Where(role => !string.IsNullOrWhiteSpace(role))
             .Distinct()
             .ToArray();
     }
@@ -211,6 +233,18 @@ internal sealed class SourceOutputExecutor
         string mappingServiceFullyQualifiedName = $"{classNamespace}.{mappingServiceName}";
         string registration = SourceBuilders.MappingServiceSingletonBuilder.Build(source, target, mappingServiceFullyQualifiedName);
         return registration;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="results"></param>
+    /// <returns></returns>
+    private static string BuildUseMinimalApiFramework(ImmutableArray<IResult> results)
+    {
+        bool withJwtAuthentication = results.Any(result => result.WithJwtAuthentication);
+        string useMinimalApiFramework = UseMinimalApiFrameworkBuilder.Build(withJwtAuthentication);
+        return useMinimalApiFramework;
     }
 
     #endregion

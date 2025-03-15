@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using MinimalApiGen.Framework.Pagination;
 using System.ComponentModel;
+
 using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
 using SampleModelResponse = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelResponse;
 

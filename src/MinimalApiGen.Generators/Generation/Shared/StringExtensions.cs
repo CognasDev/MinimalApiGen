@@ -20,57 +20,73 @@ internal static class StringExtensions
     {
         if (string.IsNullOrWhiteSpace(input))
         {
-            throw new ArgumentNullException($"{nameof(input)} cannot be null or whitespace.", nameof(input));
+            throw new ArgumentNullException(nameof(input));
         }
 
-        ReadOnlySpan<char> word = input.Trim().ToLowerInvariant().AsSpan();
-        if (word.IsEmpty)
+        Match match = Regex.Match(input, @"\w+");
+        if (!match.Success)
         {
             return $"an {input}";
         }
 
-        if (StartsWithAny(word, "euler", "heir", "honest", "hono") ||  (word.StartsWith("hour".AsSpan()) && !word.StartsWith("houri".AsSpan())))
+        string word = match.Groups[0].Value;
+        string wordLower = word.ToLower();
+
+        foreach (string anword in new string[] { "euler", "heir", "honest", "hono" })
+        {
+            if (wordLower.StartsWith(anword))
+            {
+                return $"an {input}";
+            }
+        }
+
+        if (wordLower.StartsWith("hour") && !wordLower.StartsWith("houri"))
         {
             return $"an {input}";
         }
 
-        if (word.Length == 1 && "aedhilnorsx".AsSpan().IndexOf(word[0]) >= 0)
-        {
-            return $"an {input}";
-        }
-
-        if (Regex.IsMatch(input, @"^(?!FJO|[HLMNS]Y.|RY[EO]|SQU|(F[LR]?|[HL]|MN?|N|RH?|S[CHKLMNPTVW]?|X(YL)?)[AEIOU])[FHLMNRSX][A-Z]"))
-        {
-            return $"an {input}";
-        }
-
-        if (Regex.IsMatch(input, @"^e[uw]|^onc?e\b|^uni([^nmd]|mo)|^u[bcfhjkqrst][aeiou]"))
+        if (wordLower.StartsWith("one ") || wordLower.StartsWith("one-"))
         {
             return $"a {input}";
         }
 
-        if (Regex.IsMatch(input, @"^U[NK][AIEO]"))
+        char[] charList = ['a', 'e', 'd', 'h', 'i', 'l', 'm', 'n', 'o', 'r', 's', 'x'];
+        if (wordLower.Length == 1)
+        {
+            return wordLower.IndexOfAny(charList) == 0 ? $"an {input}" : $"a {input}";
+        }
+
+        if (Regex.Match(word, "(?!FJO|[HLMNS]Y.|RY[EO]|SQU|(F[LR]?|[HL]|MN?|N|RH?|S[CHKLMNPTVW]?|X(YL)?)[AEIOU])[FHLMNRSX][A-Z]").Success)
+        {
+            return $"an {input}";
+        }
+
+        foreach (string regex in new string[] { "^e[uw]", "^onc?e\b", "^uni([^nmd]|mo)", "^u[bcfhjkqrst][aeiou]" })
+        {
+            if (Regex.IsMatch(wordLower, regex))
+            {
+                return $"a {input}";
+            }
+        }
+
+        if (Regex.IsMatch(word, "^U[NK][AIEO]"))
         {
             return $"a {input}";
         }
 
-        if (input == input.ToUpper() && "aedhilnorsx".AsSpan().IndexOf(word[0]) >= 0)
+        if (word == word.ToUpper())
         {
-            return $"an {input}";
+            return wordLower.IndexOfAny(charList) == 0 ? $"an {input}" : $"a {input}";
         }
 
-        if ("aeiou".AsSpan().IndexOf(word[0]) >= 0)
-        {
-            return $"an {input}";
-        }
-
-        if (Regex.IsMatch(input, @"^y(b[lor]|cl[ea]|fere|gg|p[ios]|rou|tt)"))
+        if (wordLower.IndexOfAny(['a', 'e', 'i', 'o', 'u']) == 0 || Regex.IsMatch(wordLower, "^y(b[lor]|cl[ea]|fere|gg|p[ios]|rou|tt)"))
         {
             return $"an {input}";
         }
 
         return $"a {input}";
     }
+
 
     #endregion
 

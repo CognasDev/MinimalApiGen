@@ -21,13 +21,12 @@ public static class ExtensionMethods
     public static void AddJwtAuthentication(this WebApplicationBuilder builder)
     {
         IServiceCollection serviceCollection = builder.Services;
-        IConfiguration configuration = builder.Configuration;
+        ConfigurationManager configuration = builder.Configuration;
 
         serviceCollection.AddHttpContextAccessor();
         serviceCollection.AddSingleton<IEmailVerificationLinkFactory, EmailVerificationLinkFactory>();
         serviceCollection.AddSingleton<IPasswordHasher, PasswordHasher>();
         serviceCollection.AddSingleton<ITokenGenerator, TokenGenerator>();
-        serviceCollection.AddAuthorization();
         serviceCollection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
@@ -42,16 +41,6 @@ public static class ExtensionMethods
             });
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="webApplication"></param>
-    public static void UseJwtAuthentication(this WebApplication webApplication)
-    {
-        webApplication.UseAuthentication();
-        webApplication.UseAuthorization();
-    }
-
     #endregion
 
     #region Private Method Declarations
@@ -61,7 +50,7 @@ public static class ExtensionMethods
     /// </summary>
     /// <param name="configuration"></param>
     /// <exception cref="InvalidOperationException"></exception>
-    private static SymmetricSecurityKey GetKey(IConfiguration configuration)
+    private static SymmetricSecurityKey GetKey(ConfigurationManager configuration)
     {
         string? secret = configuration[JwtConfigNames.Secret];
         if (string.IsNullOrWhiteSpace(secret))

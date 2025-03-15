@@ -19,8 +19,9 @@ public sealed class WithGetByIdOptionals : IWithGetByIdOptionals
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    public IWithGetByIdWithJwtAuthentication WithJwtAuthentication() => new WithGetByIdWithJwtAuthentication();
+    public IWithGetByIdWithJwtAuthentication WithJwtAuthentication(string role = "") => new WithGetByIdWithJwtAuthentication();
 
     #endregion
 

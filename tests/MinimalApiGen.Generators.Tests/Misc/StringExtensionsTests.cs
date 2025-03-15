@@ -16,6 +16,7 @@ public sealed class StringExtensionsTests
     [Theory]
     [InlineData("note")]
     [InlineData("user")]
+    [InlineData("User")]
     public void WithIndefiniteArticle_A(string input)
     {
         string result = input.WithIndefiniteArticle();
@@ -31,6 +32,7 @@ public sealed class StringExtensionsTests
     [InlineData("input")]
     [InlineData("umbrella")]
     [InlineData("understanding")]
+    [InlineData("Understanding")]
     public void WithIndefiniteArticle_An(string input)
     {
         string result = input.WithIndefiniteArticle();

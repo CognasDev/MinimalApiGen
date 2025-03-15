@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace MinimalApiGen.Framework.Authentication;
 

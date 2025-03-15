@@ -1,7 +1,9 @@
-﻿using HealthChecks.UI.Client;
+﻿//HintName: UseMinimalApiFramework.g.cs
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using MinimalApiGen.Framework.Generation;
 
-namespace MinimalApiGen.Framework.Extensions;
+namespace MinimalApiGen.Framework.Generation;
 
 /// <summary>
 /// 
@@ -16,11 +18,14 @@ public static class WebApplicationExtensions
     /// <param name="webApplication"></param>
     public static void UseMinimalApiFramework(this WebApplication webApplication)
     {
+        webApplication.UseMinimalApiFrameworkRoutes();
         webApplication.UseOutputCache();
         webApplication.MapHealthChecks("/api/health", new()
         {
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
+        webApplication.UseHttpsRedirection();
+        
     }
 
     #endregion

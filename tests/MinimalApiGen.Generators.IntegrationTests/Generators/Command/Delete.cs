@@ -32,7 +32,7 @@ public sealed class TestGenerator
                                             .WithModelId(model => model.Id)
                                             .WithDelete()
                                                 .WithHandler<ISimpleHandler>(command => command.DeleteModelAsync)
-                                                .WithJwtAuthentication()
+                                                .WithJwtAuthentication(""SampleRole"")
                                                 .WithRequest<SampleModelRequest>()
                                                 .WithRequestMappingService();
     }

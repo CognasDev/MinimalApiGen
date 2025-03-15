@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using MinimalApiGen.Framework.Pagination;
 using System.ComponentModel;
+
 using Genre = Samples.MusicCollection.Api.Genres.Genre;
 using GenreResponse = Samples.MusicCollection.Api.Genres.GenreResponse;
 

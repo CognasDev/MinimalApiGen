@@ -42,8 +42,9 @@ public sealed class WithDeleteOptionals : IWithDeleteOptionals
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    public IWithDeleteWithJwtAuthentication WithJwtAuthentication() => new WithDeleteWithJwtAuthentication();
+    public IWithDeleteWithJwtAuthentication WithJwtAuthentication(string role = "") => new WithDeleteWithJwtAuthentication();
 
     #endregion
 

@@ -1,7 +1,4 @@
-﻿using MinimalApiGen.Framework.Generation.Query.Shared;
-using MinimalApiGen.Generators.Abstractions.Query;
-using MinimalApiGen.Generators.Abstractions.Query.Get;
-using MinimalApiGen.Generators.Abstractions.Query.Shared;
+﻿using MinimalApiGen.Generators.Abstractions.Query.Get;
 using System.Linq.Expressions;
 
 namespace MinimalApiGen.Framework.Generation.Query.Get;

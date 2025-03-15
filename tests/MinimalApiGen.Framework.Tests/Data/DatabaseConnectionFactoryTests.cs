@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using MinimalApiGen.Framework.Data;
 using Moq;
@@ -17,39 +18,80 @@ public sealed class DatabaseConnectionFactoryTests
     /// 
     /// </summary>
     [Fact]
-    public void CreateDbConnection_ValidKey()
+    public void Constructor_ShouldThrowArgumentNullException_WhenConfigurationIsNull()
+    {
+        Action act = static () => _ = new DatabaseConnectionFactory(It.IsAny<IConfiguration>());
+        act.Should().Throw<ArgumentNullException>();
+    }
+
+    /// <summary>
+    /// 
+    /// </summaryz
+    [Fact]
+    public void Constructor_ShouldThrowNullReferenceException_WhenNoConnectionStringsFound()
     {
         Mock<IConfiguration> mockConfiguration = new();
         Mock<IConfigurationSection> mockConfigurationSection = new();
+        mockConfiguration.Setup(config => config.GetSection("ConnectionStrings")).Returns(mockConfigurationSection.Object);
+        mockConfigurationSection.Setup(config => config.GetChildren()).Returns([]);
 
-        const string validConnectionStringKey = "localdb";
-        string expectedConnectionString = "Data Source=ServerName;Initial Catalog=DataBaseName;Integrated Security=SSPI;";
-
-        mockConfiguration.Setup(configuration => configuration.GetSection(It.Is<string>(sectionName => sectionName == "ConnectionStrings"))).Returns(mockConfigurationSection.Object);
-        mockConfigurationSection.SetupGet(configurationSection => configurationSection[It.Is<string>(key => key == validConnectionStringKey)]).Returns(expectedConnectionString);
-
-        DatabaseConnectionFactory databaseConnectionFactory = new(mockConfiguration.Object);
-        IDbConnection databaseConnection = databaseConnectionFactory.Create();
-        databaseConnection.ConnectionString.Should().Be(expectedConnectionString);
+        Action act = () => _ = new DatabaseConnectionFactory(mockConfiguration.Object);
+        act.Should().Throw<NullReferenceException>().WithMessage("No connection strings found in configuration.");
     }
 
     /// <summary>
     /// 
     /// </summary>
     [Fact]
-    public void CreateDbConnection_InvalidKey()
+    public void Constructor_ShouldThrowNullReferenceException_WhenConnectionStringIsEmpty()
     {
+        Mock<IConfigurationSection> mockConfigurationSection = new Mock<IConfigurationSection>();
+        mockConfigurationSection.Setup(config => config.Value).Returns(string.Empty);
+
         Mock<IConfiguration> mockConfiguration = new();
+        mockConfiguration.Setup(config => config.GetSection("ConnectionStrings")).Returns(mockConfigurationSection.Object);
+        mockConfigurationSection.Setup(config => config.GetChildren()).Returns(new[] { mockConfigurationSection.Object });
+
+        Action act = () => _ = new DatabaseConnectionFactory(mockConfiguration.Object);
+        act.Should().Throw<NullReferenceException>();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    [Fact]
+    public void Constructor_ShouldInitialize_WhenValidConnectionStringIsProvided()
+    {
         Mock<IConfigurationSection> mockConfigurationSection = new();
+        mockConfigurationSection.Setup(config => config.Value).Returns("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;");
 
-        mockConfiguration.Setup(configuration => configuration.GetSection(It.Is<string>(sectionName => sectionName == "ConnectionStrings"))).Returns(mockConfigurationSection.Object);
+        Mock<IConfiguration> mockConfiguration = new();
+        mockConfiguration.Setup(config => config.GetSection("ConnectionStrings")).Returns(mockConfigurationSection.Object);
+        mockConfigurationSection.Setup(config => config.GetChildren()).Returns(new[] { mockConfigurationSection.Object });
 
-        Action action = () =>
-        {
-            DatabaseConnectionFactory databaseConnectionFactory = new(mockConfiguration.Object);
-        };
+        DatabaseConnectionFactory factory = new(mockConfiguration.Object);
+        factory.Should().NotBeNull();
+    }
 
-        action.Should().Throw<KeyNotFoundException>();
+    /// <summary>
+    /// 
+    /// </summary>
+    [Fact]
+    public void Create_ShouldReturnSqlConnection_WhenCalled()
+    {
+        Mock<IConfigurationSection> mockConfigurationSection = new();
+        mockConfigurationSection.Setup(config => config.Value).Returns("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;");
+
+        Mock<IConfiguration> mockConfiguration = new();
+        mockConfiguration.Setup(config => config.GetSection("ConnectionStrings")).Returns(mockConfigurationSection.Object);
+        mockConfigurationSection.Setup(config => config.GetChildren()).Returns([mockConfigurationSection.Object]);
+
+        DatabaseConnectionFactory factory = new(mockConfiguration.Object);
+
+        IDbConnection connection = factory.Create();
+
+        connection.Should().NotBeNull();
+        connection.Should().BeOfType<SqlConnection>();
     }
 
     #endregion

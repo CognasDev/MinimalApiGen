@@ -115,9 +115,9 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// 
     /// </summary>
     public string HandlerDelegateParameters { get; } = DelegateParametersBuilder.BuildForModel(commandResult.HandlerParameters,
-                                                                                                     commandResult.Services,
-                                                                                                     commandResult.KeyedServices,
-                                                                                                     commandResult.ModelFullyQualifiedName);
+                                                                                               commandResult.Services,
+                                                                                               commandResult.KeyedServices,
+                                                                                               commandResult.ModelFullyQualifiedName);
 
     /// <summary>
     /// 
@@ -144,6 +144,16 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// </summary>
     public string JwtAuthentication { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildRole(commandResult.AuthenticationRole) : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationNamespace { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(commandResult.AuthenticationRole) : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -156,7 +166,7 @@ $@"using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
-
+{AuthenticationNamespace}
 using {ModelName} = {ModelFullyQualifiedName};
 using {RequestName} = {RequestFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
@@ -177,7 +187,7 @@ public partial class {ClassName}
     {{
         return endpointRouteBuilder.MapPost
         (
-            ""/{ModelPluralNameLower}"",
+            ""/{ModelPluralNameLower}"",{AuthenticationRole}
             async Task<Results<CreatedAtRoute<{ResponseName}>, BadRequest{FluentValidationResult}>>
             (
                 CancellationToken cancellationToken,

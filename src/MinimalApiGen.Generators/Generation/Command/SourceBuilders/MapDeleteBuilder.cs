@@ -1,5 +1,4 @@
 ﻿using MinimalApiGen.Generators.Generation.Command.Results;
-using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 
@@ -102,6 +101,16 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// </summary>
     public string JwtAuthentication { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.Build() : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildRole(commandResult.AuthenticationRole) : string.Empty;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationNamespace { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(commandResult.AuthenticationRole) : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -114,7 +123,7 @@ $@"using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
-
+{AuthenticationNamespace}
 using {ModelName} = {ModelFullyQualifiedName};
 
 namespace {ClassNamespace};
@@ -133,7 +142,7 @@ public partial class {ClassName}
     {{
         return endpointRouteBuilder.MapDelete
         (
-            ""/{ModelPluralNameLower}/{{id}}"",
+            ""/{ModelPluralNameLower}/{{id}}"",{AuthenticationRole}
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,

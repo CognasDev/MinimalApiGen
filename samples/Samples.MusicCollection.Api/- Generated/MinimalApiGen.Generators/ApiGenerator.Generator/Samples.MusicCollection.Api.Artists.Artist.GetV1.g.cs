@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using MinimalApiGen.Framework.Pagination;
 using System.ComponentModel;
+
 using Artist = Samples.MusicCollection.Api.Artists.Artist;
 using ArtistResponse = Samples.MusicCollection.Api.Artists.ArtistResponse;
 

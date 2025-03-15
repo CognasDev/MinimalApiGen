@@ -138,6 +138,11 @@ internal readonly record struct CommandResult : ICommandResult
     /// </summary>
     public bool WithJwtAuthentication { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string AuthenticationRole { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -197,6 +202,7 @@ internal readonly record struct CommandResult : ICommandResult
         HandlerParameters = new(commandIntermediateResult.HandlerResult!.Parameters);
 
         WithJwtAuthentication = commandIntermediateResult.WithJwtAuthentication;
+        AuthenticationRole = commandIntermediateResult.AuthenticationRole;
     }
 
     #endregion
@@ -236,7 +242,8 @@ internal readonly record struct CommandResult : ICommandResult
                HandlerDelegateName == result.HandlerDelegateName &&
                HandlerParameters == result.HandlerParameters &&
                WithFluentValidation == result.WithFluentValidation &&
-               WithJwtAuthentication == result.WithJwtAuthentication;
+               WithJwtAuthentication == result.WithJwtAuthentication &&
+               AuthenticationRole == result.AuthenticationRole;
     }
 
     #endregion

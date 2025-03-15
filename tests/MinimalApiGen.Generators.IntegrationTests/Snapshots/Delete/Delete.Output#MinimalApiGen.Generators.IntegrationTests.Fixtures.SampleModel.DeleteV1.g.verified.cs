@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
+using Microsoft.AspNetCore.Authorization;
+
 using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
 
 namespace TestNamespace;
@@ -23,6 +25,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
         return endpointRouteBuilder.MapDelete
         (
             "/samplemodels/{id}",
+            [Authorize(Policy = "SampleRole")]
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,

@@ -21,11 +21,19 @@ public sealed class DatabaseConnectionFactory : IDatabaseConnectionFactory
     /// Default constructor for <see cref="DatabaseConnectionFactory"/>
     /// </summary>
     /// <param name="configuration"></param>
-    /// <exception cref="KeyNotFoundException"></exception>
+    /// <exception cref="NullReferenceException"></exception>
     public DatabaseConnectionFactory(IConfiguration configuration)
     {
         ArgumentNullException.ThrowIfNull(configuration, nameof(configuration));
-        _connectionString = configuration.GetConnectionString("localdb") ?? throw new KeyNotFoundException();
+        IConfigurationSection connectionStringsSection = configuration.GetSection("ConnectionStrings");
+
+        IConfigurationSection section = connectionStringsSection.GetChildren().SingleOrDefault() ?? throw new NullReferenceException("No connection strings found in configuration.");
+        if (string.IsNullOrWhiteSpace(section.Value))
+        {
+            throw new NullReferenceException();
+        }
+
+        _connectionString = section.Value;
     }
 
     #endregion

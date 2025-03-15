@@ -26,8 +26,9 @@ public sealed class WithPutOptionals : IWithPutOptionals
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    public IWithPutWithJwtAuthentication WithJwtAuthentication() => new WithPutWithJwtAuthentication();
+    public IWithPutWithJwtAuthentication WithJwtAuthentication(string role = "") => new WithPutWithJwtAuthentication();
 
     #endregion
 

@@ -17,6 +17,7 @@ builder.ConfigureLogging(LoggingType.File);
 builder.AddMinimalApiFramework();
 builder.AddMinimalApiFrameworkData();
 builder.AddMinimalApiFramewokMappingServices();
+builder.AddMinimalApiAuthorization();
 
 builder.Services.AddValidatorsFromAssemblyContaining<ArtistRequestValidator>(ServiceLifetime.Singleton);
 
@@ -34,7 +35,6 @@ builder.Services.AddSingleton<ILabelsQueryHandler, LabelsQueryHandler>();
 builder.Services.AddSingleton<ITracksQueryHandler, TracksQueryHandler>();
 
 WebApplication webApplication = builder.Build();
-webApplication.UseMinimalApiFrameworkRoutes();
 
 if (webApplication.Environment.IsDevelopment())
 {
@@ -42,5 +42,4 @@ if (webApplication.Environment.IsDevelopment())
 }
 
 webApplication.UseMinimalApiFramework();
-webApplication.UseHttpsRedirection();
 webApplication.Run();

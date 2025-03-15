@@ -10,8 +10,9 @@ public interface IPostJwtAuthentication
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="role"></param>
     /// <returns></returns>
-    IWithPostWithJwtAuthentication WithJwtAuthentication();
+    IWithPostWithJwtAuthentication WithJwtAuthentication(string role = "");
 
     #endregion
 }
