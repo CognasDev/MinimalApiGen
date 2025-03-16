@@ -18,7 +18,6 @@ internal static class AuthenticationRolesBuilder
     public static string Build(ReadOnlySpan<string> authenticationRoles) =>
 $@"namespace MinimalApiGen.Framework.Generation;
 
-using Microsoft.AspNetCore.Builder;
 using MinimalApiGen.Framework.Authentication;
 
 /// <summary>
