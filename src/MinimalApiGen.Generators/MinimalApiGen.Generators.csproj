@@ -18,7 +18,7 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0">
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.1" />
+		<PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.6.1" />
 		<PackageReference Include="System.Text.Json" Version="9.0.3">
 			<GeneratePathProperty>true</GeneratePathProperty>
 			<PrivateAssets>all</PrivateAssets>
@@ -46,7 +46,7 @@
 
 	<!--Nuget package configuration-->
 	<PropertyGroup>
-		<Version>$(VersionPrefix)1.1.6-alpha</Version>
+		<Version>$(VersionPrefix)1.1.7-alpha</Version>
 		<Title>MinimalApiGen.Generators</Title>
 		<Authors>CognasDev</Authors>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>

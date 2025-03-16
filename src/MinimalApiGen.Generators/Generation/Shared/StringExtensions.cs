@@ -89,26 +89,4 @@ internal static class StringExtensions
 
 
     #endregion
-
-    #region Private Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="word"></param>
-    /// <param name="prefixes"></param>
-    /// <returns></returns>
-    private static bool StartsWithAny(ReadOnlySpan<char> word, params string[] prefixes)
-    {
-        foreach (string prefix in prefixes)
-        {
-            if (word.StartsWith(prefix.AsSpan()))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    #endregion
 }

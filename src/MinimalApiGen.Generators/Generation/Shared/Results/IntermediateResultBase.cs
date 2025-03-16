@@ -82,7 +82,7 @@ internal abstract record IntermediateResultBase
     /// <summary>
     /// 
     /// </summary>
-    public string AuthenticationRole { get; set; } = string.Empty;
+    public string? AuthenticationRole { get; set; }
 
     #endregion
 

@@ -93,7 +93,7 @@ internal sealed class QueryProcessor
                     break;
                 case string name when (name == QueryMethodNames.WithGetJwtAuthentication || name == QueryMethodNames.WithGetByIdJwtAuthentication):
                     intermediateResult!.WithJwtAuthentication = true;
-                    intermediateResult.AuthenticationRole = invocationInfo.GetAuthenticationRole(semanticModel);
+                    intermediateResult.AuthenticationRole = invocationInfo.ToAuthenticationRole(semanticModel);
                     break;
             }
         }
