@@ -12,8 +12,9 @@ public interface ITokenGenerator
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="email"></param>
+    /// <param name="roles"></param>
     /// <returns></returns>
-    string GenerateToken(string userId, string email);
+    string GenerateToken(string userId, string email, IEnumerable<string> roles);
 
     #endregion
 }
