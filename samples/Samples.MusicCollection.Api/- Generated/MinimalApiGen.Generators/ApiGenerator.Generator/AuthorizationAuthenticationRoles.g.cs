@@ -1,5 +1,6 @@
 ﻿namespace MinimalApiGen.Framework.Generation;
 
+using Microsoft.AspNetCore.Builder;
 using MinimalApiGen.Framework.Authentication;
 
 /// <summary>
