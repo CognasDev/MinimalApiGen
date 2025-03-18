@@ -57,6 +57,17 @@ public static class ModuleLoader
             }
         });
 
+        string? entryAssemblyLocation = Assembly.GetEntryAssembly()?.Location;
+        if (!string.IsNullOrWhiteSpace(entryAssemblyLocation))
+        {
+            ReadOnlySpan<string> modules = Directory.GetFiles(entryAssemblyLocation, $"*{name}*.dll");
+            foreach (string module in modules)
+            {
+                Assembly moduleAssembly = Assembly.LoadFrom(module);
+                moduleAssemblies.Add(moduleAssembly);
+            }
+        }
+
         FrozenSet<Assembly> frozenSet = moduleAssemblies.ToFrozenSet();
         return frozenSet;
     }
