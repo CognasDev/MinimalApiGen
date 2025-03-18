@@ -60,7 +60,8 @@ public static class ModuleLoader
         string? entryAssemblyLocation = Assembly.GetEntryAssembly()?.Location;
         if (!string.IsNullOrWhiteSpace(entryAssemblyLocation))
         {
-            ReadOnlySpan<string> modules = Directory.GetFiles(entryAssemblyLocation, $"*{name}*.dll");
+            string entryAssemblyDirectory = Path.GetDirectoryName(entryAssemblyLocation)!;
+            ReadOnlySpan<string> modules = Directory.GetFiles(entryAssemblyDirectory, $"*{name}*.dll");
             foreach (string module in modules)
             {
                 Assembly moduleAssembly = Assembly.LoadFrom(module);
