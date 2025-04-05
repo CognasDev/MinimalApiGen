@@ -76,8 +76,7 @@ public sealed class TokenGenerator : ITokenGenerator
         List<Claim> claims =
         [
             new(JwtRegisteredClaimNames.Sub, userId),
-            new(JwtRegisteredClaimNames.Email, email),
-            new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(), ClaimValueTypes.Integer64),
+            new(JwtRegisteredClaimNames.Email, email)
         ];
         roles.FastForEach(role => claims.Add(new(ClaimTypes.Role, role)));
         ClaimsIdentity subject = new(claims);
