@@ -6,7 +6,6 @@ using MinimalApiGen.Framework.Data;
 using MinimalApiGen.Framework.ExceptionHandling;
 using MinimalApiGen.Framework.Generation;
 using MinimalApiGen.Framework.HealthChecks;
-using MinimalApiGen.Framework.Services;
 using MinimalApiGen.Framework.Swagger;
 using MinimalApiGen.Framework.Versioning;
 using System.Diagnostics;
@@ -35,7 +34,7 @@ public static class AddMinimalApiFrameworkExtensions
 
         serviceCollection.AddDefaultHealthChecks();
         serviceCollection.AddExceptionHandlers();
-        serviceCollection.AddHttpClientServices();
+        serviceCollection.AddHttpClient();
         serviceCollection.AddVersioning();
 
         //Data
