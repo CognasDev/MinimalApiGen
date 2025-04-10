@@ -15,15 +15,17 @@ public static partial class EndpointRouteMappingExtension
     public static void UseMinimalApiFrameworkRoutes(this WebApplication webApplication)
     {
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
+		RouteGroupBuilder apiVersionRouteV2 = webApplication.GetApiVersionRoute(2);
 
-		Samples.QuickStartApi.V1.Command.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapper = new();
-		Samples.QuickStartApi.V1.Query.SampleModelQueryRouteEndpointsMapper sampleModelQueryRouteEndpointsMapper = new();
+		Samples.QuickStartApi.V1.Command.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapperV1 = new();
+		Samples.QuickStartApi.V1.Command.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapperV2 = new();
+		Samples.QuickStartApi.V1.Query.SampleModelQueryRouteEndpointsMapper sampleModelQueryRouteEndpointsMapperV1 = new();
 
-		sampleModelCommandRouteEndpointsMapper.MapPostV1(apiVersionRouteV1);
-		sampleModelCommandRouteEndpointsMapper.MapPutV1(apiVersionRouteV1);
-		sampleModelCommandRouteEndpointsMapper.MapDeleteV1(apiVersionRouteV1);
-		sampleModelQueryRouteEndpointsMapper.MapGetV1(apiVersionRouteV1);
-		sampleModelQueryRouteEndpointsMapper.MapGetByIdV1(apiVersionRouteV1);
+		sampleModelCommandRouteEndpointsMapperV1.MapPostV1(apiVersionRouteV1);
+		sampleModelCommandRouteEndpointsMapperV1.MapPutV1(apiVersionRouteV1);
+		sampleModelCommandRouteEndpointsMapperV2.MapDeleteV2(apiVersionRouteV2);
+		sampleModelQueryRouteEndpointsMapperV1.MapGetV1(apiVersionRouteV1);
+		sampleModelQueryRouteEndpointsMapperV1.MapGetByIdV1(apiVersionRouteV1);
 
     }
 }

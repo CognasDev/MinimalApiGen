@@ -1,4 +1,5 @@
-﻿using MinimalApiGen.Generators.Abstractions.Command.Delete;
+﻿using MinimalApiGen.Generators.Abstractions.Command;
+using MinimalApiGen.Generators.Abstractions.Command.Delete;
 
 namespace MinimalApiGen.Framework.Generation.Command.Delete;
 
@@ -7,6 +8,17 @@ namespace MinimalApiGen.Framework.Generation.Command.Delete;
 /// </summary>
 public sealed class WithDeleteWithJwtAuthentication : IWithDeleteWithJwtAuthentication
 {
+    #region Public Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="version"></param>
+    /// <returns></returns>
+    public ICommandOperations WithVersion(int version) => new CommandOperations();
+
+    #endregion
+
     #region Public Method Declarations - Services
 
     /// <summary>

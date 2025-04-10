@@ -17,9 +17,9 @@ public static partial class EndpointRouteMappingExtension
     {
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
 
-		MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelQueryRouteEndpointsMapper sampleModelQueryRouteEndpointsMapper = new();
+		MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelQueryRouteEndpointsMapper sampleModelQueryRouteEndpointsMapperV1 = new();
 
-		sampleModelQueryRouteEndpointsMapper.MapGetByIdV1(apiVersionRouteV1);
+		sampleModelQueryRouteEndpointsMapperV1.MapGetByIdV1(apiVersionRouteV1);
 
     }
 }

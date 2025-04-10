@@ -19,6 +19,7 @@ public sealed class ArtistsCommandGenerator
                                        .WithModelId(model => model.ArtistId)
                                        .WithPost()
                                             .WithHandler<IArtistsCommandHandler>(command => command.InsertArtistAsync)
+                                            .WithJwtAuthentication()
                                             .WithRequest<ArtistRequest>()
                                             .WithFluentValidation()
                                             .WithRequestMappingService()
@@ -38,7 +39,8 @@ public sealed class ArtistsCommandGenerator
         ApiGeneration.Command<Artist>().WithNamespaceOf<IArtistsCommandHandler>()
                                        .WithModelId(model => model.ArtistId)
                                        .WithDelete()
-                                            .WithHandler<IArtistsCommandHandler>(command => command.DeleteArtistAsync);
+                                            .WithHandler<IArtistsCommandHandler>(command => command.DeleteArtistAsync)
+                                            .WithJwtAuthentication();
 
     }
 

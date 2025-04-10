@@ -28,7 +28,7 @@ public static class AddMinimalApiFrameworkExtensions
 
         serviceCollection.AddPagination(); //needs to be before exception handlers
         serviceCollection.AddOutputCache();
-        
+        builder.AddMinimalApiAuthorization();
         builder.AddMinimalApiFramewokMappingServices();
 
         serviceCollection.AddDefaultHealthChecks();

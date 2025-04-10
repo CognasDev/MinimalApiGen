@@ -75,6 +75,8 @@ public static partial class EndpointRouteMappingExtension
             builder.Append(versionWithName.FullName);
             builder.Append(" ");
             builder.Append(versionWithName.ClassName);
+            builder.Append("V");
+            builder.Append(versionWithName.Version);
             builder.AppendLine(" = new();");
         }
 
@@ -85,6 +87,8 @@ public static partial class EndpointRouteMappingExtension
             int version = endpointRouteMapping.Version;
             builder.Append("\t\t");
             builder.Append(JsonNamingPolicy.CamelCase.ConvertName(endpointRouteMapping.ClassName));
+            builder.Append("V");
+            builder.Append(version);
             builder.Append(".Map");
             builder.Append(endpointRouteMapping.OperationType);
             builder.Append("V");

@@ -3,41 +3,41 @@ using Microsoft.AspNetCore.Mvc;
 using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
-using Artist = Samples.MusicCollection.Api.Artists.Artist;
+using SampleModel = Samples.QuickStartApi.V1.Model.SampleModel;
 
-namespace Samples.MusicCollection.Api.Artists;
+namespace Samples.QuickStartApi.V1.Command;
 
 /// <summary>
 /// 
 /// </summary>
 #nullable enable
-public partial class ArtistCommandRouteEndpointsMapper
+public partial class SampleModelCommandRouteEndpointsMapper
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="endpointRouteBuilder"></param>
-    public virtual RouteHandlerBuilder MapDeleteV1(IEndpointRouteBuilder endpointRouteBuilder)
+    public virtual RouteHandlerBuilder MapDeleteV2(IEndpointRouteBuilder endpointRouteBuilder)
     {
         return endpointRouteBuilder.MapDelete
         (
-            "/artists/{id}",
+            "/samplemodels/{id}",
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
                 [FromRoute] int id,
-                [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandHandler handler
+                [FromServices] Samples.QuickStartApi.V1.Command.ICommandHandlerV1 handler
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
-                await handler.DeleteArtistAsync(id).ConfigureAwait(false);
+                await handler.DeleteModelAsync(id, cancellationToken).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
         )
-        .WithName("Artists-Delete-V1")
-        .WithTags("artists")
-        .WithOpenApi(operation => new(operation) { Summary = "Deletes an Artist via the id." })
-        .MapToApiVersion(1)
+        .WithName("SampleModels-Delete-V2")
+        .WithTags("samplemodels")
+        .WithOpenApi(operation => new(operation) { Summary = "Deletes a SampleModel via the id." })
+        .MapToApiVersion(2)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)

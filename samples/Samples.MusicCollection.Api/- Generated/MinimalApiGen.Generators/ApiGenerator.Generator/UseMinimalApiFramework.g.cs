@@ -30,7 +30,8 @@ public static class UseMinimalApiFrameworkExtensions
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
         webApplication.UseHttpsRedirection();
-        
+        webApplication.UseAuthentication();
+		webApplication.UseAuthorization();
     }
 
     #endregion
