@@ -8,7 +8,7 @@ namespace MinimalApiGen.Framework.Pluralize;
 /// <summary>
 /// 
 /// </summary>
-internal sealed class Pluralizer : IPluralizer
+public sealed class Pluralizer : IPluralizer
 {
     #region Field Declarations
 
