@@ -1,9 +1,7 @@
 using FluentValidation;
-using MinimalApiGen.Framework.Data;
 using MinimalApiGen.Framework.Extensions;
 using MinimalApiGen.Framework.Generation;
 using MinimalApiGen.Framework.Logging;
-using MinimalApiGen.Framework.Swagger;
 using Samples.MusicCollection.Api.Albums;
 using Samples.MusicCollection.Api.Artists;
 using Samples.MusicCollection.Api.Genres;
@@ -15,10 +13,6 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.ConfigureLogging(LoggingType.File);
 
 builder.AddMinimalApiFramework();
-builder.AddMinimalApiFrameworkData();
-builder.AddMinimalApiFramewokMappingServices();
-builder.AddMinimalApiAuthorization();
-
 builder.Services.AddValidatorsFromAssemblyContaining<ArtistRequestValidator>(ServiceLifetime.Singleton);
 
 builder.Services.AddSingleton<IArtistsCommandHandler, ArtistsCommandHandler>();
@@ -35,11 +29,5 @@ builder.Services.AddSingleton<ILabelsQueryHandler, LabelsQueryHandler>();
 builder.Services.AddSingleton<ITracksQueryHandler, TracksQueryHandler>();
 
 WebApplication webApplication = builder.Build();
-
-if (webApplication.Environment.IsDevelopment())
-{
-    webApplication.AddSwagger();
-}
-
 webApplication.UseMinimalApiFramework();
 webApplication.Run();

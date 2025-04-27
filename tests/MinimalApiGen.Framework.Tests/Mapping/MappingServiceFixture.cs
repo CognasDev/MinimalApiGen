@@ -5,7 +5,7 @@ namespace MinimalApiGen.Framework.Tests.Mapping;
 /// <summary>
 /// 
 /// </summary>
-internal sealed class TestMappingService : MappingServiceBase<int, string>
+internal sealed class MappingServiceFixture : MappingServiceBase<int, string>
 {
     #region Public Method Declarations
 

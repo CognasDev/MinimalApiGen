@@ -1,5 +1,4 @@
-﻿using MinimalApiGen.Generators.Generation.Command.Results;
-using MinimalApiGen.Generators.Generation.Query.Results;
+﻿using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using System.Collections.Generic;
@@ -46,7 +45,7 @@ internal static class QueryIntermediateResultExtensions
     {
         if (queryIntermediateResult is not null)
         {
-            queryIntermediateResult.QueryNamespace = queryNamespace;
+            queryIntermediateResult.Namespace = queryNamespace;
             queryIntermediateResult.ModelIdPropertyResult = modelIdPropertyResult;
             queryIntermediateResults.Add(queryIntermediateResult);
         }

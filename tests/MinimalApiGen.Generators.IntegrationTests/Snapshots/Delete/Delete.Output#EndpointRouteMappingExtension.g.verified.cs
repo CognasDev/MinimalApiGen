@@ -17,9 +17,9 @@ public static partial class EndpointRouteMappingExtension
     {
 		RouteGroupBuilder apiVersionRouteV1 = webApplication.GetApiVersionRoute(1);
 
-		TestNamespace.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapper = new();
+		TestNamespace.SampleModelCommandRouteEndpointsMapper sampleModelCommandRouteEndpointsMapperV1 = new();
 
-		sampleModelCommandRouteEndpointsMapper.MapDeleteV1(apiVersionRouteV1);
+		sampleModelCommandRouteEndpointsMapperV1.MapDeleteV1(apiVersionRouteV1);
 
     }
 }

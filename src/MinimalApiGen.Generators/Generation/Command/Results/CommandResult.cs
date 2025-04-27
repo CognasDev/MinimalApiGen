@@ -19,7 +19,7 @@ internal readonly record struct CommandResult : ICommandResult
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; }
+    public string Namespace { get; }
 
     /// <summary>
     /// 
@@ -143,6 +143,16 @@ internal readonly record struct CommandResult : ICommandResult
     /// </summary>
     public string AuthenticationRole { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FilterName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FilterFullyQualifiedName { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -173,7 +183,7 @@ internal readonly record struct CommandResult : ICommandResult
     public CommandResult(CommandIntermediateResult commandIntermediateResult)
     {
         ClassName = $"{commandIntermediateResult.ModelName}CommandRouteEndpointsMapper";
-        ClassNamespace = commandIntermediateResult.CommandNamespace!;
+        Namespace = commandIntermediateResult.Namespace!;
         ModelName = commandIntermediateResult.ModelName;
         ModelPluralName = commandIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = commandIntermediateResult.ModelFullyQualifiedName;
@@ -181,7 +191,7 @@ internal readonly record struct CommandResult : ICommandResult
         ModelIdPropertyName = commandIntermediateResult.ModelIdPropertyResult.PropertyName;
         ModelIdPropertyType = commandIntermediateResult.ModelIdPropertyResult.PropertyType;
         ModelIdUnderlyingPropertyType = commandIntermediateResult.ModelIdPropertyResult.UnderlyingType;
-        OperationType = commandIntermediateResult.CommandType;
+        OperationType = commandIntermediateResult.OperationType;
 
         RequestName = commandIntermediateResult.RequestResult.RequestName;
         WithFluentValidation = commandIntermediateResult.WithFluentValidation;
@@ -202,7 +212,10 @@ internal readonly record struct CommandResult : ICommandResult
         HandlerParameters = new(commandIntermediateResult.HandlerResult!.Parameters);
 
         WithJwtAuthentication = commandIntermediateResult.WithJwtAuthentication;
-        AuthenticationRole = commandIntermediateResult.AuthenticationRole;
+        AuthenticationRole = commandIntermediateResult.AuthenticationRole ?? string.Empty;
+
+        FilterName = commandIntermediateResult.AddEndpointFilterResult?.FilterName ?? string.Empty;
+        FilterFullyQualifiedName = commandIntermediateResult.AddEndpointFilterResult?.FilterFullyQualifiedName ?? string.Empty;
     }
 
     #endregion
@@ -218,7 +231,7 @@ internal readonly record struct CommandResult : ICommandResult
     {
         return other is CommandResult result &&
                ClassName == result.ClassName &&
-               ClassNamespace == result.ClassNamespace &&
+               Namespace == result.Namespace &&
                ModelName == result.ModelName &&
                ModelPluralName == result.ModelPluralName &&
                ModelFullyQualifiedName == result.ModelFullyQualifiedName &&
@@ -243,7 +256,9 @@ internal readonly record struct CommandResult : ICommandResult
                HandlerParameters == result.HandlerParameters &&
                WithFluentValidation == result.WithFluentValidation &&
                WithJwtAuthentication == result.WithJwtAuthentication &&
-               AuthenticationRole == result.AuthenticationRole;
+               AuthenticationRole == result.AuthenticationRole &&
+               FilterName == result.FilterName &&
+               FilterFullyQualifiedName == result.FilterFullyQualifiedName;
     }
 
     #endregion

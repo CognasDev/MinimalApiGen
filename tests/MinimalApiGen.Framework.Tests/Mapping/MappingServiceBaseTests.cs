@@ -16,7 +16,7 @@ public sealed class MappingServiceBaseTests
     public void Map_SingleItem_ReturnsMappedItem()
     {
         // Arrange
-        TestMappingService service = new();
+        MappingServiceFixture service = new();
         int source = 1;
 
         // Act
@@ -33,7 +33,7 @@ public sealed class MappingServiceBaseTests
     public void Map_Collection_ReturnsMappedCollection()
     {
         // Arrange
-        TestMappingService service = new();
+        MappingServiceFixture service = new();
         List<int> sourceCollection = [1, 2, 3];
 
         // Act

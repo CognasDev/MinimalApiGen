@@ -21,6 +21,8 @@ internal static class WithQueryParametersHandler
     /// 
     /// </summary>
     /// <param name="fluentInvocation"></param>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
     public static IEnumerable<QueryParameterResult> ToQueryParameters(this InvocationInfo fluentInvocation)
     {
         List<QueryParameterResult> queryParameterResults = [];

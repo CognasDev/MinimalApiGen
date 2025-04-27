@@ -10,34 +10,9 @@ namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 /// 
 /// </summary>
 /// <param name="result"></param>
-internal sealed class ResponseMappingServiceBuilder(IResult result)
+internal sealed class ResponseMappingServiceBuilder(IResult result) : MappingServiceBuilderBase(result)
 {
     #region Property Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ClassNamespace { get; } = result.ClassNamespace;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ModelName { get; } = result.ModelName;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string ModelFullyQualifiedName { get; } = result.ModelFullyQualifiedName;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public string OperationName { get; } = result.OperationType.ToString();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public int Version { get; } = result.ApiVersion;
 
     /// <summary>
     /// 
@@ -52,17 +27,12 @@ internal sealed class ResponseMappingServiceBuilder(IResult result)
     /// <summary>
     /// 
     /// </summary>
-    public EquatableArray<string> ModelProperties { get; } = result.ModelProperties;
-
-    /// <summary>
-    /// 
-    /// </summary>
     public EquatableArray<string> ResponseProperties { get; } = result.ResponseProperties;
 
     /// <summary>
     /// 
     /// </summary>
-    public string MappingServiceName => $"{OperationName}{ModelName}To{ResponseName}MappingServiceV{Version}";
+    public override string MappingServiceName => $"{OperationName}{ModelName}To{ResponseName}MappingServiceV{Version}";
 
     #endregion
 
@@ -77,7 +47,7 @@ $@"using MinimalApiGen.Framework.Mapping;
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 
@@ -95,43 +65,13 @@ public sealed class {MappingServiceName} : MappingServiceBase<{ModelName}, {Resp
     {{
         {ResponseName} response = new()
         {{
-{BuildPropertyMap()}
+{BuildPropertyMap(ModelProperties, ResponseProperties, "model")}
         }};
         return response;
     }}
 
     #endregion
 }}";
-
-    #endregion
-
-    #region Private Method Declarations
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
-    private string BuildPropertyMap()
-    {
-        ReadOnlySpan<string> commonProperties = ModelProperties.Where
-                                                                (
-                                                                    modelProperty => ResponseProperties.Any(responseProperty => responseProperty == modelProperty)
-                                                                )
-                                                               .Select(modelProperty => modelProperty)
-                                                               .ToArray();
-
-        StringBuilder stringBuilder = new();
-        foreach (string propertyName in commonProperties)
-        {
-            stringBuilder.Append("\t\t\t");
-            stringBuilder.Append(propertyName);
-            stringBuilder.Append(" = model.");
-            stringBuilder.Append(propertyName);
-            stringBuilder.AppendLine(",");
-        }
-        string propertyMap = stringBuilder.ToString();
-        return propertyMap;
-    }
 
     #endregion
 }

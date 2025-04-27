@@ -81,12 +81,5 @@ public sealed partial class AllMusicPage
 
     #endregion
 
-    #region Private Method Declarations
 
-    void CompleteUpload(UploadCompleteEventArgs args)
-    {
-        var d = 3;
-    }
-
-    #endregion
 }

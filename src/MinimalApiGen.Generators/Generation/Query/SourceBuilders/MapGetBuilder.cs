@@ -1,5 +1,4 @@
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
@@ -26,7 +25,7 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; } = queryResult.ClassNamespace;
+    public string Namespace { get; } = queryResult.Namespace;
 
     /// <summary>
     /// 
@@ -141,6 +140,11 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// </summary>
     public string AuthenticationNamespace { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(queryResult.AuthenticationRole) : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string EndpointFilter { get; } = !string.IsNullOrWhiteSpace(queryResult.FilterFullyQualifiedName) ? AddEndpointFilterBuilder.Build(queryResult.FilterFullyQualifiedName): string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -157,7 +161,7 @@ using System.Net.Mime;
 using {ModelName} = {ModelFullyQualifiedName};
 using {ResponseName} = {ResponseFullyQualifiedName};
 
-namespace {ClassNamespace};
+namespace {Namespace};
 
 /// <summary>
 /// 
@@ -202,7 +206,7 @@ public partial class {ClassName}
         .MapToApiVersion({ApiVersion})
         .Produces<IEnumerable<{ResponseName}>>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor}{JwtAuthentication};
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor}{JwtAuthentication}{EndpointFilter};
      }}
 }}";
 

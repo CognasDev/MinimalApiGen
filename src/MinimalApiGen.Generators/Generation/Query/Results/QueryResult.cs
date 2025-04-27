@@ -1,4 +1,5 @@
 using MinimalApiGen.Generators.Equality;
+using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 
@@ -19,7 +20,7 @@ internal readonly record struct QueryResult : IQueryResult
     /// <summary>
     /// 
     /// </summary>
-    public string ClassNamespace { get; }
+    public string Namespace { get; }
 
     /// <summary>
     /// 
@@ -129,6 +130,16 @@ internal readonly record struct QueryResult : IQueryResult
     /// </summary>
     public string AuthenticationRole { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FilterName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FilterFullyQualifiedName { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -159,7 +170,7 @@ internal readonly record struct QueryResult : IQueryResult
     public QueryResult(QueryIntermediateResult queryIntermediateResult)
     {
         ClassName = $"{queryIntermediateResult.ModelName}QueryRouteEndpointsMapper";
-        ClassNamespace = queryIntermediateResult.QueryNamespace!;
+        Namespace = queryIntermediateResult.Namespace!;
         ModelName = queryIntermediateResult.ModelName;
         ModelPluralName = queryIntermediateResult.ModelPluralName;
         ModelFullyQualifiedName = queryIntermediateResult.ModelFullyQualifiedName;
@@ -185,9 +196,12 @@ internal readonly record struct QueryResult : IQueryResult
         HandlerParameters = new(queryIntermediateResult.HandlerResult!.Parameters);
 
         WithJwtAuthentication = queryIntermediateResult.WithJwtAuthentication;
-        AuthenticationRole = queryIntermediateResult.AuthenticationRole;
+        AuthenticationRole = queryIntermediateResult.AuthenticationRole ?? string.Empty;
 
         QueryParameterResults = new(queryIntermediateResult.QueryParameterResults);
+
+        FilterName = queryIntermediateResult.AddEndpointFilterResult?.FilterName ?? string.Empty;
+        FilterFullyQualifiedName = queryIntermediateResult.AddEndpointFilterResult?.FilterFullyQualifiedName ?? string.Empty;
     }
 
     #endregion
@@ -203,7 +217,7 @@ internal readonly record struct QueryResult : IQueryResult
     {
         return other is QueryResult result &&
                ClassName == result.ClassName &&
-               ClassNamespace == result.ClassNamespace &&
+               Namespace == result.Namespace &&
                ModelName == result.ModelName &&
                ModelPluralName == result.ModelPluralName &&
                ModelFullyQualifiedName == result.ModelFullyQualifiedName &&
@@ -226,7 +240,10 @@ internal readonly record struct QueryResult : IQueryResult
                HandlerParameters.Equals(result.HandlerParameters) &&
                QueryParameterResults.Equals(result.QueryParameterResults) &&
                WithJwtAuthentication == result.WithJwtAuthentication &&
-               AuthenticationRole == result.AuthenticationRole;
+               AuthenticationRole == result.AuthenticationRole &&
+               FilterName == result.FilterName &&
+               FilterFullyQualifiedName == result.FilterFullyQualifiedName;
+
     }
 
     #endregion

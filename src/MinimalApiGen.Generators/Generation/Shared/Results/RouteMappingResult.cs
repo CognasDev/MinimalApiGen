@@ -3,8 +3,8 @@
 /// <summary>
 /// 
 /// </summary>
-/// <param name="ClassNamespace"></param>
+/// <param name="Namespace"></param>
 /// <param name="ClassName"></param>
 /// <param name="Version"></param>
 /// <param name="OperationType"></param>
-internal readonly record struct RouteMappingResult(string ClassNamespace, string ClassName, int Version, OperationType OperationType);
+internal readonly record struct RouteMappingResult(string Namespace, string ClassName, int Version, OperationType OperationType);

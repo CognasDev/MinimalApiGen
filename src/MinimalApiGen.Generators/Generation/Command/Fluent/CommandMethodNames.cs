@@ -96,6 +96,11 @@ internal static class CommandMethodNames
     /// </summary>
     public static string WithPostJwtAuthentication { get; } = $"{typeof(IPostJwtAuthentication).FullName}.{nameof(IPostJwtAuthentication.WithJwtAuthentication)}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPostAddEndpontFilter { get; } = $"{typeof(IPostAddEndpointFilter).FullName}.{nameof(IPostAddEndpointFilter.WithAddEndpointFilter)}";
+
     #endregion
 
     #region Property Declarations - Put
@@ -140,6 +145,11 @@ internal static class CommandMethodNames
     /// </summary>
     public static string WithPutJwtAuthentication { get; } = $"{typeof(IPutJwtAuthentication).FullName}.{nameof(IPutJwtAuthentication.WithJwtAuthentication)}";
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithPutAddEndpontFilter { get; } = $"{typeof(IPutAddEndpointFilter).FullName}.{nameof(IPutAddEndpointFilter.WithAddEndpointFilter)}";
+
     #endregion
 
     #region Property Declarations - Delete
@@ -168,6 +178,11 @@ internal static class CommandMethodNames
     /// 
     /// </summary>
     public static string WithDeleteJwtAuthentication { get; } = $"{typeof(IDeleteJwtAuthentication).FullName}.{nameof(IDeleteJwtAuthentication.WithJwtAuthentication)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithDeleteAddEndpontFilter { get; } = $"{typeof(IDeleteAddEndpointFilter).FullName}.{nameof(IDeleteAddEndpointFilter.WithAddEndpointFilter)}";
 
     #endregion
 }

@@ -50,6 +50,13 @@ public sealed class WithGetByIdWithJwtAuthentication : IWithGetByIdWithJwtAuthen
     /// <typeparam name="TService4"></typeparam>
     public IWithGetByIdWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithGetByIdWithServices();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEndpointFilter"></typeparam>
+    /// <returns></returns>
+    public IWithGetByIdWithAddEndpointFilter WithAddEndpointFilter<TEndpointFilter>() => new WithGetByIdWithAddEndpointFilter();
+
     #endregion
 
     #region Public Method Declarations - KeyedServices

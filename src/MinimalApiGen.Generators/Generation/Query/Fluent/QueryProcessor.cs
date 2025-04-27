@@ -1,6 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
 using MinimalApiGen.Generators.Equality;
-using MinimalApiGen.Generators.Generation.Command.Results;
 using MinimalApiGen.Generators.Generation.Query.FluentHandlers;
 using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
@@ -94,7 +93,10 @@ internal sealed class QueryProcessor
                     break;
                 case string name when (name == QueryMethodNames.WithGetJwtAuthentication || name == QueryMethodNames.WithGetByIdJwtAuthentication):
                     intermediateResult!.WithJwtAuthentication = true;
-                    intermediateResult.AuthenticationRole = invocationInfo.GetAuthenticationRole(semanticModel);
+                    intermediateResult.AuthenticationRole = invocationInfo.ToAuthenticationRole(semanticModel);
+                    break;
+                case string name when (name == QueryMethodNames.WithGetAddEndpontFilter || name == QueryMethodNames.WithGetByIdAddEndpontFilter):
+                    intermediateResult!.AddEndpointFilterResult = invocationInfo.ToEndpointFilter();
                     break;
             }
         }

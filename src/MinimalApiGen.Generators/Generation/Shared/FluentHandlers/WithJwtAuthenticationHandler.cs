@@ -17,7 +17,7 @@ internal static class WithJwtAuthenticationHandler
     /// <param name="fluentInvocation"></param>
     /// <param name="semanticModel"></param>
     /// <returns></returns>
-    public static string? GetAuthenticationRole(this InvocationInfo fluentInvocation, SemanticModel semanticModel)
+    public static string? ToAuthenticationRole(this InvocationInfo fluentInvocation, SemanticModel semanticModel)
     {
         ExpressionSyntax? expression = fluentInvocation.InvocationExpressionSyntax.ArgumentList.Arguments.SingleOrDefault()?.Expression;
         if (expression is null)

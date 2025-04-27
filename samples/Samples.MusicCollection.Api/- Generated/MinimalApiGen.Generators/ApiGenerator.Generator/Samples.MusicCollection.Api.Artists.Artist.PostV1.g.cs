@@ -66,6 +66,7 @@ public partial class ArtistCommandRouteEndpointsMapper
         .Accepts<ArtistRequest>(MediaTypeNames.Application.Json)
         .Produces<ArtistResponse>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)
+        .RequireAuthorization();
      }
 }

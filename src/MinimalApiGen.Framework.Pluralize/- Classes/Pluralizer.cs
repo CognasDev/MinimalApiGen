@@ -8,7 +8,7 @@ namespace MinimalApiGen.Framework.Pluralize;
 /// <summary>
 /// 
 /// </summary>
-internal sealed class Pluralizer : IPluralizer
+public sealed class Pluralizer : IPluralizer
 {
     #region Field Declarations
 
@@ -70,7 +70,7 @@ internal sealed class Pluralizer : IPluralizer
     /// <param name="originalWord"></param>
     /// <param name="newWord"></param>
     /// <returns></returns>
-    private string RestoreCase(string originalWord, string newWord)
+    private static string RestoreCase(string originalWord, string newWord)
     {
         if (originalWord == newWord)
         {

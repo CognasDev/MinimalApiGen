@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithPutWithJwtAuthentication : IPutServices, IPutKeyedServices, IPutRequest, IPutResponse
+public interface IWithPutWithJwtAuthentication : IPutServices, IPutKeyedServices, IPutRequest, IPutResponse, IPutAddEndpointFilter
 {
 }

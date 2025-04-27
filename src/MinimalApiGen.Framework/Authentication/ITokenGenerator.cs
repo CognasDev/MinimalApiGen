@@ -12,8 +12,10 @@ public interface ITokenGenerator
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="email"></param>
+    /// <param name="additionalClaims"></param>
+    /// <param name="roles"></param>
     /// <returns></returns>
-    string GenerateToken(string userId, string email);
+    string GenerateToken(string userId, string email, IDictionary<string, string> additionalClaims, IEnumerable<string> roles);
 
     #endregion
 }

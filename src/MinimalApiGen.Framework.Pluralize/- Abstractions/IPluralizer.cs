@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-internal interface IPluralizer
+public interface IPluralizer
 {
     #region Method Declarations
 

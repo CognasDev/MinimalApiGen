@@ -18,7 +18,7 @@ internal interface IResult : IEquatable<IResult>
     /// <summary>
     /// 
     /// </summary>
-    string ClassNamespace { get; }
+    string Namespace { get; }
 
     /// <summary>
     /// 
@@ -107,6 +107,16 @@ internal interface IResult : IEquatable<IResult>
     /// 
     /// </summary>
     string AuthenticationRole { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    string FilterName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    string FilterFullyQualifiedName { get; }
 
     #endregion
 

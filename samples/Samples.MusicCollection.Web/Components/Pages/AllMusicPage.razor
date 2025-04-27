@@ -21,7 +21,6 @@
                         <RadzenRow>
                             <RadzenUpload Name="file" Icon="upload" ChooseText="" Accept="image/*"
                                           InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "select file" }})"
-                                          Complete=@CompleteUpload
                                           Url="api/AllMusic/Images/Artists" Multiple="false" AutoUpload="true" />
                             <RadzenButton Icon="delete" />
                         </RadzenRow>
