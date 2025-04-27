@@ -54,7 +54,7 @@ public sealed class QueryDatabaseService : IQueryDatabaseService
     {
         DynamicParameters? dynamicParameters = _dynamicParameterFactory.Create(parameters);
         using IDbConnection dbConnection = _databaseConnectionFactory.Create();
-        return await dbConnection.QueryAsync<TModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        return await dbConnection.QueryAsync<TModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure);
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public sealed class QueryDatabaseService : IQueryDatabaseService
         parameterList.AddRange(parameters);
         DynamicParameters? dynamicParameters = _dynamicParameterFactory.Create(parameterList);
         using IDbConnection dbConnection = _databaseConnectionFactory.Create();
-        return await dbConnection.QueryAsync<TModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        return await dbConnection.QueryAsync<TModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure);
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public sealed class QueryDatabaseService : IQueryDatabaseService
     {
         DynamicParameters? dynamicParameters = _dynamicParameterFactory.Create(parameters);
         using IDbConnection dbConnection = _databaseConnectionFactory.Create();
-        return await dbConnection.QuerySingleOrDefaultAsync<TModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        return await dbConnection.QuerySingleOrDefaultAsync<TModel>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure);
     }
 
     #endregion

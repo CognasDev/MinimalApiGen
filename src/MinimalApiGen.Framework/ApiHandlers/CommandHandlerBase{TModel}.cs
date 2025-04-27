@@ -78,7 +78,7 @@ public abstract class CommandHandlerBase<TModel> where TModel : class
     /// <exception cref="NullReferenceException"></exception>
     protected async Task<TModel> InsertModelAsync(TModel model)
     {
-        TModel? insertedModel = await _databaseService.InsertModelAsync(InsertStoredProcedure, model).ConfigureAwait(false);
+        TModel? insertedModel = await _databaseService.InsertModelAsync(InsertStoredProcedure, model);
         return insertedModel ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(InsertStoredProcedure)}: {InsertStoredProcedure}");
     }
 
@@ -90,7 +90,7 @@ public abstract class CommandHandlerBase<TModel> where TModel : class
     /// <exception cref="NullReferenceException"></exception>
     public async Task<TModel> UpdateModelAsync(TModel model)
     {
-        TModel? updatedModel = await _databaseService.UpdateModelAsync(UpdateStoredProcedure, model).ConfigureAwait(false);
+        TModel? updatedModel = await _databaseService.UpdateModelAsync(UpdateStoredProcedure, model);
         return updatedModel ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(UpdateStoredProcedure)}: {UpdateStoredProcedure}");
     }
 
@@ -101,7 +101,7 @@ public abstract class CommandHandlerBase<TModel> where TModel : class
     /// <returns></returns>
     public async Task<bool> DeleteModelAsync(params IParameter[] parameters)
     {
-        int deleteCount = await _databaseService.DeleteModelAsync(DeleteStoredProcedure, parameters).ConfigureAwait(false);
+        int deleteCount = await _databaseService.DeleteModelAsync(DeleteStoredProcedure, parameters);
         bool result = deleteCount == 1;
         return result;
     }

@@ -40,12 +40,12 @@ public sealed class ApiHealthCheck : IHealthCheck
         try
         {
             HealthCheckResult healthyResult = _healthCheckResultHelper.Healthy("Api is running.");
-            return await Task.FromResult(healthyResult).ConfigureAwait(false);
+            return await Task.FromResult(healthyResult);
         }
         catch (Exception exception)
         {
             HealthCheckResult apiDownResult = _healthCheckResultHelper.Failed(context.Registration.FailureStatus, "Api is down.", exception);
-            return await Task.FromResult(apiDownResult).ConfigureAwait(false);
+            return await Task.FromResult(apiDownResult);
         }
     }
 

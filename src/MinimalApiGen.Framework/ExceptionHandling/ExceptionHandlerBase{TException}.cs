@@ -65,7 +65,7 @@ public abstract class ExceptionHandlerBase<TException> : IExceptionHandler where
 
         httpContext.Response.StatusCode = StatusCode;
         ProblemDetails problemDetails = CreateProblemDetails(stronglyTypedException);
-        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken).ConfigureAwait(false);
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
         return true;
     }
 

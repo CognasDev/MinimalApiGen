@@ -55,16 +55,16 @@ public sealed class DatabaseHealthCheck : IHealthCheck
             {
                 dbConnection.Close();
                 HealthCheckResult healthyResult = _healthCheckResultHelper.Healthy("Successful database connection.");
-                return await Task.FromResult(healthyResult).ConfigureAwait(false);
+                return await Task.FromResult(healthyResult);
             }
 
             HealthCheckResult cannontConnectResult = BuildCannotConnectResult(context.Registration.FailureStatus);
-            return await Task.FromResult(cannontConnectResult).ConfigureAwait(false);
+            return await Task.FromResult(cannontConnectResult);
         }
         catch (Exception exception)
         {
             HealthCheckResult cannontConnectResult = BuildCannotConnectResult(context.Registration.FailureStatus, exception);
-            return await Task.FromResult(cannontConnectResult).ConfigureAwait(false);
+            return await Task.FromResult(cannontConnectResult);
         }
     }
 

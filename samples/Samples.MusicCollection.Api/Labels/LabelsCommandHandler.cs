@@ -17,13 +17,13 @@ public sealed class LabelsCommandHandler(ILogger<LabelsCommandHandler> logger, I
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Label> InsertLabelAsync(Label album) => await InsertModelAsync(album).ConfigureAwait(false);
+    public async Task<Label> InsertLabelAsync(Label album) => await InsertModelAsync(album);
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Label> UpdateLabelAsync(Label album) => await UpdateModelAsync(album).ConfigureAwait(false);
+    public async Task<Label> UpdateLabelAsync(Label album) => await UpdateModelAsync(album);
 
     /// <summary>
     /// 
@@ -33,7 +33,7 @@ public sealed class LabelsCommandHandler(ILogger<LabelsCommandHandler> logger, I
     public async Task DeleteLabelAsync(int id)
     {
         ModelParameter<Label> parameter = new(label => label.LabelId, id);
-        await DeleteModelAsync(parameter).ConfigureAwait(false);
+        await DeleteModelAsync(parameter);
     }
 
     #endregion

@@ -30,7 +30,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
-                await handler.DeleteModelAsync(id, cancellationToken).ConfigureAwait(false);
+                await handler.DeleteModelAsync(id, cancellationToken);
                 return TypedResults.NoContent();
             }
         )

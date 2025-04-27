@@ -39,11 +39,11 @@ public sealed class TracksQueryHandler : QueryHandlerBase<Track>, ITracksQueryHa
         if (albumId.HasValue)
         {
             ModelParameter<Track> artistIdParameter = new(track => track.AlbumId, albumId);
-            tracks = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter).ConfigureAwait(false);
+            tracks = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter);
         }
         else
         {
-            tracks = await SelectModelsAsync().ConfigureAwait(false);
+            tracks = await SelectModelsAsync();
         }
         return tracks;
     }
@@ -56,7 +56,7 @@ public sealed class TracksQueryHandler : QueryHandlerBase<Track>, ITracksQueryHa
     public async Task<Track?> SelectTrackAsync(int id)
     {
         ModelParameter<Track> parameter = new(track => track.TrackId, id);
-        Track? selectedModel = await SelectModelAsync(parameter).ConfigureAwait(false);
+        Track? selectedModel = await SelectModelAsync(parameter);
         return selectedModel;
     }
 
