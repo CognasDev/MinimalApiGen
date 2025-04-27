@@ -143,6 +143,16 @@ internal readonly record struct CommandResult : ICommandResult
     /// </summary>
     public string AuthenticationRole { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FilterName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string FilterFullyQualifiedName { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details
@@ -202,7 +212,10 @@ internal readonly record struct CommandResult : ICommandResult
         HandlerParameters = new(commandIntermediateResult.HandlerResult!.Parameters);
 
         WithJwtAuthentication = commandIntermediateResult.WithJwtAuthentication;
-        AuthenticationRole = commandIntermediateResult.AuthenticationRole;
+        AuthenticationRole = commandIntermediateResult.AuthenticationRole ?? string.Empty;
+
+        FilterName = commandIntermediateResult.AddEndpointFilterResult?.FilterName ?? string.Empty;
+        FilterFullyQualifiedName = commandIntermediateResult.AddEndpointFilterResult?.FilterFullyQualifiedName ?? string.Empty;
     }
 
     #endregion
@@ -243,7 +256,9 @@ internal readonly record struct CommandResult : ICommandResult
                HandlerParameters == result.HandlerParameters &&
                WithFluentValidation == result.WithFluentValidation &&
                WithJwtAuthentication == result.WithJwtAuthentication &&
-               AuthenticationRole == result.AuthenticationRole;
+               AuthenticationRole == result.AuthenticationRole &&
+               FilterName == result.FilterName &&
+               FilterFullyQualifiedName == result.FilterFullyQualifiedName;
     }
 
     #endregion

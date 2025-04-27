@@ -17,6 +17,13 @@ public sealed class WithDeleteWithJwtAuthentication : IWithDeleteWithJwtAuthenti
     /// <returns></returns>
     public ICommandOperations WithVersion(int version) => new CommandOperations();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEndpointFilter"></typeparam>
+    /// <returns></returns>
+    public IWithDeleteWithAddEndpointFilter WithAddEndpointFilter<TEndpointFilter>() => new WithDeleteWithAddEndpointFilter();
+
     #endregion
 
     #region Public Method Declarations - Services

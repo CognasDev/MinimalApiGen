@@ -84,6 +84,11 @@ internal abstract record IntermediateResultBase
     /// </summary>
     public string? AuthenticationRole { get; set; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public AddEndpointFilterResult? AddEndpointFilterResult { get; set; }
+
     #endregion
 
     #region Constructor Declarations

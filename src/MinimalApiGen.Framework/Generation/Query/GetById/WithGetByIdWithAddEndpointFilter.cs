@@ -5,7 +5,7 @@ namespace MinimalApiGen.Framework.Generation.Query.GetById;
 /// <summary>
 /// 
 /// </summary>
-public sealed class WithGetByIdWithJwtAuthentication : IWithGetByIdWithJwtAuthentication
+public sealed class WithGetByIdWithAddEndpointFilter : IWithGetByIdWithAddEndpointFilter
 {
     #region Public Method Declarations
 
@@ -49,13 +49,6 @@ public sealed class WithGetByIdWithJwtAuthentication : IWithGetByIdWithJwtAuthen
     /// <typeparam name="TService3"></typeparam>
     /// <typeparam name="TService4"></typeparam>
     public IWithGetByIdWithServices WithServices<TService1, TService2, TService3, TService4>() => new WithGetByIdWithServices();
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TEndpointFilter"></typeparam>
-    /// <returns></returns>
-    public IWithGetByIdWithAddEndpointFilter WithAddEndpointFilter<TEndpointFilter>() => new WithGetByIdWithAddEndpointFilter();
 
     #endregion
 

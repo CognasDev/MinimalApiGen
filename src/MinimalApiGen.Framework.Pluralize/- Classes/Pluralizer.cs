@@ -70,7 +70,7 @@ public sealed class Pluralizer : IPluralizer
     /// <param name="originalWord"></param>
     /// <param name="newWord"></param>
     /// <returns></returns>
-    private string RestoreCase(string originalWord, string newWord)
+    private static string RestoreCase(string originalWord, string newWord)
     {
         if (originalWord == newWord)
         {

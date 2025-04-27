@@ -129,6 +129,11 @@ internal sealed class MapGetByIdBuilder(IQueryResult queryResult, ServicesBuilde
     /// </summary>
     public string AuthenticationNamespace { get; } = queryResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(queryResult.AuthenticationRole) : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string EndpointFilter { get; } = !string.IsNullOrWhiteSpace(queryResult.FilterFullyQualifiedName) ? AddEndpointFilterBuilder.Build(queryResult.FilterFullyQualifiedName) : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -191,7 +196,7 @@ public partial class {ClassName}
         .Produces<{ResponseName}>(StatusCodes.Status200OK, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status404NotFound)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor}{JwtAuthentication};
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){CachedFor}{JwtAuthentication}{EndpointFilter};
      }}
 }}";
 

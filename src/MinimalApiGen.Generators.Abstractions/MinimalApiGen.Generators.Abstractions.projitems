@@ -10,15 +10,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IWithPostWithJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IPutAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IPutJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Put\IWithPutWithFluentValidation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IGetByIdAddEndpointFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\GetById\IWithGetByIdWithJwtAuthentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IGetAddEndpointFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IGetQueryParameters{TModel}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Query\Get\IWithGetWithQueryParameters.cs" />

@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithGetByIdWithJwtAuthentication : IGetByIdServices, IGetByIdKeyedServices, IGetByIdResponse
+public interface IWithGetByIdWithJwtAuthentication : IGetByIdServices, IGetByIdKeyedServices, IGetByIdResponse, IGetByIdAddEndpointFilter
 {
 }

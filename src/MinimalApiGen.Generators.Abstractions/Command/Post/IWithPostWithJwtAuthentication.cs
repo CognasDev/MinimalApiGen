@@ -3,6 +3,6 @@
 /// <summary>
 /// 
 /// </summary>
-public interface IWithPostWithJwtAuthentication : IPostServices, IPostKeyedServices, IPostRequest, IPostResponse
+public interface IWithPostWithJwtAuthentication : IPostServices, IPostKeyedServices, IPostRequest, IPostResponse, IPostAddEndpointFilter
 {
 }

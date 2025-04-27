@@ -154,6 +154,11 @@ internal sealed class MapPostBuilder(ICommandResult commandResult, ServicesBuild
     /// </summary>
     public string AuthenticationNamespace { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(commandResult.AuthenticationRole) : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string EndpointFilter { get; } = !string.IsNullOrWhiteSpace(commandResult.FilterFullyQualifiedName) ? AddEndpointFilterBuilder.Build(commandResult.FilterFullyQualifiedName) : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -222,7 +227,7 @@ public partial class {ClassName}
         .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces<{ResponseName}>(StatusCodes.Status201Created, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication};
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication}{EndpointFilter};
      }}
 }}";
 

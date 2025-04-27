@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Generators.Generation.Command.Results;
+using MinimalApiGen.Generators.Generation.Query.Results;
 using MinimalApiGen.Generators.Generation.Shared;
 using MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 
@@ -111,6 +112,11 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// </summary>
     public string AuthenticationNamespace { get; } = commandResult.WithJwtAuthentication ? JwtAuthenticationBuilder.BuildUsings(commandResult.AuthenticationRole) : string.Empty;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public string EndpointFilter { get; } = !string.IsNullOrWhiteSpace(commandResult.FilterFullyQualifiedName) ? AddEndpointFilterBuilder.Build(commandResult.FilterFullyQualifiedName) : string.Empty;
+
     #endregion
 
     #region Public Method Declarations
@@ -161,7 +167,7 @@ public partial class {ClassName}
         .MapToApiVersion({ApiVersion})
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication};
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication}{EndpointFilter};
      }}
 }}";
 

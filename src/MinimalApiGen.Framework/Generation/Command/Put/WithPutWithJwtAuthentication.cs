@@ -23,6 +23,13 @@ public sealed class WithPutWithJwtAuthentication : IWithPutWithJwtAuthentication
     /// <returns></returns>
     public IWithPutWithResponse WithResponse<TResponse>() => new WithPutWithResponse();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEndpointFilter"></typeparam>
+    /// <returns></returns>
+    public IWithPutWithAddEndpointFilter WithAddEndpointFilter<TEndpointFilter>() => new WithPutWithAddEndpointFilter();
+
     #endregion
 
     #region Public Method Declarations - Services

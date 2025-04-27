@@ -25,6 +25,13 @@ public sealed class WithGetWithJwtAuthentication : IWithGetWithJwtAuthentication
     /// <returns></returns>
     public IWithGetWithResponse WithResponse<TResponse>() => new WithGetWithResponse();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEndpointFilter"></typeparam>
+    /// <returns></returns>
+    public IWithGetWithAddEndpointFilter WithAddEndpointFilter<TEndpointFilter>() => new WithGetWithAddEndpointFilter();
+
     #endregion
 
     #region Public Method Declarations - Services

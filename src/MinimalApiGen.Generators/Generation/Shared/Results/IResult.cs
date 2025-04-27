@@ -108,6 +108,16 @@ internal interface IResult : IEquatable<IResult>
     /// </summary>
     string AuthenticationRole { get; }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    string FilterName { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    string FilterFullyQualifiedName { get; }
+
     #endregion
 
     #region Property Declarations - Business Logic Details

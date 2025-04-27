@@ -24,16 +24,6 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithGet { get; } = $"{typeof(IQueryOperations).FullName}.{nameof(IQueryOperations.WithGet)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string WithGetById { get; } = $"{typeof(IQueryOperations).FullName}.{nameof(IQueryOperations.WithGetById)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static string WithNamespace { get; } = $"{typeof(IQueryRoot<>).Namespace}.{typeof(IQueryRoot<>).Name.Split('`')[0]}.{nameof(IQueryRoot<object>.WithNamespace)}";
 
     /// <summary>
@@ -49,12 +39,31 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithQueryParameters { get; } = $"{typeof(IGetQueryParameters).FullName}.{nameof(IGetQueryParameters.WithQueryParameters)}";
+    public static string WithVersion { get; } = $"{typeof(IVersion).FullName}.{nameof(IVersion.WithVersion)}";
 
     /// <summary>
     /// 
     /// </summary>
-    public static string WithVersion { get; } = $"{typeof(IVersion).FullName}.{nameof(IVersion.WithVersion)}";
+    public static string WithMappingService { get; } = $"{typeof(IMappingService).FullName}.{nameof(IMappingService.WithMappingService)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string CachedFor { get; } = $"{typeof(ICache).FullName}.{nameof(ICache.CachedFor)}";
+
+    #endregion
+
+    #region Property Declarations - Get
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGet { get; } = $"{typeof(IQueryOperations).FullName}.{nameof(IQueryOperations.WithGet)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithQueryParameters { get; } = $"{typeof(IGetQueryParameters).FullName}.{nameof(IGetQueryParameters.WithQueryParameters)}";
 
     /// <summary>
     /// 
@@ -64,17 +73,7 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithGetByIdServices { get; } = $"{typeof(IGetByIdServices).FullName}.{nameof(IGetByIdServices.WithServices)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static string WithGetKeyedServices { get; } = $"{typeof(IGetKeyedServices).FullName}.{nameof(IGetKeyedServices.WithKeyedServices)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string WithGetByIdKeyedServices { get; } = $"{typeof(IGetByIdKeyedServices).FullName}.{nameof(IGetByIdKeyedServices.WithKeyedServices)}";
 
     /// <summary>
     /// 
@@ -89,27 +88,7 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
-    public static string WithGetByIdHandler { get; } = $"{typeof(IWithGetByIdOperation).FullName}.{nameof(IWithGetByIdOperation.WithHandler)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string WithMappingService { get; } = $"{typeof(IMappingService).FullName}.{nameof(IMappingService.WithMappingService)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
     public static string WithGetResponse { get; } = $"{typeof(IGetResponse).FullName}.{nameof(IGetResponse.WithResponse)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string WithGetByIdResponse { get; } = $"{typeof(IGetByIdResponse).FullName}.{nameof(IGetByIdResponse.WithResponse)}";
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public static string CachedFor { get; } = $"{typeof(ICache).FullName}.{nameof(ICache.CachedFor)}";
 
     /// <summary>
     /// 
@@ -119,7 +98,46 @@ internal static class QueryMethodNames
     /// <summary>
     /// 
     /// </summary>
+    public static string WithGetAddEndpontFilter { get; } = $"{typeof(IGetAddEndpointFilter).FullName}.{nameof(IGetAddEndpointFilter.WithAddEndpointFilter)}";
+
+    #endregion
+
+    #region Property Declarations - GetById
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetById { get; } = $"{typeof(IQueryOperations).FullName}.{nameof(IQueryOperations.WithGetById)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdServices { get; } = $"{typeof(IGetByIdServices).FullName}.{nameof(IGetByIdServices.WithServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdKeyedServices { get; } = $"{typeof(IGetByIdKeyedServices).FullName}.{nameof(IGetByIdKeyedServices.WithKeyedServices)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdHandler { get; } = $"{typeof(IWithGetByIdOperation).FullName}.{nameof(IWithGetByIdOperation.WithHandler)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdResponse { get; } = $"{typeof(IGetByIdResponse).FullName}.{nameof(IGetByIdResponse.WithResponse)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static string WithGetByIdJwtAuthentication { get; } = $"{typeof(IGetByIdJwtAuthentication).FullName}.{nameof(IGetByIdJwtAuthentication.WithJwtAuthentication)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static string WithGetByIdAddEndpontFilter { get; } = $"{typeof(IGetByIdAddEndpointFilter).FullName}.{nameof(IGetByIdAddEndpointFilter.WithAddEndpointFilter)}";
 
     #endregion
 }

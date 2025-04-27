@@ -95,6 +95,9 @@ internal sealed class CommandProcessor
                     intermediateResult!.WithJwtAuthentication = true;
                     intermediateResult.AuthenticationRole = invocationInfo.ToAuthenticationRole(semanticModel);
                     break;
+                case string name when (name == CommandMethodNames.WithPostAddEndpontFilter || name == CommandMethodNames.WithPutAddEndpontFilter || name == CommandMethodNames.WithDeleteAddEndpontFilter):
+                    intermediateResult!.AddEndpointFilterResult = invocationInfo.ToEndpointFilter();
+                    break;
             }
         }
 

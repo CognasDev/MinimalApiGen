@@ -95,6 +95,9 @@ internal sealed class QueryProcessor
                     intermediateResult!.WithJwtAuthentication = true;
                     intermediateResult.AuthenticationRole = invocationInfo.ToAuthenticationRole(semanticModel);
                     break;
+                case string name when (name == QueryMethodNames.WithGetAddEndpontFilter || name == QueryMethodNames.WithGetByIdAddEndpontFilter):
+                    intermediateResult!.AddEndpointFilterResult = invocationInfo.ToEndpointFilter();
+                    break;
             }
         }
 

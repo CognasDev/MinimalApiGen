@@ -40,16 +40,17 @@ public sealed class TokenGenerator : ITokenGenerator
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="email"></param>
+    /// <param name="additionalClaims"></param>
     /// <param name="roles"></param>
     /// <returns></returns>
-    public string GenerateToken(string userId, string email, IEnumerable<string> roles)
+    public string GenerateToken(string userId, string email, IDictionary<string, string> additionalClaims, IEnumerable<string> roles)
     {
         JsonWebTokenHandler tokenHandler = new();
         DateTime expiry = DateTime.UtcNow.AddMinutes(_configuration.GetValue<int>(JwtConfigNames.Expiration));
 
         SecurityTokenDescriptor tokenDescriptor = new()
         {
-            Subject = GetSubject(userId, email, roles),
+            Subject = GetSubject(userId, email, additionalClaims, roles),
             Expires = expiry,
             Issuer = _configuration[JwtConfigNames.Issuer],
             Audience = _configuration[JwtConfigNames.Audience],
@@ -69,15 +70,21 @@ public sealed class TokenGenerator : ITokenGenerator
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="email"></param>
+    /// <param name="additionalClaims"></param>
     /// <param name="roles"></param>
     /// <returns></returns>
-    private static ClaimsIdentity GetSubject(string userId, string email, IEnumerable<string> roles)
+    private static ClaimsIdentity GetSubject(string userId, string email, IDictionary<string, string> additionalClaims, IEnumerable<string> roles)
     {
         List<Claim> claims =
         [
             new(JwtRegisteredClaimNames.Sub, userId),
             new(JwtRegisteredClaimNames.Email, email)
         ];
+        additionalClaims.FastForEach(additionalClaim =>
+        {
+            Claim claim = new(additionalClaim.Key, additionalClaim.Value);
+            claims.Add(claim);
+        });
         roles.FastForEach(role => claims.Add(new(ClaimTypes.Role, role)));
         ClaimsIdentity subject = new(claims);
         return subject;
