@@ -4,7 +4,7 @@ using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using Artist = Samples.MusicCollection.Api.Artists.Artist;
-
+using ArtistRequest = Samples.MusicCollection.Api.Artists.ArtistRequest;
 namespace Samples.MusicCollection.Api.Artists;
 
 /// <summary>
@@ -25,11 +25,13 @@ public partial class ArtistCommandRouteEndpointsMapper
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromBody] ArtistRequest request,
                 [FromRoute] int id,
                 [FromServices] Samples.MusicCollection.Api.Artists.IArtistsCommandHandler handler
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                ArgumentNullException.ThrowIfNull(request, nameof(request));
                 await handler.DeleteArtistAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
@@ -38,9 +40,9 @@ public partial class ArtistCommandRouteEndpointsMapper
         .WithTags("artists")
         .WithOpenApi(operation => new(operation) { Summary = "Deletes an Artist via the id." })
         .MapToApiVersion(1)
+        .Accepts<ArtistRequest>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
-        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)
-        .RequireAuthorization();
+        .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
      }
 }

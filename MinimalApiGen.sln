@@ -27,8 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Query", "3. Query", "{A4
 	ProjectSection(SolutionItems) = preProject
 		docs\3. Query\WithGet.md = docs\3. Query\WithGet.md
 		docs\3. Query\WithGetById.md = docs\3. Query\WithGetById.md
-		docs\3. Query\WithKeyedServices.md = docs\3. Query\WithKeyedServices.md
 		docs\3. Query\WithHandler.md = docs\3. Query\WithHandler.md
+		docs\3. Query\WithKeyedServices.md = docs\3. Query\WithKeyedServices.md
 		docs\3. Query\WithMappingService.md = docs\3. Query\WithMappingService.md
 		docs\3. Query\WithNamespace.md = docs\3. Query\WithNamespace.md
 		docs\3. Query\WithNamespaceOf.md = docs\3. Query\WithNamespaceOf.md
@@ -49,8 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Command", "2. Command", 
 	ProjectSection(SolutionItems) = preProject
 		docs\2. Command\WithDelete.md = docs\2. Command\WithDelete.md
 		docs\2. Command\WithFluentValidation.md = docs\2. Command\WithFluentValidation.md
-		docs\2. Command\WithKeyedServices.md = docs\2. Command\WithKeyedServices.md
 		docs\2. Command\WithHandler.md = docs\2. Command\WithHandler.md
+		docs\2. Command\WithKeyedServices.md = docs\2. Command\WithKeyedServices.md
 		docs\2. Command\WithMappingService.md = docs\2. Command\WithMappingService.md
 		docs\2. Command\WithNamespace.md = docs\2. Command\WithNamespace.md
 		docs\2. Command\WithNamespaceOf.md = docs\2. Command\WithNamespaceOf.md
@@ -67,8 +67,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MinimalApiGen.Framework.Plu
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Samples.MusicCollection.Data", "samples\Samples.MusicCollection.Data\Samples.MusicCollection.Data.sqlproj", "{74FCF198-332C-4D19-9D44-14FBCC75B430}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Api", "samples\Samples.MusicCollection.Api\Samples.MusicCollection.Api.csproj", "{D544945F-DF56-4A16-8356-81CD8C476393}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Web", "samples\Samples.MusicCollection.Web\Samples.MusicCollection.Web.csproj", "{18974716-C119-4D33-94B0-88A4F564EBEA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
@@ -79,6 +77,8 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MinimalApiGen.Shared", "src\MinimalApiGen.Shared\MinimalApiGen.Shared.shproj", "{4EB82823-075F-4B3A-97F3-DDF91EF20720}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiGen.Shared.Tests", "tests\MinimalApiGen.Shared.Tests\MinimalApiGen.Shared.Tests.csproj", "{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.MusicCollection.Api", "samples\Samples.MusicCollection.Api\Samples.MusicCollection.Api.csproj", "{4EF20C3D-342D-C7B1-EA03-2AC087E01755}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,10 +114,6 @@ Global
 		{74FCF198-332C-4D19-9D44-14FBCC75B430}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{74FCF198-332C-4D19-9D44-14FBCC75B430}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74FCF198-332C-4D19-9D44-14FBCC75B430}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{D544945F-DF56-4A16-8356-81CD8C476393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D544945F-DF56-4A16-8356-81CD8C476393}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D544945F-DF56-4A16-8356-81CD8C476393}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D544945F-DF56-4A16-8356-81CD8C476393}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18974716-C119-4D33-94B0-88A4F564EBEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18974716-C119-4D33-94B0-88A4F564EBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18974716-C119-4D33-94B0-88A4F564EBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -126,6 +122,10 @@ Global
 		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EF20C3D-342D-C7B1-EA03-2AC087E01755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EF20C3D-342D-C7B1-EA03-2AC087E01755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EF20C3D-342D-C7B1-EA03-2AC087E01755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EF20C3D-342D-C7B1-EA03-2AC087E01755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,10 +143,10 @@ Global
 		{D177D68D-DAA2-4C52-9CBA-DF4F40F2FDE9} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{5B201EAA-8A7C-4863-988F-98F1B2D7F7A2} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
 		{74FCF198-332C-4D19-9D44-14FBCC75B430} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
-		{D544945F-DF56-4A16-8356-81CD8C476393} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{18974716-C119-4D33-94B0-88A4F564EBEA} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 		{4EB82823-075F-4B3A-97F3-DDF91EF20720} = {25EBC387-6C88-4B5F-A665-F48FB60FAA60}
 		{3FFECD3F-4E60-4B59-A683-1EFE833FE3B9} = {1044EFAC-1347-4A8E-AF06-398EE0D7FF24}
+		{4EF20C3D-342D-C7B1-EA03-2AC087E01755} = {E5600EED-954B-4044-96B4-0C1EE0AE86A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {160B1408-CAC3-462D-8788-AFE85104788D}

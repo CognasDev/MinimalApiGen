@@ -7,7 +7,7 @@ using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
 
 using SampleModel = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModel;
-
+using SampleModelRequest = MinimalApiGen.Generators.IntegrationTests.Fixtures.SampleModelRequest;
 namespace TestNamespace;
 
 /// <summary>
@@ -29,11 +29,13 @@ public partial class SampleModelCommandRouteEndpointsMapper
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromBody] SampleModelRequest request,
                 [FromRoute] int id,
                 [FromServices] MinimalApiGen.Generators.IntegrationTests.Fixtures.ISimpleHandler handler
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                ArgumentNullException.ThrowIfNull(request, nameof(request));
                 await handler.DeleteModelAsync(cancellationToken).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
@@ -42,6 +44,7 @@ public partial class SampleModelCommandRouteEndpointsMapper
         .WithTags("samplemodels")
         .WithOpenApi(operation => new(operation) { Summary = "Deletes a SampleModel via the id." })
         .MapToApiVersion(1)
+        .Accepts<SampleModelRequest>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json)

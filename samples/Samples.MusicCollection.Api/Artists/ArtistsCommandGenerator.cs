@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Framework.Generation;
+using Samples.MusicCollection.Api.Albums;
 
 namespace Samples.MusicCollection.Api.Artists;
 
@@ -40,7 +41,7 @@ public sealed class ArtistsCommandGenerator
                                        .WithModelId(model => model.ArtistId)
                                        .WithDelete()
                                             .WithHandler<IArtistsCommandHandler>(command => command.DeleteArtistAsync)
-                                            .WithJwtAuthentication();
+                                            .WithRequest<ArtistRequest>();
 
     }
 

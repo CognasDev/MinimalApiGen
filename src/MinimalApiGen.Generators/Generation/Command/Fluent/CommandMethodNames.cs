@@ -177,6 +177,11 @@ internal static class CommandMethodNames
     /// <summary>
     /// 
     /// </summary>
+    public static string WithDeleteRequest { get; } = $"{typeof(IDeleteRequest).FullName}.{nameof(IDeleteRequest.WithRequest)}";
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static string WithDeleteJwtAuthentication { get; } = $"{typeof(IDeleteJwtAuthentication).FullName}.{nameof(IDeleteJwtAuthentication.WithJwtAuthentication)}";
 
     /// <summary>

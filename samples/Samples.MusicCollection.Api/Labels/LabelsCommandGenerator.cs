@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Framework.Generation;
+using Samples.MusicCollection.Api.Genres;
 
 namespace Samples.MusicCollection.Api.Labels;
 
@@ -38,7 +39,8 @@ public sealed class LabelsCommandGenerator
         ApiGeneration.Command<Label>().WithNamespaceOf<ILabelsCommandHandler>()
                                       .WithModelId(model => model.LabelId)
                                       .WithDelete()
-                                            .WithHandler<ILabelsCommandHandler>(command => command.DeleteLabelAsync);
+                                            .WithHandler<ILabelsCommandHandler>(command => command.DeleteLabelAsync)
+                                            .WithRequest<LabelRequest>();
 
     }
 

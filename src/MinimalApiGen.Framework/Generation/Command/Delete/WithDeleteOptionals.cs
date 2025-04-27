@@ -17,6 +17,13 @@ public sealed class WithDeleteOptionals : IWithDeleteOptionals
     /// <returns></returns>
     public ICommandOperations WithVersion(int version) => new CommandOperations();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TRequest"></typeparam>
+    /// <returns></returns>
+    public IWithDeleteWithRequest WithRequest<TRequest>() => new WithDeleteWithRequest();
+
     #endregion
 
     #region Public Method Declarations - Services

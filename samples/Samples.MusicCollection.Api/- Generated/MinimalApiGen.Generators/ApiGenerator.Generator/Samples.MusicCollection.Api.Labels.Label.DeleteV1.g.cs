@@ -4,7 +4,7 @@ using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using Label = Samples.MusicCollection.Api.Labels.Label;
-
+using LabelRequest = Samples.MusicCollection.Api.Labels.LabelRequest;
 namespace Samples.MusicCollection.Api.Labels;
 
 /// <summary>
@@ -25,11 +25,13 @@ public partial class LabelCommandRouteEndpointsMapper
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromBody] LabelRequest request,
                 [FromRoute] int id,
                 [FromServices] Samples.MusicCollection.Api.Labels.ILabelsCommandHandler handler
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                ArgumentNullException.ThrowIfNull(request, nameof(request));
                 await handler.DeleteLabelAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
@@ -38,6 +40,7 @@ public partial class LabelCommandRouteEndpointsMapper
         .WithTags("labels")
         .WithOpenApi(operation => new(operation) { Summary = "Deletes a Label via the id." })
         .MapToApiVersion(1)
+        .Accepts<LabelRequest>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);
