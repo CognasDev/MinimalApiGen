@@ -11,8 +11,10 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteAddEndpointFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IDeleteRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithJwtAuthentication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithAddEndpointFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Delete\IWithDeleteWithRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ICommandOperations.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostAddEndpointFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Post\IPostJwtAuthentication.cs" />

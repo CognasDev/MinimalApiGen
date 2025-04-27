@@ -89,7 +89,7 @@ public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<T
     /// <returns></returns>
     public async ValueTask DisposeAsync()
     {
-        await DisposeAsyncCore().ConfigureAwait(false);
+        await DisposeAsyncCore();
         GC.SuppressFinalize(this);
     }
 
@@ -106,7 +106,7 @@ public abstract class ApiTestBase<TEntryPoint> : IAsyncLifetime, IClassFixture<T
         if (!_disposed)
         {
             HttpClient?.Dispose();
-            await _scope.DisposeAsync().ConfigureAwait(false);
+            await _scope.DisposeAsync();
             _disposed = true;
         }
     }

@@ -39,11 +39,11 @@ public sealed class AlbumsQueryHandler : QueryHandlerBase<Album>, IAlbumsQueryHa
         if (artistId.HasValue)
         {
             ModelParameter<Album> artistIdParameter = new(album => album.ArtistId, artistId);
-            albums = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter).ConfigureAwait(false);
+            albums = await SelectModelsAsync(_selectByArtistIdStoredProcedure, artistIdParameter);
         }
         else
         {
-            albums = await SelectModelsAsync().ConfigureAwait(false);
+            albums = await SelectModelsAsync();
         }
         return albums;
     }
@@ -56,7 +56,7 @@ public sealed class AlbumsQueryHandler : QueryHandlerBase<Album>, IAlbumsQueryHa
     public async Task<Album?> SelectAlbumAsync(int id)
     {
         ModelParameter<Album> parameter = new(album => album.AlbumId, id);
-        Album? album = await SelectModelAsync(parameter).ConfigureAwait(false);
+        Album? album = await SelectModelAsync(parameter);
         return album;
     }
 

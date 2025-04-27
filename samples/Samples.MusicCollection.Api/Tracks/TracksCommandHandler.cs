@@ -17,13 +17,13 @@ public sealed class TracksCommandHandler(ILogger<TracksCommandHandler> logger, I
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Track> InsertTrackAsync(Track album) => await InsertModelAsync(album).ConfigureAwait(false);
+    public async Task<Track> InsertTrackAsync(Track album) => await InsertModelAsync(album);
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Track> UpdateTrackAsync(Track album) => await UpdateModelAsync(album).ConfigureAwait(false);
+    public async Task<Track> UpdateTrackAsync(Track album) => await UpdateModelAsync(album);
 
     /// <summary>
     /// 
@@ -33,7 +33,7 @@ public sealed class TracksCommandHandler(ILogger<TracksCommandHandler> logger, I
     public async Task DeleteTrackAsync(int id)
     {
         ModelParameter<Track> parameter = new(track => track.TrackId, id);
-        await DeleteModelAsync(parameter).ConfigureAwait(false);
+        await DeleteModelAsync(parameter);
     }
 
     #endregion

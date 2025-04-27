@@ -40,6 +40,7 @@ public sealed class CommandGeneratorV1
                                             .WithModelId(model => model.Id)
                                             .WithDelete()
                                                 .WithHandler<ICommandHandlerV1>(command => command.DeleteModelAsync)
+                                                .WithRequest<SampleModelRequest>()
                                                 .WithJwtAuthentication()
                                                 .WithVersion(2);
 

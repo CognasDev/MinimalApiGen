@@ -18,7 +18,7 @@ public sealed class DatabaseTransactionService : IDatabaseTransactionService
     public async Task ExecuteTransactionAsync(params Func<Task>[] asyncDatabaseTasks)
     {
         using TransactionScope transactionScope = CreateTransactionScope();
-        await asyncDatabaseTasks.FastForEachAsync(asyncDatabaseTask => asyncDatabaseTask()).ConfigureAwait(false);
+        await asyncDatabaseTasks.FastForEachAsync(asyncDatabaseTask => asyncDatabaseTask());
         transactionScope.Complete();
     }
 

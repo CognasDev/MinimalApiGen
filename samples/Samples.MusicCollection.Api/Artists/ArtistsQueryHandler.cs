@@ -17,7 +17,7 @@ public sealed class ArtistsQueryHandler(ILogger<ArtistsQueryHandler> logger, IQu
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<Artist>> SelectArtistsAsync() => await SelectModelsAsync().ConfigureAwait(false);
+    public async Task<IEnumerable<Artist>> SelectArtistsAsync() => await SelectModelsAsync();
 
     /// <summary>
     /// 
@@ -27,7 +27,7 @@ public sealed class ArtistsQueryHandler(ILogger<ArtistsQueryHandler> logger, IQu
     public async Task<Artist?> SelectArtistAsync(int id)
     {
         ModelParameter<Artist> parameter = new(artist => artist.ArtistId, id);
-        Artist? artist = await SelectModelAsync(parameter).ConfigureAwait(false);
+        Artist? artist = await SelectModelAsync(parameter);
         return artist;
     }
 

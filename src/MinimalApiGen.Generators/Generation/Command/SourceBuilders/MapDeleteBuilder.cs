@@ -67,6 +67,16 @@ internal sealed class MapDeleteBuilder(ICommandResult commandResult, ServicesBui
     /// <summary>
     /// 
     /// </summary>
+    public string RequestName { get; } = commandResult.RequestName;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string RequestFullyQualifiedName { get; } = commandResult.RequestFullyQualifiedName;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public string FromServices { get; } = servicesBuilder.FromServices;
 
     /// <summary>
@@ -131,7 +141,7 @@ using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 {AuthenticationNamespace}
 using {ModelName} = {ModelFullyQualifiedName};
-
+using {RequestName} = {RequestFullyQualifiedName};
 namespace {Namespace};
 
 /// <summary>
@@ -152,11 +162,13 @@ public partial class {ClassName}
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromBody] {RequestName} request,
                 [FromRoute] {ModelIdUnderlyingPropertyType ?? ModelIdPropertyType} id,
                 [FromServices] {Handler} handler
             ) =>
             {{
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                ArgumentNullException.ThrowIfNull(request, nameof(request));
                 await handler.{HandlerDelegateName}({HandlerDelegateParameters}).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }}
@@ -165,6 +177,7 @@ public partial class {ClassName}
         .WithTags(""{ModelPluralNameLower}"")
         .WithOpenApi(operation => new(operation) {{ Summary = ""Deletes {ModelName.WithIndefiniteArticle()} via the id."" }})
         .MapToApiVersion({ApiVersion})
+        .Accepts<{RequestName}>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json){JwtAuthentication}{EndpointFilter};

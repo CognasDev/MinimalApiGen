@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Framework.Generation;
+using Samples.MusicCollection.Api.Albums;
 
 namespace Samples.MusicCollection.Api.Genres;
 
@@ -38,7 +39,8 @@ public sealed class GenresCommandGenerator
         ApiGeneration.Command<Genre>().WithNamespaceOf<IGenresCommandHandler>()
                                       .WithModelId(model => model.GenreId)
                                       .WithDelete()
-                                            .WithHandler<IGenresCommandHandler>(command => command.DeleteGenreAsync);
+                                            .WithHandler<IGenresCommandHandler>(command => command.DeleteGenreAsync)
+                                            .WithRequest<GenreRequest>();
 
     }
 

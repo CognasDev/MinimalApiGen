@@ -1,4 +1,5 @@
 ﻿using MinimalApiGen.Framework.Generation;
+using Samples.MusicCollection.Api.Labels;
 
 namespace Samples.MusicCollection.Api.Tracks;
 
@@ -38,7 +39,8 @@ public sealed class TracksCommandGenerator
         ApiGeneration.Command<Track>().WithNamespaceOf<ITracksCommandHandler>()
                                       .WithModelId(model => model.TrackId)
                                       .WithDelete()
-                                            .WithHandler<ITracksCommandHandler>(command => command.DeleteTrackAsync);
+                                            .WithHandler<ITracksCommandHandler>(command => command.DeleteTrackAsync)
+                                            .WithRequest<TrackRequest>();
 
     }
 

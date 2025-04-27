@@ -17,13 +17,13 @@ public sealed class GenresCommandHandler(ILogger<GenresCommandHandler> logger, I
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Genre> InsertGenreAsync(Genre album) => await InsertModelAsync(album).ConfigureAwait(false);
+    public async Task<Genre> InsertGenreAsync(Genre album) => await InsertModelAsync(album);
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Genre> UpdateGenreAsync(Genre album) => await UpdateModelAsync(album).ConfigureAwait(false);
+    public async Task<Genre> UpdateGenreAsync(Genre album) => await UpdateModelAsync(album);
 
     /// <summary>
     /// 
@@ -33,7 +33,7 @@ public sealed class GenresCommandHandler(ILogger<GenresCommandHandler> logger, I
     public async Task DeleteGenreAsync(int id)
     {
         ModelParameter<Genre> parameter = new(genre => genre.GenreId, id);
-        await DeleteModelAsync(parameter).ConfigureAwait(false);
+        await DeleteModelAsync(parameter);
     }
 
     #endregion

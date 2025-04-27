@@ -17,13 +17,13 @@ public sealed class AlbumsCommandHandler(ILogger<AlbumsCommandHandler> logger, I
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Album> InsertAlbumAsync(Album album) => await InsertModelAsync(album).ConfigureAwait(false);
+    public async Task<Album> InsertAlbumAsync(Album album) => await InsertModelAsync(album);
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<Album> UpdateAlbumAsync(Album album) => await UpdateModelAsync(album).ConfigureAwait(false);
+    public async Task<Album> UpdateAlbumAsync(Album album) => await UpdateModelAsync(album);
 
     /// <summary>
     /// 
@@ -33,7 +33,7 @@ public sealed class AlbumsCommandHandler(ILogger<AlbumsCommandHandler> logger, I
     public async Task DeleteAlbumAsync(int id)
     {
         ModelParameter<Album> parameter = new(album => album.AlbumId, id);
-        await DeleteModelAsync(parameter).ConfigureAwait(false);
+        await DeleteModelAsync(parameter);
     }
 
     #endregion

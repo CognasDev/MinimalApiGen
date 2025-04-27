@@ -71,7 +71,7 @@ public abstract class QueryHandlerBase<TModel> where TModel : class
     /// <exception cref="NullReferenceException"></exception>
     protected async Task<IEnumerable<TModel>> SelectModelsAsync(params IParameter[] parameters)
     {
-        IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(SelectStoredProcedure, parameters).ConfigureAwait(false);
+        IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(SelectStoredProcedure, parameters);
         return selectedModels ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(SelectStoredProcedure)}: {SelectStoredProcedure}");
     }
 
@@ -84,7 +84,7 @@ public abstract class QueryHandlerBase<TModel> where TModel : class
     /// <exception cref="NullReferenceException"></exception>
     protected async Task<IEnumerable<TModel>> SelectModelsAsync(string storedProceduereName, params IParameter[] parameters)
     {
-        IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(storedProceduereName, parameters).ConfigureAwait(false);
+        IEnumerable<TModel>? selectedModels = await _databaseService.SelectModelsAsync<TModel>(storedProceduereName, parameters);
         return selectedModels ?? throw new NullReferenceException($"Model: {typeof(TModel).Name}, {nameof(SelectStoredProcedure)}: {SelectStoredProcedure}");
     }
 
@@ -95,7 +95,7 @@ public abstract class QueryHandlerBase<TModel> where TModel : class
     /// <returns></returns>
     protected async Task<TModel?> SelectModelAsync(IParameter idParameter)
     {
-        TModel? selectedModel = await _databaseService.SelectModelAsync<TModel>(SelectByIdStoredProcedure, idParameter).ConfigureAwait(false);
+        TModel? selectedModel = await _databaseService.SelectModelAsync<TModel>(SelectByIdStoredProcedure, idParameter);
         return selectedModel;
     }
 

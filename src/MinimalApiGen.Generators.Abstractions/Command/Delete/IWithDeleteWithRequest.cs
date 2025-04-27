@@ -5,6 +5,6 @@ namespace MinimalApiGen.Generators.Abstractions.Command.Delete;
 /// <summary>
 /// 
 /// </summary>
-public interface IWithDeleteWithJwtAuthentication : IDeleteServices, IDeleteKeyedServices, IDeleteRequest, IVersion, IDeleteAddEndpointFilter
+public interface IWithDeleteWithRequest : IDeleteJwtAuthentication, IVersion
 {
 }

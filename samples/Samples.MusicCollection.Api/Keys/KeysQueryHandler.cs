@@ -17,7 +17,7 @@ public sealed class KeysQueryHandler(ILogger<KeysQueryHandler> logger, IQueryDat
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<Key>> SelectKeysAsync() => await SelectModelsAsync().ConfigureAwait(false);
+    public async Task<IEnumerable<Key>> SelectKeysAsync() => await SelectModelsAsync();
 
     /// <summary>
     /// 
@@ -27,7 +27,7 @@ public sealed class KeysQueryHandler(ILogger<KeysQueryHandler> logger, IQueryDat
     public async Task<Key?> SelectKeyAsync(int id)
     {
         ModelParameter<Key> parameter = new(key => key.KeyId, id);
-        Key? key = await SelectModelAsync(parameter).ConfigureAwait(false);
+        Key? key = await SelectModelAsync(parameter);
         return key;
     }
 

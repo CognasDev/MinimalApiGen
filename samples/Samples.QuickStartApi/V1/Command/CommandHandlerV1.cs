@@ -18,7 +18,7 @@ public sealed class CommandHandlerV1 : ICommandHandlerV1
     public async Task<SampleModel?> PostModelAsync(SampleModel model, CancellationToken cancellationToken)
     {
         SampleModel postedModel = model with { Name = $"{model.Name} - Posted" };
-        return await Task.FromResult<SampleModel?>(postedModel).ConfigureAwait(false);
+        return await Task.FromResult<SampleModel?>(postedModel);
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ public sealed class CommandHandlerV1 : ICommandHandlerV1
     public async Task<SampleModel?> PutModelAsync(SampleModel model, CancellationToken cancellationToken)
     {
         SampleModel postedModel = model with { Name = $"{model.Name} - Put" };
-        return await Task.FromResult<SampleModel?>(postedModel).ConfigureAwait(false);
+        return await Task.FromResult<SampleModel?>(postedModel);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public sealed class CommandHandlerV1 : ICommandHandlerV1
     /// <returns></returns>
     public async Task DeleteModelAsync(int id, CancellationToken cancellationToken)
     {
-        await Task.CompletedTask.ConfigureAwait(false);
+        await Task.CompletedTask;
     }
 
     #endregion

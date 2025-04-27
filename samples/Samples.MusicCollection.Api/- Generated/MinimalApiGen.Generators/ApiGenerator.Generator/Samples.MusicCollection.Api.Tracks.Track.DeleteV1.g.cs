@@ -4,7 +4,7 @@ using MinimalApiGen.Framework.Mapping;
 using System.Net.Mime;
 
 using Track = Samples.MusicCollection.Api.Tracks.Track;
-
+using TrackRequest = Samples.MusicCollection.Api.Tracks.TrackRequest;
 namespace Samples.MusicCollection.Api.Tracks;
 
 /// <summary>
@@ -25,11 +25,13 @@ public partial class TrackCommandRouteEndpointsMapper
             async Task<Results<NoContent, BadRequest>>
             (
                 CancellationToken cancellationToken,
+                [FromBody] TrackRequest request,
                 [FromRoute] int id,
                 [FromServices] Samples.MusicCollection.Api.Tracks.ITracksCommandHandler handler
             ) =>
             {
                 ArgumentNullException.ThrowIfNull(handler, nameof(handler));
+                ArgumentNullException.ThrowIfNull(request, nameof(request));
                 await handler.DeleteTrackAsync(id).ConfigureAwait(false);
                 return TypedResults.NoContent();
             }
@@ -38,6 +40,7 @@ public partial class TrackCommandRouteEndpointsMapper
         .WithTags("tracks")
         .WithOpenApi(operation => new(operation) { Summary = "Deletes a Track via the id." })
         .MapToApiVersion(1)
+        .Accepts<TrackRequest>(MediaTypeNames.Application.Json)
         .Produces(StatusCodes.Status204NoContent)
         .Produces<ProblemDetails>(StatusCodes.Status400BadRequest, MediaTypeNames.Application.Json)
         .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError, MediaTypeNames.Application.Json);

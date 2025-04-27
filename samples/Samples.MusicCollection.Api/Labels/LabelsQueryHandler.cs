@@ -17,7 +17,7 @@ public sealed class LabelsQueryHandler(ILogger<LabelsQueryHandler> logger, IQuer
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<Label>> SelectLabelsAsync() => await SelectModelsAsync().ConfigureAwait(false);
+    public async Task<IEnumerable<Label>> SelectLabelsAsync() => await SelectModelsAsync();
 
     /// <summary>
     /// 
@@ -27,7 +27,7 @@ public sealed class LabelsQueryHandler(ILogger<LabelsQueryHandler> logger, IQuer
     public async Task<Label?> SelectLabelAsync(int id)
     {
         ModelParameter<Label> parameter = new(label => label.LabelId, id);
-        Label? label = await SelectModelAsync(parameter).ConfigureAwait(false);
+        Label? label = await SelectModelAsync(parameter);
         return label;
     }
 

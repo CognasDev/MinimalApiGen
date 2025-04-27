@@ -46,7 +46,7 @@ public sealed class CommandDatabaseService : ICommandDatabaseService
     public async Task<TModel?> InsertModelAsync<TModel>(string storedProcedure, TModel model)
     {
         using IDbConnection dbConnection = _databaseConnectionFactory.Create();
-        TModel? insertedModel = await dbConnection.QuerySingleOrDefaultAsync<TModel>(storedProcedure, model, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        TModel? insertedModel = await dbConnection.QuerySingleOrDefaultAsync<TModel>(storedProcedure, model, commandType: CommandType.StoredProcedure);
         return insertedModel;
     }
 
@@ -60,7 +60,7 @@ public sealed class CommandDatabaseService : ICommandDatabaseService
     public async Task<TModel?> UpdateModelAsync<TModel>(string storedProcedure, TModel model)
     {
         using IDbConnection dbConnection = _databaseConnectionFactory.Create();
-        TModel? updatedModel = await dbConnection.QuerySingleOrDefaultAsync<TModel>(storedProcedure, model, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        TModel? updatedModel = await dbConnection.QuerySingleOrDefaultAsync<TModel>(storedProcedure, model, commandType: CommandType.StoredProcedure);
         return updatedModel;
     }
 
@@ -74,7 +74,7 @@ public sealed class CommandDatabaseService : ICommandDatabaseService
     {
         DynamicParameters? dynamicParameters = _dynamicParameterFactory.Create(parameters);
         using IDbConnection dbConnection = _databaseConnectionFactory.Create();
-        int deleteCount = await dbConnection.ExecuteScalarAsync<int>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
+        int deleteCount = await dbConnection.ExecuteScalarAsync<int>(storedProcedure, dynamicParameters, commandType: CommandType.StoredProcedure);
         return deleteCount;
     }
 

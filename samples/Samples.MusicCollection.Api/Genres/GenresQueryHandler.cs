@@ -17,7 +17,7 @@ public sealed class GenresQueryHandler(ILogger<GenresQueryHandler> logger, IQuer
     /// 
     /// </summary>
     /// <returns></returns>
-    public async Task<IEnumerable<Genre>> SelectGenresAsync() => await SelectModelsAsync().ConfigureAwait(false);
+    public async Task<IEnumerable<Genre>> SelectGenresAsync() => await SelectModelsAsync();
 
     /// <summary>
     /// 
@@ -27,7 +27,7 @@ public sealed class GenresQueryHandler(ILogger<GenresQueryHandler> logger, IQuer
     public async Task<Genre?> SelectGenreAsync(int id)
     {
         ModelParameter<Genre> parameter = new(genre => genre.GenreId, id);
-        Genre? genre = await SelectModelAsync(parameter).ConfigureAwait(false);
+        Genre? genre = await SelectModelAsync(parameter);
         return genre;
     }
 
