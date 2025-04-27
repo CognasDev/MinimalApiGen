@@ -33,7 +33,7 @@ public sealed class TestGenerator
                                           .WithGet()
                                           .WithHandler<ISimpleHandler>(logic => logic.GetModelsAsync)
                                           .WithJwtAuthentication()
-                                          .WithEndpointFilter<SampleEndpointFilter>()    
+                                          .WithAddEndpointFilter<SampleEndpointFilter>()    
                                           .WithResponse<SampleModelResponse>()
                                           .WithVersion(2);
     }
