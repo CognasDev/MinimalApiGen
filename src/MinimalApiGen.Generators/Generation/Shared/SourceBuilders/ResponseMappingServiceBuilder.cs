@@ -1,8 +1,6 @@
 ﻿using MinimalApiGen.Generators.Equality;
 using MinimalApiGen.Generators.Generation.Shared.Results;
 using System;
-using System.Linq;
-using System.Text;
 
 namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 

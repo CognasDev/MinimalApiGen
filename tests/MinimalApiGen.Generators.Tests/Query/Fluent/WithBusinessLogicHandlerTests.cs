@@ -54,7 +54,7 @@ public sealed class WithHandlerHandlerTests
         // Assert
         result.FullyQualifiedName.Should().Be("Namespace.Handler");
         result.DelegateName.Should().Be("TestMethod");
-        result.Parameters.Should().ContainSingle().Which.Should().Be(new HandlerParamterResult { Name = null, Type = "System.String" });
+        result.Parameters.Should().ContainSingle().Which.Should().Be(new HandlerParamterResult { Name = default!, Type = "System.String" });
 
         #endregion
     }

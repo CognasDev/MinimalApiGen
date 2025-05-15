@@ -55,7 +55,7 @@ public abstract class QueryHandlerBase<TModel> where TModel : class
         Logger = logger;
         _databaseService = databaseService;
 
-        PluralModelName = Pluralizer.Instance.Pluralize(typeof(TModel).Name);
+        PluralModelName = Pluralizer.Instance.Pluralize<TModel>();
         SelectStoredProcedure = $"[dbo].[{PluralModelName}_Select]";
         SelectByIdStoredProcedure = $"[dbo].[{PluralModelName}_SelectById]";
     }

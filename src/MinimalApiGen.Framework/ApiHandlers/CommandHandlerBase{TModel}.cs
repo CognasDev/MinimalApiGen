@@ -60,7 +60,7 @@ public abstract class CommandHandlerBase<TModel> where TModel : class
         Logger = logger;
         _databaseService = databaseService;
 
-        PluralModelName = Pluralizer.Instance.Pluralize(typeof(TModel).Name);
+        PluralModelName = Pluralizer.Instance.Pluralize<TModel>();
         InsertStoredProcedure = $"[dbo].[{PluralModelName}_Insert]";
         UpdateStoredProcedure = $"[dbo].[{PluralModelName}_Update]";
         DeleteStoredProcedure = $"[dbo].[{PluralModelName}_Delete]";

@@ -143,7 +143,7 @@ internal sealed class MapGetBuilder(IQueryResult queryResult, ServicesBuilder se
     /// <summary>
     /// 
     /// </summary>
-    public string EndpointFilter { get; } = !string.IsNullOrWhiteSpace(queryResult.FilterFullyQualifiedName) ? AddEndpointFilterBuilder.Build(queryResult.FilterFullyQualifiedName): string.Empty;
+    public string EndpointFilter { get; } = !string.IsNullOrWhiteSpace(queryResult.FilterFullyQualifiedName) ? AddEndpointFilterBuilder.Build(queryResult.FilterFullyQualifiedName) : string.Empty;
 
     #endregion
 

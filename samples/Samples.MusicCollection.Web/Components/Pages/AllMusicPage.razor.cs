@@ -1,5 +1,4 @@
-﻿using Radzen;
-using Samples.MusicCollection.Web.AllMusic;
+﻿using Samples.MusicCollection.Web.AllMusic;
 
 namespace Samples.MusicCollection.Web.Components.Pages;
 

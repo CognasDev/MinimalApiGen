@@ -11,7 +11,7 @@ namespace MinimalApiGen.Generators.Generation.Shared.SourceBuilders;
 /// </summary>
 /// <param name="result"></param>
 internal abstract class MappingServiceBuilderBase(IResult result)
-{   
+{
     #region Property Declarations
 
     /// <summary>

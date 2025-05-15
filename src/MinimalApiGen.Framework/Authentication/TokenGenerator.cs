@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using MinimalApiGen.Shared.Collections;
 using System.Security.Claims;
 using System.Text;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace MinimalApiGen.Framework.Authentication;
 
