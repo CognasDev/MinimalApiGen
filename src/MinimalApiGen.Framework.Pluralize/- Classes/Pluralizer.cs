@@ -40,7 +40,19 @@ public sealed class Pluralizer : IPluralizer
     }
 
     #endregion
+
     #region Public Method Declarations
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public string Pluralize<T>()
+    {
+        string word = typeof(T).Name;
+        return Pluralize(word);
+    }
 
     /// <summary>
     /// 

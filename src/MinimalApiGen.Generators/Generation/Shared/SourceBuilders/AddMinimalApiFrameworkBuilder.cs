@@ -34,6 +34,7 @@ namespace MinimalApiGen.Framework.Extensions;
 /// <summary>
 /// 
 /// </summary>
+#nullable enable
 public static class AddMinimalApiFrameworkExtensions
 {{
     #region Public Method Declarations

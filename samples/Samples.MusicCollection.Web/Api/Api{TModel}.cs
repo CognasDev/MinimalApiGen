@@ -53,7 +53,7 @@ public class Api<TModel> : IApi<TModel>, IDisposable
         _configChangeListener = apiDetailsMonitor.OnChange(apiDetails => _apiDetails = apiDetails);
 
         HttpClientFactory = httpClientFactory;
-        PluralModelName = Pluralizer.Instance.Pluralize(typeof(TModel).Name).ToLowerInvariant();
+        PluralModelName = Pluralizer.Instance.Pluralize<TModel>().ToLowerInvariant();
         _apiDetails = apiDetailsMonitor.CurrentValue;
     }
 

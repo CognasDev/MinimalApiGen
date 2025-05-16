@@ -1,7 +1,5 @@
-﻿using MinimalApiGen.Framework.Generation.Command.Shared;
-using MinimalApiGen.Generators.Abstractions.Command;
+﻿using MinimalApiGen.Generators.Abstractions.Command;
 using MinimalApiGen.Generators.Abstractions.Command.Delete;
-using MinimalApiGen.Generators.Abstractions.Command.Shared;
 
 namespace MinimalApiGen.Framework.Generation.Command.Delete;
 

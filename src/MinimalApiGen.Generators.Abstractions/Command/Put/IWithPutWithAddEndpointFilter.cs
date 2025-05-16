@@ -1,6 +1,4 @@
-﻿using MinimalApiGen.Generators.Abstractions.Command.Shared;
-
-namespace MinimalApiGen.Generators.Abstractions.Command.Put;
+﻿namespace MinimalApiGen.Generators.Abstractions.Command.Put;
 
 /// <summary>
 /// 

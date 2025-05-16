@@ -33,12 +33,9 @@ public sealed class ParameterTests
         string name = string.Empty;
         string value = Guid.NewGuid().ToString();
 
-        Action action = () =>
-        {
-            Parameter parameter = new(name, value);
-        };
+        Action action = () => _ = new Parameter(name, value);
 
-        action.Should().Throw<ArgumentNullException>().WithParameterName(nameof(IParameter.Name).ToLower());
+        action.Should().Throw<ArgumentException>().WithParameterName(nameof(IParameter.Name).ToLower());
     }
 
     /// <summary>
@@ -50,12 +47,9 @@ public sealed class ParameterTests
         string name = " ";
         string value = Guid.NewGuid().ToString();
 
-        Action action = () =>
-        {
-            Parameter parameter = new(name, value);
-        };
+        Action action = () => _ = new Parameter(name, value);
 
-        action.Should().Throw<ArgumentNullException>().WithParameterName(nameof(IParameter.Name).ToLower());
+        action.Should().Throw<ArgumentException>().WithParameterName(nameof(IParameter.Name).ToLower());
     }
 
     #endregion
