@@ -46,7 +46,7 @@
 
 	<!--Nuget package configuration-->
 	<PropertyGroup>
-		<Version>$(VersionPrefix)1.3.2-alpha</Version>
+		<Version>$(VersionPrefix)1.3.2-dotnet10-alpha</Version>
 		<Title>MinimalApiGen.Generators</Title>
 		<Authors>CognasDev</Authors>
 		<RepositoryUrl>https://github.com/cognasdev/minimalapigen</RepositoryUrl>
